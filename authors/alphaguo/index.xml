@@ -38,7 +38,7 @@
     <link>https://alphaguo.vip/%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA/</link>
     <pubDate>Sun, 31 Dec 2023 22:40:41 &#43;0800</pubDate><author>
                         <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA/</guid>
-    <description><![CDATA[1、内存分区 1.1 运行之前1）预处理：宏定义展开、头文件展开、条件编译，这里并不会检查语法 2）编译：检查语法，将预处理后文件编译生成汇编文件 3）]]></description>
+    <description><![CDATA[内存四区]]></description>
 </item><item>
     <title>Linux各级目录简介</title>
     <link>https://alphaguo.vip/linux%E5%90%84%E7%BA%A7%E7%9B%AE%E5%BD%95%E7%AE%80%E4%BB%8B/</link>
