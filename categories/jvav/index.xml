@@ -1,0 +1,13 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>JVAV - 分类 - AlphaGuo Blog</title>
+        <link>https://alphaguo.vip/categories/jvav/</link>
+        <description>JVAV - 分类 - AlphaGuo Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 31 Dec 2023 20:41:01 &#43;0800</lastBuildDate><atom:link href="https://alphaguo.vip/categories/jvav/" rel="self" type="application/rss+xml" /><item>
+    <title>网络编程</title>
+    <link>https://alphaguo.vip/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</link>
+    <pubDate>Sun, 31 Dec 2023 20:41:01 &#43;0800</pubDate><author>
+                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</guid>
+    <description><![CDATA[1.网络编程入门 1.1 网络编程概述 计算机网络 是指将地理位置不同的具有独立功能的多台计算机及其外部设备，通过通信线路连接起来，在网络操作系统，网络]]></description>
+</item></channel>
+</rss>

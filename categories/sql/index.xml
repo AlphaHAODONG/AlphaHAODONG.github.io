@@ -1,0 +1,13 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>SQL - 分类 - AlphaGuo Blog</title>
+        <link>https://alphaguo.vip/categories/sql/</link>
+        <description>SQL - 分类 - AlphaGuo Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 31 Dec 2023 19:54:20 &#43;0800</lastBuildDate><atom:link href="https://alphaguo.vip/categories/sql/" rel="self" type="application/rss+xml" /><item>
+    <title>MySql</title>
+    <link>https://alphaguo.vip/mysql/</link>
+    <pubDate>Sun, 31 Dec 2023 19:54:20 &#43;0800</pubDate><author>
+                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/mysql/</guid>
+    <description><![CDATA[这里边没啥好玩的，就不自己写了，直接用黑马的作业 MySQL基础今日目标： 完成MySQL的安装及登陆基本操作 能通过SQL对数据库进行CRUD 能]]></description>
+</item></channel>
+</rss>

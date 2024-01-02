@@ -1,0 +1,1633 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>Git同时连接github和gitee - AlphaGuo Blog</title><meta name="Description" content="关山难越"><meta property="og:title" content="Git同时连接github和gitee" />
+<meta property="og:description" content="Git 分布式版本控制工具 课程内容 Git概述 Git代码托管服务 Git常用命令 在IDEA中使用Git 1. 前言 1.1 什么是GitGit是一个分布式版本控制工" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://alphaguo.vip/git%E5%90%8C%E6%97%B6%E8%BF%9E%E6%8E%A5github%E5%92%8Cgitee/" /><meta property="og:image" content="https://alphaguo.vip/images/favicon-16x16.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-31T20:40:22+08:00" />
+<meta property="article:modified_time" content="2023-12-31T20:40:22+08:00" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://alphaguo.vip/images/favicon-16x16.png" /><meta name="twitter:title" content="Git同时连接github和gitee"/>
+<meta name="twitter:description" content="Git 分布式版本控制工具 课程内容 Git概述 Git代码托管服务 Git常用命令 在IDEA中使用Git 1. 前言 1.1 什么是GitGit是一个分布式版本控制工"/>
+<meta name="twitter:site" content="@guo_alpha36266"/>
+<meta name="application-name" content="AlphaGuo">
+<meta name="apple-mobile-web-app-title" content="AlphaGuo">
+
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><meta name="twitter:creator" content="@@guo_alpha36266" /><link rel="icon" href="/images/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://alphaguo.vip/git%E5%90%8C%E6%97%B6%E8%BF%9E%E6%8E%A5github%E5%92%8Cgitee/" /><link rel="prev" href="https://alphaguo.vip/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" /><link rel="next" href="https://alphaguo.vip/se%E5%A2%9E%E5%BC%BA%E7%89%88/" />
+<link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Git同时连接github和gitee",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://alphaguo.vip/git%E5%90%8C%E6%97%B6%E8%BF%9E%E6%8E%A5github%E5%92%8Cgitee/"
+        },"genre": "posts","keywords": "tool","wordcount":  7329 ,
+        "url": "https://alphaguo.vip/git%E5%90%8C%E6%97%B6%E8%BF%9E%E6%8E%A5github%E5%92%8Cgitee/","datePublished": "2023-12-31T20:40:22+08:00","dateModified": "2023-12-31T20:40:22+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"authors": [{
+                        "@type": "Person",
+                        "name": "AlphaGuo"                    
+                    }],"description": ""
+    }
+    </script></head>
+
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme); document.documentElement.style.setProperty('color-scheme', theme === 'light' ? 'light' : 'dark'); window.theme = theme;   window.isDark = window.theme !== 'light' }
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('auto' === 'light' || 'auto' === 'dark' || 'auto' === 'black') setTheme('auto'), saveTheme('auto'); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+        window.switchThemeEventSet = new Set()
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="AlphaGuo Blog"><span id="desktop-header-typeit" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-select" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                    <select class="color-theme-select" id="theme-select-desktop" title="切换主题">
+                        <option value="light">浅色</option>
+                        <option value="dark">深色</option>
+                        <option value="black">黑色</option>
+                        <option value="auto">跟随系统</option>
+                    </select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="AlphaGuo Blog"><span id="mobile-header-typeit" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-select" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+                <select class="color-theme-select" id="theme-select-mobile" title="切换主题">
+                    <option value="light">浅色</option>
+                    <option value="dark">深色</option>
+                    <option value="black">黑色</option>
+                    <option value="auto">跟随系统</option>
+                </select>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">目录</h2>
+        <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#课程内容">课程内容</a></li>
+    <li><a href="#1-前言">1. 前言</a>
+      <ul>
+        <li><a href="#11-什么是git">1.1 什么是Git</a></li>
+        <li><a href="#12-使用git能做什么">1.2 使用Git能做什么</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-git概述">2. Git概述</a>
+      <ul>
+        <li><a href="#21-git简介">2.1 Git简介</a></li>
+        <li><a href="#22-git下载与安装">2.2 Git下载与安装</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-git代码托管服务">3. Git代码托管服务</a>
+      <ul>
+        <li><a href="#31-常用的git代码托管服务">3.1 常用的Git代码托管服务</a></li>
+        <li><a href="#32-码云代码托管服务">3.2 码云代码托管服务</a>
+          <ul>
+            <li><a href="#321-注册码云账号">3.2.1 注册码云账号</a></li>
+            <li><a href="#322-登录码云">3.2.2 登录码云</a></li>
+            <li><a href="#323-创建远程仓库">3.2.3 创建远程仓库</a></li>
+            <li><a href="#324-邀请其他用户成为仓库成员">3.2.4 邀请其他用户成为仓库成员</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#4-git常用命令">4. Git常用命令</a>
+      <ul>
+        <li><a href="#41配置github和gitee">4.1配置github和gitee</a>
+          <ul>
+            <li><a href="#411清除之前的配置">4.1.1清除之前的配置</a></li>
+            <li><a href="#412秘钥">4.1.2秘钥</a></li>
+            <li><a href="#413-识别-ssh-keys-新的私钥">4.1.3 识别 SSH keys 新的私钥</a></li>
+            <li><a href="#414-多账号配置-config-文件">4.1.4 多账号配置 config 文件</a></li>
+            <li><a href="#415-添加-ssh">4.1.5 添加 ssh</a></li>
+            <li><a href="#416-测试成功">4.1.6 测试成功</a></li>
+          </ul>
+        </li>
+        <li><a href="#42-获取git仓库">4.2 获取Git仓库</a>
+          <ul>
+            <li><a href="#421-在本地初始化git仓库">4.2.1 在本地初始化Git仓库</a></li>
+            <li><a href="#422-从远程仓库克隆">4.2.2 从远程仓库克隆</a></li>
+          </ul>
+        </li>
+        <li><a href="#43-工作区暂存区版本库">4.3 工作区、暂存区、版本库</a></li>
+        <li><a href="#44-git工作区中文件的状态">4.4 Git工作区中文件的状态</a></li>
+        <li><a href="#45-本地仓库操作">4.5 本地仓库操作</a>
+          <ul>
+            <li><a href="#451-git-status">4.5.1 git status</a></li>
+            <li><a href="#452-git-add">4.5.2 git add</a></li>
+            <li><a href="#453-git-reset">4.5.3 git reset</a></li>
+            <li><a href="#454-git-commit">4.5.4 git commit</a></li>
+            <li><a href="#455-git-log">4.5.5 git log</a></li>
+          </ul>
+        </li>
+        <li><a href="#46-远程仓库操作">4.6 远程仓库操作</a>
+          <ul>
+            <li><a href="#461-git-remote">4.6.1 git remote</a></li>
+            <li><a href="#462-git-remote-add">4.6.2 git remote add</a></li>
+            <li><a href="#463-git-clone">4.6.3 git clone</a></li>
+            <li><a href="#464-git-push">4.6.4 git push</a></li>
+            <li><a href="#465-git-pull">4.6.5 git pull</a></li>
+          </ul>
+        </li>
+        <li><a href="#47-分支操作">4.7 分支操作</a>
+          <ul>
+            <li><a href="#471-查看分支">4.7.1 查看分支</a></li>
+            <li><a href="#472-创建分支">4.7.2 创建分支</a></li>
+            <li><a href="#473-切换分支">4.7.3 切换分支</a></li>
+            <li><a href="#474-推送至远程仓库分支">4.7.4 推送至远程仓库分支</a></li>
+            <li><a href="#475-合并分支">4.7.5 合并分支</a></li>
+          </ul>
+        </li>
+        <li><a href="#48-标签操作">4.8 标签操作</a>
+          <ul>
+            <li><a href="#481-查看标签">4.8.1 查看标签</a></li>
+            <li><a href="#482-创建标签">4.8.2 创建标签</a></li>
+            <li><a href="#483-将标签推送至远程仓库">4.8.3 将标签推送至远程仓库</a></li>
+            <li><a href="#484-检出标签">4.8.4 检出标签</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#5-在idea中使用git">5. 在IDEA中使用Git</a>
+      <ul>
+        <li><a href="#51-在idea中配置git">5.1 在IDEA中配置Git</a></li>
+        <li><a href="#52-获取git仓库">5.2 获取Git仓库</a>
+          <ul>
+            <li><a href="#521-本地初始化仓库">5.2.1 本地初始化仓库</a></li>
+            <li><a href="#522-从远程仓库克隆">5.2.2 从远程仓库克隆</a></li>
+          </ul>
+        </li>
+        <li><a href="#53-git忽略文件">5.3 Git忽略文件</a></li>
+        <li><a href="#54-本地仓库操作">5.4 本地仓库操作</a>
+          <ul>
+            <li><a href="#541-将文件加入暂存区">5.4.1 将文件加入暂存区</a></li>
+            <li><a href="#542-将暂存区文件提交到版本库">5.4.2 将暂存区文件提交到版本库</a></li>
+            <li><a href="#543-查看日志">5.4.3 查看日志</a></li>
+          </ul>
+        </li>
+        <li><a href="#55-远程仓库操作">5.5 远程仓库操作</a>
+          <ul>
+            <li><a href="#551-查看远程仓库">5.5.1 查看远程仓库</a></li>
+            <li><a href="#552-添加远程仓库">5.5.2 添加远程仓库</a></li>
+            <li><a href="#553-推送至远程仓库">5.5.3 推送至远程仓库</a></li>
+            <li><a href="#554-从远程仓库拉取">5.5.4 从远程仓库拉取</a></li>
+          </ul>
+        </li>
+        <li><a href="#56-分支操作">5.6 分支操作</a>
+          <ul>
+            <li><a href="#561-查看分支">5.6.1 查看分支</a></li>
+            <li><a href="#562-创建分支">5.6.2 创建分支</a></li>
+            <li><a href="#563-切换分支">5.6.3 切换分支</a></li>
+            <li><a href="#564-将分支推送到远程仓库">5.6.4 将分支推送到远程仓库</a></li>
+            <li><a href="#565-合并分支">5.6.5 合并分支</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Git同时连接github和gitee</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><span class='author'><span class="author fas fa-user-circle fa-fw"></span><span class='screen-reader-text'>  </span><a href='https://alphaguo.vip/authors/alphaguo'>AlphaGuo</a></span>
+                </span>&nbsp;<span class="post-category">收录于 </span>&nbsp;<span class="post-category">类别 <a href="/categories/tool/"><i class="far fa-folder fa-fw"></i>tool</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-12-31">2023-12-31</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-12-31">2023-12-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 7329 字&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 15 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#课程内容">课程内容</a></li>
+    <li><a href="#1-前言">1. 前言</a>
+      <ul>
+        <li><a href="#11-什么是git">1.1 什么是Git</a></li>
+        <li><a href="#12-使用git能做什么">1.2 使用Git能做什么</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-git概述">2. Git概述</a>
+      <ul>
+        <li><a href="#21-git简介">2.1 Git简介</a></li>
+        <li><a href="#22-git下载与安装">2.2 Git下载与安装</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-git代码托管服务">3. Git代码托管服务</a>
+      <ul>
+        <li><a href="#31-常用的git代码托管服务">3.1 常用的Git代码托管服务</a></li>
+        <li><a href="#32-码云代码托管服务">3.2 码云代码托管服务</a>
+          <ul>
+            <li><a href="#321-注册码云账号">3.2.1 注册码云账号</a></li>
+            <li><a href="#322-登录码云">3.2.2 登录码云</a></li>
+            <li><a href="#323-创建远程仓库">3.2.3 创建远程仓库</a></li>
+            <li><a href="#324-邀请其他用户成为仓库成员">3.2.4 邀请其他用户成为仓库成员</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#4-git常用命令">4. Git常用命令</a>
+      <ul>
+        <li><a href="#41配置github和gitee">4.1配置github和gitee</a>
+          <ul>
+            <li><a href="#411清除之前的配置">4.1.1清除之前的配置</a></li>
+            <li><a href="#412秘钥">4.1.2秘钥</a></li>
+            <li><a href="#413-识别-ssh-keys-新的私钥">4.1.3 识别 SSH keys 新的私钥</a></li>
+            <li><a href="#414-多账号配置-config-文件">4.1.4 多账号配置 config 文件</a></li>
+            <li><a href="#415-添加-ssh">4.1.5 添加 ssh</a></li>
+            <li><a href="#416-测试成功">4.1.6 测试成功</a></li>
+          </ul>
+        </li>
+        <li><a href="#42-获取git仓库">4.2 获取Git仓库</a>
+          <ul>
+            <li><a href="#421-在本地初始化git仓库">4.2.1 在本地初始化Git仓库</a></li>
+            <li><a href="#422-从远程仓库克隆">4.2.2 从远程仓库克隆</a></li>
+          </ul>
+        </li>
+        <li><a href="#43-工作区暂存区版本库">4.3 工作区、暂存区、版本库</a></li>
+        <li><a href="#44-git工作区中文件的状态">4.4 Git工作区中文件的状态</a></li>
+        <li><a href="#45-本地仓库操作">4.5 本地仓库操作</a>
+          <ul>
+            <li><a href="#451-git-status">4.5.1 git status</a></li>
+            <li><a href="#452-git-add">4.5.2 git add</a></li>
+            <li><a href="#453-git-reset">4.5.3 git reset</a></li>
+            <li><a href="#454-git-commit">4.5.4 git commit</a></li>
+            <li><a href="#455-git-log">4.5.5 git log</a></li>
+          </ul>
+        </li>
+        <li><a href="#46-远程仓库操作">4.6 远程仓库操作</a>
+          <ul>
+            <li><a href="#461-git-remote">4.6.1 git remote</a></li>
+            <li><a href="#462-git-remote-add">4.6.2 git remote add</a></li>
+            <li><a href="#463-git-clone">4.6.3 git clone</a></li>
+            <li><a href="#464-git-push">4.6.4 git push</a></li>
+            <li><a href="#465-git-pull">4.6.5 git pull</a></li>
+          </ul>
+        </li>
+        <li><a href="#47-分支操作">4.7 分支操作</a>
+          <ul>
+            <li><a href="#471-查看分支">4.7.1 查看分支</a></li>
+            <li><a href="#472-创建分支">4.7.2 创建分支</a></li>
+            <li><a href="#473-切换分支">4.7.3 切换分支</a></li>
+            <li><a href="#474-推送至远程仓库分支">4.7.4 推送至远程仓库分支</a></li>
+            <li><a href="#475-合并分支">4.7.5 合并分支</a></li>
+          </ul>
+        </li>
+        <li><a href="#48-标签操作">4.8 标签操作</a>
+          <ul>
+            <li><a href="#481-查看标签">4.8.1 查看标签</a></li>
+            <li><a href="#482-创建标签">4.8.2 创建标签</a></li>
+            <li><a href="#483-将标签推送至远程仓库">4.8.3 将标签推送至远程仓库</a></li>
+            <li><a href="#484-检出标签">4.8.4 检出标签</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#5-在idea中使用git">5. 在IDEA中使用Git</a>
+      <ul>
+        <li><a href="#51-在idea中配置git">5.1 在IDEA中配置Git</a></li>
+        <li><a href="#52-获取git仓库">5.2 获取Git仓库</a>
+          <ul>
+            <li><a href="#521-本地初始化仓库">5.2.1 本地初始化仓库</a></li>
+            <li><a href="#522-从远程仓库克隆">5.2.2 从远程仓库克隆</a></li>
+          </ul>
+        </li>
+        <li><a href="#53-git忽略文件">5.3 Git忽略文件</a></li>
+        <li><a href="#54-本地仓库操作">5.4 本地仓库操作</a>
+          <ul>
+            <li><a href="#541-将文件加入暂存区">5.4.1 将文件加入暂存区</a></li>
+            <li><a href="#542-将暂存区文件提交到版本库">5.4.2 将暂存区文件提交到版本库</a></li>
+            <li><a href="#543-查看日志">5.4.3 查看日志</a></li>
+          </ul>
+        </li>
+        <li><a href="#55-远程仓库操作">5.5 远程仓库操作</a>
+          <ul>
+            <li><a href="#551-查看远程仓库">5.5.1 查看远程仓库</a></li>
+            <li><a href="#552-添加远程仓库">5.5.2 添加远程仓库</a></li>
+            <li><a href="#553-推送至远程仓库">5.5.3 推送至远程仓库</a></li>
+            <li><a href="#554-从远程仓库拉取">5.5.4 从远程仓库拉取</a></li>
+          </ul>
+        </li>
+        <li><a href="#56-分支操作">5.6 分支操作</a>
+          <ul>
+            <li><a href="#561-查看分支">5.6.1 查看分支</a></li>
+            <li><a href="#562-创建分支">5.6.2 创建分支</a></li>
+            <li><a href="#563-切换分支">5.6.3 切换分支</a></li>
+            <li><a href="#564-将分支推送到远程仓库">5.6.4 将分支推送到远程仓库</a></li>
+            <li><a href="#565-合并分支">5.6.5 合并分支</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="git-分布式版本控制工具" class="headerLink">
+    <a href="#git-%e5%88%86%e5%b8%83%e5%bc%8f%e7%89%88%e6%9c%ac%e6%8e%a7%e5%88%b6%e5%b7%a5%e5%85%b7" class="header-mark"></a>Git 分布式版本控制工具</h1><h2 id="课程内容" class="headerLink">
+    <a href="#%e8%af%be%e7%a8%8b%e5%86%85%e5%ae%b9" class="header-mark"></a>课程内容</h2><ul>
+<li>Git概述</li>
+<li>Git代码托管服务</li>
+<li>Git常用命令</li>
+<li>在IDEA中使用Git</li>
+</ul>
+<h2 id="1-前言" class="headerLink">
+    <a href="#1-%e5%89%8d%e8%a8%80" class="header-mark"></a>1. 前言</h2><h3 id="11-什么是git" class="headerLink">
+    <a href="#11-%e4%bb%80%e4%b9%88%e6%98%afgit" class="header-mark"></a>1.1 什么是Git</h3><p>Git是一个分布式版本控制工具，主要用于管理开发过程中的源代码文件（Java类、xml文件、html页面等），在软件开发过程中被广泛使用。</p>
+<p>在IDEA开发工具中可以集成Git（后面会讲解Git安装和集成过程）：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210924171926037.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210924171926037.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210924171926037.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210924171926037.png 2x"
+        sizes="auto"
+        alt="image-20210924171926037"
+        title="image-20210924171926037" ></figure></p>
+<p>集成后在IDEA中可以看到Git相关图标：<figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210924172028329.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210924172028329.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210924172028329.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210924172028329.png 2x"
+        sizes="auto"
+        alt="image-20210924172028329"
+        title="image-20210924172028329" ></figure></p>
+<p>可以通过启动两个IDEA窗口模拟两个开发人员来展示Git的使用：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926080623416.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926080623416.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926080623416.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926080623416.png 2x"
+        sizes="auto"
+        alt="image-20210926080623416"
+        title="image-20210926080623416" ></figure></p>
+<p>其他的版本控制工具：</p>
+<ul>
+<li>SVN</li>
+<li>CVS</li>
+<li>VSS</li>
+</ul>
+<h3 id="12-使用git能做什么" class="headerLink">
+    <a href="#12-%e4%bd%bf%e7%94%a8git%e8%83%bd%e5%81%9a%e4%bb%80%e4%b9%88" class="header-mark"></a>1.2 使用Git能做什么</h3><ul>
+<li>代码回溯：Git在管理文件过程中会记录日志，方便回退到历史版本</li>
+<li>版本切换：Git存在分支的概念，一个项目可以有多个分支（版本），可以任意切换</li>
+<li>多人协作：Git支持多人协作，即一个团队共同开发一个项目，每个团队成员负责一部分代码，通过Git就可以管理和协调</li>
+<li>远程备份：Git通过仓库管理文件，在Git中存在远程仓库，如果本地文件丢失还可以从远程仓库获取</li>
+</ul>
+<h2 id="2-git概述" class="headerLink">
+    <a href="#2-git%e6%a6%82%e8%bf%b0" class="header-mark"></a>2. Git概述</h2><h3 id="21-git简介" class="headerLink">
+    <a href="#21-git%e7%ae%80%e4%bb%8b" class="header-mark"></a>2.1 Git简介</h3><p>Git 是一个分布式版本控制工具，通常用来对软件开发过程中的源代码文件进行管理。通过Git 仓库来存储和管理这些文件，Git 仓库分为两种：</p>
+<ul>
+<li>本地仓库：开发人员自己电脑上的 Git 仓库</li>
+<li>远程仓库：远程服务器上的 Git 仓库</li>
+</ul>
+<img src="D:/quark01/assets/image-20210924173708313.png" alt="image-20210924173708313" style="zoom: 50%;" />
+<p>解释说明：</p>
+<blockquote>
+<p>commit：提交,将本地文件和版本信息保存到本地仓库</p>
+<p>push：推送,将本地仓库文件和版本信息上传到远程仓库</p>
+<p>pull：拉取,将远程仓库文件和版本信息下载到本地仓库</p>
+</blockquote>
+<h3 id="22-git下载与安装" class="headerLink">
+    <a href="#22-git%e4%b8%8b%e8%bd%bd%e4%b8%8e%e5%ae%89%e8%a3%85" class="header-mark"></a>2.2 Git下载与安装</h3><p>下载地址： <a href="https://git-scm.com/download" target="_blank" rel="noopener noreferrer">https://git-scm.com/download</a></p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210924174639182.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210924174639182.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210924174639182.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210924174639182.png 2x"
+        sizes="auto"
+        alt="image-20210924174639182"
+        title="image-20210924174639182" ></figure></p>
+<p>下载完成后得到安装文件：<figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210924174717172.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210924174717172.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210924174717172.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210924174717172.png 2x"
+        sizes="auto"
+        alt="image-20210924174717172"
+        title="image-20210924174717172" ></figure></p>
+<p>直接双击完成安装即可，安装完成后可以在任意目录下点击鼠标右键，如果能够看到如下菜单则说明安装成功：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210924174934683.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210924174934683.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210924174934683.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210924174934683.png 2x"
+        sizes="auto"
+        alt="image-20210924174934683"
+        title="image-20210924174934683" ></figure></p>
+<p>Git GUI Here：打开Git 图形界面</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210924175209242.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210924175209242.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210924175209242.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210924175209242.png 2x"
+        sizes="auto"
+        alt="image-20210924175209242"
+        title="image-20210924175209242" ></figure></p>
+<p>Git Bash Here：打开Git 命令行</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210924175314485.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210924175314485.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210924175314485.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210924175314485.png 2x"
+        sizes="auto"
+        alt="image-20210924175314485"
+        title="image-20210924175314485" ></figure></p>
+<p>Git安装目录结构如下：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926094227522.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926094227522.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926094227522.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926094227522.png 2x"
+        sizes="auto"
+        alt="image-20210926094227522"
+        title="image-20210926094227522" ></figure></p>
+<h2 id="3-git代码托管服务" class="headerLink">
+    <a href="#3-git%e4%bb%a3%e7%a0%81%e6%89%98%e7%ae%a1%e6%9c%8d%e5%8a%a1" class="header-mark"></a>3. Git代码托管服务</h2><h3 id="31-常用的git代码托管服务" class="headerLink">
+    <a href="#31-%e5%b8%b8%e7%94%a8%e7%9a%84git%e4%bb%a3%e7%a0%81%e6%89%98%e7%ae%a1%e6%9c%8d%e5%8a%a1" class="header-mark"></a>3.1 常用的Git代码托管服务</h3><p>Git中存在两种类型的仓库，即<strong>本地仓库</strong>和<strong>远程仓库</strong>。那么我们如何搭建Git<strong>远程仓库</strong>呢？</p>
+<p>我们可以借助互联网上提供的一些代码托管服务来实现，其中比较常用的有GitHub、码云、GitLab等。</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>网址</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>gitHub</td>
+<td><a href="https://github.com/" target="_blank" rel="noopener noreferrer">https://github.com/</a></td>
+<td>一个面向开源及私有软件项目的托管平台，因为只支持Git 作为唯一的版本库格式进行托管，故名gitHub</td>
+</tr>
+<tr>
+<td>码云</td>
+<td><a href="https://gitee.com/" target="_blank" rel="noopener noreferrer">https://gitee.com/</a></td>
+<td>国内的一个代码托管平台，由于服务器在国内，所以相比于GitHub，码云速度会更快</td>
+</tr>
+<tr>
+<td>GitLab</td>
+<td><a href="https://about.gitlab.com/" target="_blank" rel="noopener noreferrer">https://about.gitlab.com/</a></td>
+<td>一个用于仓库管理系统的开源项目，使用Git作为代码管理工具，并在此基础上搭建起来的web服务</td>
+</tr>
+<tr>
+<td>BitBucket</td>
+<td><a href="https://bitbucket.org/" target="_blank" rel="noopener noreferrer">https://bitbucket.org/</a></td>
+<td>一家源代码托管网站，采用Mercurial和Git作为分布式版本控制系统，同时提供商业计划和免费账户</td>
+</tr>
+</tbody>
+</table>
+<h3 id="32-码云代码托管服务" class="headerLink">
+    <a href="#32-%e7%a0%81%e4%ba%91%e4%bb%a3%e7%a0%81%e6%89%98%e7%ae%a1%e6%9c%8d%e5%8a%a1" class="header-mark"></a>3.2 码云代码托管服务</h3><p>码云网址：https://gitee.com/</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926082758518.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926082758518.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926082758518.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926082758518.png 2x"
+        sizes="auto"
+        alt="image-20210926082758518"
+        title="image-20210926082758518" ></figure></p>
+<p>使用码云的操作流程如下：</p>
+<ol>
+<li>注册码云账号</li>
+<li>登录码云</li>
+<li>创建远程仓库</li>
+<li>邀请其他用户成为仓库成员</li>
+</ol>
+<h4 id="321-注册码云账号" class="headerLink">
+    <a href="#321-%e6%b3%a8%e5%86%8c%e7%a0%81%e4%ba%91%e8%b4%a6%e5%8f%b7" class="header-mark"></a>3.2.1 注册码云账号</h4><p>注册网址： <a href="https://gitee.com/signup" target="_blank" rel="noopener noreferrer">https://gitee.com/signup</a></p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926083229013.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926083229013.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926083229013.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926083229013.png 2x"
+        sizes="auto"
+        alt="image-20210926083229013"
+        title="image-20210926083229013" ></figure></p>
+<h4 id="322-登录码云" class="headerLink">
+    <a href="#322-%e7%99%bb%e5%bd%95%e7%a0%81%e4%ba%91" class="header-mark"></a>3.2.2 登录码云</h4><p>注册完成后可以使用刚刚注册的邮箱进行登录（地址： <a href="https://gitee.com/login" target="_blank" rel="noopener noreferrer">https://gitee.com/login</a> ）</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926083328306.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926083328306.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926083328306.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926083328306.png 2x"
+        sizes="auto"
+        alt="image-20210926083328306"
+        title="image-20210926083328306" ></figure></p>
+<h4 id="323-创建远程仓库" class="headerLink">
+    <a href="#323-%e5%88%9b%e5%bb%ba%e8%bf%9c%e7%a8%8b%e4%bb%93%e5%ba%93" class="header-mark"></a>3.2.3 创建远程仓库</h4><p>登录成功后可以创建远程仓库，操作方式如下：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926083510298.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926083510298.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926083510298.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926083510298.png 2x"
+        sizes="auto"
+        alt="image-20210926083510298"
+        title="image-20210926083510298" ></figure></p>
+<p>页面跳转到新建仓库页面：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926083629924.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926083629924.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926083629924.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926083629924.png 2x"
+        sizes="auto"
+        alt="image-20210926083629924"
+        title="image-20210926083629924" ></figure></p>
+<p>解释说明：</p>
+<blockquote>
+<p>仓库名称：必填，每个仓库都需要有一个名称，同一个码云账号下的仓库名称不能重复</p>
+<p>路径：访问远程仓库时会使用到，一般无需手动指定，和仓库名称自动保持一致</p>
+<p>开源：所有人都可以查看此仓库</p>
+<p>私有：只有此仓库的成员可见，其他人不可见</p>
+</blockquote>
+<p>创建完成后可以查看仓库信息：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926090131032.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926090131032.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926090131032.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926090131032.png 2x"
+        sizes="auto"
+        alt="image-20210926090131032"
+        title="image-20210926090131032" ></figure></p>
+<p><strong>注意</strong>：每个Git远程仓库都会对应一个网络地址，点击【克隆/下载】按钮，在弹出窗口点击【复制】按钮即可复制网络地址，地址如下：</p>
+<p><a href="https://gitee.com/ChuanZhiBoKe/myGitRepo.git" target="_blank" rel="noopener noreferrer">https://gitee.com/ChuanZhiBoKe/myGitRepo.git</a></p>
+<h4 id="324-邀请其他用户成为仓库成员" class="headerLink">
+    <a href="#324-%e9%82%80%e8%af%b7%e5%85%b6%e4%bb%96%e7%94%a8%e6%88%b7%e6%88%90%e4%b8%ba%e4%bb%93%e5%ba%93%e6%88%90%e5%91%98" class="header-mark"></a>3.2.4 邀请其他用户成为仓库成员</h4><p>前面已经在码云上创建了自己的远程仓库，目前仓库成员只有自己一个人（身份为管理员）。在企业实际开发中，一个项目往往是由多个人共同开发完成的，为了使多个参与者都有权限操作远程仓库，就需要邀请其他项目参与者成为当前仓库的成员。</p>
+<p>点击管理按钮进入仓库管理页面，左侧菜单中可以看到【仓库成员管理】：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926090608272.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926090608272.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926090608272.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926090608272.png 2x"
+        sizes="auto"
+        alt="image-20210926090608272"
+        title="image-20210926090608272" ></figure></p>
+<p>点击【开发者】菜单，跳转到如下页面：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926091027151.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926091027151.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926091027151.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926091027151.png 2x"
+        sizes="auto"
+        alt="image-20210926091027151"
+        title="image-20210926091027151" ></figure></p>
+<p>点击【添加仓库成员】菜单下的【邀请用户】菜单，跳转到如下页面：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926091204422.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926091204422.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926091204422.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926091204422.png 2x"
+        sizes="auto"
+        alt="image-20210926091204422"
+        title="image-20210926091204422" ></figure></p>
+<p>可以看到邀请用户有多种方式：链接邀请、直接添加、通过仓库邀请成员</p>
+<p><strong>注意</strong>：被邀请用户必须为码云的注册用户，否则无法成为仓库成员</p>
+<h2 id="4-git常用命令" class="headerLink">
+    <a href="#4-git%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4" class="header-mark"></a>4. Git常用命令</h2><h3 id="41配置github和gitee" class="headerLink">
+    <a href="#41%e9%85%8d%e7%bd%aegithub%e5%92%8cgitee" class="header-mark"></a>4.1配置github和gitee</h3><p>背景：由于个人博客(<a href="https://www.alphaguo.vip" target="_blank" rel="noopener noreferrer">www.alphaguo.vip</a>)是存于github仓库托管，现在项目需要用到gitee，于是需要在一台电脑上同时配置两个用户，进行不同的仓库操作</p>
+<h4 id="411清除之前的配置" class="headerLink">
+    <a href="#411%e6%b8%85%e9%99%a4%e4%b9%8b%e5%89%8d%e7%9a%84%e9%85%8d%e7%bd%ae" class="header-mark"></a>4.1.1清除之前的配置</h4><p>在这里由于之前配置github用户时使用的是全局配置，所以需要先把用户信息清除，并分别为两个仓库配置local用户信息</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="c1"># 列出全局用户名，邮箱配置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">git</span> <span class="nx">config</span> <span class="o">--**</span><span class="k">global</span><span class="o">**</span> <span class="o">--**</span><span class="k">list</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="c1"># 重置用户名和邮箱
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">git</span> <span class="nx">config</span> <span class="o">--**</span><span class="k">global</span><span class="o">**</span> <span class="o">--**</span><span class="nx">unset</span><span class="o">**</span> <span class="nx">user</span><span class="o">.</span><span class="nx">name</span>
+</span></span><span class="line"><span class="cl"><span class="nx">git</span> <span class="nx">config</span> <span class="o">--**</span><span class="k">global</span><span class="o">**</span> <span class="o">--**</span><span class="nx">unset</span><span class="o">**</span> <span class="nx">user</span><span class="o">.</span><span class="nx">email</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="412秘钥" class="headerLink">
+    <a href="#412%e7%a7%98%e9%92%a5" class="header-mark"></a>4.1.2秘钥</h4><p><strong>删除旧的秘钥：</strong> 旧的秘钥存放在用户目录的.ssh文件夹中，删除其中的 <code>id_rsa</code>、<code>id_rsa.pub</code> 之类的公钥和密钥文件。</p>
+<p><strong>生成新的秘钥：</strong></p>
+<p>GitHub 的钥匙</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">ssh</span><span class="o">-</span><span class="nx">keygen</span> <span class="o">-</span><span class="nx">t</span> <span class="nx">rsa</span> <span class="o">-</span><span class="nx">f</span> <span class="o">~</span><span class="err">/.ssh/id_rsa.github -C &#34;邮箱一&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>回车即可。</p>
+<p>邮箱换一个。不要跟上面相同就行了。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">ssh</span><span class="o">-</span><span class="nx">keygen</span> <span class="o">-</span><span class="nx">t</span> <span class="nx">rsa</span> <span class="o">-</span><span class="nx">f</span> <span class="o">~</span><span class="err">/.ssh/id_rsa.gitee -C &#34;邮箱二&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="mi">1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>回车即可。</p>
+<p>完成后会在~/.ssh / 目录下生成以下文件。</p>
+<ul>
+<li>id_rsa.github</li>
+<li>id_rsa.github.pub</li>
+<li>id_rsa.gitee</li>
+<li>id_rsa.gitee.pub</li>
+</ul>
+<p>报错：Could not open a connection to your authentication agent.解决方法</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">ssh-agent bash
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="413-识别-ssh-keys-新的私钥" class="headerLink">
+    <a href="#413-%e8%af%86%e5%88%ab-ssh-keys-%e6%96%b0%e7%9a%84%e7%a7%81%e9%92%a5" class="header-mark"></a>4.1.3 识别 SSH keys 新的私钥</h4><p>默认只读取 id_rsa，为了让 SSH 识别新的私钥，需要将新的私钥加入到 SSH agent 中。<strong>这一步也需要再探索一下，我没有设置也可以成功。</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">ssh</span><span class="o">-</span><span class="nx">agent</span> <span class="nx">bash</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ssh</span><span class="o">-</span><span class="nx">add</span> <span class="o">~</span><span class="err">/.ssh/id_rsa.github</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ssh</span><span class="o">-</span><span class="nx">add</span> <span class="o">~</span><span class="err">/.ssh/id_rsa.gitee</span>
+</span></span><span class="line"><span class="cl"><span class="mi">123</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="414-多账号配置-config-文件" class="headerLink">
+    <a href="#414-%e5%a4%9a%e8%b4%a6%e5%8f%b7%e9%85%8d%e7%bd%ae-config-%e6%96%87%e4%bb%b6" class="header-mark"></a>4.1.4 多账号配置 config 文件</h4><p>创建config文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">touch</span> <span class="o">~</span><span class="err">/.ssh/config </span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>config 中填写的内容：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="err">#</span><span class="nx">Default</span> <span class="nx">gitHub</span> <span class="nx">user</span> <span class="nx">Self</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Host</span> <span class="nx">github</span><span class="p">.</span><span class="nx">com</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">HostName</span> <span class="nx">github</span><span class="p">.</span><span class="nx">com</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">User</span> <span class="nx">git</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">IdentityFile</span> <span class="o">~</span><span class="err">/.ssh/id_rsa.github</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">#</span> <span class="nx">gitee</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Host</span> <span class="nx">gitee</span><span class="p">.</span><span class="nx">com</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Port</span> <span class="mi">22</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">HostName</span> <span class="nx">gitee</span><span class="p">.</span><span class="nx">com</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">User</span> <span class="nx">git</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">IdentityFile</span> <span class="o">~</span><span class="err">/.ssh/id_rsa.gitee</span>
+</span></span><span class="line"><span class="cl"><span class="mi">123456789101112</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="415-添加-ssh" class="headerLink">
+    <a href="#415-%e6%b7%bb%e5%8a%a0-ssh" class="header-mark"></a>4.1.5 添加 ssh</h4><p>分别添加SSH到Gitee和Github：</p>
+<p>Github：
+<a href="https://github.com/settings/keys" target="_blank" rel="noopener noreferrer">https://github.com/settings/keys</a>
+将 <strong>id_rsa.github.pub</strong> 中的内容填进去，起名的话随意。</p>
+<p>Gitee:
+<a href="https://gitee.com/profile/sshkeys" target="_blank" rel="noopener noreferrer">https://gitee.com/profile/sshkeys</a>
+将 <strong>id_rsa.gitee.pub</strong> 中的内容填进去，起名的话随意。</p>
+<h4 id="416-测试成功" class="headerLink">
+    <a href="#416-%e6%b5%8b%e8%af%95%e6%88%90%e5%8a%9f" class="header-mark"></a>4.1.6 测试成功</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="nx">ssh</span> <span class="o">-</span><span class="nx">T</span> <span class="nx">git</span><span class="err">@</span><span class="nx">gitee</span><span class="p">.</span><span class="nx">com</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ssh</span> <span class="o">-</span><span class="nx">T</span> <span class="nx">git</span><span class="err">@</span><span class="nx">github</span><span class="p">.</span><span class="nx">com</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果提示没有设置用户信息，需要在各仓库里设置local用户信息</p>
+<p>找到仓库目录（就是有.git子目录的目录）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">git</span> <span class="nx">config</span> <span class="o">--</span><span class="nx">local</span> <span class="nx">user</span><span class="o">.</span><span class="nx">name</span> <span class="s2">&#34;username&#34;</span> 
+</span></span><span class="line"><span class="cl"><span class="nx">git</span> <span class="nx">config</span> <span class="o">--</span><span class="nx">local</span> <span class="nx">user</span><span class="o">.</span><span class="nx">email</span> <span class="s2">&#34;username@qq.com&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="42-获取git仓库" class="headerLink">
+    <a href="#42-%e8%8e%b7%e5%8f%96git%e4%bb%93%e5%ba%93" class="header-mark"></a>4.2 获取Git仓库</h3><p>要使用Git对我们的代码进行管理，首先需要获得Git仓库。</p>
+<p>获取Git仓库通常有两种方式：</p>
+<ul>
+<li>在本地初始化Git仓库（不常用）</li>
+<li>从远程仓库克隆（常用）</li>
+</ul>
+<h4 id="421-在本地初始化git仓库" class="headerLink">
+    <a href="#421-%e5%9c%a8%e6%9c%ac%e5%9c%b0%e5%88%9d%e5%a7%8b%e5%8c%96git%e4%bb%93%e5%ba%93" class="header-mark"></a>4.2.1 在本地初始化Git仓库</h4><p><strong>操作步骤如下</strong>：</p>
+<ol>
+<li>在任意目录下创建一个空目录（例如repo1）作为我们的本地Git仓库</li>
+<li>进入这个目录中，点击右键打开Git bash窗口</li>
+<li>执行命令<strong>git</strong> <strong>init</strong></li>
+</ol>
+<p>如果在当前目录中看到.git文件夹（此文件夹为隐藏文件夹）则说明Git仓库创建成功</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926093721515.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926093721515.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926093721515.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926093721515.png 2x"
+        sizes="auto"
+        alt="image-20210926093721515"
+        title="image-20210926093721515" ></figure></p>
+<h4 id="422-从远程仓库克隆" class="headerLink">
+    <a href="#422-%e4%bb%8e%e8%bf%9c%e7%a8%8b%e4%bb%93%e5%ba%93%e5%85%8b%e9%9a%86" class="header-mark"></a>4.2.2 从远程仓库克隆</h4><p>可以通过Git提供的命令从远程仓库进行克隆，将远程仓库克隆到本地</p>
+<p><strong>命令格式</strong>：git clone 远程仓库地址</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926094404332.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926094404332.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926094404332.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926094404332.png 2x"
+        sizes="auto"
+        alt="image-20210926094404332"
+        title="image-20210926094404332" ></figure></p>
+<h3 id="43-工作区暂存区版本库" class="headerLink">
+    <a href="#43-%e5%b7%a5%e4%bd%9c%e5%8c%ba%e6%9a%82%e5%ad%98%e5%8c%ba%e7%89%88%e6%9c%ac%e5%ba%93" class="header-mark"></a>4.3 工作区、暂存区、版本库</h3><p>为了更好的学习Git，我们需要了解Git相关的一些概念，这些概念在后面的学习中会经常提到。</p>
+<p><strong>版本库</strong>：前面看到的.git隐藏文件夹就是版本库，版本库中存储了很多配置信息、日志信息和文件版本信息等</p>
+<p><strong>工作区</strong>：包含.git文件夹的目录就是工作区，也称为工作目录，主要用于存放开发的代码</p>
+<p><strong>暂存区</strong>：.git文件夹中有很多文件，其中有一个index文件就是暂存区，也可以叫做stage。暂存区是一个临时保存修改文件的地方</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926094831386.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926094831386.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926094831386.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926094831386.png 2x"
+        sizes="auto"
+        alt="image-20210926094831386"
+        title="image-20210926094831386" ></figure></p>
+<h3 id="44-git工作区中文件的状态" class="headerLink">
+    <a href="#44-git%e5%b7%a5%e4%bd%9c%e5%8c%ba%e4%b8%ad%e6%96%87%e4%bb%b6%e7%9a%84%e7%8a%b6%e6%80%81" class="header-mark"></a>4.4 Git工作区中文件的状态</h3><p>Git工作区中的文件存在两种状态：</p>
+<ul>
+<li>
+<p>untracked 未跟踪（未被纳入版本控制）</p>
+</li>
+<li>
+<p>tracked 已跟踪（被纳入版本控制）</p>
+<p>​     1）Unmodified 未修改状态</p>
+<p>​     2）Modified 已修改状态</p>
+<p>​     3）Staged 已暂存状态</p>
+</li>
+</ul>
+<p><strong>注意</strong>：文件的状态会随着我们执行Git的命令发生变化</p>
+<h3 id="45-本地仓库操作" class="headerLink">
+    <a href="#45-%e6%9c%ac%e5%9c%b0%e4%bb%93%e5%ba%93%e6%93%8d%e4%bd%9c" class="header-mark"></a>4.5 本地仓库操作</h3><p>本地仓库常用命令如下：</p>
+<ul>
+<li>git status 查看文件状态</li>
+<li>git add 将文件的修改加入暂存区</li>
+<li>git reset 将暂存区的文件取消暂存或者是切换到指定版本</li>
+<li>git commit 将暂存区的文件修改提交到版本库</li>
+<li>git log  查看日志</li>
+</ul>
+<h4 id="451-git-status" class="headerLink">
+    <a href="#451-git-status" class="header-mark"></a>4.5.1 git status</h4><p>git status 命令用于查看文件状态</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926095623297.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926095623297.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926095623297.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926095623297.png 2x"
+        sizes="auto"
+        alt="image-20210926095623297"
+        title="image-20210926095623297" ></figure></p>
+<p>注意：由于工作区中文件状态的不同，执行 git status 命令后的输出也会不同</p>
+<h4 id="452-git-add" class="headerLink">
+    <a href="#452-git-add" class="header-mark"></a>4.5.2 git add</h4><p>git add 命令的作用是将文件的修改加入暂存区，命令格式：git add fileName</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926100003056.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926100003056.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926100003056.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926100003056.png 2x"
+        sizes="auto"
+        alt="image-20210926100003056"
+        title="image-20210926100003056" ></figure></p>
+<p>加入暂存区后再执行 git status 命令，可以发现文件的状态已经发生变化。</p>
+<h4 id="453-git-reset" class="headerLink">
+    <a href="#453-git-reset" class="header-mark"></a>4.5.3 git reset</h4><p>git reset 命令的作用是将暂存区的文件<strong>取消暂存</strong>或者是<strong>切换到指定版本</strong></p>
+<p>取消暂存命令格式：git reset 文件名</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926101346514.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926101346514.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926101346514.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926101346514.png 2x"
+        sizes="auto"
+        alt="image-20210926101346514"
+        title="image-20210926101346514" ></figure></p>
+<p>切换到指定版本命令格式：git reset &ndash;hard 版本号</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926101401721.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926101401721.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926101401721.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926101401721.png 2x"
+        sizes="auto"
+        alt="image-20210926101401721"
+        title="image-20210926101401721" ></figure></p>
+<p>注意：每次Git提交都会产生新的版本号，通过版本号就可以回到历史版本</p>
+<h4 id="454-git-commit" class="headerLink">
+    <a href="#454-git-commit" class="header-mark"></a>4.5.4 git commit</h4><p>git commit 命令的作用是将暂存区的文件修改提交到版本库，命令格式：git commit -m msg 文件名</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926101859601.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926101859601.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926101859601.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926101859601.png 2x"
+        sizes="auto"
+        alt="image-20210926101859601"
+        title="image-20210926101859601" ></figure></p>
+<p>解释说明：</p>
+<blockquote>
+<p>-m：代表message，每次提交时需要设置，会记录到日志中</p>
+<p>可以使用通配符*一次提交多个文件</p>
+</blockquote>
+<h4 id="455-git-log" class="headerLink">
+    <a href="#455-git-log" class="header-mark"></a>4.5.5 git log</h4><p>git log 命令的作用是查看提交日志</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926102305539.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926102305539.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926102305539.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926102305539.png 2x"
+        sizes="auto"
+        alt="image-20210926102305539"
+        title="image-20210926102305539" ></figure></p>
+<p>通过git log命令查看日志，可以发现每次提交都会产生一个版本号，提交时设置的message、提交人、邮箱、提交时间等信息都会记录到日志中</p>
+<h3 id="46-远程仓库操作" class="headerLink">
+    <a href="#46-%e8%bf%9c%e7%a8%8b%e4%bb%93%e5%ba%93%e6%93%8d%e4%bd%9c" class="header-mark"></a>4.6 远程仓库操作</h3><p>前面执行的命令操作都是针对的本地仓库，本节我们会学习关于远程仓库的一些操作，具体包括：</p>
+<ul>
+<li>git remote  查看远程仓库</li>
+<li>git remote add 添加远程仓库</li>
+<li>git clone 从远程仓库克隆</li>
+<li>git pull 从远程仓库拉取</li>
+<li>git push 推送到远程仓库</li>
+</ul>
+<h4 id="461-git-remote" class="headerLink">
+    <a href="#461-git-remote" class="header-mark"></a>4.6.1 git remote</h4><p>如果要查看已经配置的远程仓库服务器，可以执行 git remote 命令，它会列出每一个远程服务器的简称。</p>
+<p>如果已经克隆了远程仓库，那么至少应该能看到 origin ，这是 Git 克隆的仓库服务器的默认名字。</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926103746721.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926103746721.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926103746721.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926103746721.png 2x"
+        sizes="auto"
+        alt="image-20210926103746721"
+        title="image-20210926103746721" ></figure></p>
+<p>解释说明：</p>
+<blockquote>
+<p>可以通过-v参数查看远程仓库更加详细的信息</p>
+<p>本地仓库配置的远程仓库都需要一个简称，后续在和远程仓库交互时会使用到这个简称</p>
+</blockquote>
+<h4 id="462-git-remote-add" class="headerLink">
+    <a href="#462-git-remote-add" class="header-mark"></a>4.6.2 git remote add</h4><p>添加远程仓库命令格式：git remote add 简称 远程仓库地址</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926104723901.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926104723901.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926104723901.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926104723901.png 2x"
+        sizes="auto"
+        alt="image-20210926104723901"
+        title="image-20210926104723901" ></figure></p>
+<p>注意：一个本地仓库可以关联多个远程仓库</p>
+<h4 id="463-git-clone" class="headerLink">
+    <a href="#463-git-clone" class="header-mark"></a>4.6.3 git clone</h4><p>如果你想获得一份已经存在了的 Git 远程仓库的拷贝，这时就要用到 git clone 命令。 Git 克隆的是该 Git 仓库服务器上的几乎所有数据（包括日志信息、历史记录等）。</p>
+<p>克隆仓库的命令格式： git clone 远程仓库地址</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926105017148.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926105017148.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926105017148.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926105017148.png 2x"
+        sizes="auto"
+        alt="image-20210926105017148"
+        title="image-20210926105017148" ></figure></p>
+<h4 id="464-git-push" class="headerLink">
+    <a href="#464-git-push" class="header-mark"></a>4.6.4 git push</h4><p>将本地仓库内容推送到远程仓库，命令格式：git push 远程仓库简称 分支名称</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926105413681.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926105413681.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926105413681.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926105413681.png 2x"
+        sizes="auto"
+        alt="image-20210926105413681"
+        title="image-20210926105413681" ></figure></p>
+<p>在使用git push命令将本地文件推送至码云远程仓库时，如果是第一次操作，需要进行身份认证，认证通过才可以推送，如下：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926105913504.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926105913504.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926105913504.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926105913504.png 2x"
+        sizes="auto"
+        alt="image-20210926105913504"
+        title="image-20210926105913504" ></figure></p>
+<p>注意：上面的用户名和密码对应的就是我们在码云上注册的用户名和密码，认证通过后会将用户名和密码保存到windows系统中（如下图），后续再推送则无需重复输入用户名和密码。</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926110810630.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926110810630.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926110810630.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926110810630.png 2x"
+        sizes="auto"
+        alt="image-20210926110810630"
+        title="image-20210926110810630" ></figure></p>
+<p>推送完成后可以到远程仓库中查看文件的变化。</p>
+<p>解释说明：</p>
+<blockquote>
+<p>一个仓库可以有多个分支，默认情况下在创建仓库后会自动创建一个master分支</p>
+<p>后面会讲解分支相关的操作</p>
+</blockquote>
+<h4 id="465-git-pull" class="headerLink">
+    <a href="#465-git-pull" class="header-mark"></a>4.6.5 git pull</h4><p><strong>git</strong> <strong>pull</strong> 命令的作用是从远程仓库获取最新版本并合并到本地仓库</p>
+<p>命令格式：git pull 远程仓库简称 分支名称</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926111013002.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926111013002.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926111013002.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926111013002.png 2x"
+        sizes="auto"
+        alt="image-20210926111013002"
+        title="image-20210926111013002" ></figure></p>
+<p><strong>注意</strong>：如果当前本地仓库不是从远程仓库克隆，而是本地创建的仓库，并且仓库中存在文件，此时再从远程仓库拉取文件的时候会报错（fatal: refusing to merge unrelated histories ）</p>
+<p>解决此问题可以在git pull命令后加入参数&ndash;allow-unrelated-histories</p>
+<h3 id="47-分支操作" class="headerLink">
+    <a href="#47-%e5%88%86%e6%94%af%e6%93%8d%e4%bd%9c" class="header-mark"></a>4.7 分支操作</h3><p>分支是Git 使用过程中非常重要的概念。使用分支意味着你可以把你的工作从开发主线上分离开来，以免影响开发主线。</p>
+<p>本地仓库和远程仓库中都有分支，同一个仓库可以有多个分支，各个分支相互独立，互不干扰。</p>
+<p>通过git init 命令创建本地仓库时默认会创建一个master分支。</p>
+<p>本节我们会学习关于分支的相关命令，具体命令如下：</p>
+<ul>
+<li>git branch                                     查看分支</li>
+<li>git branch [name]                       创建分支</li>
+<li>git checkout [name]                    切换分支</li>
+<li>git push [shortName] [name]   推送至远程仓库分支</li>
+<li>git merge [name]                        合并分支</li>
+</ul>
+<h4 id="471-查看分支" class="headerLink">
+    <a href="#471-%e6%9f%a5%e7%9c%8b%e5%88%86%e6%94%af" class="header-mark"></a>4.7.1 查看分支</h4><p>查看分支命令：git branch</p>
+<p>git branch 		列出所有本地分支</p>
+<p>git branch -r 	列出所有远程分支</p>
+<p>git branch -a 	列出所有本地分支和远程分支</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926124843275.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926124843275.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926124843275.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926124843275.png 2x"
+        sizes="auto"
+        alt="image-20210926124843275"
+        title="image-20210926124843275" ></figure></p>
+<h4 id="472-创建分支" class="headerLink">
+    <a href="#472-%e5%88%9b%e5%bb%ba%e5%88%86%e6%94%af" class="header-mark"></a>4.7.2 创建分支</h4><p>创建分支命令格式：git branch 分支名称</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926125053711.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926125053711.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926125053711.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926125053711.png 2x"
+        sizes="auto"
+        alt="image-20210926125053711"
+        title="image-20210926125053711" ></figure></p>
+<h4 id="473-切换分支" class="headerLink">
+    <a href="#473-%e5%88%87%e6%8d%a2%e5%88%86%e6%94%af" class="header-mark"></a>4.7.3 切换分支</h4><p>一个仓库中可以有多个分支，切换分支命令格式：git checkout 分支名称</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926125259155.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926125259155.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926125259155.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926125259155.png 2x"
+        sizes="auto"
+        alt="image-20210926125259155"
+        title="image-20210926125259155" ></figure></p>
+<p>注意：在命令行中会显示出当前所在分支，如上图所示。</p>
+<h4 id="474-推送至远程仓库分支" class="headerLink">
+    <a href="#474-%e6%8e%a8%e9%80%81%e8%87%b3%e8%bf%9c%e7%a8%8b%e4%bb%93%e5%ba%93%e5%88%86%e6%94%af" class="header-mark"></a>4.7.4 推送至远程仓库分支</h4><p>推送至远程仓库分支命令格式：git push 远程仓库简称 分支命令</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926125628894.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926125628894.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926125628894.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926125628894.png 2x"
+        sizes="auto"
+        alt="image-20210926125628894"
+        title="image-20210926125628894" ></figure></p>
+<p>推送完成后可以查看远程仓库：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926125810878.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926125810878.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926125810878.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926125810878.png 2x"
+        sizes="auto"
+        alt="image-20210926125810878"
+        title="image-20210926125810878" ></figure></p>
+<h4 id="475-合并分支" class="headerLink">
+    <a href="#475-%e5%90%88%e5%b9%b6%e5%88%86%e6%94%af" class="header-mark"></a>4.7.5 合并分支</h4><p>合并分支就是将两个分支的文件进行合并处理，命令格式：git merge 分支命令</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926130213015.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926130213015.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926130213015.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926130213015.png 2x"
+        sizes="auto"
+        alt="image-20210926130213015"
+        title="image-20210926130213015" ></figure></p>
+<p>注意：分支合并时需注意合并的方向，如上图所示，在Master分支执行操作，结果就是将b3分支合并到Master分支。</p>
+<h3 id="48-标签操作" class="headerLink">
+    <a href="#48-%e6%a0%87%e7%ad%be%e6%93%8d%e4%bd%9c" class="header-mark"></a>4.8 标签操作</h3><p>Git 中的标签，指的是某个分支某个特定时间点的状态。通过标签，可以很方便的切换到标记时的状态。</p>
+<p>比较有代表性的是人们会使用这个功能来标记发布结点（v1.0 、v1.2等）。下面是mybatis-plus的标签：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926130452557.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926130452557.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926130452557.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926130452557.png 2x"
+        sizes="auto"
+        alt="image-20210926130452557"
+        title="image-20210926130452557" ></figure></p>
+<p>在本节中，我们将学习如下和标签相关的命令：</p>
+<ul>
+<li>git tag                                                查看标签</li>
+<li>git tag [name]                                  创建标签</li>
+<li>git push [shortName] [name]       将标签推送至远程仓库</li>
+<li>git checkout -b [branch] [name]   检出标签</li>
+</ul>
+<h4 id="481-查看标签" class="headerLink">
+    <a href="#481-%e6%9f%a5%e7%9c%8b%e6%a0%87%e7%ad%be" class="header-mark"></a>4.8.1 查看标签</h4><p>查看标签命令：git tag</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926151333473.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926151333473.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926151333473.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926151333473.png 2x"
+        sizes="auto"
+        alt="image-20210926151333473"
+        title="image-20210926151333473" ></figure></p>
+<h4 id="482-创建标签" class="headerLink">
+    <a href="#482-%e5%88%9b%e5%bb%ba%e6%a0%87%e7%ad%be" class="header-mark"></a>4.8.2 创建标签</h4><p>创建标签命令：git tag 标签名</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926151452581.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926151452581.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926151452581.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926151452581.png 2x"
+        sizes="auto"
+        alt="image-20210926151452581"
+        title="image-20210926151452581" ></figure></p>
+<h4 id="483-将标签推送至远程仓库" class="headerLink">
+    <a href="#483-%e5%b0%86%e6%a0%87%e7%ad%be%e6%8e%a8%e9%80%81%e8%87%b3%e8%bf%9c%e7%a8%8b%e4%bb%93%e5%ba%93" class="header-mark"></a>4.8.3 将标签推送至远程仓库</h4><p>将标签推送至远程仓库命令：git push 远程仓库简称 标签名</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926151621286.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926151621286.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926151621286.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926151621286.png 2x"
+        sizes="auto"
+        alt="image-20210926151621286"
+        title="image-20210926151621286" ></figure></p>
+<p>推送完成后可以在远程仓库中查看标签。</p>
+<h4 id="484-检出标签" class="headerLink">
+    <a href="#484-%e6%a3%80%e5%87%ba%e6%a0%87%e7%ad%be" class="header-mark"></a>4.8.4 检出标签</h4><p>检出标签时需要新建一个分支来指向某个标签，检出标签的命令格式：git checkout -b 分支名 标签名</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926152111514.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926152111514.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926152111514.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926152111514.png 2x"
+        sizes="auto"
+        alt="image-20210926152111514"
+        title="image-20210926152111514" ></figure></p>
+<h2 id="5-在idea中使用git" class="headerLink">
+    <a href="#5-%e5%9c%a8idea%e4%b8%ad%e4%bd%bf%e7%94%a8git" class="header-mark"></a>5. 在IDEA中使用Git</h2><p>通过Git命令可以完成Git相关操作，为了简化操作过程，我们可以在IEDA中配置Git，配置好后就可以在IDEA中通过图形化的方式来操作Git。</p>
+<h3 id="51-在idea中配置git" class="headerLink">
+    <a href="#51-%e5%9c%a8idea%e4%b8%ad%e9%85%8d%e7%bd%aegit" class="header-mark"></a>5.1 在IDEA中配置Git</h3><p>在IDEA中使用Git，本质上还是使用的本地安装的Git软件，所以需要提前安装好Git并在IDEA中配置Git。</p>
+<p>Git安装目录：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926152847948.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926152847948.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926152847948.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926152847948.png 2x"
+        sizes="auto"
+        alt="image-20210926152847948"
+        title="image-20210926152847948" ></figure></p>
+<p>解释说明：</p>
+<blockquote>
+<p>git.exe：Git安装目录下的可执行文件，前面执行的git命令，其实就是执行的这个文件</p>
+</blockquote>
+<p>IDEA中的配置：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926152950420.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926152950420.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926152950420.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926152950420.png 2x"
+        sizes="auto"
+        alt="image-20210926152950420"
+        title="image-20210926152950420" ></figure></p>
+<p>说明：如果Git安装在默认目录中（C:\Program Files\Git），则IDEA中无需再手动配置，直接就可以使用。</p>
+<h3 id="52-获取git仓库" class="headerLink">
+    <a href="#52-%e8%8e%b7%e5%8f%96git%e4%bb%93%e5%ba%93" class="header-mark"></a>5.2 获取Git仓库</h3><p>在IDEA中获取Git仓库有两种方式：</p>
+<ul>
+<li>本地初始化仓库，本质就是执行 git init 命令</li>
+<li>从远程仓库克隆，本质就是执行 git clone 命令</li>
+</ul>
+<h4 id="521-本地初始化仓库" class="headerLink">
+    <a href="#521-%e6%9c%ac%e5%9c%b0%e5%88%9d%e5%a7%8b%e5%8c%96%e4%bb%93%e5%ba%93" class="header-mark"></a>5.2.1 本地初始化仓库</h4><p>在IDEA中通过如下操作可以在本地初始化一个本地仓库，其实底层就是执行的 git init 命令。操作过程如下：</p>
+<p>1）依次选择菜单【VCS】&mdash;【Import into Version Control】&mdash;【Create Git Repository】</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926153806414.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926153806414.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926153806414.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926153806414.png 2x"
+        sizes="auto"
+        alt="image-20210926153806414"
+        title="image-20210926153806414" ></figure></p>
+<p>2）在弹出的【Create Git Repository】对话框中选择当前项目根目录，点击【OK】按钮：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926154201744.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926154201744.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926154201744.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926154201744.png 2x"
+        sizes="auto"
+        alt="image-20210926154201744"
+        title="image-20210926154201744" ></figure></p>
+<p>操作完成后可以看到当前项目根目录下出现了.git隐藏目录：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926154757082.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926154757082.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926154757082.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926154757082.png 2x"
+        sizes="auto"
+        alt="image-20210926154757082"
+        title="image-20210926154757082" ></figure></p>
+<p>操作完成后可以在IDEA的工具栏中看到Git的相关操作图标：<figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926154933876.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926154933876.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926154933876.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926154933876.png 2x"
+        sizes="auto"
+        alt="image-20210926154933876"
+        title="image-20210926154933876" ></figure></p>
+<h4 id="522-从远程仓库克隆" class="headerLink">
+    <a href="#522-%e4%bb%8e%e8%bf%9c%e7%a8%8b%e4%bb%93%e5%ba%93%e5%85%8b%e9%9a%86" class="header-mark"></a>5.2.2 从远程仓库克隆</h4><p>在IDEA中从远程仓库克隆本质就是执行的 git clone 命令，具体操作过程如下：</p>
+<p>1）在IDEA开始窗口中点击【Get from Version Control】</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926155434202.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926155434202.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926155434202.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926155434202.png 2x"
+        sizes="auto"
+        alt="image-20210926155434202"
+        title="image-20210926155434202" ></figure></p>
+<p>2）在弹出的【Get from Version Control】窗口中输入远程仓库的URL地址和对应的本地仓库存放目录，点击【Clone】按钮进行仓库克隆操作</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926155750107.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926155750107.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926155750107.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926155750107.png 2x"
+        sizes="auto"
+        alt="image-20210926155750107"
+        title="image-20210926155750107" ></figure></p>
+<h3 id="53-git忽略文件" class="headerLink">
+    <a href="#53-git%e5%bf%bd%e7%95%a5%e6%96%87%e4%bb%b6" class="header-mark"></a>5.3 Git忽略文件</h3><p>在Git工作区中有一个特殊的文件 .gitignore，通过此文件可以指定工作区中的哪些文件不需要Git管理。我们在码云上创建Git远程仓库时可以指定生成此文件，如下：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926161050169.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926161050169.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926161050169.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926161050169.png 2x"
+        sizes="auto"
+        alt="image-20210926161050169"
+        title="image-20210926161050169" ></figure></p>
+<p>创建完成后效果如下：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926161233052.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926161233052.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926161233052.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926161233052.png 2x"
+        sizes="auto"
+        alt="image-20210926161233052"
+        title="image-20210926161233052" ></figure></p>
+<p>解释说明：</p>
+<blockquote>
+<p>1）我们在使用Git管理项目代码时，并不是所有文件都需要Git管理，例如Java项目中编译的.class文件、开发工具自带的配置文件等，这些文件没有必要交给Git管理，所以也就不需要提交到Git版本库中</p>
+<p>2）注意忽略文件的名称是固定的，不能修改</p>
+<p>3）添加到忽略列表中的文件后续Git工具就会忽略它</p>
+</blockquote>
+<p>一个参考的.gitignore文件内容如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">.git
+</span></span><span class="line"><span class="cl">logs
+</span></span><span class="line"><span class="cl">rebel.xml
+</span></span><span class="line"><span class="cl">target/
+</span></span><span class="line"><span class="cl">!.mvn/wrapper/maven-wrapper.jar
+</span></span><span class="line"><span class="cl">log.path_IS_UNDEFINED
+</span></span><span class="line"><span class="cl">.DS_Store
+</span></span><span class="line"><span class="cl">offline_user.md
+</span></span><span class="line"><span class="cl">*.class
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">### IntelliJ IDEA ###
+</span></span><span class="line"><span class="cl">.idea
+</span></span><span class="line"><span class="cl">*.iws
+</span></span><span class="line"><span class="cl">*.iml
+</span></span><span class="line"><span class="cl">*.ipr
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="54-本地仓库操作" class="headerLink">
+    <a href="#54-%e6%9c%ac%e5%9c%b0%e4%bb%93%e5%ba%93%e6%93%8d%e4%bd%9c" class="header-mark"></a>5.4 本地仓库操作</h3><p>本地仓库操作：</p>
+<ul>
+<li>将文件加入暂存区，本质就是执行 git add 命令</li>
+<li>将暂存区的文件提交到版本库，本质就是执行 git commit 命令</li>
+<li>查看日志，本质就是执行 git log 命令</li>
+</ul>
+<h4 id="541-将文件加入暂存区" class="headerLink">
+    <a href="#541-%e5%b0%86%e6%96%87%e4%bb%b6%e5%8a%a0%e5%85%a5%e6%9a%82%e5%ad%98%e5%8c%ba" class="header-mark"></a>5.4.1 将文件加入暂存区</h4><p>当在Git工作区新增文件或者对已有文件修改后，就需要将文件的修改加入暂存区，具体操作如下：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926162515597.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926162515597.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926162515597.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926162515597.png 2x"
+        sizes="auto"
+        alt="image-20210926162515597"
+        title="image-20210926162515597" ></figure></p>
+<h4 id="542-将暂存区文件提交到版本库" class="headerLink">
+    <a href="#542-%e5%b0%86%e6%9a%82%e5%ad%98%e5%8c%ba%e6%96%87%e4%bb%b6%e6%8f%90%e4%ba%a4%e5%88%b0%e7%89%88%e6%9c%ac%e5%ba%93" class="header-mark"></a>5.4.2 将暂存区文件提交到版本库</h4><p>将暂存区文件提交到版本库，可以选择一个文件进行提交，也可以选择整个项目提交多个文件。在IEDA中对文件的提交进行了简化操作，也就是如果文件修改后，无需再加入暂存区，可以直接提交。</p>
+<p>1）提交一个文件：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926162809740.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926162809740.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926162809740.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926162809740.png 2x"
+        sizes="auto"
+        alt="image-20210926162809740"
+        title="image-20210926162809740" ></figure></p>
+<p>可以看到，如果选中一个文件提交，则菜单名称为【Commit File&hellip;】</p>
+<p>2）提交多个文件：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926162843891.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926162843891.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926162843891.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926162843891.png 2x"
+        sizes="auto"
+        alt="image-20210926162843891"
+        title="image-20210926162843891" ></figure></p>
+<p>可以看到，如果提交多个文件，则菜单名称为【Commit Directory&hellip;】</p>
+<p>由于提交操作属于高频操作，所以为了进一步方便操作，在IDEA的工具栏中提供了提交操作的快捷按钮：<figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926163535277.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926163535277.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926163535277.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926163535277.png 2x"
+        sizes="auto"
+        alt="image-20210926163535277"
+        title="image-20210926163535277" ></figure></p>
+<h4 id="543-查看日志" class="headerLink">
+    <a href="#543-%e6%9f%a5%e7%9c%8b%e6%97%a5%e5%bf%97" class="header-mark"></a>5.4.3 查看日志</h4><p>查看日志，既可以查看整个仓库的提交日志，也可以查看某个文件的提交日志。</p>
+<p>1）查看整个项目的提交日志：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926163902184.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926163902184.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926163902184.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926163902184.png 2x"
+        sizes="auto"
+        alt="image-20210926163902184"
+        title="image-20210926163902184" ></figure></p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926164138430.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926164138430.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926164138430.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926164138430.png 2x"
+        sizes="auto"
+        alt="image-20210926164138430"
+        title="image-20210926164138430" ></figure></p>
+<p>2）查看某个文件的提交日志</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926164210056.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926164210056.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926164210056.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926164210056.png 2x"
+        sizes="auto"
+        alt="image-20210926164210056"
+        title="image-20210926164210056" ></figure></p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926164233935.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926164233935.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926164233935.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926164233935.png 2x"
+        sizes="auto"
+        alt="image-20210926164233935"
+        title="image-20210926164233935" ></figure></p>
+<h3 id="55-远程仓库操作" class="headerLink">
+    <a href="#55-%e8%bf%9c%e7%a8%8b%e4%bb%93%e5%ba%93%e6%93%8d%e4%bd%9c" class="header-mark"></a>5.5 远程仓库操作</h3><p>远程仓库操作：</p>
+<ul>
+<li>查看远程仓库，本质就是执行 git remote 命令</li>
+<li>添加远程仓库，本质就是执行 git remote add 命令</li>
+<li>推送至远程仓库，本质就是执行 git push 命令</li>
+<li>从远程仓库拉取，本质就是执行 git pull 命令</li>
+</ul>
+<h4 id="551-查看远程仓库" class="headerLink">
+    <a href="#551-%e6%9f%a5%e7%9c%8b%e8%bf%9c%e7%a8%8b%e4%bb%93%e5%ba%93" class="header-mark"></a>5.5.1 查看远程仓库</h4><p>操作过程如下：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926165935756.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926165935756.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926165935756.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926165935756.png 2x"
+        sizes="auto"
+        alt="image-20210926165935756"
+        title="image-20210926165935756" ></figure></p>
+<p>在弹出的【Git Remotes】窗口中可以看到配置的远程仓库：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926170143160.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926170143160.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926170143160.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926170143160.png 2x"
+        sizes="auto"
+        alt="image-20210926170143160"
+        title="image-20210926170143160" ></figure></p>
+<h4 id="552-添加远程仓库" class="headerLink">
+    <a href="#552-%e6%b7%bb%e5%8a%a0%e8%bf%9c%e7%a8%8b%e4%bb%93%e5%ba%93" class="header-mark"></a>5.5.2 添加远程仓库</h4><p>一个本地仓库可以配置多个远程仓库，在【Git Remotes】窗口中点击【+】来添加一个新的远程仓库：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926170653126.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926170653126.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926170653126.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926170653126.png 2x"
+        sizes="auto"
+        alt="image-20210926170653126"
+        title="image-20210926170653126" ></figure></p>
+<h4 id="553-推送至远程仓库" class="headerLink">
+    <a href="#553-%e6%8e%a8%e9%80%81%e8%87%b3%e8%bf%9c%e7%a8%8b%e4%bb%93%e5%ba%93" class="header-mark"></a>5.5.3 推送至远程仓库</h4><p>可以通过如下操作将本地仓库文件推送至远程仓库：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926170908769.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926170908769.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926170908769.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926170908769.png 2x"
+        sizes="auto"
+        alt="image-20210926170908769"
+        title="image-20210926170908769" ></figure></p>
+<p>在弹出的【Push Commits】窗口中可以看到本次推送的文件，点击【Push】按钮即可推送至远程仓库：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926171058705.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926171058705.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926171058705.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926171058705.png 2x"
+        sizes="auto"
+        alt="image-20210926171058705"
+        title="image-20210926171058705" ></figure></p>
+<p>由于推送至远程仓库操作属于高频操作，所以可以通过IDEA工具栏中的提交快捷按钮同时完成提交和推送：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926171408649.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926171408649.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926171408649.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926171408649.png 2x"
+        sizes="auto"
+        alt="image-20210926171408649"
+        title="image-20210926171408649" ></figure></p>
+<p>点击【Commit and Push&hellip;】按钮同时完成提交和推送操作</p>
+<h4 id="554-从远程仓库拉取" class="headerLink">
+    <a href="#554-%e4%bb%8e%e8%bf%9c%e7%a8%8b%e4%bb%93%e5%ba%93%e6%8b%89%e5%8f%96" class="header-mark"></a>5.5.4 从远程仓库拉取</h4><p>可以通过如下操作从远程仓库拉取：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926171646041.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926171646041.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926171646041.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926171646041.png 2x"
+        sizes="auto"
+        alt="image-20210926171646041"
+        title="image-20210926171646041" ></figure></p>
+<p>由于从远程仓库拉取文件属于高频操作，所以在IDEA的工具栏中提供了对应的快捷按钮：<figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926171919288.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926171919288.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926171919288.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926171919288.png 2x"
+        sizes="auto"
+        alt="image-20210926171919288"
+        title="image-20210926171919288" ></figure></p>
+<p>在弹出的【Update Project】窗口中点击【OK】：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926171950911.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926171950911.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926171950911.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926171950911.png 2x"
+        sizes="auto"
+        alt="image-20210926171950911"
+        title="image-20210926171950911" ></figure></p>
+<h3 id="56-分支操作" class="headerLink">
+    <a href="#56-%e5%88%86%e6%94%af%e6%93%8d%e4%bd%9c" class="header-mark"></a>5.6 分支操作</h3><p>分支操作：</p>
+<ul>
+<li>查看分支，本质就是执行 git branch 命令</li>
+<li>创建分支，本质就是执行 git branch 分支名 命令</li>
+<li>切换分支，本质就是执行 git checkout 命令</li>
+<li>将分支推送到远程仓库，本质就是执行 git push 命令</li>
+<li>合并分支，本质就是执行 git merge 命令</li>
+</ul>
+<h4 id="561-查看分支" class="headerLink">
+    <a href="#561-%e6%9f%a5%e7%9c%8b%e5%88%86%e6%94%af" class="header-mark"></a>5.6.1 查看分支</h4><p>可以通过如下操作查看分支：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926172752562.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926172752562.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926172752562.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926172752562.png 2x"
+        sizes="auto"
+        alt="image-20210926172752562"
+        title="image-20210926172752562" ></figure></p>
+<p>在弹出的窗口中可以看到本地分支和远程分支：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926172903493.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926172903493.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926172903493.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926172903493.png 2x"
+        sizes="auto"
+        alt="image-20210926172903493"
+        title="image-20210926172903493" ></figure></p>
+<p>由于分支操作属于高频操作，所以在IDEA的状态栏中提供了分支操作的快捷按钮：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926173622605.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926173622605.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926173622605.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926173622605.png 2x"
+        sizes="auto"
+        alt="image-20210926173622605"
+        title="image-20210926173622605" ></figure></p>
+<p>点击【master】快捷按钮即可弹出【Git Branches】分支窗口：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926173744979.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926173744979.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926173744979.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926173744979.png 2x"
+        sizes="auto"
+        alt="image-20210926173744979"
+        title="image-20210926173744979" ></figure></p>
+<h4 id="562-创建分支" class="headerLink">
+    <a href="#562-%e5%88%9b%e5%bb%ba%e5%88%86%e6%94%af" class="header-mark"></a>5.6.2 创建分支</h4><p>在【Git Branches】分支窗口中点击【New Branch】，弹出如下窗口：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926173903894.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926173903894.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926173903894.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926173903894.png 2x"
+        sizes="auto"
+        alt="image-20210926173903894"
+        title="image-20210926173903894" ></figure></p>
+<p>在弹出的【Create New Branch】窗口中输入新分支的名称，点击【Create】按钮完成分支创建</p>
+<h4 id="563-切换分支" class="headerLink">
+    <a href="#563-%e5%88%87%e6%8d%a2%e5%88%86%e6%94%af" class="header-mark"></a>5.6.3 切换分支</h4><p>通过如下操作可以切换分支：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926174358500.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926174358500.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926174358500.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926174358500.png 2x"
+        sizes="auto"
+        alt="image-20210926174358500"
+        title="image-20210926174358500" ></figure></p>
+<h4 id="564-将分支推送到远程仓库" class="headerLink">
+    <a href="#564-%e5%b0%86%e5%88%86%e6%94%af%e6%8e%a8%e9%80%81%e5%88%b0%e8%bf%9c%e7%a8%8b%e4%bb%93%e5%ba%93" class="header-mark"></a>5.6.4 将分支推送到远程仓库</h4><p>通过如下操作可以将分支推送到远程仓库：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926175004502.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926175004502.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926175004502.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926175004502.png 2x"
+        sizes="auto"
+        alt="image-20210926175004502"
+        title="image-20210926175004502" ></figure></p>
+<h4 id="565-合并分支" class="headerLink">
+    <a href="#565-%e5%90%88%e5%b9%b6%e5%88%86%e6%94%af" class="header-mark"></a>5.6.5 合并分支</h4><p>通过下面操作可以进行分支的合并：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926175216197.png"
+        srcset="D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926175216197.png, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926175216197.png 1.5x, D:%5c%e6%96%b0%e5%bb%ba%e6%96%87%e4%bb%b6%e5%a4%b9%5c_posts%5cimage-20210926175216197.png 2x"
+        sizes="auto"
+        alt="image-20210926175216197"
+        title="image-20210926175216197" ></figure></p>
+</div>
+
+        
+
+<div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-12-31</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span><a class="link-to-mardown" href=/git%E5%90%8C%E6%97%B6%E8%BF%9E%E6%8E%A5github%E5%92%8Cgitee/index.md target="_blank" rel="noopener noreferrer">阅读原始文档</a>
+                    </span></div>
+            <div class="post-info-share"><button title="分享到 Twitter" data-sharer="twitter" data-url="https://alphaguo.vip/git%E5%90%8C%E6%97%B6%E8%BF%9E%E6%8E%A5github%E5%92%8Cgitee/" data-title="Git同时连接github和gitee" data-via="@guo_alpha36266" data-hashtags="tool"><span class="fab fa-twitter fa-fw"></span></button><button title="分享到 Facebook" data-sharer="facebook" data-url="https://alphaguo.vip/git%E5%90%8C%E6%97%B6%E8%BF%9E%E6%8E%A5github%E5%92%8Cgitee/" data-hashtag="tool"><span class="fab fa-facebook-square fa-fw"></span></button><button title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://alphaguo.vip/git%E5%90%8C%E6%97%B6%E8%BF%9E%E6%8E%A5github%E5%92%8Cgitee/" data-title="Git同时连接github和gitee" data-web><span class="fab fa-whatsapp fa-fw"></span></button><button title="分享到 Line" data-sharer="line" data-url="https://alphaguo.vip/git%E5%90%8C%E6%97%B6%E8%BF%9E%E6%8E%A5github%E5%92%8Cgitee/" data-title="Git同时连接github和gitee"><span data-svg-src="/lib/simple-icons/icons/line.min.svg"></span></button><button title="分享到 微博" data-sharer="weibo" data-url="https://alphaguo.vip/git%E5%90%8C%E6%97%B6%E8%BF%9E%E6%8E%A5github%E5%92%8Cgitee/" data-title="Git同时连接github和gitee"><span class="fab fa-weibo fa-fw"></span></button><button title="分享到 Myspace" data-sharer="myspace" data-url="https://alphaguo.vip/git%E5%90%8C%E6%97%B6%E8%BF%9E%E6%8E%A5github%E5%92%8Cgitee/" data-title="Git同时连接github和gitee" data-description=""><span data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></span></button><button title="分享到 Blogger" data-sharer="blogger" data-url="https://alphaguo.vip/git%E5%90%8C%E6%97%B6%E8%BF%9E%E6%8E%A5github%E5%92%8Cgitee/" data-title="Git同时连接github和gitee" data-description=""><span class="fab fa-blogger fa-fw"></span></button><button title="分享到 Evernote" data-sharer="evernote" data-url="https://alphaguo.vip/git%E5%90%8C%E6%97%B6%E8%BF%9E%E6%8E%A5github%E5%92%8Cgitee/" data-title="Git同时连接github和gitee"><span class="fab fa-evernote fa-fw"></span></button></div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/tool/">tool</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" class="prev" rel="prev" title="数据类型"><i class="fas fa-angle-left fa-fw"></i>数据类型</a>
+            <a href="/se%E5%A2%9E%E5%BC%BA%E7%89%88/" class="next" rel="next" title="SE增强版">SE增强版<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">AlphaGuo</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+            <div class="footer-line"></div>
+            <div class="footer-line">
+            </div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="回到顶部">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div id="cookieconsent-container"></div><div class="assets"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/katex/copy-tex.min.css">
+        <noscript><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"desktop-header-typeit":"AlphaGuo Blog","mobile-header-typeit":"AlphaGuo Blog"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":50,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"sharerjs":true,"table":{"sort":true},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/lib/tablesort/tablesort.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js" defer></script><script type="text/javascript" src="/lib/katex/mhchem.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script type="text/javascript" src="/js/cookieconsent.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script></div>
+</body>
+
+</html>

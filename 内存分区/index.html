@@ -1,0 +1,912 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>内存分区 - AlphaGuo Blog</title><meta name="Description" content="关山难越"><meta property="og:title" content="内存分区" />
+<meta property="og:description" content="1、内存分区 1.1 运行之前1）预处理：宏定义展开、头文件展开、条件编译，这里并不会检查语法 2）编译：检查语法，将预处理后文件编译生成汇编文件 3）" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://alphaguo.vip/%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA/" /><meta property="og:image" content="https://alphaguo.vip/images/favicon-16x16.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-31T22:40:41+08:00" />
+<meta property="article:modified_time" content="2023-12-31T22:40:41+08:00" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://alphaguo.vip/images/favicon-16x16.png" /><meta name="twitter:title" content="内存分区"/>
+<meta name="twitter:description" content="1、内存分区 1.1 运行之前1）预处理：宏定义展开、头文件展开、条件编译，这里并不会检查语法 2）编译：检查语法，将预处理后文件编译生成汇编文件 3）"/>
+<meta name="twitter:site" content="@guo_alpha36266"/>
+<meta name="application-name" content="AlphaGuo">
+<meta name="apple-mobile-web-app-title" content="AlphaGuo">
+
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><meta name="twitter:creator" content="@@guo_alpha36266" /><link rel="icon" href="/images/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://alphaguo.vip/%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA/" /><link rel="prev" href="https://alphaguo.vip/linux%E5%90%84%E7%BA%A7%E7%9B%AE%E5%BD%95%E7%AE%80%E4%BB%8B/" /><link rel="next" href="https://alphaguo.vip/%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84/" />
+<link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "内存分区",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://alphaguo.vip/%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA/"
+        },"genre": "posts","keywords": "C","wordcount":  5142 ,
+        "url": "https://alphaguo.vip/%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA/","datePublished": "2023-12-31T22:40:41+08:00","dateModified": "2023-12-31T22:40:41+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"authors": [{
+                        "@type": "Person",
+                        "name": "AlphaGuo"                    
+                    }],"description": ""
+    }
+    </script></head>
+
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme); document.documentElement.style.setProperty('color-scheme', theme === 'light' ? 'light' : 'dark'); window.theme = theme;   window.isDark = window.theme !== 'light' }
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('auto' === 'light' || 'auto' === 'dark' || 'auto' === 'black') setTheme('auto'), saveTheme('auto'); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+        window.switchThemeEventSet = new Set()
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="AlphaGuo Blog"><span id="desktop-header-typeit" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-select" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                    <select class="color-theme-select" id="theme-select-desktop" title="切换主题">
+                        <option value="light">浅色</option>
+                        <option value="dark">深色</option>
+                        <option value="black">黑色</option>
+                        <option value="auto">跟随系统</option>
+                    </select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="AlphaGuo Blog"><span id="mobile-header-typeit" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-select" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+                <select class="color-theme-select" id="theme-select-mobile" title="切换主题">
+                    <option value="light">浅色</option>
+                    <option value="dark">深色</option>
+                    <option value="black">黑色</option>
+                    <option value="auto">跟随系统</option>
+                </select>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">目录</h2>
+        <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1内存分区">1、内存分区</a>
+          <ul>
+            <li><a href="#11-运行之前">1.1 运行之前</a></li>
+            <li><a href="#12运行之后">1.2运行之后</a></li>
+          </ul>
+        </li>
+        <li><a href="#2分区模型">2、分区模型</a>
+          <ul>
+            <li><a href="#21栈区">2.1栈区</a></li>
+            <li><a href="#22堆区">2.2堆区</a></li>
+          </ul>
+        </li>
+        <li><a href="#3全局静态区">3、全局/静态区</a></li>
+        <li><a href="#4函数调用模型">4、函数调用模型</a>
+          <ul>
+            <li><a href="#41函数调用流程">4.1函数调用流程</a></li>
+            <li><a href="#42调用惯例">4.2调用惯例</a></li>
+            <li><a href="#43函数变量传递分析">4.3函数变量传递分析</a></li>
+            <li><a href="#44栈的生长方向和内存存放方向">4.4栈的生长方向和内存存放方向</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">内存分区</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><span class='author'><span class="author fas fa-user-circle fa-fw"></span><span class='screen-reader-text'>  </span><a href='https://alphaguo.vip/authors/alphaguo'>AlphaGuo</a></span>
+                </span>&nbsp;<span class="post-category">收录于 </span>&nbsp;<span class="post-category">类别 <a href="/categories/c/"><i class="far fa-folder fa-fw"></i>C</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-12-31">2023-12-31</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-12-31">2023-12-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 5142 字&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 11 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1内存分区">1、内存分区</a>
+          <ul>
+            <li><a href="#11-运行之前">1.1 运行之前</a></li>
+            <li><a href="#12运行之后">1.2运行之后</a></li>
+          </ul>
+        </li>
+        <li><a href="#2分区模型">2、分区模型</a>
+          <ul>
+            <li><a href="#21栈区">2.1栈区</a></li>
+            <li><a href="#22堆区">2.2堆区</a></li>
+          </ul>
+        </li>
+        <li><a href="#3全局静态区">3、全局/静态区</a></li>
+        <li><a href="#4函数调用模型">4、函数调用模型</a>
+          <ul>
+            <li><a href="#41函数调用流程">4.1函数调用流程</a></li>
+            <li><a href="#42调用惯例">4.2调用惯例</a></li>
+            <li><a href="#43函数变量传递分析">4.3函数变量传递分析</a></li>
+            <li><a href="#44栈的生长方向和内存存放方向">4.4栈的生长方向和内存存放方向</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h3 id="1内存分区" class="headerLink">
+    <a href="#1%e5%86%85%e5%ad%98%e5%88%86%e5%8c%ba" class="header-mark"></a>1、内存分区</h3><h4 id="11-运行之前" class="headerLink">
+    <a href="#11-%e8%bf%90%e8%a1%8c%e4%b9%8b%e5%89%8d" class="header-mark"></a>1.1 运行之前</h4><p>1）预处理：宏定义展开、头文件展开、条件编译，这里并不会检查语法</p>
+<p>2）编译：检查语法，将预处理后文件编译生成汇编文件</p>
+<p>3）汇编：将汇编文件生成目标文件(二进制文件)</p>
+<p>4）链接：将目标文件链接为可执行程序</p>
+<p>当我们编译完成生成可执行文件之后，我们通过在linux下<code>size</code>命令可以查看一个可执行二进制文件基本情况：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338781.jpeg"
+        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338781.jpeg, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338781.jpeg 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338781.jpeg 2x"
+        sizes="auto"
+        alt="img"
+        title="img" ></figure></p>
+<p>通过上图可以得知，在没有运行程序前，也就是说程序没有加载到内存前，可执行程序内部已经分好3段信息，分别为代码区（<code>text</code>）、数据区（<code>data</code>）和未初始化数据区（<code>bss</code>）3 个部分（有些人直接把<code>data</code>和<code>bss</code>合起来叫做静态区或全局区）。</p>
+<p>l 代码区存放 CPU 执行的机器指令。通常代码区是可<strong>共享</strong>的（即另外的执行程序可以调用它），使其可共享的目的是对于频繁被执行的程序，只需要在内存中有一份代码即可。代码区通常是<strong>只读</strong>的，使其只读的原因是防止程序意外地修改了它的指t令。另外，代码区还规划了局部变量的相关信息。</p>
+<p>l 全局初始化数据区/静态数据区（data段）该区包含了在程序中明确被初始化的全局变量、已经初始化的静态变量（包括全局静态变量和t）和常量数据（如字符串常量）。</p>
+<p>l 未初始化数据区（又叫 bss 区）存入的是全局未初始化变量和未初始化静态变量。未初始化数据区的数据在程序开始执行之前被内核初始化为 0 或者空（NULL）。</p>
+<p><em><strong>*总体来讲说，程序源代码被编译之后主要分成两种段：程序指令(代码区)和程序数据（数据区）。代码段属于程序指令，而数据域段和.bss段属于程序数据。*</strong></em></p>
+<p>那为什么把程序的指令和程序数据分开呢？</p>
+<p>程序被load到内存中之后，可以将数据和代码分别映射到两个内存区域。由于数据区域对进程来说是可读可写的，而指令区域对程序来讲说是只读的，所以分区之后呢，可以将程序指令区域和数据区域分别设置成可读可写或只读。这样可以防止程序的指令有意或者无意被修改；</p>
+<p>当系统中运行着多个同样的程序的时候，这些程序执行的指令都是一样的，所以只需要内存中保存一份程序的指令就可以了，只是每一个程序运行中数据不一样而已，这样可以节省大量的内存。比如说之前的Windows Internet Explorer 7.0运行起来之后， 它需要占用112 844KB的内存，它的私有部分数据有大概15 944KB，也就是说有96 900KB空间是共享的，如果程序中运行了几百个这样的进程，可以想象共享的方法可以节省大量的内存。</p>
+<h4 id="12运行之后" class="headerLink">
+    <a href="#12%e8%bf%90%e8%a1%8c%e4%b9%8b%e5%90%8e" class="header-mark"></a>1.2运行之后</h4><p>程序在加载到内存前，代码区和全局区(<code>data</code>和<code>bss</code>)的大小就是固定的，程序运行期间不能改变。然后，运行可执行程序，操作系统把物理硬盘程序<code>load</code>(加载)到内存，除了根据可执行程序的信息分出代码区（<code>text</code>）、数据区（<code>data</code>）和未初始化数据区（<code>bss</code>）之外，还额外增加了栈区、堆区。</p>
+<p>l 代码区（text segment）</p>
+<p>加载的是可执行文件代码段，所有的可执行代码都加载到代码区，这块内存是不可以在运行期间修改的。</p>
+<p>l 未初始化数据区（BSS）</p>
+<p>加载的是可执行文件BSS段，位置可以分开亦可以紧靠数据段，存储于数据段的数据（全局未初始化，静态未初始化数据）的生存周期为整个程序运行过程。</p>
+<p>l 全局初始化数据区/静态数据区（data segment）</p>
+<p>加载的是可执行文件数据段，存储于数据段（全局初始化，静态初始化数据，文字常量(只读)）的数据的生存周期为整个程序运行过程。</p>
+<p>l 栈区（stack）</p>
+<p>栈是一种先进后出的内存结构，由编译器自动分配释放，存放函数的参数值、返回值、局部变量等。在程序运行过程中实时加载和释放，因此，局部变量的生存周期为申请到释放该段栈空间。</p>
+<p>l 堆区（heap）</p>
+<p>堆是一个大容器，它的容量要远远大于栈，但没有栈那样先进后出的顺序。用于动态内存分配。堆在内存中位于BSS区和栈区之间。一般由程序员分配和释放，若程序员不释放，程序结束时由操作系统回收。</p>
+<table>
+<thead>
+<tr>
+<th><strong>类型</strong></th>
+<th><strong>作用域</strong></th>
+<th><strong>生命周期</strong></th>
+<th><strong>存储位置</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>auto变量</td>
+<td>一对{}内</td>
+<td>当前函数</td>
+<td>栈区</td>
+</tr>
+<tr>
+<td>static局部变量</td>
+<td>一对{}内</td>
+<td>整个程序运行期</td>
+<td>初始化在data段，未初始化在BSS段</td>
+</tr>
+<tr>
+<td>extern变量</td>
+<td>整个程序</td>
+<td>整个程序运行期</td>
+<td>初始化在data段，未初始化在BSS段</td>
+</tr>
+<tr>
+<td>static全局变量</td>
+<td>当前文件</td>
+<td>整个程序运行期</td>
+<td>初始化在data段，未初始化在BSS段</td>
+</tr>
+<tr>
+<td>extern函数</td>
+<td>整个程序</td>
+<td>整个程序运行期</td>
+<td>代码区</td>
+</tr>
+<tr>
+<td>static函数</td>
+<td>当前文件</td>
+<td>整个程序运行期</td>
+<td>代码区</td>
+</tr>
+<tr>
+<td>register变量</td>
+<td>一对{}内</td>
+<td>当前函数</td>
+<td>运行时存储在CPU寄存器</td>
+</tr>
+<tr>
+<td>字符串常量</td>
+<td>当前文件</td>
+<td>整个程序运行期</td>
+<td>data段</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2分区模型" class="headerLink">
+    <a href="#2%e5%88%86%e5%8c%ba%e6%a8%a1%e5%9e%8b" class="header-mark"></a>2、分区模型</h3><h4 id="21栈区" class="headerLink">
+    <a href="#21%e6%a0%88%e5%8c%ba" class="header-mark"></a>2.1栈区</h4><p>由系统进行内存的管理。主要存放函数的参数以及局部变量。在函数完成执行，系统自行释放栈区内存，不需要用户管理。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#char* func(){
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>	<span class="kt">char</span> <span class="n">p</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&#34;hello world!&#34;</span><span class="p">;</span> <span class="c1">//在栈区存储 乱码
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">p</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="n">p</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">test</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">char</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">p</span> <span class="o">=</span> <span class="nf">func</span><span class="p">();</span>  
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">p</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="22堆区" class="headerLink">
+    <a href="#22%e5%a0%86%e5%8c%ba" class="header-mark"></a>2.2堆区</h4><p>由编程人员手动申请，手动释放，若不手动释放，程序结束后由系统回收，生命周期是整个程序运行期间。使用<code>malloc</code>或者<code>new</code>进行堆的申请。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">char</span><span class="o">*</span> <span class="nf">func</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">char</span><span class="o">*</span> <span class="n">str</span> <span class="o">=</span> <span class="nf">malloc</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">strcpy</span><span class="p">(</span><span class="n">str</span><span class="p">,</span> <span class="s">&#34;hello world!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">str</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="n">str</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">test01</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">char</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">p</span> <span class="o">=</span> <span class="nf">func</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">p</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">allocateSpace</span><span class="p">(</span><span class="kt">char</span><span class="o">*</span> <span class="n">p</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">	<span class="n">p</span> <span class="o">=</span> <span class="nf">malloc</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">strcpy</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s">&#34;hello world!&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">p</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">test02</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="kt">char</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">allocateSpace</span><span class="p">(</span><span class="n">p</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">p</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><img
+        
+        loading="lazy"
+        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338731.jpeg"
+        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338731.jpeg, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338731.jpeg 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338731.jpeg 2x"
+        sizes="auto"
+        alt="img"
+        title="img" ></figure></p>
+<p>堆分配内存API：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">void</span> <span class="o">*</span><span class="nf">calloc</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">nmemb</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">size</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="err">功能：</span>
+</span></span><span class="line"><span class="cl"><span class="err">在内存动态存储区中分配</span><span class="n">nmemb块长度为size字节的连续区域</span><span class="err">。</span><span class="n">calloc自动将分配的内存</span>	<span class="err">置</span><span class="mi">0</span><span class="err">。</span>
+</span></span><span class="line"><span class="cl"><span class="err">参数：</span>
+</span></span><span class="line"><span class="cl"><span class="n">nmemb</span><span class="err">：所需内存单元数量</span>
+</span></span><span class="line"><span class="cl"><span class="n">size</span><span class="err">：每个内存单元的大小（单位：字节）</span>
+</span></span><span class="line"><span class="cl"><span class="err">返回值：</span>
+</span></span><span class="line"><span class="cl">	<span class="err">成功：分配空间的起始地址</span>
+</span></span><span class="line"><span class="cl"><span class="err">失败：</span><span class="nb">NULL</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">void</span> <span class="o">*</span><span class="nf">realloc</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">ptr</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">size</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="err">功能：</span>
+</span></span><span class="line"><span class="cl"><span class="err">重新分配用</span><span class="n">malloc或者calloc函数在堆中分配内存空间的大小</span><span class="err">。</span>
+</span></span><span class="line"><span class="cl"><span class="n">realloc不会自动清理增加的内存</span><span class="err">，需要手动清理，如果指定的地址后面有连续的空间，那么就会在已有地址基础上增加内存，如果指定的地址后面没有空间，那么</span><span class="n">realloc会重新分配新的连续内存</span><span class="err">，把旧内存的值拷贝到新内存，同时释放旧内存。</span>
+</span></span><span class="line"><span class="cl"><span class="err">参数：</span>
+</span></span><span class="line"><span class="cl"><span class="n">ptr</span><span class="err">：为之前用</span><span class="n">malloc或者calloc分配的内存地址</span><span class="err">，如果此参数等于</span><span class="nb">NULL</span><span class="err">，那么和</span><span class="n">realloc与malloc功能一致</span>
+</span></span><span class="line"><span class="cl"><span class="n">size</span><span class="err">：为重新分配内存的大小</span><span class="p">,</span> <span class="err">单位：字节</span>
+</span></span><span class="line"><span class="cl"><span class="err">返回值：</span>
+</span></span><span class="line"><span class="cl"><span class="err">成功：新分配的堆内存地址</span>
+</span></span><span class="line"><span class="cl"><span class="err">失败：</span><span class="nb">NULL</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">test01</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span><span class="o">*</span> <span class="n">p1</span> <span class="o">=</span> <span class="nf">calloc</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">p1</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="n">i</span> <span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">		<span class="n">p1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d &#34;</span><span class="p">,</span><span class="n">p1</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">free</span><span class="p">(</span><span class="n">p1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">test02</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span><span class="o">*</span> <span class="n">p1</span> <span class="o">=</span> <span class="nf">calloc</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">p1</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">		<span class="n">p1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span><span class="o">*</span> <span class="n">p2</span> <span class="o">=</span> <span class="nf">realloc</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span> <span class="mi">15</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">p2</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">p1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">p2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">//打印
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d &#34;</span><span class="p">,</span> <span class="n">p2</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">//重新赋值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">		<span class="n">p2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="c1">//再次打印
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">15</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d &#34;</span><span class="p">,</span> <span class="n">p2</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nf">free</span><span class="p">(</span><span class="n">p2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="3全局静态区" class="headerLink">
+    <a href="#3%e5%85%a8%e5%b1%80%e9%9d%99%e6%80%81%e5%8c%ba" class="header-mark"></a>3、全局/静态区</h3><p>​		全局静态区内的变量在编译阶段已经分配好内存空间并初始化。这块内存在程序运行期间一直存在,它主要存储<strong>全局变量</strong>、<strong>静态变量</strong>和<strong>常量</strong>。</p>
+<p>（1）这里不区分初始化和未初始化的数据区，是因为静态存储区内的变量若不显示初始化，则编译器会自动以默认的方式进行初始化，即静态存储区内不存在未初始化的变量。</p>
+<p>（2）全局静态存储区内的常量分为常变量和字符串常量，一经初始化，不可修改。静态存储内的常变量是全局变量，与局部常变量不同，区别在于局部常变量存放于栈，实际可间接通过指针或者引用进行修改，而全局常变量存放于静态常量区则不可以间接修改。</p>
+<p>（3）字符串常量存储在全局/静态存储区的常量区。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">v1</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span><span class="c1">//全局/静态区
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">const</span> <span class="kt">int</span> <span class="n">v2</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span> <span class="c1">//常量，一旦初始化，不可修改
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">static</span> <span class="kt">int</span> <span class="n">v3</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span> <span class="c1">//全局/静态区
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">char</span> <span class="o">*</span><span class="n">p1</span><span class="p">;</span> <span class="c1">//全局/静态区，编译器默认初始化为NULL
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">//那么全局static int 和 全局int变量有什么区别？
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">test</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">	<span class="k">static</span> <span class="kt">int</span> <span class="n">v4</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span> <span class="c1">//全局/静态区
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">char</span><span class="o">*</span> <span class="nf">func</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">	<span class="k">static</span> <span class="kt">char</span> <span class="n">arr</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&#34;hello world!&#34;</span><span class="p">;</span> <span class="c1">//在静态区存储 可读可写
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">arr</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;c&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">char</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="s">&#34;hello world!&#34;</span><span class="p">;</span> <span class="c1">//全局/静态区-字符串常量区 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">//p[2] = &#39;c&#39;; //只读，不可修改 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">arr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">p</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">arr</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="n">arr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">test</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">char</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="nf">func</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%s</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="n">p</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>ANSI C中规定：修改字符串常量，结果是未定义的。</p>
+<p>ANSI C并没有规定编译器的实现者对字符串的处理，例如：</p>
+<p>1.有些编译器可修改字符串常量，有些编译器则不可修改字符串常量。</p>
+<p>2.有些编译器把多个相同的字符串常量看成一个（这种优化可能出现在字符串常量中，节省空间），有些则不进行此优化。如果进行优化，则可能导致修改一个字符串常量导致另外的字符串常量也发生变化，结果不可知。</p>
+<p><strong>所以尽量不要去修改字符串常量</strong>！</p>
+<p>在理解C/C++内存分区时，常会碰到如下术语：数据区，堆，栈，静态区，常量区，全局区，字符串常量区，文字常量区，代码区等等，初学者被搞得云里雾里。在这里，尝试捋清楚以上分区的关系。</p>
+<p><em><strong>*数据区包括*</strong></em>：堆，栈，全局/静态存储区。
+　　<em><strong>*全局/静态存储区包括*</strong></em>：常量区，全局区、静态区。
+　　<em><strong>*常量区包括*</strong></em>：字符串常量区、常变量区。
+　　<em><strong>*代码区*</strong></em>：存放程序编译后的二进制代码，不可寻址区。</p>
+<p><em><strong>*可以说，C/C++内存分区其实只有两个，即代码区和数据区。*</strong></em></p>
+<h3 id="4函数调用模型" class="headerLink">
+    <a href="#4%e5%87%bd%e6%95%b0%e8%b0%83%e7%94%a8%e6%a8%a1%e5%9e%8b" class="header-mark"></a>4、函数调用模型</h3><h4 id="41函数调用流程" class="headerLink">
+    <a href="#41%e5%87%bd%e6%95%b0%e8%b0%83%e7%94%a8%e6%b5%81%e7%a8%8b" class="header-mark"></a>4.1函数调用流程</h4><p>栈(stack)是现代计算机程序里最为重要的概念之一，几乎每一个程序都使用了栈，没有栈就没有函数，没有局部变量，也就没有我们如今能见到的所有计算机的语言。在解释为什么栈如此重要之前，我们先了解一下传统的栈的定义：</p>
+<p>在经典的计算机科学中，栈被定义为一个特殊的容器，用户可以将数据压入栈中(入栈，push)，也可以将压入栈中的数据弹出(出栈，pop),但是栈容器必须遵循一条规则：<strong>先入栈的数据最后出栈</strong>(First In Last Out,FILO).</p>
+<p>在经典的操作系统中，栈总是向下增长的。压栈的操作使得栈顶的地址减小，弹出操作使得栈顶地址增大。</p>
+<p>栈在程序运行中具有极其重要的地位。最重要的，栈保存一个函数调用所需要维护的信息，这通常被称为堆栈帧(Stack Frame)或者活动记录(Activate Record).一个函数调用过程所需要的信息一般包括以下几个方面：</p>
+<ul>
+<li>函数的返回地址；</li>
+<li>函数的参数；</li>
+<li>局部变量；</li>
+<li>保存的上下文：包括在函数调用前后需要保持不变的寄存器。</li>
+</ul>
+<p>我们从下面的代码，分析以下函数的调用过程：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">func</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span><span class="kt">int</span> <span class="n">b</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">t_a</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">t_b</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="n">t_a</span> <span class="o">+</span> <span class="n">t_b</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ret</span> <span class="o">=</span> <span class="nf">func</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="n">EXIT_SUCCESS</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="42调用惯例" class="headerLink">
+    <a href="#42%e8%b0%83%e7%94%a8%e6%83%af%e4%be%8b" class="header-mark"></a>4.2调用惯例</h4><p>现在，我们大致了解了函数调用的过程，这期间有一个现象，那就是函数的调用者和被调用者对函数调用有着一致的理解，例如，它们双方都一致的认为函数的参数是按照某个固定的方式压入栈中。如果不这样的话，函数将无法正确运行。</p>
+<p>如果函数调用方在传递参数的时候先压入a参数，再压入b参数，而被调用函数则认为先压入的是b,后压入的是a,那么被调用函数在使用a,b值时候，就会颠倒。</p>
+<p>因此，<strong>函数的调用方和被调用方对于函数是如何调用的必须有一个明确的约定，只有双方都遵循同样的约定，函数才能够被正确的调用，这样的约定被称为</strong>**”****调用惯例(**Calling Convention)”.一个调用惯例一般包含以下几个方面：</p>
+<p><em><strong>*函数参数的传递顺序和方式*</strong></em></p>
+<p>函数的传递有很多种方式，最常见的是通过栈传递。函数的调用方将参数压入栈中，函数自己再从栈中将参数取出。对于有多个参数的函数，调用惯例要规定函数调用方将参数压栈的顺序：从左向右，还是从右向左。有些调用惯例还允许使用寄存器传递参数，以提高性能。</p>
+<p><em><strong>*栈的维护方式*</strong></em></p>
+<p>在函数将参数压入栈中之后，函数体会被调用，此后需要将被压入栈中的参数全部弹出，以使得栈在函数调用前后保持一致。这个弹出的工作可以由函数的调用方来完成，也可以由函数本身来完成。</p>
+<p>为了在链接的时候对调用惯例进行区分，调用惯例要对函数本身的名字进行修饰。不同的调用惯例有不同的名字修饰策略。</p>
+<p>事实上，在c语言里，存在着多个调用惯例，而默认的是cdecl.任何一个没有显示指定调用惯例的函数都是默认是cdecl惯例。比如我们上面对于func函数的声明，它的完整写法应该是：</p>
+<p>int _cdecl func(int a,int b);</p>
+<p><em><strong>*注意: <em>cdecl不是标准的关键字，在不同的编译器里可能有不同的写法，例如gcc里就不存在_cdecl这样的关键字，而是使用__attribute</em>_((cdecl)).*</strong></em></p>
+<table>
+<thead>
+<tr>
+<th>调用惯例</th>
+<th>出栈方</th>
+<th>参数传递</th>
+<th>名字修饰</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cdecl</td>
+<td>函数调用方</td>
+<td>从右至左参数入栈</td>
+<td>下划线+函数名</td>
+</tr>
+<tr>
+<td>stdcall</td>
+<td>函数本身</td>
+<td>从右至左参数入栈</td>
+<td>下划线+函数名+@+参数字节数</td>
+</tr>
+<tr>
+<td>fastcall</td>
+<td>函数本身</td>
+<td>前两个参数由寄存器传递，其余参数通过堆栈传递。</td>
+<td>@+函数名+@+参数的字节数</td>
+</tr>
+<tr>
+<td>pascal</td>
+<td>函数本身</td>
+<td>从左至右参数入栈</td>
+<td>较为复杂，参见相关文档</td>
+</tr>
+</tbody>
+</table>
+<h4 id="43函数变量传递分析" class="headerLink">
+    <a href="#43%e5%87%bd%e6%95%b0%e5%8f%98%e9%87%8f%e4%bc%a0%e9%80%92%e5%88%86%e6%9e%90" class="header-mark"></a>4.3函数变量传递分析</h4><p><figure><img
+        
+        loading="lazy"
+        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338873.png"
+        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338873.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338873.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338873.png 2x"
+        sizes="auto"
+        alt="img"
+        title="img" ></figure></p>
+<p><figure><img
+        
+        loading="lazy"
+        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338097.png"
+        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338097.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338097.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338097.png 2x"
+        sizes="auto"
+        alt="img"
+        title="img" ></figure></p>
+<p><figure><img
+        
+        loading="lazy"
+        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338960.png"
+        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338960.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338960.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338960.png 2x"
+        sizes="auto"
+        alt="img"
+        title="img" ></figure></p>
+<p><figure><img
+        
+        loading="lazy"
+        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338789.png"
+        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338789.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338789.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338789.png 2x"
+        sizes="auto"
+        alt="img"
+        title="img" ></figure></p>
+<p><figure><img
+        
+        loading="lazy"
+        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338412.png"
+        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338412.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338412.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338412.png 2x"
+        sizes="auto"
+        alt="img"
+        title="img" ></figure></p>
+<h4 id="44栈的生长方向和内存存放方向" class="headerLink">
+    <a href="#44%e6%a0%88%e7%9a%84%e7%94%9f%e9%95%bf%e6%96%b9%e5%90%91%e5%92%8c%e5%86%85%e5%ad%98%e5%ad%98%e6%94%be%e6%96%b9%e5%90%91" class="header-mark"></a>4.4栈的生长方向和内存存放方向</h4><p><figure><img
+        
+        loading="lazy"
+        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338760.png"
+        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338760.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338760.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338760.png 2x"
+        sizes="auto"
+        alt="img"
+        title="img" ></figure></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="c1">//1. 栈的生长方向
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">test01</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">d</span> <span class="o">=</span> <span class="mi">40</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;a = %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;b = %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;c = %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">c</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;d = %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">d</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">//a的地址大于b的地址，故而生长方向向下
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//2. 内存生长方向(小端模式)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">test02</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="c1">//高位字节 -&gt; 地位字节
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kt">int</span> <span class="n">num</span> <span class="o">=</span> <span class="mh">0xaabbccdd</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">unsigned</span> <span class="kt">char</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">num</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">//从首地址开始的第一个字节
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%x</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span><span class="o">*</span><span class="n">p</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%x</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">p</span> <span class="o">+</span> <span class="mi">1</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%x</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">p</span> <span class="o">+</span> <span class="mi">2</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%x</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="o">*</span><span class="p">(</span><span class="n">p</span> <span class="o">+</span> <span class="mi">3</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div>
+
+        
+
+
+<h2>相关内容</h2>
+<div class="related-container">
+    <div class="related-item-container">
+            <h2 class="related-title">
+                <a href="/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9Cpro/">文件操作pro</a>
+            </h2>
+        </div>
+    <div class="related-item-container">
+            <h2 class="related-title">
+                <a href="/%E7%BB%93%E6%9E%84%E4%BD%93%E5%BC%BA%E5%8C%96/">结构体强化</a>
+            </h2>
+        </div>
+    <div class="related-item-container">
+            <h2 class="related-title">
+                <a href="/%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84/">多维数组</a>
+            </h2>
+        </div>
+    <div class="related-item-container">
+            <h2 class="related-title">
+                <a href="/%E6%8C%87%E9%92%88%E5%BC%BA%E5%8C%96/">指针强化</a>
+            </h2>
+        </div>
+    <div class="related-item-container">
+            <h2 class="related-title">
+                <a href="/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">数据类型</a>
+            </h2>
+        </div>
+    
+
+</div>
+
+<div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-12-31</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span><a class="link-to-mardown" href=/%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA/index.md target="_blank" rel="noopener noreferrer">阅读原始文档</a>
+                    </span></div>
+            <div class="post-info-share"><button title="分享到 Twitter" data-sharer="twitter" data-url="https://alphaguo.vip/%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA/" data-title="内存分区" data-via="@guo_alpha36266" data-hashtags="C"><span class="fab fa-twitter fa-fw"></span></button><button title="分享到 Facebook" data-sharer="facebook" data-url="https://alphaguo.vip/%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA/" data-hashtag="C"><span class="fab fa-facebook-square fa-fw"></span></button><button title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://alphaguo.vip/%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA/" data-title="内存分区" data-web><span class="fab fa-whatsapp fa-fw"></span></button><button title="分享到 Line" data-sharer="line" data-url="https://alphaguo.vip/%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA/" data-title="内存分区"><span data-svg-src="/lib/simple-icons/icons/line.min.svg"></span></button><button title="分享到 微博" data-sharer="weibo" data-url="https://alphaguo.vip/%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA/" data-title="内存分区"><span class="fab fa-weibo fa-fw"></span></button><button title="分享到 Myspace" data-sharer="myspace" data-url="https://alphaguo.vip/%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA/" data-title="内存分区" data-description=""><span data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></span></button><button title="分享到 Blogger" data-sharer="blogger" data-url="https://alphaguo.vip/%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA/" data-title="内存分区" data-description=""><span class="fab fa-blogger fa-fw"></span></button><button title="分享到 Evernote" data-sharer="evernote" data-url="https://alphaguo.vip/%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA/" data-title="内存分区"><span class="fab fa-evernote fa-fw"></span></button></div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/c/">C</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/linux%E5%90%84%E7%BA%A7%E7%9B%AE%E5%BD%95%E7%AE%80%E4%BB%8B/" class="prev" rel="prev" title="Linux各级目录简介"><i class="fas fa-angle-left fa-fw"></i>Linux各级目录简介</a>
+            <a href="/%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84/" class="next" rel="next" title="多维数组">多维数组<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">AlphaGuo</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+            <div class="footer-line"></div>
+            <div class="footer-line">
+            </div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="回到顶部">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div id="cookieconsent-container"></div><div class="assets"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/katex/copy-tex.min.css">
+        <noscript><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"desktop-header-typeit":"AlphaGuo Blog","mobile-header-typeit":"AlphaGuo Blog"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":50,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"sharerjs":true,"table":{"sort":true},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/lib/tablesort/tablesort.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js" defer></script><script type="text/javascript" src="/lib/katex/mhchem.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script type="text/javascript" src="/js/cookieconsent.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script></div>
+</body>
+
+</html>

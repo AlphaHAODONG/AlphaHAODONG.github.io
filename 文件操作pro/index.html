@@ -1,0 +1,565 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>文件操作pro - AlphaGuo Blog</title><meta name="Description" content="关山难越"><meta property="og:title" content="文件操作pro" />
+<meta property="og:description" content="1、相关概念 1.1 文件的概念​ 一个文件通常就是磁盘上一段命名的存储区。但是对于操作系统来说，文件就会更复杂一些。例如，一个大文件可以存储在一些分" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://alphaguo.vip/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9Cpro/" /><meta property="og:image" content="https://alphaguo.vip/images/favicon-16x16.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-31T22:41:39+08:00" />
+<meta property="article:modified_time" content="2023-12-31T22:41:39+08:00" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://alphaguo.vip/images/favicon-16x16.png" /><meta name="twitter:title" content="文件操作pro"/>
+<meta name="twitter:description" content="1、相关概念 1.1 文件的概念​ 一个文件通常就是磁盘上一段命名的存储区。但是对于操作系统来说，文件就会更复杂一些。例如，一个大文件可以存储在一些分"/>
+<meta name="twitter:site" content="@guo_alpha36266"/>
+<meta name="application-name" content="AlphaGuo">
+<meta name="apple-mobile-web-app-title" content="AlphaGuo">
+
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><meta name="twitter:creator" content="@@guo_alpha36266" /><link rel="icon" href="/images/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://alphaguo.vip/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9Cpro/" /><link rel="prev" href="https://alphaguo.vip/%E7%BB%93%E6%9E%84%E4%BD%93%E5%BC%BA%E5%8C%96/" /><link rel="next" href="https://alphaguo.vip/js/" />
+<link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "文件操作pro",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://alphaguo.vip/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9Cpro/"
+        },"genre": "posts","keywords": "C","wordcount":  3570 ,
+        "url": "https://alphaguo.vip/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9Cpro/","datePublished": "2023-12-31T22:41:39+08:00","dateModified": "2023-12-31T22:41:39+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"authors": [{
+                        "@type": "Person",
+                        "name": "AlphaGuo"                    
+                    }],"description": ""
+    }
+    </script></head>
+
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme); document.documentElement.style.setProperty('color-scheme', theme === 'light' ? 'light' : 'dark'); window.theme = theme;   window.isDark = window.theme !== 'light' }
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('auto' === 'light' || 'auto' === 'dark' || 'auto' === 'black') setTheme('auto'), saveTheme('auto'); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+        window.switchThemeEventSet = new Set()
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="AlphaGuo Blog"><span id="desktop-header-typeit" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-select" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                    <select class="color-theme-select" id="theme-select-desktop" title="切换主题">
+                        <option value="light">浅色</option>
+                        <option value="dark">深色</option>
+                        <option value="black">黑色</option>
+                        <option value="auto">跟随系统</option>
+                    </select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="AlphaGuo Blog"><span id="mobile-header-typeit" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-select" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+                <select class="color-theme-select" id="theme-select-mobile" title="切换主题">
+                    <option value="light">浅色</option>
+                    <option value="dark">深色</option>
+                    <option value="black">黑色</option>
+                    <option value="auto">跟随系统</option>
+                </select>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">目录</h2>
+        <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1相关概念">1、相关概念</a>
+          <ul>
+            <li><a href="#11-文件的概念">1.1 文件的概念</a></li>
+            <li><a href="#12-流的概念">1.2 流的概念</a>
+              <ul>
+                <li><a href="#121-文本流">1.2.1 文本流</a></li>
+                <li><a href="#122-二进制流">1.2.2 二进制流</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#2文件的操作">2、文件的操作</a>
+          <ul>
+            <li><a href="#21-文件流总览">2.1 文件流总览</a></li>
+            <li><a href="#22-文件指针">2.2 文件指针</a></li>
+            <li><a href="#23-文件缓冲区">2.3 文件缓冲区</a></li>
+            <li><a href="#24-文件打开关闭">2.4 文件打开关闭</a>
+              <ul>
+                <li><a href="#241-文件打开-fopen">2.4.1 文件打开 <code>fopen</code></a></li>
+                <li><a href="#242-文件关闭--fclose">2.4.2 文件关闭  <code>fclose</code></a></li>
+              </ul>
+            </li>
+            <li><a href="#25-文件读写函数">2.5 文件读写函数</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">文件操作pro</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><span class='author'><span class="author fas fa-user-circle fa-fw"></span><span class='screen-reader-text'>  </span><a href='https://alphaguo.vip/authors/alphaguo'>AlphaGuo</a></span>
+                </span>&nbsp;<span class="post-category">收录于 </span>&nbsp;<span class="post-category">类别 <a href="/categories/c/"><i class="far fa-folder fa-fw"></i>C</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-12-31">2023-12-31</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-12-31">2023-12-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3570 字&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 8 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1相关概念">1、相关概念</a>
+          <ul>
+            <li><a href="#11-文件的概念">1.1 文件的概念</a></li>
+            <li><a href="#12-流的概念">1.2 流的概念</a>
+              <ul>
+                <li><a href="#121-文本流">1.2.1 文本流</a></li>
+                <li><a href="#122-二进制流">1.2.2 二进制流</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#2文件的操作">2、文件的操作</a>
+          <ul>
+            <li><a href="#21-文件流总览">2.1 文件流总览</a></li>
+            <li><a href="#22-文件指针">2.2 文件指针</a></li>
+            <li><a href="#23-文件缓冲区">2.3 文件缓冲区</a></li>
+            <li><a href="#24-文件打开关闭">2.4 文件打开关闭</a>
+              <ul>
+                <li><a href="#241-文件打开-fopen">2.4.1 文件打开 <code>fopen</code></a></li>
+                <li><a href="#242-文件关闭--fclose">2.4.2 文件关闭  <code>fclose</code></a></li>
+              </ul>
+            </li>
+            <li><a href="#25-文件读写函数">2.5 文件读写函数</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h3 id="1相关概念" class="headerLink">
+    <a href="#1%e7%9b%b8%e5%85%b3%e6%a6%82%e5%bf%b5" class="header-mark"></a>1、相关概念</h3><h4 id="11-文件的概念" class="headerLink">
+    <a href="#11-%e6%96%87%e4%bb%b6%e7%9a%84%e6%a6%82%e5%bf%b5" class="header-mark"></a>1.1 文件的概念</h4><p>​		一个文件通常就是磁盘上一段命名的存储区。但是对于操作系统来说，文件就会更复杂一些。例如，一个大文件可以存储在一些分散的区段中，或者还会包含一些操作系统可以确定其文件类型的附加数据，但是这些是操作系统，而不是我们程序员所要关心的事情。我们应该考虑如何在C程序中处理文件。</p>
+<h4 id="12-流的概念" class="headerLink">
+    <a href="#12-%e6%b5%81%e7%9a%84%e6%a6%82%e5%bf%b5" class="header-mark"></a>1.2 流的概念</h4><p>​		流是一个动态的概念，可以将一个字节形象地比喻成一滴水，字节在设备、文件和程序之间的传输就是流，类似于水在管道中的传输，可以看出，流是对输入输出源的一种抽象，也是对传输信息的一种抽象。</p>
+<p>​		C语言中，I/O操作可以简单地看作是从程序移进或移出字节，这种搬运的过程便称为流(stream)。程序只需要关心是否正确地输出了字节数据，以及是否正确地输入了要读取字节数据，特定I/O设备的细节对程序员是隐藏的。</p>
+<h5 id="121-文本流" class="headerLink">
+    <a href="#121-%e6%96%87%e6%9c%ac%e6%b5%81" class="header-mark"></a>1.2.1 文本流</h5><p>​		文本流，也就是以文本模式读取文件。文本流的某些特性在不同的系统中不同。其中之一就是文本行的最大长度。标准规定至少允许254个字符。另一个可能不同的特性是文本行的结束方式。例如在Windows系统中，文本文件约定以一个回车符和一个换行符结尾。但是在Linux下只用一个换行符结尾</p>
+<p>​		标准的C把文件定义为零个或多个字符，后面跟一个表示结束的换行符\n。对于那些文本行的外在表现形式与这个定义不同的系统上，库函数负责外部形式与内部形式之间的翻译。例如，在Windows系统中，在输出时，文本的换行符被写成一对回车/换行符。在输入时，文本中的回车符被丢弃。这种不必考虑文本的外部形式而操作文本的外部形式而操作文本的能力简化了可移值程序的创建。</p>
+<h5 id="122-二进制流" class="headerLink">
+    <a href="#122-%e4%ba%8c%e8%bf%9b%e5%88%b6%e6%b5%81" class="header-mark"></a>1.2.2 二进制流</h5><p>​		二进制流中的字节将完全根据程序编写他们的形式写入到文件中，而且完全根据他们从文件或设备读取的形式度入到从程序中。他们并未作任何改变。这种类型的流适用于非文本数据，到那时如果你不希望I/O函数修改文本文件的行末字符，也可以把他们运用于文本文件。</p>
+<p>​		c语言在处理这两种文件的时候并不区分，都看成是字符流，按字节进行处理。</p>
+<p>​		我们程序中，经常看到文本方式打开文件的二进制方式打开文件仅仅体现在换行符的处理上。</p>
+<p>​		比如说，<em><strong>在Windows下，文件的换行符是<code>\r\n</code>，而在Linux下换行符是<code>\n</code>。</strong></em></p>
+<p>​		当对文件使用文本方式打开时，读写的Windows文件中的换行符<code>\r\n</code>会被替换成\n读到内存中，当在Windows下写入文件时，<code>\n</code>会被替换成<code>\r\n</code>再写入文件。如果使用二进制的方式打开文件，则不进行\r\n和\n之间的转换，那么由于Linux下的换行符就是\n，所以文本文件方式和二进制方式无区别。</p>
+<h3 id="2文件的操作" class="headerLink">
+    <a href="#2%e6%96%87%e4%bb%b6%e7%9a%84%e6%93%8d%e4%bd%9c" class="header-mark"></a>2、文件的操作</h3><h4 id="21-文件流总览" class="headerLink">
+    <a href="#21-%e6%96%87%e4%bb%b6%e6%b5%81%e6%80%bb%e8%a7%88" class="header-mark"></a>2.1 文件流总览</h4><ol>
+<li>程序为通吃处于活动状态的每个文件声明一个指针变量，其类型为FILE*。这个指针指向这个FILE结构，当他处于活动状态时由流使用。</li>
+<li>流通过fopen函数打开。为了打开一个流，我们必须指定需要访问的文件或设备以及他们的访问方式（读。写、或者读写）。fopen和操作系统验证文件或设备是否存在并初始化FILE。</li>
+<li>根据需要对文件进行读写操作。</li>
+<li>最后调用fclose函数关闭流。关闭一个流可以防止与它相关的文件被再次访问，保证任何存储于缓冲区中的数据被正确写入到文件中，并且释放file结构。</li>
+</ol>
+<p>标准I/O更为简单，因为它们并不需要打开或者关闭。</p>
+<p>I/O函数以三种基本的形式处理数据：<strong>单个字符</strong>、<strong>文本行</strong>和<strong>二进制数据</strong>。对于每种形式都有一组特定的函数对它们进行处理。</p>
+<table>
+<thead>
+<tr>
+<th>家族名</th>
+<th>目的</th>
+<th>可用于所有流</th>
+<th>只用于stdin和stdout</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>getchar</td>
+<td>字符输入</td>
+<td>fgetc、getc</td>
+<td>getchar</td>
+</tr>
+<tr>
+<td>putchar</td>
+<td>字符输出</td>
+<td>fputc、putc</td>
+<td>putchar</td>
+</tr>
+<tr>
+<td>gets</td>
+<td>文本行输入</td>
+<td>fgets</td>
+<td>gets</td>
+</tr>
+<tr>
+<td>puts</td>
+<td>文本行输出</td>
+<td>fputs</td>
+<td>puts</td>
+</tr>
+<tr>
+<td>scanf</td>
+<td>格式化输入</td>
+<td>fscanf</td>
+<td>scanf</td>
+</tr>
+<tr>
+<td>printf</td>
+<td>格式化输出</td>
+<td>fprintf</td>
+<td>printf</td>
+</tr>
+</tbody>
+</table>
+<h4 id="22-文件指针" class="headerLink">
+    <a href="#22-%e6%96%87%e4%bb%b6%e6%8c%87%e9%92%88" class="header-mark"></a>2.2 文件指针</h4><p>​		我们知道，文件是由操作系统管理的单元。当我们想操作一个文件的时候，让操作系统帮我们打开文件，操作系统把我们指定要打开文件的信息保存起来，并且返回给我们一个指针指向文件的信息。文件指针也可以理解为代指打开的文件。这个指针的类型为FILE类型。该类型定义在stdio.h头文件中。通过文件指针，我们就可以对文件进行各种操作。</p>
+<p>​		对于每一个ANSI C程序，运行时系统必须提供至少三个流-标准输入(stdin)、标准输出(stdout)、标准错误(stderr)，它们都是一个指向FILE结构的指针。标准输入是缺省情况下的输入来源，标准输出时缺省情况下的输出设置。具体缺省值因编译器而异，通常标准输入为键盘设备、标准输出为终端或者屏幕。</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338995.jpeg"
+        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338995.jpeg, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338995.jpeg 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338995.jpeg 2x"
+        sizes="auto"
+        alt="img"
+        title="img" ></figure></p>
+<p>ANSI C并未规定FILE的成员，不同编译器可能有不同的定义。VS下FILE信息如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">struct</span> <span class="n">_iobuf</span> <span class="p">{</span> 
+</span></span><span class="line"><span class="cl">        <span class="kt">char</span>  <span class="o">*</span><span class="n">_ptr</span><span class="p">;</span>         <span class="c1">//文件输入的下一个位置 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span>   <span class="n">_cnt</span><span class="p">;</span>          <span class="c1">//剩余多少字符未被读取
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">char</span>  <span class="o">*</span><span class="n">_base</span><span class="p">;</span>        <span class="c1">//指基础位置(应该是文件的其始位置) 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span>   <span class="n">_flag</span><span class="p">;</span>         <span class="c1">//文件标志 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span>   <span class="n">_file</span><span class="p">;</span>         <span class="c1">//文件的有效性验证 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span>   <span class="n">_charbuf</span><span class="p">;</span>      <span class="c1">//检查缓冲区状况,如果无缓冲区则不读取 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span>   <span class="n">_bufsiz</span><span class="p">;</span>       <span class="c1">//文件的大小 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">char</span>  <span class="o">*</span><span class="n">_tmpfname</span><span class="p">;</span>    <span class="c1">//临时文件名 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span> 
+</span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">struct</span> <span class="n">_iobuf</span> <span class="n">FILE</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="23-文件缓冲区" class="headerLink">
+    <a href="#23-%e6%96%87%e4%bb%b6%e7%bc%93%e5%86%b2%e5%8c%ba" class="header-mark"></a>2.3 文件缓冲区</h4><p><em><strong>文件缓冲区</strong></em></p>
+<p>​		ANSI C标准采用“缓冲文件系统”处理数据文件 所谓缓冲文件系统是指系统自动地在内存区为程序中每一个正在使用的文件开辟一个文件缓冲区从内存向磁盘输出数据必须先送到内存中的缓冲区，装满缓冲区后才一起送到磁盘去 如果从磁盘向计算机读入数据，则一次从磁盘文件将一批数据输入到内存缓冲区(充满缓冲 区)，然后再从缓冲区逐个地将数据送到程序数据区(给程序变量) 。</p>
+<p><em><strong>那么文件缓冲区有什么作用呢？</strong></em></p>
+<p>​		如我们从磁盘里取信息，我们先把读出的数据放在缓冲区，计算机再直接从缓冲区中取数据，等缓冲区的数据取完后再去磁盘中读取，这样就可以减少磁盘的读写次数，再加上计算机对缓冲区的操作大大快于对磁盘的操作，故应用缓冲区可大大提高计算机的运行速度。</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338021.jpeg"
+        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338021.jpeg, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338021.jpeg 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338021.jpeg 2x"
+        sizes="auto"
+        alt="img"
+        title="img" ></figure></p>
+<h4 id="24-文件打开关闭" class="headerLink">
+    <a href="#24-%e6%96%87%e4%bb%b6%e6%89%93%e5%bc%80%e5%85%b3%e9%97%ad" class="header-mark"></a>2.4 文件打开关闭</h4><h5 id="241-文件打开-fopen" class="headerLink">
+    <a href="#241-%e6%96%87%e4%bb%b6%e6%89%93%e5%bc%80-fopen" class="header-mark"></a>2.4.1 文件打开 <code>fopen</code></h5><p>​		文件的打开操作表示将给用户指定的文件在内存分配一个FILE结构区，并将该结构的指针返回给用户程序，以后用户程序就可用此FILE指针来实现对指定文件的存取操作了。当使用打开函数时，必须给出文件名、文件操作方式(读、写或读写)。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">FILE</span> <span class="o">*</span> <span class="nf">fopen</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">filename</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">mode</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="err">功能：打开文件</span>
+</span></span><span class="line"><span class="cl"><span class="err">参数：</span>
+</span></span><span class="line"><span class="cl">	<span class="n">filename</span><span class="err">：需要打开的文件名，根据需要加上路径</span>
+</span></span><span class="line"><span class="cl">	<span class="n">mode</span><span class="err">：打开文件的权限设置</span>
+</span></span><span class="line"><span class="cl"><span class="err">返回值：</span>
+</span></span><span class="line"><span class="cl">	<span class="err">成功：文件指针</span>
+</span></span><span class="line"><span class="cl">	<span class="err">失败：</span><span class="nb">NULL</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><table>
+<thead>
+<tr>
+<th>方式</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>“r”</td>
+<td>打开，只读，文件必须已经存在。</td>
+</tr>
+<tr>
+<td>“w”</td>
+<td>只写,如果文件不存在则创建,如果文件已存在则把文件长度截断(Truncate)为0字节。再重新写,也就是替换掉原来的文件内容文件指针指到头。</td>
+</tr>
+<tr>
+<td>“a”</td>
+<td>只能在文件末尾追加数据,如果文件不存在则创建</td>
+</tr>
+<tr>
+<td>“rb”</td>
+<td>打开一个二进制文件，只读</td>
+</tr>
+<tr>
+<td>“wb”</td>
+<td>打开一个二进制文件，只写</td>
+</tr>
+<tr>
+<td>“ab&quot;</td>
+<td>打开一个二进制文件，追加</td>
+</tr>
+<tr>
+<td>“r+”</td>
+<td>允许读和写,文件必须已存在</td>
+</tr>
+<tr>
+<td>“w+”</td>
+<td>允许读和写,如果文件不存在则创建,如果文件已存在则把文件长度截断为0字节再重新写 。</td>
+</tr>
+<tr>
+<td>“a+”</td>
+<td>允许读和追加数据,如果文件不存在则创建</td>
+</tr>
+<tr>
+<td>“rb+”</td>
+<td>以读/写方式打开一个二进制文件</td>
+</tr>
+<tr>
+<td>“wb+”</td>
+<td>以读/写方式建立一个新的二进制文件</td>
+</tr>
+<tr>
+<td>“ab+”</td>
+<td>以读/写方式打开一个二进制文件进行追加</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">test</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="n">FILE</span> <span class="o">*</span><span class="n">fp</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// &#34;\\&#34;这样的路径形式，只能在windows使用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// &#34;/&#34;这样的路径形式，windows和linux平台下都可用，建议使用这种
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// 路径可以是相对路径，也可是绝对路径
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">fp</span> <span class="o">=</span> <span class="nf">fopen</span><span class="p">(</span><span class="s">&#34;../test&#34;</span><span class="p">,</span> <span class="s">&#34;w&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//fp = fopen(&#34;..\\test&#34;, &#34;w&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">fp</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="c1">//返回空，说明打开失败
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">//perror()是标准出错打印函数，能打印调用库函数出错原因
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nf">perror</span><span class="p">(</span><span class="s">&#34;open&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>应该检查fopen的返回值!如何函数失败，它会返回一个NULL值。如果程序不检查错误，这个NULL指针就会传给后续的I/O函数。它们将对这个指针执行间接访问，并将失败.</p>
+<h5 id="242-文件关闭--fclose" class="headerLink">
+    <a href="#242-%e6%96%87%e4%bb%b6%e5%85%b3%e9%97%ad--fclose" class="header-mark"></a>2.4.2 文件关闭  <code>fclose</code></h5><p>​		文件操作完成后，如果程序没有结束，必须要用fclose()函数进行关闭，这是因为对打开的文件进行写入时，若文件缓冲区的空间未被写入的内容填满，这些内容不会写到打开的文件中。只有对打开的文件进行关闭操作时，停留在文件缓冲区的内容才能写到该文件中去，从而使文件完整。再者一旦关闭了文件，该文件对应的FILE结构将被释放，从而使关闭的文件得到保护，因为这时对该文件的存取操作将不会进行。文件的关闭也意味着释放了该文件的缓冲区。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">fclose</span><span class="p">(</span><span class="n">FILE</span> <span class="o">*</span> <span class="n">stream</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="err">功能：关闭先前</span><span class="n">fopen</span><span class="p">()</span><span class="err">打开的文件。此动作让缓冲区的数据写入文件中，并释放系统所提供的文件资源。</span>
+</span></span><span class="line"><span class="cl"><span class="err">参数：</span>
+</span></span><span class="line"><span class="cl">	<span class="n">stream</span><span class="err">：文件指针</span>
+</span></span><span class="line"><span class="cl"><span class="err">返回值：</span>
+</span></span><span class="line"><span class="cl">	<span class="err">成功：</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl">	<span class="err">失败：</span><span class="o">-</span><span class="mi">1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>​		它表示该函数将关闭FILE指针对应的文件，并返回一个整数值。若成功地关闭了文件，则返回一个0值，否则返回一个非0值.</p>
+<h4 id="25-文件读写函数" class="headerLink">
+    <a href="#25-%e6%96%87%e4%bb%b6%e8%af%bb%e5%86%99%e5%87%bd%e6%95%b0" class="header-mark"></a>2.5 文件读写函数</h4><ul>
+<li>按照字符读写文件：<code>fgetc()</code>, <code>fputc()</code></li>
+<li>按照行读写文件：<code>fputs()</code>, <code>fgets()</code></li>
+<li>按照块读写文件：<code>fread()</code>, <code>fwirte()</code></li>
+<li>按照格式化读写文件：<code>fprintf()</code>, <code>fscanf()</code></li>
+<li>按照随机位置读写文件：<code>fseek()</code>, <code>ftell()</code>, <code>rewind()</code></li>
+</ul>
+</div>
+
+        
+
+
+<h2>相关内容</h2>
+<div class="related-container">
+    <div class="related-item-container">
+            <h2 class="related-title">
+                <a href="/%E7%BB%93%E6%9E%84%E4%BD%93%E5%BC%BA%E5%8C%96/">结构体强化</a>
+            </h2>
+        </div>
+    <div class="related-item-container">
+            <h2 class="related-title">
+                <a href="/%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84/">多维数组</a>
+            </h2>
+        </div>
+    <div class="related-item-container">
+            <h2 class="related-title">
+                <a href="/%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA/">内存分区</a>
+            </h2>
+        </div>
+    <div class="related-item-container">
+            <h2 class="related-title">
+                <a href="/%E6%8C%87%E9%92%88%E5%BC%BA%E5%8C%96/">指针强化</a>
+            </h2>
+        </div>
+    <div class="related-item-container">
+            <h2 class="related-title">
+                <a href="/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">数据类型</a>
+            </h2>
+        </div>
+    
+
+</div>
+
+<div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-12-31</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span><a class="link-to-mardown" href=/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9Cpro/index.md target="_blank" rel="noopener noreferrer">阅读原始文档</a>
+                    </span></div>
+            <div class="post-info-share"><button title="分享到 Twitter" data-sharer="twitter" data-url="https://alphaguo.vip/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9Cpro/" data-title="文件操作pro" data-via="@guo_alpha36266" data-hashtags="C"><span class="fab fa-twitter fa-fw"></span></button><button title="分享到 Facebook" data-sharer="facebook" data-url="https://alphaguo.vip/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9Cpro/" data-hashtag="C"><span class="fab fa-facebook-square fa-fw"></span></button><button title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://alphaguo.vip/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9Cpro/" data-title="文件操作pro" data-web><span class="fab fa-whatsapp fa-fw"></span></button><button title="分享到 Line" data-sharer="line" data-url="https://alphaguo.vip/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9Cpro/" data-title="文件操作pro"><span data-svg-src="/lib/simple-icons/icons/line.min.svg"></span></button><button title="分享到 微博" data-sharer="weibo" data-url="https://alphaguo.vip/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9Cpro/" data-title="文件操作pro"><span class="fab fa-weibo fa-fw"></span></button><button title="分享到 Myspace" data-sharer="myspace" data-url="https://alphaguo.vip/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9Cpro/" data-title="文件操作pro" data-description=""><span data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></span></button><button title="分享到 Blogger" data-sharer="blogger" data-url="https://alphaguo.vip/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9Cpro/" data-title="文件操作pro" data-description=""><span class="fab fa-blogger fa-fw"></span></button><button title="分享到 Evernote" data-sharer="evernote" data-url="https://alphaguo.vip/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9Cpro/" data-title="文件操作pro"><span class="fab fa-evernote fa-fw"></span></button></div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/c/">C</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E7%BB%93%E6%9E%84%E4%BD%93%E5%BC%BA%E5%8C%96/" class="prev" rel="prev" title="结构体强化"><i class="fas fa-angle-left fa-fw"></i>结构体强化</a>
+            <a href="/js/" class="next" rel="next" title="Js">Js<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">AlphaGuo</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+            <div class="footer-line"></div>
+            <div class="footer-line">
+            </div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="回到顶部">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div id="cookieconsent-container"></div><div class="assets"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/katex/copy-tex.min.css">
+        <noscript><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"desktop-header-typeit":"AlphaGuo Blog","mobile-header-typeit":"AlphaGuo Blog"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":50,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"sharerjs":true,"table":{"sort":true},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/lib/tablesort/tablesort.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js" defer></script><script type="text/javascript" src="/lib/katex/mhchem.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script type="text/javascript" src="/js/cookieconsent.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script></div>
+</body>
+
+</html>

@@ -1,0 +1,806 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>SE增强版 - AlphaGuo Blog</title><meta name="Description" content="关山难越"><meta property="og:title" content="SE增强版" />
+<meta property="og:description" content="类加载器类加载器（Class Loader）是 Java 虚拟机（JVM）的一个重要组成部分，它负责将类的字节码加载到 JVM 中，并将其转换为运行时的实例。类" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://alphaguo.vip/se%E5%A2%9E%E5%BC%BA%E7%89%88/" /><meta property="og:image" content="https://alphaguo.vip/images/favicon-16x16.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-31T20:40:40+08:00" />
+<meta property="article:modified_time" content="2023-12-31T20:40:40+08:00" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://alphaguo.vip/images/favicon-16x16.png" /><meta name="twitter:title" content="SE增强版"/>
+<meta name="twitter:description" content="类加载器类加载器（Class Loader）是 Java 虚拟机（JVM）的一个重要组成部分，它负责将类的字节码加载到 JVM 中，并将其转换为运行时的实例。类"/>
+<meta name="twitter:site" content="@guo_alpha36266"/>
+<meta name="application-name" content="AlphaGuo">
+<meta name="apple-mobile-web-app-title" content="AlphaGuo">
+
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><meta name="twitter:creator" content="@@guo_alpha36266" /><link rel="icon" href="/images/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://alphaguo.vip/se%E5%A2%9E%E5%BC%BA%E7%89%88/" /><link rel="prev" href="https://alphaguo.vip/git%E5%90%8C%E6%97%B6%E8%BF%9E%E6%8E%A5github%E5%92%8Cgitee/" /><link rel="next" href="https://alphaguo.vip/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" />
+<link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "SE增强版",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://alphaguo.vip/se%E5%A2%9E%E5%BC%BA%E7%89%88/"
+        },"genre": "posts","keywords": "JVAV","wordcount":  6081 ,
+        "url": "https://alphaguo.vip/se%E5%A2%9E%E5%BC%BA%E7%89%88/","datePublished": "2023-12-31T20:40:40+08:00","dateModified": "2023-12-31T20:40:40+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"authors": [{
+                        "@type": "Person",
+                        "name": "AlphaGuo"                    
+                    }],"description": ""
+    }
+    </script></head>
+
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme); document.documentElement.style.setProperty('color-scheme', theme === 'light' ? 'light' : 'dark'); window.theme = theme;   window.isDark = window.theme !== 'light' }
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('auto' === 'light' || 'auto' === 'dark' || 'auto' === 'black') setTheme('auto'), saveTheme('auto'); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+        window.switchThemeEventSet = new Set()
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="AlphaGuo Blog"><span id="desktop-header-typeit" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-select" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                    <select class="color-theme-select" id="theme-select-desktop" title="切换主题">
+                        <option value="light">浅色</option>
+                        <option value="dark">深色</option>
+                        <option value="black">黑色</option>
+                        <option value="auto">跟随系统</option>
+                    </select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="AlphaGuo Blog"><span id="mobile-header-typeit" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-select" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+                <select class="color-theme-select" id="theme-select-mobile" title="切换主题">
+                    <option value="light">浅色</option>
+                    <option value="dark">深色</option>
+                    <option value="black">黑色</option>
+                    <option value="auto">跟随系统</option>
+                </select>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">目录</h2>
+        <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#类加载器">类加载器</a></li>
+        <li><a href="#双亲委派模型">双亲委派模型</a></li>
+        <li><a href="#反射">反射</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">SE增强版</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><span class='author'><span class="author fas fa-user-circle fa-fw"></span><span class='screen-reader-text'>  </span><a href='https://alphaguo.vip/authors/alphaguo'>AlphaGuo</a></span>
+                </span>&nbsp;<span class="post-category">收录于 </span>&nbsp;<span class="post-category">类别 <a href="/categories/jvava/"><i class="far fa-folder fa-fw"></i>JVAVA</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-12-31">2023-12-31</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-12-31">2023-12-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 6081 字&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 13 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#类加载器">类加载器</a></li>
+        <li><a href="#双亲委派模型">双亲委派模型</a></li>
+        <li><a href="#反射">反射</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h3 id="类加载器" class="headerLink">
+    <a href="#%e7%b1%bb%e5%8a%a0%e8%bd%bd%e5%99%a8" class="header-mark"></a>类加载器</h3><p>类加载器（Class Loader）是 Java 虚拟机（JVM）的一个重要组成部分，它负责将类的字节码加载到 JVM 中，并将其转换为运行时的实例。类加载器实际上是一个 Java 类，它通过查找类的字节码文件并创建类的定义来完成加载过程。</p>
+<p>Java 类加载器的主要功能包括以下几个方面：</p>
+<p>\1. 加载（Loading）：类加载器负责在运行时查找并加载类的字节码文件。它根据类的名称或其他标识符，从文件系统、网络或其他来源获取类的字节码，并创建一个表示该类的 Class 对象。</p>
+<p>\2. 验证（Verification）：类加载器在加载类的过程中进行验证，确保类的字节码文件符合 Java 虚拟机规范，不会造成安全问题或导致系统崩溃。</p>
+<p>\3. 准备（Preparation）：准备阶段是类加载过程的一部分，其中类加载器为类的静态变量分配内存并设置默认初始值。</p>
+<p>\4. 解析（Resolution）：解析阶段是类加载过程的一部分，其中类加载器将符号引用解析为直接引用。符号引用是一种符号名称，它在编译时用于引用类、方法、字段等，而直接引用是对实际内存地址的引用。</p>
+<p>\5. 初始化（Initialization）：初始化阶段是类加载过程的最后一步，在该阶段，类的静态变量被分配所定义的初始值，并执行类的静态初始化块。</p>
+<p>\6. 使用（Usage）：类加载器加载的类可以被 JVM 使用，包括创建类的实例、调用类的方法等。</p>
+<p>Java 类加载器采用了双亲委派模型（Parent Delegation Model）来组织类加载器之间的关系。根据这个模型，当一个类加载器收到类加载请求时，它首先将该请求委派给父加载器进行处理。只有当父加载器无法找到所请求的类时，子加载器才会尝试加载该类。这种层级关系保证了类的一致性和安全性。</p>
+<p>常见的类加载器包括以下几种：</p>
+<p>\1. 启动类加载器（Bootstrap Class Loader）：负责加载 Java 核心库（rt.jar）等核心类，是最顶层的类加载器，通常由 JVM 实现，并不是一个普通的 Java 类。</p>
+<p>\2. 扩展类加载器（Extension Class Loader）：负责加载 Java 扩展库（jre/lib/ext目录下的JAR文件）中的类。</p>
+<p>\3. 应用程序类加载器（Application Class Loader）：也称为系统类加载器，负责加载应用程序类路径（Classpath）下的类，开发者自定义的类通常由该类加载器加载。</p>
+<p>此外，还可以自定义类加载器来加载非标准的类文件，实现特定的加载需求，如加载网络资源、动态生成类等。</p>
+<p>类加载器在 Java 应用程序的运行过程中起着重要的作用，它通过动态加载类的方式提供了灵活性和扩展性，使得应用程序能够根据需要加载和使用不同的类和模块。了解类加载器的工作原理和机制有助于编写更高效、安全和可扩展的 Java 代码。</p>
+<h3 id="双亲委派模型" class="headerLink">
+    <a href="#%e5%8f%8c%e4%ba%b2%e5%a7%94%e6%b4%be%e6%a8%a1%e5%9e%8b" class="header-mark"></a>双亲委派模型</h3><p>双亲委派模型（Parent Delegation Model）是 Java 类加载器的一种工作机制，它是为了解决类加载的安全性和一致性问题而引入的。</p>
+<p>在双亲委派模型中，类加载器之间形成了一个层级关系，每个类加载器都有一个父加载器（除了顶层的启动类加载器）。当一个类加载器需要加载某个类时，它首先将加载请求委派给其父加载器进行处理，只有当父加载器无法找到该类时，才由子加载器尝试加载。这个过程被称为委派（Delegation）。</p>
+<p>具体的委派过程如下：</p>
+<p>\1. 当一个类加载器收到加载请求时，它首先检查自己是否已经加载了该类。如果已经加载，则直接返回已加载的 Class 对象。</p>
+<p>\2. 如果该类尚未加载，则委派给父加载器进行加载。父加载器也按照相同的方式进行检查，首先检查自己是否已经加载了该类，如果已经加载，则直接返回 Class 对象。</p>
+<p>\3. 如果父加载器无法加载该类，则再次将加载请求委派给父加载器的父加载器，依次往上委派，直到达到顶层的启动类加载器。</p>
+<p>\4. 如果顶层的启动类加载器仍无法加载该类，则子加载器尝试自己加载该类。</p>
+<p>通过这种委派机制，类加载器可以确保类的一致性和安全性。它可以防止不同的加载器重复加载同一个类，保证类的唯一性。同时，由于父加载器优先加载，可以确保核心类库由启动类加载器加载，从而保证了核心类库的安全性。</p>
+<p>双亲委派模型的优势在于它能够有效地避免类的重复加载和冲突，提高了类加载的效率和安全性。它也为自定义类加载器提供了灵活的扩展机制，可以根据具体需求实现特定的类加载行为，例如加载非标准的类文件或动态生成类。</p>
+<p>需要注意的是，虽然双亲委派模型是 Java 类加载器的默认行为，但在某些情况下可以通过自定义类加载器来打破这种机制，实现特定的加载需求。</p>
+<h3 id="反射" class="headerLink">
+    <a href="#%e5%8f%8d%e5%b0%84" class="header-mark"></a>反射</h3><p>反射（Reflection）是一种在运行时检查和操作类、对象、方法和属性的能力。Java的反射机制提供了一组API，允许开发人员在运行时获取和使用类的信息，以及动态地调用类的方法、访问和修改对象的属性。</p>
+<p>通过反射，可以在运行时获取类的各种信息，包括类的名称、修饰符、父类、实现的接口等。它使得程序可以在编译时不知道具体类的情况下操作类和对象。反射提供了以下常见的类和接口：</p>
+<p><strong>\1. <code>Class</code>类：<code>java.lang.Class</code>类是反射的核心类之一。每个类在内存中都有一个对应的<code>Class</code>对象，它提供了获取类的信息和执行反射操作的方法。通过<code>Class</code>类可以获取类的构造函数、字段、方法等信息，以及创建类的实例对象。</strong></p>
+<ol>
+<li><code>getName()</code>：获取类的全限定名（包括包名和类名）。</li>
+</ol>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">  Class&lt;?&gt; clazz = MyClass.class;
+</span></span><span class="line"><span class="cl">  String className = clazz.getName(); // 获取类名
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li><code>getSimpleName()</code>：获取类的简单名称（只包括类名）。</li>
+</ol>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">  Class&lt;?&gt; clazz = MyClass.class;
+</span></span><span class="line"><span class="cl">  String simpleName = clazz.getSimpleName(); // 获取简单类名
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="3">
+<li><code>getPackage()</code>：获取类所在的包。</li>
+</ol>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">  Class&lt;?&gt; clazz = MyClass.class;
+</span></span><span class="line"><span class="cl">  Package pkg = clazz.getPackage(); // 获取包信息
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li><code>getSuperclass()</code>：获取类的父类。</li>
+</ol>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">Class&lt;?&gt; clazz = MyClass.class;
+</span></span><span class="line"><span class="cl">  Class&lt;?&gt; superclass = clazz.getSuperclass(); // 获取父类信息
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="5">
+<li><code>getInterfaces()</code>：获取类实现的接口。</li>
+</ol>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl"> Class&lt;?&gt; clazz = MyClass.class;
+</span></span><span class="line"><span class="cl">  Class&lt;?&gt;[] interfaces = clazz.getInterfaces(); // 获取实现的接口信息
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="6">
+<li><code>getModifiers()</code>：获取类的修饰符。</li>
+</ol>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">  Class&lt;?&gt; clazz = MyClass.class;
+</span></span><span class="line"><span class="cl">  int modifiers = clazz.getModifiers(); // 获取修饰符
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="7">
+<li><code>getFields()</code>：获取类的公共字段（包括父类的公共字段）。</li>
+</ol>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">  Class&lt;?&gt; clazz = MyClass.class;
+</span></span><span class="line"><span class="cl">  Field[] fields = clazz.getFields(); // 获取公共字段
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="8">
+<li><code>getDeclaredFields()</code>：获取类声明的所有字段（包括私有字段）。</li>
+</ol>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">  Class&lt;?&gt; clazz = MyClass.class;
+</span></span><span class="line"><span class="cl">  Field[] declaredFields = clazz.getDeclaredFields(); // 获取所有字段
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="9">
+<li><code>getMethods()</code>：获取类的公共方法（包括父类的公共方法）。</li>
+</ol>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">  Class&lt;?&gt; clazz = MyClass.class;
+</span></span><span class="line"><span class="cl">  Method[] methods = clazz.getMethods(); // 获取公共方法
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="10">
+<li><code>getDeclaredMethods()</code>：获取类声明的所有方法（包括私有方法）。</li>
+</ol>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">  Class&lt;?&gt; clazz = MyClass.class;
+</span></span><span class="line"><span class="cl">    Method[] declaredMethods = clazz.getDeclaredMethods(); // 获取所有方法
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="11">
+<li><code>getConstructors()</code>：获取类的公共构造函数。</li>
+</ol>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl">  <span class="n">Class</span><span class="o">&lt;</span><span class="err">?</span><span class="o">&gt;</span> <span class="n">clazz</span> <span class="o">=</span> <span class="n">MyClass</span><span class="o">.</span><span class="k">class</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Constructor</span><span class="o">&lt;</span><span class="err">?</span><span class="o">&gt;</span><span class="p">[]</span> <span class="n">constructors</span> <span class="o">=</span> <span class="n">clazz</span><span class="o">.</span><span class="n">getConstructors</span><span class="p">();</span> <span class="o">//</span> <span class="err">获取公共构造函数</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol start="12">
+<li><code>getDeclaredConstructors()</code>：获取类声明的所有构造函数。</li>
+</ol>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">  Class&lt;?&gt; clazz = MyClass.class;
+</span></span><span class="line"><span class="cl">  Constructor&lt;?&gt;[] declaredConstructors = clazz.getDeclaredConstructors(); // 获取所有构造函数
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这些方法可以通过<code>Class</code>对象来获取类的相关信息，如类名、包名、父类、接口、字段、方法和构造函数等。通过这些信息，可以实现动态地操作类和对象，例如创建对象、调用方法和修改字段值等。需要根据具体需求选择合适的方法来获取所需的类信息。</p>
+<p><strong>2. <code>Constructor</code>类：<code>java.lang.reflect.Constructor</code>类代表类的构造函数。通过<code>Constructor</code>类可以获取构造函数的信息，包括名称、参数类型、修饰符等。可以使用<code>Constructor</code>类创建类的实例对象。</strong></p>
+<p><code>Constructor</code>类提供了以下功能和方法：</p>
+<ol>
+<li>
+<p>获取构造方法信息：<code>Constructor</code>类可以提供关于构造方法的详细信息，例如构造方法的名称、参数列表、修饰符等。
+- <code>getName()</code>：获取构造方法的名称。
+- <code>getParameterTypes()</code>：获取构造方法的参数类型，返回一个<code>Class</code>数组。
+- <code>getModifiers()</code>：获取构造方法的修饰符，返回一个代表修饰符的整数值。
+- <code>isVarArgs()</code>：判断构造方法是否使用了可变参数。
+- <code>getExceptionTypes()</code>：获取构造方法声明抛出的异常类型，返回一个<code>Class</code>数组。</p>
+</li>
+<li>
+<p>创建实例：<code>Constructor</code>类可以用于创建类的实例。
+- <code>newInstance(Object... initargs)</code>：通过构造方法创建类的实例，并传递初始化参数。</p>
+</li>
+</ol>
+<p>下面是一个示例，展示了如何使用<code>Constructor</code>类来获取和使用构造方法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">java.lang.reflect.Constructor</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ReflectionExample</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c1">// 获取类的构造方法</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">Class</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">clazz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MyClass</span><span class="p">.</span><span class="na">class</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">Constructor</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">constructor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clazz</span><span class="p">.</span><span class="na">getConstructor</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="c1">// 获取构造方法信息</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="n">String</span><span class="w"> </span><span class="n">constructorName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">constructor</span><span class="p">.</span><span class="na">getName</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="n">Class</span><span class="o">&lt;?&gt;[]</span><span class="w"> </span><span class="n">parameterTypes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">constructor</span><span class="p">.</span><span class="na">getParameterTypes</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="kt">int</span><span class="w"> </span><span class="n">modifiers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">constructor</span><span class="p">.</span><span class="na">getModifiers</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="c1">// 输出构造方法信息</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Constructor Name: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">constructorName</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Parameter Types: &#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Class</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">parameterType</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">parameterTypes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">parameterType</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Modifiers: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">modifiers</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="c1">// 创建实例</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="n">Object</span><span class="w"> </span><span class="n">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">constructor</span><span class="p">.</span><span class="na">newInstance</span><span class="p">(</span><span class="s">&#34;example&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">10</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Instance created: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">instance</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">class</span> <span class="nc">MyClass</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="nf">MyClass</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 构造方法的实现</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>在上面的示例中，我们使用反射获取了<code>MyClass</code>类的构造方法，并输出了构造方法的名称、参数类型和修饰符信息。然后，通过构造方法创建了一个<code>MyClass</code>类的实例。</p>
+<p><strong>3. <code>Field</code>类：<code>java.lang.reflect.Field</code>类代表类的字段。通过<code>Field</code>类可以获取字段的信息，包括名称、类型、修饰符等。可以使用<code>Field</code>类访问和修改对象的字段值。</strong></p>
+<p><code>Field</code>类提供了以下功能和方法：</p>
+<p>\1. 获取字段信息：<code>Field</code>类可以提供关于字段的详细信息，例如字段的名称、类型、修饰符等。
+- <code>getName()</code>：获取字段的名称。
+- <code>getType()</code>：获取字段的类型，返回一个<code>Class</code>对象。
+- <code>getModifiers()</code>：获取字段的修饰符，返回一个代表修饰符的整数值。</p>
+<p>\2. 访问和修改字段值：<code>Field</code>类提供了访问和修改字段值的方法。
+- <code>get(Object obj)</code>：获取指定对象上该字段的值。
+- <code>set(Object obj, Object value)</code>：将指定对象上该字段的值设置为给定的值。</p>
+<p>下面是一个示例，展示了如何使用<code>Field</code>类来获取和修改字段值：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">java.lang.reflect.Field</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ReflectionExample</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c1">// 获取字段信息</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">Class</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">clazz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MyClass</span><span class="p">.</span><span class="na">class</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">Field</span><span class="w"> </span><span class="n">field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clazz</span><span class="p">.</span><span class="na">getDeclaredField</span><span class="p">(</span><span class="s">&#34;myField&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="c1">// 获取字段信息</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="n">String</span><span class="w"> </span><span class="n">fieldName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field</span><span class="p">.</span><span class="na">getName</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="n">Class</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">fieldType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field</span><span class="p">.</span><span class="na">getType</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="kt">int</span><span class="w"> </span><span class="n">modifiers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field</span><span class="p">.</span><span class="na">getModifiers</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="c1">// 输出字段信息</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Field Name: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">fieldName</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Field Type: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">fieldType</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Modifiers: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">modifiers</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="c1">// 创建实例并访问字段值</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="n">Object</span><span class="w"> </span><span class="n">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clazz</span><span class="p">.</span><span class="na">getDeclaredConstructor</span><span class="p">().</span><span class="na">newInstance</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="n">field</span><span class="p">.</span><span class="na">setAccessible</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w"> </span><span class="c1">// 设置可访问私有字段</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="n">Object</span><span class="w"> </span><span class="n">fieldValue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">instance</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Field Value: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">fieldValue</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="c1">// 修改字段值</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="n">field</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;New Value&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Modified Field Value: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">field</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">instance</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">class</span> <span class="nc">MyClass</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">myField</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c1">// Getter and setter for myField (not shown for brevity)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>在上面的示例中，我们使用反射获取了<code>MyClass</code>类的字段，并输出了字段的名称、类型和修饰符信息。然后，我们创建了一个<code>MyClass</code>类的实例，并使用<code>Field</code>类获取和修改了字段的值。</p>
+<p>请注意，在访问私有字段时，我们需要调用<code>setAccessible(true)</code>方法将字段设置为可访问状态，以便获取或修改其值。</p>
+<p><strong>4. <code>Method</code>类：<code>java.lang.reflect.Method</code>类代表类的方法。通过<code>Method</code>类可以获取方法的信息，包括名称、参数类型、返回类型、修饰符等。可以使用<code>Method</code>类调用类的方法。</strong></p>
+<p><code>Method</code>类提供了以下功能和方法：</p>
+<ol>
+<li>
+<p>获取方法信息：<code>Method</code>类可以提供关于方法的详细信息，例如方法的名称、返回类型、参数列表、修饰符等。
+- <code>getName()</code>：获取方法的名称。
+- <code>getReturnType()</code>：获取方法的返回类型，返回一个<code>Class</code>对象。
+- <code>getParameterTypes()</code>：获取方法的参数类型，返回一个<code>Class</code>数组。
+- <code>getModifiers()</code>：获取方法的修饰符，返回一个代表修饰符的整数值。</p>
+</li>
+<li>
+<p>调用方法：<code>Method</code>类提供了调用方法的方法。
+- <code>invoke(Object obj, Object... args)</code>：在指定的对象上调用方法，可以传递方法的参数。</p>
+</li>
+</ol>
+<p>下面是一个示例，展示了如何使用<code>Method</code>类来获取方法信息和调用方法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">java.lang.reflect.Method</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ReflectionExample</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c1">// 获取方法信息</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">Class</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">clazz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MyClass</span><span class="p">.</span><span class="na">class</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="n">Method</span><span class="w"> </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clazz</span><span class="p">.</span><span class="na">getMethod</span><span class="p">(</span><span class="s">&#34;myMethod&#34;</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="c1">// 获取方法信息</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="n">String</span><span class="w"> </span><span class="n">methodName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">method</span><span class="p">.</span><span class="na">getName</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="n">Class</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">returnType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">method</span><span class="p">.</span><span class="na">getReturnType</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="n">Class</span><span class="o">&lt;?&gt;[]</span><span class="w"> </span><span class="n">parameterTypes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">method</span><span class="p">.</span><span class="na">getParameterTypes</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="kt">int</span><span class="w"> </span><span class="n">modifiers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">method</span><span class="p">.</span><span class="na">getModifiers</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="c1">// 输出方法信息</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Method Name: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">methodName</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Return Type: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">returnType</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Parameter Types: &#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Class</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">parameterType</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">parameterTypes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">parameterType</span><span class="p">.</span><span class="na">getName</span><span class="p">());</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Modifiers: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">modifiers</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="c1">// 创建实例并调用方法</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="n">Object</span><span class="w"> </span><span class="n">instance</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clazz</span><span class="p">.</span><span class="na">getDeclaredConstructor</span><span class="p">().</span><span class="na">newInstance</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="n">Object</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">method</span><span class="p">.</span><span class="na">invoke</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span><span class="w"> </span><span class="n">10</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;example&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;Method Result: &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">result</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">Exception</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">      </span><span class="n">e</span><span class="p">.</span><span class="na">printStackTrace</span><span class="p">();</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="err">​</span><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">class</span> <span class="nc">MyClass</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">myMethod</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">text</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 方法的实现</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">text</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">value</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>在上面的示例中，我们使用反射获取了<code>MyClass</code>类的方法，并输出了方法的名称、返回类型、参数类型和修饰符信息。然后，我们创建了一个<code>MyClass</code>类的实例，并使用<code>Method</code>类调用了该方法，并获取了方法的返回值。</p>
+<p>需要注意的是，在调用方法时，我们需要提供方法的参数，并将其作为参数传递给<code>invoke</code>方法。</p>
+<p>请注意，如果要调用私有方法或者方法位于父类中，我们需要在调用方法之前使用<code>setAccessible(true)</code>方法将方法设置为可访问状态。</p>
+<p>常见用法包括：</p>
+<p>\1. 获取类的信息：可以使用<code>Class</code>类的静态方法获取类的<code>Class</code>对象，从而获取类的信息。</p>
+<p>\2. 创建对象：通过<code>Class</code>对象可以调用构造函数创建类的实例对象。</p>
+<p>\3. 调用方法：通过<code>Class</code>对象可以获取方法信息，并使用<code>Method</code>类调用方法。</p>
+<p>\4. 访问和修改字段：通过<code>Class</code>对象可以获取字段信息，并使用<code>Field</code>类访问和修改字段的值。</p>
+<p>\5. 动态代理：反射机制可以实现动态代理，通过创建代理对象来代理目标对象的方法调用。</p>
+<p>\6. 配置文件解析：可以使用反射机制读取配置文件，并根据配置文件中的信息创建对象。</p>
+<p>\7. 框架开发：许多框架（如Spring和Hibernate）使用反射来实现依赖注入、ORM等功能。</p>
+<p>需要注意的是，反射虽然提供了强大的功能，但使用不当可能会导致性能下降、安全问题和代码可读性降低。因此，在使用反射时应当谨慎，并根据实际需求权衡利弊。</p>
+<p>\1. <code>Class.forName(String className)</code>：根据类的全限定名（包括包名和类名）加载类，并返回对应的<code>Class</code>对象。可以用于动态加载类，常用于配置文件解析和插件机制等场景。</p>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w">  </span><span class="n">Class</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">clazz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Class</span><span class="p">.</span><span class="na">forName</span><span class="p">(</span><span class="s">&#34;com.example.MyClass&#34;</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>\2. <code>newInstance()</code>：通过<code>Class</code>对象的<code>newInstance()</code>方法创建类的实例对象。该方法会调用类的无参构造函数进行对象的创建。注意：该方法在Java 9及之后版本中已过时，推荐使用<code>getDeclaredConstructor().newInstance()</code>方法。</p>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w">  </span><span class="n">Class</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">clazz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MyClass</span><span class="p">.</span><span class="na">class</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">Object</span><span class="w"> </span><span class="n">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clazz</span><span class="p">.</span><span class="na">newInstance</span><span class="p">();</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>\3. <code>getConstructor(Class&lt;?&gt;... parameterTypes)</code>：通过<code>Class</code>对象的<code>getConstructor()</code>方法获取指定参数类型的公共构造函数。返回一个<code>Constructor</code>对象，可以用于创建类的实例对象。</p>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w">  </span><span class="n">Class</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">clazz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MyClass</span><span class="p">.</span><span class="na">class</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">Constructor</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">constructor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clazz</span><span class="p">.</span><span class="na">getConstructor</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">Object</span><span class="w"> </span><span class="n">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">constructor</span><span class="p">.</span><span class="na">newInstance</span><span class="p">(</span><span class="s">&#34;example&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">123</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>\4. <code>getDeclaredMethod(String name, Class&lt;?&gt;... parameterTypes)</code>：通过<code>Class</code>对象的<code>getDeclaredMethod()</code>方法获取指定方法名和参数类型的方法。返回一个<code>Method</code>对象，可以用于调用类的方法。</p>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w"> </span><span class="n">Class</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">clazz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MyClass</span><span class="p">.</span><span class="na">class</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">Method</span><span class="w"> </span><span class="n">method</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clazz</span><span class="p">.</span><span class="na">getDeclaredMethod</span><span class="p">(</span><span class="s">&#34;myMethod&#34;</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">class</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">method</span><span class="p">.</span><span class="na">invoke</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span><span class="w"> </span><span class="s">&#34;example&#34;</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>\5. <code>getField(String name)</code>：通过<code>Class</code>对象的<code>getField()</code>方法获取指定名称的公共字段。返回一个<code>Field</code>对象，可以用于访问和修改字段的值。</p>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w">  </span><span class="n">Class</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">clazz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MyClass</span><span class="p">.</span><span class="na">class</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">Field</span><span class="w"> </span><span class="n">field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clazz</span><span class="p">.</span><span class="na">getField</span><span class="p">(</span><span class="s">&#34;myField&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">Object</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">obj</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>\6. <code>getDeclaredField(String name)</code>：通过<code>Class</code>对象的<code>getDeclaredField()</code>方法获取指定名称的字段，包括私有字段。返回一个<code>Field</code>对象，可以用于访问和修改字段的值。</p>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="w">  </span><span class="n">Class</span><span class="o">&lt;?&gt;</span><span class="w"> </span><span class="n">clazz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MyClass</span><span class="p">.</span><span class="na">class</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">Field</span><span class="w"> </span><span class="n">field</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">clazz</span><span class="p">.</span><span class="na">getDeclaredField</span><span class="p">(</span><span class="s">&#34;myField&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">field</span><span class="p">.</span><span class="na">setAccessible</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w"> </span><span class="c1">// 设置可访问私有字段</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="n">Object</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">field</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">obj</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></div>
+
+        
+
+
+<h2>相关内容</h2>
+<div class="related-container">
+    <div class="related-item-container">
+            <h2 class="related-title">
+                <a href="/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a>
+            </h2>
+        </div>
+    
+
+</div>
+
+<div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-12-31</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span><a class="link-to-mardown" href=/se%E5%A2%9E%E5%BC%BA%E7%89%88/index.md target="_blank" rel="noopener noreferrer">阅读原始文档</a>
+                    </span></div>
+            <div class="post-info-share"><button title="分享到 Twitter" data-sharer="twitter" data-url="https://alphaguo.vip/se%E5%A2%9E%E5%BC%BA%E7%89%88/" data-title="SE增强版" data-via="@guo_alpha36266" data-hashtags="JVAV"><span class="fab fa-twitter fa-fw"></span></button><button title="分享到 Facebook" data-sharer="facebook" data-url="https://alphaguo.vip/se%E5%A2%9E%E5%BC%BA%E7%89%88/" data-hashtag="JVAV"><span class="fab fa-facebook-square fa-fw"></span></button><button title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://alphaguo.vip/se%E5%A2%9E%E5%BC%BA%E7%89%88/" data-title="SE增强版" data-web><span class="fab fa-whatsapp fa-fw"></span></button><button title="分享到 Line" data-sharer="line" data-url="https://alphaguo.vip/se%E5%A2%9E%E5%BC%BA%E7%89%88/" data-title="SE增强版"><span data-svg-src="/lib/simple-icons/icons/line.min.svg"></span></button><button title="分享到 微博" data-sharer="weibo" data-url="https://alphaguo.vip/se%E5%A2%9E%E5%BC%BA%E7%89%88/" data-title="SE增强版"><span class="fab fa-weibo fa-fw"></span></button><button title="分享到 Myspace" data-sharer="myspace" data-url="https://alphaguo.vip/se%E5%A2%9E%E5%BC%BA%E7%89%88/" data-title="SE增强版" data-description=""><span data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></span></button><button title="分享到 Blogger" data-sharer="blogger" data-url="https://alphaguo.vip/se%E5%A2%9E%E5%BC%BA%E7%89%88/" data-title="SE增强版" data-description=""><span class="fab fa-blogger fa-fw"></span></button><button title="分享到 Evernote" data-sharer="evernote" data-url="https://alphaguo.vip/se%E5%A2%9E%E5%BC%BA%E7%89%88/" data-title="SE增强版"><span class="fab fa-evernote fa-fw"></span></button></div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/jvav/">JVAV</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/git%E5%90%8C%E6%97%B6%E8%BF%9E%E6%8E%A5github%E5%92%8Cgitee/" class="prev" rel="prev" title="Git同时连接github和gitee"><i class="fas fa-angle-left fa-fw"></i>Git同时连接github和gitee</a>
+            <a href="/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" class="next" rel="next" title="网络编程">网络编程<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">AlphaGuo</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+            <div class="footer-line"></div>
+            <div class="footer-line">
+            </div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="回到顶部">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div id="cookieconsent-container"></div><div class="assets"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/katex/copy-tex.min.css">
+        <noscript><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"desktop-header-typeit":"AlphaGuo Blog","mobile-header-typeit":"AlphaGuo Blog"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":50,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"sharerjs":true,"table":{"sort":true},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/lib/tablesort/tablesort.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js" defer></script><script type="text/javascript" src="/lib/katex/mhchem.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script type="text/javascript" src="/js/cookieconsent.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script></div>
+</body>
+
+</html>

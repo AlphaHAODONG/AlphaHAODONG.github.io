@@ -1,0 +1,1805 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>文件操作 - AlphaGuo Blog</title><meta name="Description" content="关山难越"><meta property="og:title" content="文件操作" />
+<meta property="og:description" content="1 、概述 1.1磁盘文件和设备文件 磁盘文件 指一组相关数据的有序集合,通常存储在外部介质(如磁盘)上，使用时才调入内存。 设备文件 在操作系统中把每" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://alphaguo.vip/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" /><meta property="og:image" content="https://alphaguo.vip/images/favicon-16x16.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-31T20:35:34+08:00" />
+<meta property="article:modified_time" content="2023-12-31T20:35:34+08:00" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://alphaguo.vip/images/favicon-16x16.png" /><meta name="twitter:title" content="文件操作"/>
+<meta name="twitter:description" content="1 、概述 1.1磁盘文件和设备文件 磁盘文件 指一组相关数据的有序集合,通常存储在外部介质(如磁盘)上，使用时才调入内存。 设备文件 在操作系统中把每"/>
+<meta name="twitter:site" content="@guo_alpha36266"/>
+<meta name="application-name" content="AlphaGuo">
+<meta name="apple-mobile-web-app-title" content="AlphaGuo">
+
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><meta name="twitter:creator" content="@@guo_alpha36266" /><link rel="icon" href="/images/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://alphaguo.vip/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" /><link rel="prev" href="https://alphaguo.vip/%E7%BB%93%E6%9E%84%E4%BD%93/" /><link rel="next" href="https://alphaguo.vip/%E4%BD%8E%E7%BA%A7%E5%87%BD%E6%95%B0/" />
+<link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "文件操作",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://alphaguo.vip/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/"
+        },"genre": "posts","keywords": "C","wordcount":  8548 ,
+        "url": "https://alphaguo.vip/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/","datePublished": "2023-12-31T20:35:34+08:00","dateModified": "2023-12-31T20:35:34+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"authors": [{
+                        "@type": "Person",
+                        "name": "AlphaGuo"                    
+                    }],"description": ""
+    }
+    </script></head>
+
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme); document.documentElement.style.setProperty('color-scheme', theme === 'light' ? 'light' : 'dark'); window.theme = theme;   window.isDark = window.theme !== 'light' }
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('auto' === 'light' || 'auto' === 'dark' || 'auto' === 'black') setTheme('auto'), saveTheme('auto'); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+        window.switchThemeEventSet = new Set()
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="AlphaGuo Blog"><span id="desktop-header-typeit" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-select" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                    <select class="color-theme-select" id="theme-select-desktop" title="切换主题">
+                        <option value="light">浅色</option>
+                        <option value="dark">深色</option>
+                        <option value="black">黑色</option>
+                        <option value="auto">跟随系统</option>
+                    </select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="AlphaGuo Blog"><span id="mobile-header-typeit" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-select" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+                <select class="color-theme-select" id="theme-select-mobile" title="切换主题">
+                    <option value="light">浅色</option>
+                    <option value="dark">深色</option>
+                    <option value="black">黑色</option>
+                    <option value="auto">跟随系统</option>
+                </select>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">目录</h2>
+        <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-概述">1 、概述</a>
+          <ul>
+            <li><a href="#11磁盘文件和设备文件">1.1磁盘文件和设备文件</a></li>
+            <li><a href="#12-磁盘文件的分类">1.2 磁盘文件的分类</a></li>
+            <li><a href="#13-文本文件和二进制文件">1.3 文本文件和二进制文件</a>
+              <ul>
+                <li><a href="#文本文件">文本文件</a></li>
+                <li><a href="#二进制文件">二进制文件</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#2-文件的打开和关闭">2、 文件的打开和关闭</a>
+          <ul>
+            <li><a href="#21-文件指针">2.1 文件指针</a></li>
+            <li><a href="#22-文件的打开">2.2 文件的打开</a></li>
+            <li><a href="#23-文件的关闭">2.3 文件的关闭</a></li>
+          </ul>
+        </li>
+        <li><a href="#3-文件的顺序读写">3 、文件的顺序读写</a>
+          <ul>
+            <li><a href="#31-按照字符读写文件fgetcfputc">3.1 按照字符读写文件<code>fgetc</code>、<code>fputc</code></a>
+              <ul>
+                <li><a href="#311写文件">3.1.1写文件</a></li>
+                <li><a href="#312文件结尾">3.1.2文件结尾</a></li>
+                <li><a href="#313读文件">3.1.3读文件</a></li>
+                <li><a href="#314拷贝文件">3.1.4拷贝文件</a></li>
+              </ul>
+            </li>
+            <li><a href="#32按照行读写文件fgetsfputs">3.2按照行读写文件<code>fgets</code>、<code>fputs</code></a>
+              <ul>
+                <li><a href="#321写文件">3.2.1写文件</a></li>
+                <li><a href="#322读文件">3.2.2读文件</a></li>
+                <li><a href="#323强化四则运算">3.2.3强化四则运算</a></li>
+              </ul>
+            </li>
+            <li><a href="#33按照格式化文件fprintffscanf">3.3按照格式化文件fprintf、fscanf</a>
+              <ul>
+                <li><a href="#331写文件">3.3.1写文件</a></li>
+                <li><a href="#332读文件">3.3.2读文件</a></li>
+              </ul>
+            </li>
+            <li><a href="#34按照块读写文件freadfwrite">3.4按照块读写文件fread、fwrite</a>
+              <ul>
+                <li><a href="#341写文件">3.4.1写文件</a></li>
+                <li><a href="#342读文件">3.4.2读文件</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#4文件的随机读写">4、文件的随机读写</a>
+          <ul>
+            <li><a href="#41-fseek">4.1 fseek</a></li>
+            <li><a href="#42-ftell">4.2 ftell</a></li>
+          </ul>
+        </li>
+        <li><a href="#5获取文件状态">5、获取文件状态</a>
+          <ul>
+            <li><a href="#51stat">5.1stat</a></li>
+          </ul>
+        </li>
+        <li><a href="#6删除和重命名文件">6、删除和重命名文件</a>
+          <ul>
+            <li><a href="#61-remove">6.1 <code>remove</code></a></li>
+            <li><a href="#62-rename-函数">6.2 <code>rename</code> 函数</a></li>
+          </ul>
+        </li>
+        <li><a href="#7文件缓冲区">7、文件缓冲区</a></li>
+        <li><a href="#文件缓冲类型">文件缓冲类型</a></li>
+        <li><a href="#问题与注意事项">问题与注意事项</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">文件操作</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><span class='author'><span class="author fas fa-user-circle fa-fw"></span><span class='screen-reader-text'>  </span><a href='https://alphaguo.vip/authors/alphaguo'>AlphaGuo</a></span>
+                </span>&nbsp;<span class="post-category">收录于 </span>&nbsp;<span class="post-category">类别 <a href="/categories/c/"><i class="far fa-folder fa-fw"></i>C</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-12-31">2023-12-31</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-12-31">2023-12-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 8548 字&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 18 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-概述">1 、概述</a>
+          <ul>
+            <li><a href="#11磁盘文件和设备文件">1.1磁盘文件和设备文件</a></li>
+            <li><a href="#12-磁盘文件的分类">1.2 磁盘文件的分类</a></li>
+            <li><a href="#13-文本文件和二进制文件">1.3 文本文件和二进制文件</a>
+              <ul>
+                <li><a href="#文本文件">文本文件</a></li>
+                <li><a href="#二进制文件">二进制文件</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#2-文件的打开和关闭">2、 文件的打开和关闭</a>
+          <ul>
+            <li><a href="#21-文件指针">2.1 文件指针</a></li>
+            <li><a href="#22-文件的打开">2.2 文件的打开</a></li>
+            <li><a href="#23-文件的关闭">2.3 文件的关闭</a></li>
+          </ul>
+        </li>
+        <li><a href="#3-文件的顺序读写">3 、文件的顺序读写</a>
+          <ul>
+            <li><a href="#31-按照字符读写文件fgetcfputc">3.1 按照字符读写文件<code>fgetc</code>、<code>fputc</code></a>
+              <ul>
+                <li><a href="#311写文件">3.1.1写文件</a></li>
+                <li><a href="#312文件结尾">3.1.2文件结尾</a></li>
+                <li><a href="#313读文件">3.1.3读文件</a></li>
+                <li><a href="#314拷贝文件">3.1.4拷贝文件</a></li>
+              </ul>
+            </li>
+            <li><a href="#32按照行读写文件fgetsfputs">3.2按照行读写文件<code>fgets</code>、<code>fputs</code></a>
+              <ul>
+                <li><a href="#321写文件">3.2.1写文件</a></li>
+                <li><a href="#322读文件">3.2.2读文件</a></li>
+                <li><a href="#323强化四则运算">3.2.3强化四则运算</a></li>
+              </ul>
+            </li>
+            <li><a href="#33按照格式化文件fprintffscanf">3.3按照格式化文件fprintf、fscanf</a>
+              <ul>
+                <li><a href="#331写文件">3.3.1写文件</a></li>
+                <li><a href="#332读文件">3.3.2读文件</a></li>
+              </ul>
+            </li>
+            <li><a href="#34按照块读写文件freadfwrite">3.4按照块读写文件fread、fwrite</a>
+              <ul>
+                <li><a href="#341写文件">3.4.1写文件</a></li>
+                <li><a href="#342读文件">3.4.2读文件</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#4文件的随机读写">4、文件的随机读写</a>
+          <ul>
+            <li><a href="#41-fseek">4.1 fseek</a></li>
+            <li><a href="#42-ftell">4.2 ftell</a></li>
+          </ul>
+        </li>
+        <li><a href="#5获取文件状态">5、获取文件状态</a>
+          <ul>
+            <li><a href="#51stat">5.1stat</a></li>
+          </ul>
+        </li>
+        <li><a href="#6删除和重命名文件">6、删除和重命名文件</a>
+          <ul>
+            <li><a href="#61-remove">6.1 <code>remove</code></a></li>
+            <li><a href="#62-rename-函数">6.2 <code>rename</code> 函数</a></li>
+          </ul>
+        </li>
+        <li><a href="#7文件缓冲区">7、文件缓冲区</a></li>
+        <li><a href="#文件缓冲类型">文件缓冲类型</a></li>
+        <li><a href="#问题与注意事项">问题与注意事项</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h3 id="1-概述" class="headerLink">
+    <a href="#1-%e6%a6%82%e8%bf%b0" class="header-mark"></a>1 、概述</h3><h4 id="11磁盘文件和设备文件" class="headerLink">
+    <a href="#11%e7%a3%81%e7%9b%98%e6%96%87%e4%bb%b6%e5%92%8c%e8%ae%be%e5%a4%87%e6%96%87%e4%bb%b6" class="header-mark"></a>1.1磁盘文件和设备文件</h4><ul>
+<li>磁盘文件</li>
+</ul>
+<p>指一组相关数据的有序集合,通常存储在外部介质(如磁盘)上，使用时才调入内存。</p>
+<ul>
+<li>设备文件</li>
+</ul>
+<p>在操作系统中把每一个与主机相连的输入、输出设备看作是一个文件，把它们的输入、输出等同于对磁盘文件的读和写。</p>
+<h4 id="12-磁盘文件的分类" class="headerLink">
+    <a href="#12-%e7%a3%81%e7%9b%98%e6%96%87%e4%bb%b6%e7%9a%84%e5%88%86%e7%b1%bb" class="header-mark"></a>1.2 磁盘文件的分类</h4><p>计算机的存储在物理上是二进制的，所以物理上所有的磁盘文件本质上都是一样的：以字节为单位进行顺序存储。</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333332.jpeg"
+        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333332.jpeg, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333332.jpeg 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333332.jpeg 2x"
+        sizes="auto"
+        alt="img"
+        title="img" ></figure></p>
+<p>从用户或者操作系统使用的角度（逻辑上）把文件分为：</p>
+<ul>
+<li>文本文件：基于字符编码的文件</li>
+<li>二进制文件：基于值编码的文件</li>
+</ul>
+<h4 id="13-文本文件和二进制文件" class="headerLink">
+    <a href="#13-%e6%96%87%e6%9c%ac%e6%96%87%e4%bb%b6%e5%92%8c%e4%ba%8c%e8%bf%9b%e5%88%b6%e6%96%87%e4%bb%b6" class="header-mark"></a>1.3 文本文件和二进制文件</h4><h5 id="文本文件" class="headerLink">
+    <a href="#%e6%96%87%e6%9c%ac%e6%96%87%e4%bb%b6" class="header-mark"></a>文本文件</h5><ul>
+<li>基于字符编码，常见编码有<code>ASCII</code>、<code>UNICODE</code>等</li>
+<li>一般可以使用文本编辑器直接打开</li>
+<li>数5678的以ASCII存储形式(ASCII码)为：00110101 00110110 00110111 00111000</li>
+</ul>
+<h5 id="二进制文件" class="headerLink">
+    <a href="#%e4%ba%8c%e8%bf%9b%e5%88%b6%e6%96%87%e4%bb%b6" class="header-mark"></a>二进制文件</h5><ul>
+<li>基于值编码,自己根据具体应用,指定某个值是什么意思</li>
+<li>把内存中的数据按其在内存中的存储形式原样输出到磁盘上</li>
+<li>数5678的存储形式(二进制码)为：00010110 00101110</li>
+</ul>
+<h3 id="2-文件的打开和关闭" class="headerLink">
+    <a href="#2-%e6%96%87%e4%bb%b6%e7%9a%84%e6%89%93%e5%bc%80%e5%92%8c%e5%85%b3%e9%97%ad" class="header-mark"></a>2、 文件的打开和关闭</h3><h4 id="21-文件指针" class="headerLink">
+    <a href="#21-%e6%96%87%e4%bb%b6%e6%8c%87%e9%92%88" class="header-mark"></a>2.1 文件指针</h4><p>在C语言中用一个指针变量指向一个文件，这个指针称为文件指针。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">struct</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">short</span>           <span class="n">level</span><span class="p">;</span>	<span class="c1">//缓冲区&#34;满&#34;或者&#34;空&#34;的程度 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kt">unsigned</span>        <span class="n">flags</span><span class="p">;</span>	<span class="c1">//文件状态标志 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kt">char</span>            <span class="n">fd</span><span class="p">;</span>		<span class="c1">//文件描述符
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kt">unsigned</span> <span class="kt">char</span>   <span class="n">hold</span><span class="p">;</span>	<span class="c1">//如无缓冲区不读取字符
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kt">short</span>           <span class="n">bsize</span><span class="p">;</span>	<span class="c1">//缓冲区的大小
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kt">unsigned</span> <span class="kt">char</span>   <span class="o">*</span><span class="n">buffer</span><span class="p">;</span><span class="c1">//数据缓冲区的位置 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kt">unsigned</span>        <span class="n">ar</span><span class="p">;</span>	 <span class="c1">//指针，当前的指向 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kt">unsigned</span>        <span class="n">istemp</span><span class="p">;</span>	<span class="c1">//临时文件，指示器
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kt">short</span>           <span class="n">token</span><span class="p">;</span>	<span class="c1">//用于有效性的检查 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span><span class="n">FILE</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>FILE</code>是系统使用<code>typedef</code>定义出来的有关文件信息的一种结构体类型，结构中含有文件名、文件状态和文件当前位置等信息。</p>
+<p>声明FILE结构体类型的信息包含在头文件“<code>stdio.h</code>”中，一般设置一个指向FILE类型变量的指针变量，然后通过它来引用这些FILE类型变量。通过文件指针就可对它所指的文件进行各种操作。</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333295.jpeg"
+        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333295.jpeg, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333295.jpeg 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333295.jpeg 2x"
+        sizes="auto"
+        alt="img"
+        title="img" ></figure></p>
+<p>C语言中有三个特殊的文件指针由系统默认打开，用户无需定义即可直接使用:</p>
+<ul>
+<li><code>stdin</code>： 标准输入，默认为当前终端（键盘），我们使用的<code>scanf</code>、<code>getchar</code>函数默认从此终端获得数据。</li>
+<li><code>stdout</code>：标准输出，默认为当前终端（屏幕），我们使用的<code>printf</code>、<code>puts</code>函数默认输出信息到此终端。</li>
+<li><code>stderr</code>：标准出错，默认为当前终端（屏幕），我们使用的<code>perror</code>函数默认输出信息到此终端。</li>
+</ul>
+<h4 id="22-文件的打开" class="headerLink">
+    <a href="#22-%e6%96%87%e4%bb%b6%e7%9a%84%e6%89%93%e5%bc%80" class="header-mark"></a>2.2 文件的打开</h4><p>任何文件使用之前必须打开：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="n">FILE</span> <span class="o">*</span> <span class="nf">fopen</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">filename</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">mode</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="err">功能：打开文件</span>
+</span></span><span class="line"><span class="cl"><span class="err">参数：</span>
+</span></span><span class="line"><span class="cl">	<span class="n">filename</span><span class="err">：需要打开的文件名，根据需要加上路径</span>
+</span></span><span class="line"><span class="cl">	<span class="n">mode</span><span class="err">：打开文件的模式设置</span>
+</span></span><span class="line"><span class="cl"><span class="err">返回值：</span>
+</span></span><span class="line"><span class="cl">	<span class="err">成功：文件指针</span>
+</span></span><span class="line"><span class="cl">	<span class="err">失败：</span><span class="nb">NULL</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>第一个参数的几种形式:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">FILE</span> <span class="o">*</span><span class="n">fp_passwd</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">//相对路径：
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">//打开当前目录passdw文件：源文件(源程序)所在目录
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">FILE</span> <span class="o">*</span><span class="n">fp_passwd</span> <span class="o">=</span> <span class="nf">fopen</span><span class="p">(</span><span class="s">&#34;passwd.txt&#34;</span><span class="p">,</span> <span class="s">&#34;r&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="c1">//打开当前目录(test)下passwd.txt文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">fp_passwd</span> <span class="o">=</span> <span class="nf">fopen</span><span class="p">(</span><span class="s">&#34;. / test / passwd.txt&#34;</span><span class="p">,</span> <span class="s">&#34;r&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="c1">//打开当前目录上一级目录（相对当前目录）passwd.txt文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">fp_passwd</span> <span class="o">=</span> <span class="nf">fopen</span><span class="p">(</span><span class="s">&#34;.. / passwd.txt&#34;</span><span class="p">,</span> <span class="s">&#34;r&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		
+</span></span><span class="line"><span class="cl">	<span class="c1">//绝对路径：
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">//打开C盘test目录下一个叫passwd.txt文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">fp_passwd</span> <span class="o">=</span> <span class="nf">fopen</span><span class="p">(</span><span class="s">&#34;c:/test/passwd.txt&#34;</span><span class="p">,</span><span class="s">&#34;r&#34;</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>第二个参数的几种形式(打开文件的方式)：</p>
+<table>
+<thead>
+<tr>
+<th><strong>打开模式</strong></th>
+<th><strong>含义</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>r</code>或<code>rb</code></td>
+<td>以只读方式打开一个文本文件（不创建文件，若文件不存在则报错）</td>
+</tr>
+<tr>
+<td><code>w</code>或<code>wb</code></td>
+<td>以写方式打开文件(如果文件存在则清空文件，文件不存在则创建一个文件)</td>
+</tr>
+<tr>
+<td><code>a</code>或<code>ab</code></td>
+<td>以追加方式打开文件，在末尾添加内容，若文件不存在则创建文件</td>
+</tr>
+<tr>
+<td><code>r+</code>或<code>rb+</code></td>
+<td>以可读、可写的方式打开文件(不创建新文件)</td>
+</tr>
+<tr>
+<td><code>w+</code>或<code>wb+</code></td>
+<td>以可读、可写的方式打开文件(如果文件存在则清空文件，文件不存在则创建一个文件)</td>
+</tr>
+<tr>
+<td><code>a+</code>或<code>ab+</code></td>
+<td>以添加方式打开可读、可写的文件。若文件不存在则创建文件；如果文件存在，则写入的数据会被加到文件尾后，即文件原先的内容会被保留。</td>
+</tr>
+</tbody>
+</table>
+<p>注意：</p>
+<ul>
+<li><code>b</code>是二进制模式的意思，<code>b</code>只是在<code>Windows</code>有效，在<code>Linux</code>用<code>r</code>和<code>rb</code>的结果是一样的</li>
+<li><code>Unix</code>和<code>Linux</code>下所有的文本文件行都是<code>\n</code>结尾，而<code>Windows</code>所有的文本文件行都是<code>\r\n</code>结尾</li>
+<li>在<code>Windows</code>平台下，以“文本”方式打开文件，不加<code>b</code>：</li>
+<li>当读取文件的时候，系统会将所有的 &ldquo;<code>\r\n</code>&rdquo; 转换成 &ldquo;<code>\n</code>&rdquo;</li>
+<li>当写入文件的时候，系统会将 &ldquo;<code>\n</code>&rdquo; 转换成 &ldquo;<code>\r\n</code>&rdquo; 写入</li>
+<li>以&quot;二进制&quot;方式打开文件，则读写都不会进行这样的转换</li>
+<li>在<code>Unix</code>/<code>Linux</code>平台下，“文本”与“二进制”模式没有区别，&quot;<code>\r\n</code>&quot; 作为两个字符原样输入输出</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">FILE</span> <span class="o">*</span><span class="n">fp</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// &#34;\\&#34;这样的路径形式，只能在windows使用
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// &#34;/&#34;这样的路径形式，windows和linux平台下都可用，建议使用这种
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="c1">// 路径可以是相对路径，也可是绝对路径
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="n">fp</span> <span class="o">=</span> <span class="nf">fopen</span><span class="p">(</span><span class="s">&#34;../test&#34;</span><span class="p">,</span> <span class="s">&#34;w&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//fp = fopen(&#34;..\\test&#34;, &#34;w&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">fp</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="c1">//返回空，说明打开失败
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="c1">//perror()是标准出错打印函数，能打印调用库函数出错原因
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>		<span class="nf">perror</span><span class="p">(</span><span class="s">&#34;open&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		<span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="23-文件的关闭" class="headerLink">
+    <a href="#23-%e6%96%87%e4%bb%b6%e7%9a%84%e5%85%b3%e9%97%ad" class="header-mark"></a>2.3 文件的关闭</h4><p>任何文件在使用后应该关闭：</p>
+<ul>
+<li>打开的文件会占用内存资源，如果总是打开不关闭，会消耗很多内存</li>
+<li>一个进程同时打开的文件数是有限制的，超过最大同时打开文件数，再次调用<code>fopen</code>打开文件会失败</li>
+<li>如果没有明确的调用<code>fclose</code>关闭打开的文件，那么程序在退出的时候，操作系统会统一关闭。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">fclose</span><span class="p">(</span><span class="n">FILE</span> <span class="o">*</span> <span class="n">stream</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="err">功能：关闭先前</span><span class="n">fopen</span><span class="p">()</span><span class="err">打开的文件。此动作让缓冲区的数据写入文件中，并释放系统所提供的文件资源。</span>
+</span></span><span class="line"><span class="cl"><span class="err">参数：</span>
+</span></span><span class="line"><span class="cl">	<span class="n">stream</span><span class="err">：文件指针</span>
+</span></span><span class="line"><span class="cl"><span class="err">返回值：</span>
+</span></span><span class="line"><span class="cl">	<span class="err">成功：</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl">	<span class="err">失败：</span><span class="o">-</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="n">FILE</span> <span class="o">*</span> <span class="n">fp</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">fp</span> <span class="o">=</span> <span class="nf">fopen</span><span class="p">(</span><span class="s">&#34;abc.txt&#34;</span><span class="p">,</span> <span class="s">&#34;r&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">fclose</span><span class="p">(</span><span class="n">fp</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="3-文件的顺序读写" class="headerLink">
+    <a href="#3-%e6%96%87%e4%bb%b6%e7%9a%84%e9%a1%ba%e5%ba%8f%e8%af%bb%e5%86%99" class="header-mark"></a>3 、文件的顺序读写</h3><h4 id="31-按照字符读写文件fgetcfputc" class="headerLink">
+    <a href="#31-%e6%8c%89%e7%85%a7%e5%ad%97%e7%ac%a6%e8%af%bb%e5%86%99%e6%96%87%e4%bb%b6fgetcfputc" class="header-mark"></a>3.1 按照字符读写文件<code>fgetc</code>、<code>fputc</code></h4><h5 id="311写文件" class="headerLink">
+    <a href="#311%e5%86%99%e6%96%87%e4%bb%b6" class="header-mark"></a>3.1.1写文件</h5><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">fputc</span><span class="p">(</span><span class="kt">int</span> <span class="n">ch</span><span class="p">,</span> <span class="n">FILE</span> <span class="o">*</span> <span class="n">stream</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="err">功能：将</span><span class="n">ch转换为unsigned</span> <span class="n">char后写入stream指定的文件中</span>
+</span></span><span class="line"><span class="cl"><span class="err">参数：</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ch</span><span class="err">：需要写入文件的字符</span>
+</span></span><span class="line"><span class="cl">	<span class="n">stream</span><span class="err">：文件指针</span>
+</span></span><span class="line"><span class="cl"><span class="err">返回值：</span>
+</span></span><span class="line"><span class="cl">	<span class="err">成功：成功写入文件的字符</span>
+</span></span><span class="line"><span class="cl">	<span class="err">失败：返回</span><span class="o">-</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">char</span> <span class="n">buf</span><span class="p">[]</span> <span class="o">=</span> <span class="s">&#34;this is a test for fputc&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="nf">strlen</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">//往文件fp写入字符buf[i]
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>	<span class="kt">int</span> <span class="n">ch</span> <span class="o">=</span> <span class="nf">fputc</span><span class="p">(</span><span class="n">buf</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">fp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;ch = %c</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">ch</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="312文件结尾" class="headerLink">
+    <a href="#312%e6%96%87%e4%bb%b6%e7%bb%93%e5%b0%be" class="header-mark"></a>3.1.2文件结尾</h5><p>在C语言中，<code>EOF</code>表示文件结束符(end of file)。在<code>while</code>循环中以<code>EOF</code>作为文件结束标志，这种以<code>EOF</code>作为文件结束标志的文件，必须是文本文件。在文本文件中，数据都是以字符的<code>ASCII</code>代码值的形式存放。我们知道，<code>ASCII</code>代码值的范围是0~127，不可能出现-1，因此可以用<code>EOF</code>作为文件结束标志。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#define EOF    (-1)
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>当把数据以二进制形式存放到文件中时，就会有-1值的出现，因此不能采用<code>EOF</code>作为二进制文件的结束标志。为解决这一个问题，ANSI C提供一个<code>feof</code>函数，用来判断文件是否结束。<code>feof</code>函数既可用以判断二进制文件又可用以判断文本文件。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">feof</span><span class="p">(</span><span class="n">FILE</span> <span class="o">*</span> <span class="n">stream</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="err">功能：检测是否读取到了文件结尾。判断的是最后一次“读操作的内容”，不是当前位置内容</span><span class="p">(</span><span class="err">上一个内容</span><span class="p">)</span><span class="err">。</span>
+</span></span><span class="line"><span class="cl"><span class="err">参数：</span>
+</span></span><span class="line"><span class="cl">	<span class="n">stream</span><span class="err">：文件指针</span>
+</span></span><span class="line"><span class="cl"><span class="err">返回值：</span>
+</span></span><span class="line"><span class="cl">	<span class="err">非</span><span class="mi">0</span><span class="err">值：已经到文件结尾</span>
+</span></span><span class="line"><span class="cl">	<span class="mi">0</span><span class="err">：没有到文件结尾</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="313读文件" class="headerLink">
+    <a href="#313%e8%af%bb%e6%96%87%e4%bb%b6" class="header-mark"></a>3.1.3读文件</h5><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">fgetc</span><span class="p">(</span><span class="n">FILE</span> <span class="o">*</span> <span class="n">stream</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="err">功能：从</span><span class="n">stream指定的文件中读取一个字符</span>
+</span></span><span class="line"><span class="cl"><span class="err">参数：</span>
+</span></span><span class="line"><span class="cl">	<span class="n">stream</span><span class="err">：文件指针</span>
+</span></span><span class="line"><span class="cl"><span class="err">返回值：</span>
+</span></span><span class="line"><span class="cl">	<span class="err">成功：返回读取到的字符</span>
+</span></span><span class="line"><span class="cl">	<span class="err">失败：</span><span class="o">-</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">char</span> <span class="n">ch</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#if 0</span><span class="c">
+</span></span></span><span class="line"><span class="cl"><span class="c">while ((ch = fgetc(fp)) != EOF)
+</span></span></span><span class="line"><span class="cl"><span class="c">{
+</span></span></span><span class="line"><span class="cl"><span class="c">	printf(&#34;%c&#34;, ch);
+</span></span></span><span class="line"><span class="cl"><span class="c">}
+</span></span></span><span class="line"><span class="cl"><span class="c">printf(&#34;\n&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="c"></span><span class="cp">#endif
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="nf">feof</span><span class="p">(</span><span class="n">fp</span><span class="p">))</span> <span class="c1">//文件没有结束，则执行循环
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ch</span> <span class="o">=</span> <span class="nf">fgetc</span><span class="p">(</span><span class="n">fp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%c&#34;</span><span class="p">,</span> <span class="n">ch</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="nf">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="314拷贝文件" class="headerLink">
+    <a href="#314%e6%8b%b7%e8%b4%9d%e6%96%87%e4%bb%b6" class="header-mark"></a>3.1.4拷贝文件</h5><p><figure><img
+        
+        loading="lazy"
+        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333306.png"
+        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333306.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333306.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333306.png 2x"
+        sizes="auto"
+        alt="image-20231126155201392"
+        title="image-20231126155201392" ></figure></p>
+<h4 id="32按照行读写文件fgetsfputs" class="headerLink">
+    <a href="#32%e6%8c%89%e7%85%a7%e8%a1%8c%e8%af%bb%e5%86%99%e6%96%87%e4%bb%b6fgetsfputs" class="header-mark"></a>3.2按照行读写文件<code>fgets</code>、<code>fputs</code></h4><h5 id="321写文件" class="headerLink">
+    <a href="#321%e5%86%99%e6%96%87%e4%bb%b6" class="header-mark"></a>3.2.1写文件</h5><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">fputs</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">str</span><span class="p">,</span> <span class="n">FILE</span> <span class="o">*</span> <span class="n">stream</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="err">功能：将</span><span class="n">str所指定的字符串写入到stream指定的文件中</span><span class="err">，字符串结束符</span> <span class="sc">&#39;\0&#39;</span>  <span class="err">不写入文件。</span> 
+</span></span><span class="line"><span class="cl"><span class="err">参数：</span>
+</span></span><span class="line"><span class="cl">	<span class="n">str</span><span class="err">：字符串</span>
+</span></span><span class="line"><span class="cl">	<span class="n">stream</span><span class="err">：文件指针</span>
+</span></span><span class="line"><span class="cl"><span class="err">返回值：</span>
+</span></span><span class="line"><span class="cl">	<span class="err">成功：</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl">	<span class="err">失败：</span><span class="o">-</span><span class="mi">1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">char</span> <span class="o">*</span><span class="n">buf</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&#34;123456</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="s">&#34;bbbbbbbbbb</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="s">&#34;ccccccccccc</span><span class="se">\n</span><span class="s">&#34;</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="nf">fputs</span><span class="p">(</span><span class="n">buf</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">fp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;len = %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">len</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="322读文件" class="headerLink">
+    <a href="#322%e8%af%bb%e6%96%87%e4%bb%b6" class="header-mark"></a>3.2.2读文件</h5><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">char</span> <span class="o">*</span> <span class="nf">fgets</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span> <span class="n">str</span><span class="p">,</span> <span class="kt">int</span> <span class="n">size</span><span class="p">,</span> <span class="n">FILE</span> <span class="o">*</span> <span class="n">stream</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="err">功能：从</span><span class="n">stream指定的文件内读入字符</span><span class="err">，保存到</span><span class="n">str所指定的内存空间</span><span class="err">，直到出现换行字符、读到文件结尾或是已读了</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="err">个字符为止，最后会自动加上字符</span> <span class="sc">&#39;\0&#39;</span> <span class="err">作为字符串结束。</span>
+</span></span><span class="line"><span class="cl"><span class="err">参数：</span>
+</span></span><span class="line"><span class="cl">	<span class="n">str</span><span class="err">：字符串</span>
+</span></span><span class="line"><span class="cl">	<span class="n">size</span><span class="err">：指定最大读取字符串的长度（</span><span class="n">size</span> <span class="o">-</span> <span class="mi">1</span><span class="err">）</span>
+</span></span><span class="line"><span class="cl">	<span class="n">stream</span><span class="err">：文件指针</span>
+</span></span><span class="line"><span class="cl"><span class="err">返回值：</span>
+</span></span><span class="line"><span class="cl">	<span class="err">成功：成功读取的字符串</span>
+</span></span><span class="line"><span class="cl">	<span class="err">读到文件尾或出错：</span> <span class="nb">NULL</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">char</span> <span class="n">buf</span><span class="p">[</span><span class="mi">100</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="nf">feof</span><span class="p">(</span><span class="n">fp</span><span class="p">))</span> <span class="c1">//文件没有结束
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">memset</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buf</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">char</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="nf">fgets</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">buf</span><span class="p">),</span> <span class="n">fp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;buf = %s&#34;</span><span class="p">,</span> <span class="n">buf</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="323强化四则运算" class="headerLink">
+    <a href="#323%e5%bc%ba%e5%8c%96%e5%9b%9b%e5%88%99%e8%bf%90%e7%ae%97" class="header-mark"></a>3.2.3强化四则运算</h5><p><figure><img
+        
+        loading="lazy"
+        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333439.png"
+        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333439.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333439.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333439.png 2x"
+        sizes="auto"
+        alt="image-20231126175237555"
+        title="image-20231126175237555" ></figure></p>
+<h4 id="33按照格式化文件fprintffscanf" class="headerLink">
+    <a href="#33%e6%8c%89%e7%85%a7%e6%a0%bc%e5%bc%8f%e5%8c%96%e6%96%87%e4%bb%b6fprintffscanf" class="header-mark"></a>3.3按照格式化文件fprintf、fscanf</h4><h5 id="331写文件" class="headerLink">
+    <a href="#331%e5%86%99%e6%96%87%e4%bb%b6" class="header-mark"></a>3.3.1写文件</h5><p><figure><img
+        
+        loading="lazy"
+        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333368.png"
+        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333368.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333368.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333368.png 2x"
+        sizes="auto"
+        alt="image-20231127182345127"
+        title="image-20231127182345127" ></figure></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">fprintf</span><span class="p">(</span><span class="n">FILE</span> <span class="o">*</span> <span class="n">stream</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">format</span><span class="p">,</span> <span class="p">...);</span>
+</span></span><span class="line"><span class="cl"><span class="err">功能：根据参数</span><span class="n">format字符串来转换并格式化数据</span><span class="err">，然后将结果输出到</span><span class="n">stream指定的文件中</span><span class="err">，指定出现字符串结束符</span> <span class="sc">&#39;\0&#39;</span>  <span class="err">为止。</span>
+</span></span><span class="line"><span class="cl"><span class="err">参数：</span>
+</span></span><span class="line"><span class="cl">	<span class="n">stream</span><span class="err">：已经打开的文件</span>
+</span></span><span class="line"><span class="cl">	<span class="n">format</span><span class="err">：字符串格式，用法和</span><span class="n">printf</span><span class="p">()</span><span class="err">一样</span>
+</span></span><span class="line"><span class="cl"><span class="err">返回值：</span>
+</span></span><span class="line"><span class="cl">	<span class="err">成功：实际写入文件的字符个数</span>
+</span></span><span class="line"><span class="cl">	<span class="err">失败：</span><span class="o">-</span><span class="mi">1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="nf">fprintf</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="s">&#34;%d %d %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="332读文件" class="headerLink">
+    <a href="#332%e8%af%bb%e6%96%87%e4%bb%b6" class="header-mark"></a>3.3.2读文件</h5><p><figure><img
+        
+        loading="lazy"
+        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333355.png"
+        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333355.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333355.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333355.png 2x"
+        sizes="auto"
+        alt="image-20231127182921182"
+        title="image-20231127182921182" ></figure></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">fscanf</span><span class="p">(</span><span class="n">FILE</span> <span class="o">*</span> <span class="n">stream</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">format</span><span class="p">,</span> <span class="p">...);</span>
+</span></span><span class="line"><span class="cl"><span class="err">功能：从</span><span class="n">stream指定的文件读取字符串</span><span class="err">，并根据参数</span><span class="n">format字符串来转换并格式化数据</span><span class="err">。</span>
+</span></span><span class="line"><span class="cl"><span class="err">参数：</span>
+</span></span><span class="line"><span class="cl">	<span class="n">stream</span><span class="err">：已经打开的文件</span>
+</span></span><span class="line"><span class="cl">	<span class="n">format</span><span class="err">：字符串格式，用法和</span><span class="n">scanf</span><span class="p">()</span><span class="err">一样</span>
+</span></span><span class="line"><span class="cl"><span class="err">返回值：</span>
+</span></span><span class="line"><span class="cl">	<span class="err">成功：参数数目，成功转换的值的个数</span>
+</span></span><span class="line"><span class="cl">	<span class="err">失败：</span> <span class="o">-</span> <span class="mi">1</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nf">fscanf</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="s">&#34;%d %d %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">b</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">c</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nf">printf</span><span class="p">(</span><span class="s">&#34;a = %d, b = %d, c = %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="34按照块读写文件freadfwrite" class="headerLink">
+    <a href="#34%e6%8c%89%e7%85%a7%e5%9d%97%e8%af%bb%e5%86%99%e6%96%87%e4%bb%b6freadfwrite" class="header-mark"></a>3.4按照块读写文件fread、fwrite</h4><h5 id="341写文件" class="headerLink">
+    <a href="#341%e5%86%99%e6%96%87%e4%bb%b6" class="header-mark"></a>3.4.1写文件</h5><p><figure><img
+        
+        loading="lazy"
+        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333738.png"
+        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333738.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333738.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333738.png 2x"
+        sizes="auto"
+        alt="image-20231127184758727"
+        title="image-20231127184758727" ></figure></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">size_t</span> <span class="nf">fwrite</span><span class="p">(</span><span class="k">const</span> <span class="kt">void</span> <span class="o">*</span><span class="n">ptr</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">size</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">nmemb</span><span class="p">,</span> <span class="n">FILE</span> <span class="o">*</span><span class="n">stream</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="err">功能：以数据块的方式给文件写入内容</span>
+</span></span><span class="line"><span class="cl"><span class="err">参数：</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ptr</span><span class="err">：准备写入文件数据的地址</span>
+</span></span><span class="line"><span class="cl">	<span class="n">size</span><span class="err">：</span> <span class="kt">size_t</span> <span class="err">为</span> <span class="kt">unsigned</span> <span class="n">int类型</span><span class="err">，此参数指定写入文件内容的块数据大小</span>
+</span></span><span class="line"><span class="cl">	<span class="n">nmemb</span><span class="err">：写入文件的块数，写入文件数据总大小为：</span><span class="n">size</span> <span class="o">*</span> <span class="n">nmemb</span>
+</span></span><span class="line"><span class="cl">	<span class="n">stream</span><span class="err">：已经打开的文件指针</span>
+</span></span><span class="line"><span class="cl"><span class="err">返回值：</span>
+</span></span><span class="line"><span class="cl">	<span class="err">成功：实际成功写入文件数据的块数目，此值和</span> <span class="n">nmemb</span> <span class="err">相等</span>
+</span></span><span class="line"><span class="cl">	<span class="err">失败：</span><span class="mi">0</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">struct</span> <span class="n">Stu</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">char</span> <span class="n">name</span><span class="p">[</span><span class="mi">50</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">id</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span><span class="n">Stu</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Stu</span> <span class="n">s</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">sprintf</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">name</span><span class="p">,</span> <span class="s">&#34;stu%d%d%d&#34;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">id</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="nf">fwrite</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">Stu</span><span class="p">),</span> <span class="mi">3</span><span class="p">,</span> <span class="n">fp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nf">printf</span><span class="p">(</span><span class="s">&#34;ret = %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">ret</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="342读文件" class="headerLink">
+    <a href="#342%e8%af%bb%e6%96%87%e4%bb%b6" class="header-mark"></a>3.4.2读文件</h5><p><figure><img
+        
+        loading="lazy"
+        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333780.png"
+        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333780.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333780.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333780.png 2x"
+        sizes="auto"
+        alt="image-20231205193949818"
+        title="image-20231205193949818" ></figure></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">size_t</span> <span class="nf">fread</span><span class="p">(</span><span class="kt">void</span> <span class="o">*</span><span class="n">ptr</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">size</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">nmemb</span><span class="p">,</span> <span class="n">FILE</span> <span class="o">*</span><span class="n">stream</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="err">功能：以数据块的方式从文件中读取内容</span>
+</span></span><span class="line"><span class="cl"><span class="err">参数：</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ptr</span><span class="err">：存放读取出来数据的内存空间</span>
+</span></span><span class="line"><span class="cl">	<span class="n">size</span><span class="err">：</span> <span class="kt">size_t</span> <span class="err">为</span> <span class="kt">unsigned</span> <span class="n">int类型</span><span class="err">，此参数指定读取文件内容的块数据大小</span>
+</span></span><span class="line"><span class="cl">	<span class="n">nmemb</span><span class="err">：读取文件的块数，读取文件数据总大小为：</span><span class="n">size</span> <span class="o">*</span> <span class="n">nmemb</span>
+</span></span><span class="line"><span class="cl">	<span class="n">stream</span><span class="err">：已经打开的文件指针</span>
+</span></span><span class="line"><span class="cl">    <span class="err">返回值：</span>
+</span></span><span class="line"><span class="cl">	<span class="err">成功：实际成功读取到内容的块数，如果此值比</span><span class="n">nmemb小</span><span class="err">，但大于</span><span class="mi">0</span><span class="err">，说明读到文件的结尾。</span>
+</span></span><span class="line"><span class="cl">	<span class="err">失败：</span><span class="mi">0</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>fread</code> 是 C 语言标准库中的一个函数，用于从文件中读取二进制数据。它的原型如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cCopy code
+</span></span><span class="line"><span class="cl">size_t fread(void *ptr, size_t size, size_t count, FILE *stream);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个函数的作用是从指定的文件流 <code>stream</code> 中读取数据，将读取的数据存储到 <code>ptr</code> 指向的内存块中。它的参数含义如下：</p>
+<ul>
+<li><code>ptr</code>：指向存储读取数据的内存块的指针。</li>
+<li><code>size</code>：每个数据项的字节数。</li>
+<li><code>count</code>：要读取的数据项的数量。</li>
+<li><code>stream</code>：文件流指针，指定要读取数据的文件。</li>
+</ul>
+<p><code>fread</code> 函数返回实际读取的数据项的数量，如果发生错误或文件结束，返回值可能小于 <code>count</code>。</p>
+<p>下面是一些关于 <code>fread</code> 函数的详细说明：</p>
+<ol>
+<li><strong>数据读取</strong>：<code>fread</code> 从文件中读取数据，并存储到 <code>ptr</code> 指向的内存块中。它按照每个数据项的字节数和数量来读取数据。</li>
+<li><strong>文件指针位置</strong>：每次调用 <code>fread</code> 后，文件指针会向前移动，移动的字节数等于读取的字节数。这意味着多次调用 <code>fread</code> 会逐渐将文件指针移动到文件的末尾。</li>
+<li><strong>返回值</strong>：<code>fread</code> 返回实际读取的数据项的数量。如果返回值小于 <code>count</code>，可能是因为读取到文件末尾或发生了错误。</li>
+<li><strong>结构体读取</strong>：可以使用 <code>fread</code> 一次性读取整个结构体的内容。这对于从文件中读取二进制数据结构非常有用。</li>
+</ol>
+<p>下面是一个简单的示例，演示如何使用 <code>fread</code> 从文件中读取整数数组：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">cCopy</span> <span class="n">code</span><span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">stdio</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">FILE</span><span class="o">*</span> <span class="n">fp</span> <span class="o">=</span> <span class="nf">fopen</span><span class="p">(</span><span class="s">&#34;data.bin&#34;</span><span class="p">,</span> <span class="s">&#34;rb&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">fp</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;Error opening file&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">data</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">size_t</span> <span class="n">elements_read</span> <span class="o">=</span> <span class="nf">fread</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">int</span><span class="p">),</span> <span class="mi">5</span><span class="p">,</span> <span class="n">fp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nf">fclose</span><span class="p">(</span><span class="n">fp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Read %zu elements: &#34;</span><span class="p">,</span> <span class="n">elements_read</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">elements_read</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%d &#34;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在这个例子中，我们打开一个二进制文件（使用 <code>&quot;rb&quot;</code> 模式），并尝试读取一个包含 5 个整数的数组。<code>fread</code> 函数会读取整个数组的内容，然后我们打印实际读取的元素数量和数组的内容。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">struct</span> <span class="n">Stu</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">char</span> <span class="n">name</span><span class="p">[</span><span class="mi">50</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">id</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span><span class="n">Stu</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Stu</span> <span class="n">s</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="nf">fread</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">Stu</span><span class="p">),</span> <span class="mi">3</span><span class="p">,</span> <span class="n">fp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nf">printf</span><span class="p">(</span><span class="s">&#34;ret = %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">ret</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;s = %s, %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">name</span><span class="p">,</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="4文件的随机读写" class="headerLink">
+    <a href="#4%e6%96%87%e4%bb%b6%e7%9a%84%e9%9a%8f%e6%9c%ba%e8%af%bb%e5%86%99" class="header-mark"></a>4、文件的随机读写</h3><h4 id="41-fseek" class="headerLink">
+    <a href="#41-fseek" class="header-mark"></a>4.1 fseek</h4><p><code>fseek</code> 是 C 语言标准库中的一个函数，用于在文件流中移动文件指针的位置。这个函数允许你在文件中的任意位置进行读写操作。它的原型如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">cCopy code
+</span></span><span class="line"><span class="cl">int fseek(FILE *stream, long offset, int whence);
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个函数的参数含义如下：</p>
+<ul>
+<li>
+<p><code>stream</code>：文件流指针，指定要操作的文件。</p>
+</li>
+<li>
+<p><code>offset</code>：移动的字节数，可以是正数、负数或零。</p>
+</li>
+<li>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">whence
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>：定位的方式，可以取以下值：</p>
+<ul>
+<li><code>SEEK_SET</code>：从文件的开头开始计算偏移（offset）。</li>
+<li><code>SEEK_CUR</code>：从当前位置开始计算偏移。</li>
+<li><code>SEEK_END</code>：从文件的末尾开始计算偏移。</li>
+</ul>
+</li>
+</ul>
+<p><code>fseek</code> 返回零表示成功，非零表示失败。失败可能是因为文件指针越界或发生了其他错误。</p>
+<p>下面是一些关于 <code>fseek</code> 函数的详细说明：</p>
+<ol>
+<li><strong>文件指针位置</strong>：<code>fseek</code> 允许你在文件中移动文件指针的位置。通过设置 <code>offset</code> 和 <code>whence</code> 参数，你可以将文件指针移动到文件的任何位置。</li>
+<li><strong>文件末尾定位</strong>：如果你想将文件指针移动到文件的末尾，可以使用 <code>fseek(fp, 0, SEEK_END);</code>。这是一个常见的用法，特别是当你需要获取文件大小时。</li>
+<li><strong>文件指针越界</strong>：在使用 <code>fseek</code> 时，要注意不要将文件指针移动到文件末尾之后。这可能导致未定义的行为。</li>
+</ol>
+<p>下面是一个简单的示例，演示如何使用 <code>fseek</code> 在文件中定位并读取数据：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">cCopy</span> <span class="n">code</span><span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">stdio</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">FILE</span><span class="o">*</span> <span class="n">fp</span> <span class="o">=</span> <span class="nf">fopen</span><span class="p">(</span><span class="s">&#34;data.txt&#34;</span><span class="p">,</span> <span class="s">&#34;r&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">fp</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;Error opening file&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 将文件指针移动到文件的第 10 个字节处
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nf">fseek</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">SEEK_SET</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;Error seeking in file&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">fclose</span><span class="p">(</span><span class="n">fp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 读取并打印文件中的剩余内容
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">ch</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">((</span><span class="n">ch</span> <span class="o">=</span> <span class="nf">fgetc</span><span class="p">(</span><span class="n">fp</span><span class="p">))</span> <span class="o">!=</span> <span class="n">EOF</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">putchar</span><span class="p">(</span><span class="n">ch</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nf">fclose</span><span class="p">(</span><span class="n">fp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>我们打开一个文本文件，将文件指针移动到文件的第 10 个字节处，然后读取并打印文件中的剩余内容。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="nf">fseek</span><span class="p">(</span><span class="n">FILE</span> <span class="o">*</span><span class="n">stream</span><span class="p">,</span> <span class="kt">long</span> <span class="n">offset</span><span class="p">,</span> <span class="kt">int</span> <span class="n">whence</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="err">功能：移动文件流（文件光标）的读写位置。</span>
+</span></span><span class="line"><span class="cl"><span class="err">参数：</span>
+</span></span><span class="line"><span class="cl">	<span class="n">stream</span><span class="err">：已经打开的文件指针</span>
+</span></span><span class="line"><span class="cl">	<span class="n">offset</span><span class="err">：根据</span><span class="n">whence来移动的位移数</span><span class="err">（偏移量），可以是正数，也可以负数，如果正数，则相对于</span><span class="n">whence往右移动</span><span class="err">，如果是负数，则相对于</span><span class="n">whence往左移动</span><span class="err">。如果向前移动的字节数超过了文件开头则出错返回，如果向后移动的字节数超过了文件末尾，再次写入时将增大文件尺寸。</span>
+</span></span><span class="line"><span class="cl">	<span class="n">whence</span><span class="err">：其取值如下：</span>
+</span></span><span class="line"><span class="cl">		<span class="n">SEEK_SET</span><span class="err">：从文件开头移动</span><span class="n">offset个字节</span>
+</span></span><span class="line"><span class="cl">		<span class="n">SEEK_CUR</span><span class="err">：从当前位置移动</span><span class="n">offset个字节</span>
+</span></span><span class="line"><span class="cl">		<span class="n">SEEK_END</span><span class="err">：从文件末尾移动</span><span class="n">offset个字节</span>
+</span></span><span class="line"><span class="cl">		<span class="err">返回值：</span>
+</span></span><span class="line"><span class="cl">	<span class="err">成功：</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl">	<span class="err">失败：</span><span class="o">-</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">long</span> <span class="nf">ftell</span><span class="p">(</span><span class="n">FILE</span> <span class="o">*</span><span class="n">stream</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="err">功能：获取文件流（文件光标）的读写位置。</span>
+</span></span><span class="line"><span class="cl"><span class="err">参数：</span>
+</span></span><span class="line"><span class="cl">	<span class="n">stream</span><span class="err">：已经打开的文件指针</span>
+</span></span><span class="line"><span class="cl"><span class="err">返回值：</span>
+</span></span><span class="line"><span class="cl">	<span class="err">成功：当前文件流（文件光标）的读写位置</span>
+</span></span><span class="line"><span class="cl">	<span class="err">失败：</span><span class="o">-</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">void</span> <span class="nf">rewind</span><span class="p">(</span><span class="n">FILE</span> <span class="o">*</span><span class="n">stream</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="err">功能：把文件流（文件光标）的读写位置移动到文件开头。</span>
+</span></span><span class="line"><span class="cl"><span class="err">参数：</span>
+</span></span><span class="line"><span class="cl">	<span class="n">stream</span><span class="err">：已经打开的文件指针</span>
+</span></span><span class="line"><span class="cl"><span class="err">返回值：</span>
+</span></span><span class="line"><span class="cl">	<span class="err">无返回值</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">struct</span> <span class="n">Stu</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">char</span> <span class="n">name</span><span class="p">[</span><span class="mi">50</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">id</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span><span class="n">Stu</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//假如已经往文件写入3个结构体
+</span></span></span><span class="line"><span class="cl"><span class="c1">//fwrite(s, sizeof(Stu), 3, fp);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="n">Stu</span> <span class="n">s</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="n">Stu</span> <span class="n">tmp</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">ret</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//文件光标读写位置从开头往右移动2个结构体的位置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">fseek</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">Stu</span><span class="p">),</span> <span class="n">SEEK_SET</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//读第3个结构体
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">ret</span> <span class="o">=</span> <span class="nf">fread</span><span class="p">(</span><span class="o">&amp;</span><span class="n">tmp</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">Stu</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">fp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;[tmp]%s, %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">tmp</span><span class="p">.</span><span class="n">name</span><span class="p">,</span> <span class="n">tmp</span><span class="p">.</span><span class="n">id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//把文件光标移动到文件开头
+</span></span></span><span class="line"><span class="cl"><span class="c1">//fseek(fp, 0, SEEK_SET);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nf">rewind</span><span class="p">(</span><span class="n">fp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">ret</span> <span class="o">=</span> <span class="nf">fread</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">Stu</span><span class="p">),</span> <span class="mi">3</span><span class="p">,</span> <span class="n">fp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nf">printf</span><span class="p">(</span><span class="s">&#34;ret = %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">ret</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;s === %s, %d</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">name</span><span class="p">,</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><img
+        
+        loading="lazy"
+        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333805.png"
+        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333805.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333805.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312333805.png 2x"
+        sizes="auto"
+        alt="image-20231205200027684"
+        title="image-20231205200027684" ></figure></p>
+<h4 id="42-ftell" class="headerLink">
+    <a href="#42-ftell" class="header-mark"></a>4.2 ftell</h4><p><code>ftell</code> 是 C 语言标准库中的一个函数，用于获取文件指针的当前位置。这个函数返回当前文件指针相对于文件起始位置的字节数。</p>
+<p><code>ftell</code> 函数的原型如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">cCopy</span> <span class="n">code</span>
+</span></span><span class="line"><span class="cl"><span class="kt">long</span> <span class="nf">ftell</span><span class="p">(</span><span class="n">FILE</span> <span class="o">*</span><span class="n">stream</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个函数的参数是一个文件流指针 <code>stream</code>，指定要获取位置的文件。返回值是 <code>long</code> 类型，表示文件指针的当前位置。如果发生错误，<code>ftell</code> 返回 -1L。</p>
+<p>以下是一些关于 <code>ftell</code> 函数的详细说明：</p>
+<ol>
+<li><strong>文件指针位置</strong>：<code>ftell</code> 用于获取文件指针的当前位置，返回值表示文件指针相对于文件起始位置的字节数。</li>
+<li><strong><code>long</code> 类型</strong>：返回值的数据类型是 <code>long</code>，因为文件的大小可能大于 <code>int</code> 能够表示的范围。</li>
+<li><strong><code>fseek</code> 和 <code>ftell</code> 的组合</strong>：通常，<code>fseek</code> 和 <code>ftell</code> 一起使用，用于定位和获取文件指针的位置。<code>fseek</code> 用于移动文件指针，而 <code>ftell</code> 用于获取当前位置。</li>
+</ol>
+<p>下面是一个简单的示例，演示如何使用 <code>ftell</code> 函数获取文件指针的当前位置：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">cCopy</span> <span class="n">code</span><span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">stdio</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">FILE</span><span class="o">*</span> <span class="n">fp</span> <span class="o">=</span> <span class="nf">fopen</span><span class="p">(</span><span class="s">&#34;data.txt&#34;</span><span class="p">,</span> <span class="s">&#34;r&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">fp</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;Error opening file&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 使用 ftell 获取当前文件指针位置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">long</span> <span class="n">position</span> <span class="o">=</span> <span class="nf">ftell</span><span class="p">(</span><span class="n">fp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">position</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1L</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;Error getting file position&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">fclose</span><span class="p">(</span><span class="n">fp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Current file position: %ld</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">position</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nf">fclose</span><span class="p">(</span><span class="n">fp</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在这个例子中，我们打开一个文本文件，使用 <code>ftell</code> 获取文件指针的当前位置，然后打印该位置。请注意，<code>ftell</code> 返回的值在文件指针移动后仍然有效。</p>
+<h3 id="5获取文件状态" class="headerLink">
+    <a href="#5%e8%8e%b7%e5%8f%96%e6%96%87%e4%bb%b6%e7%8a%b6%e6%80%81" class="header-mark"></a>5、获取文件状态</h3><h4 id="51stat" class="headerLink">
+    <a href="#51stat" class="header-mark"></a>5.1stat</h4><p><code>stat</code> 函数是 C 语言标准库中提供的一个用于获取文件或文件系统信息的函数。它可以获取指定文件的状态信息，并将这些信息存储在一个结构体中。在 POSIX 标准中，<code>stat</code> 函数的原型为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">cCopy</span> <span class="n">code</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">stat</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">path</span><span class="p">,</span> <span class="k">struct</span> <span class="n">stat</span> <span class="o">*</span><span class="n">buf</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中，<code>path</code> 是文件路径的字符串，<code>buf</code> 是一个指向 <code>struct stat</code> 结构体的指针，用于存储文件状态信息。<code>stat</code> 函数的返回值为 0 表示成功，-1 表示失败。</p>
+<p>以下是关于 <code>stat</code> 函数的详细说明：</p>
+<ol>
+<li><strong>结构体 <code>struct stat</code></strong>：
+<ul>
+<li><code>struct stat</code> 结构体包含了文件的多种属性，例如文件大小、最后修改时间、权限等。</li>
+<li>结构体定义在头文件 <code>sys/stat.h</code> 中。</li>
+</ul>
+</li>
+<li><strong>文件路径 <code>path</code></strong>：
+<ul>
+<li><code>path</code> 参数是一个表示文件路径的字符串。</li>
+<li>该字符串可以是相对路径或绝对路径。</li>
+</ul>
+</li>
+<li><strong>成功与失败</strong>：
+<ul>
+<li>如果函数调用成功，返回值为 0。</li>
+<li>如果函数调用失败，返回值为 -1，并设置全局变量 <code>errno</code> 表示错误的类型。</li>
+</ul>
+</li>
+<li><strong>文件状态信息</strong>：
+<ul>
+<li><code>struct stat</code> 结构体中的成员用于存储文件的各种信息，0例如文件大小、权限、最后访问时间等。</li>
+<li>常用的结构体成员包括：
+<ul>
+<li><code>st_size</code>：文件大小（字节数）。</li>
+<li><code>st_mode</code>：文件类型和权限。</li>
+<li><code>st_atime</code>：最后访问时间。</li>
+<li><code>st_mtime</code>：最后修改时间。</li>
+<li><code>st_ctime</code>：最后状态改变时间。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>文件类型和权限</strong>：
+<ul>
+<li>文件类型和权限信息存储在 <code>st_mode</code> 成员中。</li>
+<li>通过宏定义进行解析，例如 <code>S_ISREG(mode)</code> 判断是否是普通文件，<code>S_ISDIR(mode)</code> 判断是否是目录等。</li>
+</ul>
+</li>
+</ol>
+<p>下面是一个简单的示例，演示如何使用 <code>stat</code> 函数获取文件信息：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">cCopy</span> <span class="n">code</span><span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">stdio</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;sys/stat.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">filename</span> <span class="o">=</span> <span class="s">&#34;example.txt&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">struct</span> <span class="n">stat</span> <span class="n">file_info</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nf">stat</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">file_info</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;File size: %ld bytes</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">file_info</span><span class="p">.</span><span class="n">st_size</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;File permissions: %o</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">file_info</span><span class="p">.</span><span class="n">st_mode</span> <span class="o">&amp;</span> <span class="mo">0777</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Last access time: %ld</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">file_info</span><span class="p">.</span><span class="n">st_atime</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;Error getting file information&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在这个例子中，我们使用 <code>stat</code> 函数获取了一个文件的大小、权限和最后访问时间，并打印了这些信息。请注意，为了更好地理解文件权限，我们使用了 <code>&amp; 0777</code> 来提取权限的部分。</p>
+<h3 id="6删除和重命名文件" class="headerLink">
+    <a href="#6%e5%88%a0%e9%99%a4%e5%92%8c%e9%87%8d%e5%91%bd%e5%90%8d%e6%96%87%e4%bb%b6" class="header-mark"></a>6、删除和重命名文件</h3><p><code>remove</code> 和 <code>rename</code> 是 C 语言标准库中用于文件操作的两个函数。</p>
+<h4 id="61-remove" class="headerLink">
+    <a href="#61-remove" class="header-mark"></a>6.1 <code>remove</code></h4><p><code>remove</code> 函数用于删除指定的文件。其原型如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">cCopy</span> <span class="n">code</span>
+</span></span><span class="line"><span class="cl"><span class="ne">int</span> <span class="n">remove</span><span class="p">(</span><span class="k">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">filename</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>filename</code> 参数是一个字符串，表示要删除的文件的路径。</li>
+<li>返回值为 0 表示删除成功，-1 表示删除失败。在删除失败时，全局变量 <code>errno</code> 会被设置以指示具体的错误原因。</li>
+</ul>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">cCopy</span> <span class="n">code</span><span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">stdio</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">filename</span> <span class="o">=</span> <span class="s">&#34;example.txt&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nf">remove</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;File &#39;%s&#39; deleted successfully.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">filename</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;Error deleting file&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="62-rename-函数" class="headerLink">
+    <a href="#62-rename-%e5%87%bd%e6%95%b0" class="header-mark"></a>6.2 <code>rename</code> 函数</h4><p><code>rename</code> 函数用于更改文件的名称或移动文件。其原型如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">cCopy</span> <span class="n">code</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">rename</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">old_filename</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">new_filename</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><code>old_filename</code> 参数是一个字符串，表示要更改的文件的路径。</li>
+<li><code>new_filename</code> 参数是一个字符串，表示文件的新路径或新名称。</li>
+<li>返回值为 0 表示更名成功，-1 表示更名失败。在失败时，<code>errno</code> 会被设置以指示错误原因。</li>
+</ul>
+<p>示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">cCopy</span> <span class="n">code</span><span class="err">#</span><span class="n">include</span> <span class="o">&lt;</span><span class="n">stdio</span><span class="p">.</span><span class="n">h</span><span class="o">&gt;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">old_filename</span> <span class="o">=</span> <span class="s">&#34;old.txt&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">new_filename</span> <span class="o">=</span> <span class="s">&#34;new.txt&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nf">rename</span><span class="p">(</span><span class="n">old_filename</span><span class="p">,</span> <span class="n">new_filename</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;File &#39;%s&#39; renamed to &#39;%s&#39; successfully.</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">old_filename</span><span class="p">,</span> <span class="n">new_filename</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">perror</span><span class="p">(</span><span class="s">&#34;Error renaming file&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这两个函数在文件操作中很有用，<code>remove</code> 可用于删除文件，而 <code>rename</code> 可用于更改文件的名称或将文件移动到不同的位置。请注意，<code>rename</code> 函数也可以用于移动文件，通过将文件的新路径作为目标路径传递给 <code>rename</code>。</p>
+<h3 id="7文件缓冲区" class="headerLink">
+    <a href="#7%e6%96%87%e4%bb%b6%e7%bc%93%e5%86%b2%e5%8c%ba" class="header-mark"></a>7、文件缓冲区</h3><p>文件缓冲区是指对文件读写操作进行缓冲管理的一块内存区域。在 C 语言中，标准库提供了一套 I/O 缓冲机制，主要通过 <code>FILE</code> 结构体中的缓冲区来实现。</p>
+<h3 id="文件缓冲类型" class="headerLink">
+    <a href="#%e6%96%87%e4%bb%b6%e7%bc%93%e5%86%b2%e7%b1%bb%e5%9e%8b" class="header-mark"></a>文件缓冲类型</h3><ol>
+<li><strong>全缓冲（Fully Buffered）</strong>：
+<ul>
+<li>当文件大小超过一定阈值时，标准 I/O 库采用全缓冲，即在内存中为文件分配一个大的缓冲区，多次读写操作都在这个缓冲区中进行，减少了系统调用的次数，提高了性能。</li>
+<li><code>FILE</code> 结构体中的缓冲区通过 <code>setvbuf</code> 函数进行设置。</li>
+</ul>
+</li>
+<li><strong>行缓冲（Line Buffered）</strong>：
+<ul>
+<li>当文件是一个终端设备（例如终端或控制台）时，标准 I/O 库采用行缓冲，即每次读写操作都以换行符为界进行缓冲，或者当缓冲区满时进行缓冲。</li>
+<li>对于标准输入和标准输出，默认是行缓冲，但可以通过 <code>setvbuf</code> 函数进行更改。</li>
+</ul>
+</li>
+<li><strong>无缓冲（Unbuffered）</strong>：
+<ul>
+<li>当文件是一个字符设备（例如终端）且是单字符 I/O 操作时，标准 I/O 库采用无缓冲。</li>
+<li>无缓冲模式下，每个字符都立即进行 I/O 操作。</li>
+</ul>
+</li>
+</ol>
+<h3 id="问题与注意事项" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98%e4%b8%8e%e6%b3%a8%e6%84%8f%e4%ba%8b%e9%a1%b9" class="header-mark"></a>问题与注意事项</h3><ol>
+<li><strong>文件关闭时刷新缓冲</strong>：
+<ul>
+<li>在关闭文件之前，标准 I/O 库会尝试刷新缓冲区，将缓冲区中的内容写入文件。</li>
+</ul>
+</li>
+<li><strong>强制刷新缓冲</strong>：
+<ul>
+<li>使用 <code>fflush</code> 函数可以强制刷新文件缓冲区。</li>
+</ul>
+</li>
+<li><strong>缓冲区溢出</strong>：
+<ul>
+<li>当进行写操作时，如果缓冲区满了，或者调用 <code>fflush</code>，或者文件关闭时，都会导致缓冲区被刷新。如果数据量过大，可能导致缓冲区溢出。</li>
+</ul>
+</li>
+<li><strong>定向 I/O 函数</strong>：
+<ul>
+<li><code>fseek</code>, <code>ftell</code>, <code>rewind</code> 等定向 I/O 函数可能会影响缓冲区的状态。例如，使用 <code>fseek</code> 定位到文件中某个位置时，<code>fflush</code> 可能会被调用。</li>
+</ul>
+</li>
+<li><strong>线程安全性</strong>：
+<ul>
+<li>默认情况下，标准 I/O 操作是不线程安全的。在多线程环境中，要注意使用 <code>flockfile</code> 和 <code>funlockfile</code> 来保护对同一文件流的并发访问。</li>
+</ul>
+</li>
+<li><strong>强制关闭文件流</strong>：
+<ul>
+<li>使用 <code>fclose</code> 关闭文件时，系统会尝试刷新缓冲区。如果强制关闭程序（例如使用 <code>exit</code> 函数），则可能导致缓冲区未刷新。</li>
+</ul>
+</li>
+</ol>
+<p>总体而言，理解文件缓冲的工作机制并注意缓冲区的刷新是确保文件操作正确和高效的关键。根据应用的特定需求，可以通过 <code>setvbuf</code> 函数来调整文件缓冲类型。</p>
+</div>
+
+        
+
+
+<h2>相关内容</h2>
+<div class="related-container">
+    <div class="related-item-container">
+            <h2 class="related-title">
+                <a href="/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9Cpro/">文件操作pro</a>
+            </h2>
+        </div>
+    <div class="related-item-container">
+            <h2 class="related-title">
+                <a href="/%E7%BB%93%E6%9E%84%E4%BD%93%E5%BC%BA%E5%8C%96/">结构体强化</a>
+            </h2>
+        </div>
+    <div class="related-item-container">
+            <h2 class="related-title">
+                <a href="/%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84/">多维数组</a>
+            </h2>
+        </div>
+    <div class="related-item-container">
+            <h2 class="related-title">
+                <a href="/%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA/">内存分区</a>
+            </h2>
+        </div>
+    <div class="related-item-container">
+            <h2 class="related-title">
+                <a href="/%E6%8C%87%E9%92%88%E5%BC%BA%E5%8C%96/">指针强化</a>
+            </h2>
+        </div>
+    
+
+</div>
+
+<div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-12-31</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span><a class="link-to-mardown" href=/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/index.md target="_blank" rel="noopener noreferrer">阅读原始文档</a>
+                    </span></div>
+            <div class="post-info-share"><button title="分享到 Twitter" data-sharer="twitter" data-url="https://alphaguo.vip/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" data-title="文件操作" data-via="@guo_alpha36266" data-hashtags="C"><span class="fab fa-twitter fa-fw"></span></button><button title="分享到 Facebook" data-sharer="facebook" data-url="https://alphaguo.vip/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" data-hashtag="C"><span class="fab fa-facebook-square fa-fw"></span></button><button title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://alphaguo.vip/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" data-title="文件操作" data-web><span class="fab fa-whatsapp fa-fw"></span></button><button title="分享到 Line" data-sharer="line" data-url="https://alphaguo.vip/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" data-title="文件操作"><span data-svg-src="/lib/simple-icons/icons/line.min.svg"></span></button><button title="分享到 微博" data-sharer="weibo" data-url="https://alphaguo.vip/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" data-title="文件操作"><span class="fab fa-weibo fa-fw"></span></button><button title="分享到 Myspace" data-sharer="myspace" data-url="https://alphaguo.vip/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" data-title="文件操作" data-description=""><span data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></span></button><button title="分享到 Blogger" data-sharer="blogger" data-url="https://alphaguo.vip/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" data-title="文件操作" data-description=""><span class="fab fa-blogger fa-fw"></span></button><button title="分享到 Evernote" data-sharer="evernote" data-url="https://alphaguo.vip/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/" data-title="文件操作"><span class="fab fa-evernote fa-fw"></span></button></div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/c/">C</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/%E7%BB%93%E6%9E%84%E4%BD%93/" class="prev" rel="prev" title="结构体"><i class="fas fa-angle-left fa-fw"></i>结构体</a>
+            <a href="/%E4%BD%8E%E7%BA%A7%E5%87%BD%E6%95%B0/" class="next" rel="next" title="低级函数">低级函数<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">AlphaGuo</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+            <div class="footer-line"></div>
+            <div class="footer-line">
+            </div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="回到顶部">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div id="cookieconsent-container"></div><div class="assets"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/katex/copy-tex.min.css">
+        <noscript><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"desktop-header-typeit":"AlphaGuo Blog","mobile-header-typeit":"AlphaGuo Blog"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":50,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"sharerjs":true,"table":{"sort":true},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/lib/tablesort/tablesort.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js" defer></script><script type="text/javascript" src="/lib/katex/mhchem.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script type="text/javascript" src="/js/cookieconsent.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script></div>
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>JVAVA - 分类 - AlphaGuo Blog</title>
+        <link>https://alphaguo.vip/categories/jvava/</link>
+        <description>JVAVA - 分类 - AlphaGuo Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 31 Dec 2023 20:40:40 &#43;0800</lastBuildDate><atom:link href="https://alphaguo.vip/categories/jvava/" rel="self" type="application/rss+xml" /><item>
+    <title>SE增强版</title>
+    <link>https://alphaguo.vip/se%E5%A2%9E%E5%BC%BA%E7%89%88/</link>
+    <pubDate>Sun, 31 Dec 2023 20:40:40 &#43;0800</pubDate><author>
+                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/se%E5%A2%9E%E5%BC%BA%E7%89%88/</guid>
+    <description><![CDATA[类加载器类加载器（Class Loader）是 Java 虚拟机（JVM）的一个重要组成部分，它负责将类的字节码加载到 JVM 中，并将其转换为运行时的实例。类]]></description>
+</item></channel>
+</rss>

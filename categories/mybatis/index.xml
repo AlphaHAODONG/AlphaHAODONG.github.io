@@ -1,0 +1,13 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Mybatis - 分类 - AlphaGuo Blog</title>
+        <link>https://alphaguo.vip/categories/mybatis/</link>
+        <description>Mybatis - 分类 - AlphaGuo Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 31 Dec 2023 20:33:33 &#43;0800</lastBuildDate><atom:link href="https://alphaguo.vip/categories/mybatis/" rel="self" type="application/rss+xml" /><item>
+    <title>Mybatis的多表模型</title>
+    <link>https://alphaguo.vip/mybatis%E7%9A%84%E5%A4%9A%E8%A1%A8%E6%A8%A1%E5%9E%8B/</link>
+    <pubDate>Sun, 31 Dec 2023 20:33:33 &#43;0800</pubDate><author>
+                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/mybatis%E7%9A%84%E5%A4%9A%E8%A1%A8%E6%A8%A1%E5%9E%8B/</guid>
+    <description><![CDATA[4.2 多表模型一对一操作 一对一模型： 人和身份证，一个人只有一个身份证 步骤： 在Card类要有person属性，得到数据好封装。 返回结果集天然不带有]]></description>
+</item></channel>
+</rss>

@@ -1,0 +1,2241 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>MySql - AlphaGuo Blog</title><meta name="Description" content="关山难越"><meta property="og:title" content="MySql" />
+<meta property="og:description" content="这里边没啥好玩的，就不自己写了，直接用黑马的作业 MySQL基础今日目标： 完成MySQL的安装及登陆基本操作 能通过SQL对数据库进行CRUD 能" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://alphaguo.vip/mysql/" /><meta property="og:image" content="https://alphaguo.vip/images/favicon-16x16.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-31T19:54:20+08:00" />
+<meta property="article:modified_time" content="2023-12-31T19:54:20+08:00" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://alphaguo.vip/images/favicon-16x16.png" /><meta name="twitter:title" content="MySql"/>
+<meta name="twitter:description" content="这里边没啥好玩的，就不自己写了，直接用黑马的作业 MySQL基础今日目标： 完成MySQL的安装及登陆基本操作 能通过SQL对数据库进行CRUD 能"/>
+<meta name="twitter:site" content="@guo_alpha36266"/>
+<meta name="application-name" content="AlphaGuo">
+<meta name="apple-mobile-web-app-title" content="AlphaGuo">
+
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><meta name="twitter:creator" content="@@guo_alpha36266" /><link rel="icon" href="/images/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://alphaguo.vip/mysql/" /><link rel="next" href="https://alphaguo.vip/request-response/" />
+<link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "MySql",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://alphaguo.vip/mysql/"
+        },"genre": "posts","keywords": "SQL","wordcount":  10596 ,
+        "url": "https://alphaguo.vip/mysql/","datePublished": "2023-12-31T19:54:20+08:00","dateModified": "2023-12-31T19:54:20+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"authors": [{
+                        "@type": "Person",
+                        "name": "AlphaGuo"                    
+                    }],"description": ""
+    }
+    </script></head>
+
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme); document.documentElement.style.setProperty('color-scheme', theme === 'light' ? 'light' : 'dark'); window.theme = theme;   window.isDark = window.theme !== 'light' }
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('auto' === 'light' || 'auto' === 'dark' || 'auto' === 'black') setTheme('auto'), saveTheme('auto'); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+        window.switchThemeEventSet = new Set()
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="AlphaGuo Blog"><span id="desktop-header-typeit" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-select" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                    <select class="color-theme-select" id="theme-select-desktop" title="切换主题">
+                        <option value="light">浅色</option>
+                        <option value="dark">深色</option>
+                        <option value="black">黑色</option>
+                        <option value="auto">跟随系统</option>
+                    </select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="AlphaGuo Blog"><span id="mobile-header-typeit" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-select" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+                <select class="color-theme-select" id="theme-select-mobile" title="切换主题">
+                    <option value="light">浅色</option>
+                    <option value="dark">深色</option>
+                    <option value="black">黑色</option>
+                    <option value="auto">跟随系统</option>
+                </select>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">目录</h2>
+        <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#mysql基础">MySQL基础</a></li>
+    <li><a href="#1数据库相关概念">1，数据库相关概念</a>
+      <ul>
+        <li><a href="#11--数据库">1.1  数据库</a></li>
+        <li><a href="#12--数据库管理系统">1.2  数据库管理系统</a></li>
+        <li><a href="#13--常见的数据库管理系统">1.3  常见的数据库管理系统</a></li>
+        <li><a href="#14--sql">1.4  SQL</a></li>
+      </ul>
+    </li>
+    <li><a href="#2mysql">2，MySQL</a>
+      <ul>
+        <li><a href="#21--mysql安装">2.1  MySQL安装</a>
+          <ul>
+            <li><a href="#211--下载">2.1.1  下载</a></li>
+            <li><a href="#212--安装解压">2.1.2  安装(解压)</a></li>
+          </ul>
+        </li>
+        <li><a href="#22--mysql卸载">2.2  MySQL卸载</a></li>
+        <li><a href="#23--mysql配置">2.3  MySQL配置</a>
+          <ul>
+            <li><a href="#231--添加环境变量">2.3.1  添加环境变量</a></li>
+            <li><a href="#232--新建配置文件">2.3.2  新建配置文件</a></li>
+            <li><a href="#233--初始化mysql">2.3.3  初始化MySQL</a></li>
+            <li><a href="#234--注册mysql服务">2.3.4  注册MySQL服务</a></li>
+            <li><a href="#235--启动mysql服务">2.3.5  启动MySQL服务</a></li>
+            <li><a href="#236--修改默认账户密码">2.3.6  修改默认账户密码</a></li>
+          </ul>
+        </li>
+        <li><a href="#24--mysql登陆和退出">2.4  MySQL登陆和退出</a>
+          <ul>
+            <li><a href="#241--登陆">2.4.1  登陆</a></li>
+            <li><a href="#242--退出">2.4.2  退出</a></li>
+          </ul>
+        </li>
+        <li><a href="#25--mysql数据模型">2.5  MySQL数据模型</a></li>
+      </ul>
+    </li>
+    <li><a href="#3sql概述">3，SQL概述</a>
+      <ul>
+        <li><a href="#31--sql简介">3.1  SQL简介</a></li>
+        <li><a href="#32--通用语法">3.2  通用语法</a></li>
+        <li><a href="#33--sql分类">3.3  SQL分类</a></li>
+      </ul>
+    </li>
+    <li><a href="#4ddl操作数据库">4，DDL:操作数据库</a>
+      <ul>
+        <li><a href="#41--查询">4.1  查询</a></li>
+        <li><a href="#42--创建数据库">4.2  创建数据库</a></li>
+        <li><a href="#43--删除数据库">4.3  删除数据库</a></li>
+        <li><a href="#44--使用数据库">4.4  使用数据库</a></li>
+      </ul>
+    </li>
+    <li><a href="#5ddl操作表">5，DDL:操作表</a>
+      <ul>
+        <li><a href="#51--查询表">5.1  查询表</a></li>
+        <li><a href="#52--创建表">5.2  创建表</a></li>
+        <li><a href="#53--数据类型">5.3  数据类型</a></li>
+        <li><a href="#54--删除表">5.4  删除表</a></li>
+        <li><a href="#55--修改表">5.5  修改表</a></li>
+      </ul>
+    </li>
+    <li><a href="#6navicat使用">6，navicat使用</a>
+      <ul>
+        <li><a href="#61--navicat概述">6.1  navicat概述</a></li>
+        <li><a href="#62--navicat安装">6.2  navicat安装</a></li>
+        <li><a href="#63--navicat使用">6.3  navicat使用</a>
+          <ul>
+            <li><a href="#631--建立和mysql服务的连接">6.3.1  建立和mysql服务的连接</a></li>
+            <li><a href="#632--操作">6.3.2  操作</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#7dml">7，DML</a>
+      <ul>
+        <li><a href="#71--添加数据">7.1  添加数据</a></li>
+        <li><a href="#72--修改数据">7.2  修改数据</a></li>
+        <li><a href="#73--删除数据">7.3  删除数据</a></li>
+      </ul>
+    </li>
+    <li><a href="#8dql">8，DQL</a>
+      <ul>
+        <li><a href="#81--基础查询">8.1  基础查询</a>
+          <ul>
+            <li><a href="#811--语法">8.1.1  语法</a></li>
+            <li><a href="#812--练习">8.1.2  练习</a></li>
+          </ul>
+        </li>
+        <li><a href="#82--条件查询">8.2  条件查询</a>
+          <ul>
+            <li><a href="#821--语法">8.2.1  语法</a></li>
+            <li><a href="#822--条件查询练习">8.2.2  条件查询练习</a></li>
+            <li><a href="#823--模糊查询练习">8.2.3  模糊查询练习</a></li>
+          </ul>
+        </li>
+        <li><a href="#83--排序查询">8.3  排序查询</a>
+          <ul>
+            <li><a href="#831--语法">8.3.1  语法</a></li>
+            <li><a href="#832--练习">8.3.2  练习</a></li>
+          </ul>
+        </li>
+        <li><a href="#84--聚合函数">8.4  聚合函数</a>
+          <ul>
+            <li><a href="#841--概念">8.4.1  概念</a></li>
+            <li><a href="#842--聚合函数分类">8.4.2  聚合函数分类</a></li>
+            <li><a href="#843--聚合函数语法">8.4.3  聚合函数语法</a></li>
+            <li><a href="#844--练习">8.4.4  练习</a></li>
+          </ul>
+        </li>
+        <li><a href="#85--分组查询">8.5  分组查询</a>
+          <ul>
+            <li><a href="#851--语法">8.5.1  语法</a></li>
+            <li><a href="#852--练习">8.5.2  练习</a></li>
+          </ul>
+        </li>
+        <li><a href="#86--分页查询">8.6  分页查询</a>
+          <ul>
+            <li><a href="#861--语法">8.6.1  语法</a></li>
+            <li><a href="#862--练习">8.6.2  练习</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">MySql</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><span class='author'><span class="author fas fa-user-circle fa-fw"></span><span class='screen-reader-text'>  </span><a href='https://alphaguo.vip/authors/alphaguo'>AlphaGuo</a></span>
+                </span>&nbsp;<span class="post-category">收录于 </span>&nbsp;<span class="post-category">类别 <a href="/categories/sql/"><i class="far fa-folder fa-fw"></i>SQL</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-12-31">2023-12-31</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-12-31">2023-12-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 10596 字&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 22 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#mysql基础">MySQL基础</a></li>
+    <li><a href="#1数据库相关概念">1，数据库相关概念</a>
+      <ul>
+        <li><a href="#11--数据库">1.1  数据库</a></li>
+        <li><a href="#12--数据库管理系统">1.2  数据库管理系统</a></li>
+        <li><a href="#13--常见的数据库管理系统">1.3  常见的数据库管理系统</a></li>
+        <li><a href="#14--sql">1.4  SQL</a></li>
+      </ul>
+    </li>
+    <li><a href="#2mysql">2，MySQL</a>
+      <ul>
+        <li><a href="#21--mysql安装">2.1  MySQL安装</a>
+          <ul>
+            <li><a href="#211--下载">2.1.1  下载</a></li>
+            <li><a href="#212--安装解压">2.1.2  安装(解压)</a></li>
+          </ul>
+        </li>
+        <li><a href="#22--mysql卸载">2.2  MySQL卸载</a></li>
+        <li><a href="#23--mysql配置">2.3  MySQL配置</a>
+          <ul>
+            <li><a href="#231--添加环境变量">2.3.1  添加环境变量</a></li>
+            <li><a href="#232--新建配置文件">2.3.2  新建配置文件</a></li>
+            <li><a href="#233--初始化mysql">2.3.3  初始化MySQL</a></li>
+            <li><a href="#234--注册mysql服务">2.3.4  注册MySQL服务</a></li>
+            <li><a href="#235--启动mysql服务">2.3.5  启动MySQL服务</a></li>
+            <li><a href="#236--修改默认账户密码">2.3.6  修改默认账户密码</a></li>
+          </ul>
+        </li>
+        <li><a href="#24--mysql登陆和退出">2.4  MySQL登陆和退出</a>
+          <ul>
+            <li><a href="#241--登陆">2.4.1  登陆</a></li>
+            <li><a href="#242--退出">2.4.2  退出</a></li>
+          </ul>
+        </li>
+        <li><a href="#25--mysql数据模型">2.5  MySQL数据模型</a></li>
+      </ul>
+    </li>
+    <li><a href="#3sql概述">3，SQL概述</a>
+      <ul>
+        <li><a href="#31--sql简介">3.1  SQL简介</a></li>
+        <li><a href="#32--通用语法">3.2  通用语法</a></li>
+        <li><a href="#33--sql分类">3.3  SQL分类</a></li>
+      </ul>
+    </li>
+    <li><a href="#4ddl操作数据库">4，DDL:操作数据库</a>
+      <ul>
+        <li><a href="#41--查询">4.1  查询</a></li>
+        <li><a href="#42--创建数据库">4.2  创建数据库</a></li>
+        <li><a href="#43--删除数据库">4.3  删除数据库</a></li>
+        <li><a href="#44--使用数据库">4.4  使用数据库</a></li>
+      </ul>
+    </li>
+    <li><a href="#5ddl操作表">5，DDL:操作表</a>
+      <ul>
+        <li><a href="#51--查询表">5.1  查询表</a></li>
+        <li><a href="#52--创建表">5.2  创建表</a></li>
+        <li><a href="#53--数据类型">5.3  数据类型</a></li>
+        <li><a href="#54--删除表">5.4  删除表</a></li>
+        <li><a href="#55--修改表">5.5  修改表</a></li>
+      </ul>
+    </li>
+    <li><a href="#6navicat使用">6，navicat使用</a>
+      <ul>
+        <li><a href="#61--navicat概述">6.1  navicat概述</a></li>
+        <li><a href="#62--navicat安装">6.2  navicat安装</a></li>
+        <li><a href="#63--navicat使用">6.3  navicat使用</a>
+          <ul>
+            <li><a href="#631--建立和mysql服务的连接">6.3.1  建立和mysql服务的连接</a></li>
+            <li><a href="#632--操作">6.3.2  操作</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#7dml">7，DML</a>
+      <ul>
+        <li><a href="#71--添加数据">7.1  添加数据</a></li>
+        <li><a href="#72--修改数据">7.2  修改数据</a></li>
+        <li><a href="#73--删除数据">7.3  删除数据</a></li>
+      </ul>
+    </li>
+    <li><a href="#8dql">8，DQL</a>
+      <ul>
+        <li><a href="#81--基础查询">8.1  基础查询</a>
+          <ul>
+            <li><a href="#811--语法">8.1.1  语法</a></li>
+            <li><a href="#812--练习">8.1.2  练习</a></li>
+          </ul>
+        </li>
+        <li><a href="#82--条件查询">8.2  条件查询</a>
+          <ul>
+            <li><a href="#821--语法">8.2.1  语法</a></li>
+            <li><a href="#822--条件查询练习">8.2.2  条件查询练习</a></li>
+            <li><a href="#823--模糊查询练习">8.2.3  模糊查询练习</a></li>
+          </ul>
+        </li>
+        <li><a href="#83--排序查询">8.3  排序查询</a>
+          <ul>
+            <li><a href="#831--语法">8.3.1  语法</a></li>
+            <li><a href="#832--练习">8.3.2  练习</a></li>
+          </ul>
+        </li>
+        <li><a href="#84--聚合函数">8.4  聚合函数</a>
+          <ul>
+            <li><a href="#841--概念">8.4.1  概念</a></li>
+            <li><a href="#842--聚合函数分类">8.4.2  聚合函数分类</a></li>
+            <li><a href="#843--聚合函数语法">8.4.3  聚合函数语法</a></li>
+            <li><a href="#844--练习">8.4.4  练习</a></li>
+          </ul>
+        </li>
+        <li><a href="#85--分组查询">8.5  分组查询</a>
+          <ul>
+            <li><a href="#851--语法">8.5.1  语法</a></li>
+            <li><a href="#852--练习">8.5.2  练习</a></li>
+          </ul>
+        </li>
+        <li><a href="#86--分页查询">8.6  分页查询</a>
+          <ul>
+            <li><a href="#861--语法">8.6.1  语法</a></li>
+            <li><a href="#862--练习">8.6.2  练习</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>这里边没啥好玩的，就不自己写了，直接用黑马的作业</p>
+<h2 id="mysql基础" class="headerLink">
+    <a href="#mysql%e5%9f%ba%e7%a1%80" class="header-mark"></a>MySQL基础</h2><p><strong>今日目标：</strong></p>
+<blockquote>
+<ul>
+<li>完成MySQL的安装及登陆基本操作</li>
+<li>能通过SQL对数据库进行CRUD</li>
+<li>能通过SQL对表进行CRUD</li>
+<li>能通过SQL对数据进行CRUD</li>
+</ul>
+</blockquote>
+<h2 id="1数据库相关概念" class="headerLink">
+    <a href="#1%e6%95%b0%e6%8d%ae%e5%ba%93%e7%9b%b8%e5%85%b3%e6%a6%82%e5%bf%b5" class="header-mark"></a>1，数据库相关概念</h2><p>以前我们做系统，数据持久化的存储采用的是文件存储。存储到文件中可以达到系统关闭数据不会丢失的效果，当然文件存储也有它的弊端。</p>
+<p>假设在文件中存储以下的数据：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">姓名	年龄	性别	住址
+</span></span><span class="line"><span class="cl">张三	23	男	北京西三旗
+</span></span><span class="line"><span class="cl">李四	24	女	北京西二旗
+</span></span><span class="line"><span class="cl">王五	25	男	西安软件新城
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>现要修改李四这条数据的性别数据改为男，我们现学习的IO技术可以通过将所有的数据读取到内存中，然后进行修改再存到该文件中。通过这种方式操作存在很大问题，现在只有三条数据，如果文件中存储1T的数据，那么就会发现内存根本就存储不了。</p>
+<p>现需要既能持久化存储数据，也要能避免上述问题的技术使用在我们的系统中。数据库就是这样的一门技术。</p>
+<h3 id="11--数据库" class="headerLink">
+    <a href="#11--%e6%95%b0%e6%8d%ae%e5%ba%93" class="header-mark"></a>1.1  数据库</h3><ul>
+<li>
+<p>==存储和管理数据的仓库，数据是有组织的进行存储。==</p>
+</li>
+<li>
+<p>数据库英文名是 DataBase，简称DB。</p>
+</li>
+</ul>
+<p>数据库就是将数据存储在硬盘上，可以达到持久化存储的效果。那又是如何解决上述问题的？使用数据库管理系统。</p>
+<h3 id="12--数据库管理系统" class="headerLink">
+    <a href="#12--%e6%95%b0%e6%8d%ae%e5%ba%93%e7%ae%a1%e7%90%86%e7%b3%bb%e7%bb%9f" class="header-mark"></a>1.2  数据库管理系统</h3><ul>
+<li>==管理数据库的大型软件==</li>
+<li>英文：DataBase Management System，简称 DBMS</li>
+</ul>
+<p>在电脑上安装了数据库管理系统后，就可以通过数据库管理系统创建数据库来存储数据，也可以通过该系统对数据库中的数据进行数据的增删改查相关的操作。我们平时说的MySQL数据库其实是MySQL数据库管理系统。</p>
+<img src="../../../quark01/assets/image-20210721185923635.png" alt="image-20210721185923635" style="zoom:80%;" />
+<p>通过上面的描述，大家应该已经知道了 <code>数据库管理系统</code> 和 <code>数据库</code> 的关系。那么有有哪些常见的数据库管理系统呢？</p>
+<h3 id="13--常见的数据库管理系统" class="headerLink">
+    <a href="#13--%e5%b8%b8%e8%a7%81%e7%9a%84%e6%95%b0%e6%8d%ae%e5%ba%93%e7%ae%a1%e7%90%86%e7%b3%bb%e7%bb%9f" class="header-mark"></a>1.3  常见的数据库管理系统</h3><img src="../../../quark01/assets/image-20210721184354001.png" alt="image-20210721184354001" style="zoom:70%;" />
+<p>接下来对上面列举的数据库管理系统进行简单的介绍：</p>
+<ul>
+<li>Oracle：收费的大型数据库，Oracle 公司的产品</li>
+<li>==MySQL==： 开源免费的中小型数据库。后来 Sun公司收购了 MySQL，而 Sun 公司又被 Oracle 收购</li>
+<li>SQL Server：MicroSoft 公司收费的中型的数据库。C#、.net 等语言常使用</li>
+<li>PostgreSQL：开源免费中小型的数据库</li>
+<li>DB2：IBM 公司的大型收费数据库产品</li>
+<li>SQLite：嵌入式的微型数据库。如：作为 Android 内置数据库</li>
+<li>MariaDB：开源免费中小型的数据库</li>
+</ul>
+<p>我们课程上学习的是MySQL数据库管理系统，PostgreSQL在一些公司也有使用，此时大家肯定会想以后在公司中如果使用我们没有学习过程的PostgreSQL数据库管理系统怎么办？这点大家大可不必担心，如下图所示：</p>
+<img src="../../../quark01/assets/image-20210721185303106.png" alt="image-20210721185303106" style="zoom:80%;" />
+<p>我们可以通过数据库管理系统操作数据库，对数据库中的数据进行增删改查操作，而怎么样让用户跟数据库管理系统打交道呢？就可以通过一门编程语言（SQL）来实现。</p>
+<h3 id="14--sql" class="headerLink">
+    <a href="#14--sql" class="header-mark"></a>1.4  SQL</h3><ul>
+<li>英文：Structured Query Language，简称 SQL，结构化查询语言</li>
+<li>操作关系型数据库的编程语言</li>
+<li>定义操作所有关系型数据库的统一标准，可以使用SQL操作所有的关系型数据库管理系统，以后工作中如果使用到了其他的数据库管理系统，也同样的使用SQL来操作。</li>
+</ul>
+<h2 id="2mysql" class="headerLink">
+    <a href="#2mysql" class="header-mark"></a>2，MySQL</h2><h3 id="21--mysql安装" class="headerLink">
+    <a href="#21--mysql%e5%ae%89%e8%a3%85" class="header-mark"></a>2.1  MySQL安装</h3><blockquote>
+<p><strong>安装环境:Win10 64位</strong>
+<strong>软件版本:MySQL 5.7.24 解压版</strong></p>
+</blockquote>
+<h4 id="211--下载" class="headerLink">
+    <a href="#211--%e4%b8%8b%e8%bd%bd" class="header-mark"></a>2.1.1  下载</h4><p><a href="https://downloads.mysql.com/archives/community/" target="_blank" rel="noopener noreferrer">https://downloads.mysql.com/archives/community/</a></p>
+<p>点开上面的链接就能看到如下界面：</p>
+<img src="../../../quark01/assets/image-20210404200055449.png" alt="image-20210404200055449" style="zoom:80%;" />
+<p>选择选择和自己<strong>系统位数</strong>相对应的版本点击右边的<code>Download</code>，此时会进到另一个页面，同样在接近页面底部的地方找到如下图所示的位置：</p>
+<img src="https://img2018.cnblogs.com/blog/1556823/201812/1556823-20181220194715840-436169502.png" alt="img" style="zoom:80%;" />
+<p>不用理会上面的登录和注册按钮，直接点击 <code>No thanks, just start my download.</code> 就可以下载。</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109134805641.png"
+        srcset="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109134805641.png, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109134805641.png 1.5x, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109134805641.png 2x"
+        sizes="auto"
+        alt="image-20201109134805641"
+        title="image-20201109134805641" ></figure></p>
+<h4 id="212--安装解压" class="headerLink">
+    <a href="#212--%e5%ae%89%e8%a3%85%e8%a7%a3%e5%8e%8b" class="header-mark"></a>2.1.2  安装(解压)</h4><p>下载完成后我们得到的是一个压缩包，将其解压，我们就可以得到MySQL 5.7.24的软件本体了(就是一个文件夹)，我们可以把它放在你想安装的位置。</p>
+<hr>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109134948046.png"
+        srcset="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109134948046.png, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109134948046.png 1.5x, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109134948046.png 2x"
+        sizes="auto"
+        alt="image-20201109134948046"
+        title="image-20201109134948046" ></figure></p>
+<h3 id="22--mysql卸载" class="headerLink">
+    <a href="#22--mysql%e5%8d%b8%e8%bd%bd" class="header-mark"></a>2.2  MySQL卸载</h3><p>如果你想卸载MySQL，也很简单。</p>
+<p>右键开始菜单，选择<code>命令提示符(管理员)</code>，打开黑框。</p>
+<ol>
+<li>敲入<code>net stop mysql</code>，回车。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">net stop mysql
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><img
+        
+        loading="lazy"
+        src="D:%5cAlphaGuoBlog%5cquark01%5cassets%5c1556823-20181220222924783-57600848.png"
+        srcset="D:%5cAlphaGuoBlog%5cquark01%5cassets%5c1556823-20181220222924783-57600848.png, D:%5cAlphaGuoBlog%5cquark01%5cassets%5c1556823-20181220222924783-57600848.png 1.5x, D:%5cAlphaGuoBlog%5cquark01%5cassets%5c1556823-20181220222924783-57600848.png 2x"
+        sizes="auto"
+        alt="img"
+        title="img" ></figure></p>
+<ol start="2">
+<li>再敲入<code>mysqld -remove mysql</code>，回车。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">mysqld -remove mysql
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><img
+        
+        loading="lazy"
+        src="D:%5cAlphaGuoBlog%5cquark01%5cassets%5c1556823-20181220223025128-587235464.png"
+        srcset="D:%5cAlphaGuoBlog%5cquark01%5cassets%5c1556823-20181220223025128-587235464.png, D:%5cAlphaGuoBlog%5cquark01%5cassets%5c1556823-20181220223025128-587235464.png 1.5x, D:%5cAlphaGuoBlog%5cquark01%5cassets%5c1556823-20181220223025128-587235464.png 2x"
+        sizes="auto"
+        alt="img"
+        title="img" ></figure></p>
+<ol start="3">
+<li>最后删除MySQL目录及相关的环境变量。</li>
+</ol>
+<p><strong>至此，MySQL卸载完成！</strong></p>
+<h3 id="23--mysql配置" class="headerLink">
+    <a href="#23--mysql%e9%85%8d%e7%bd%ae" class="header-mark"></a>2.3  MySQL配置</h3><h4 id="231--添加环境变量" class="headerLink">
+    <a href="#231--%e6%b7%bb%e5%8a%a0%e7%8e%af%e5%a2%83%e5%8f%98%e9%87%8f" class="header-mark"></a>2.3.1  添加环境变量</h4><blockquote>
+<p>环境变量里面有很多选项，这里我们只用到<code>Path</code>这个参数。为什么在初始化的开始要添加环境变量呢？
+在黑框(即CMD)中输入一个可执行程序的名字，Windows会先在环境变量中的<code>Path</code>所指的路径中寻找一遍，如果找到了就直接执行，没找到就在当前工作目录找，如果还没找到，就报错。我们添加环境变量的目的就是能够在任意一个黑框直接调用MySQL中的相关程序而不用总是修改工作目录，大大简化了操作。</p>
+</blockquote>
+<p>右键<code>此电脑</code>→<code>属性</code>，点击<code>高级系统设置</code></p>
+<img src="../../../quark01/assets/1556823-20181220220242472-524708778.png" alt="img" style="zoom:90%;" />
+<p>点击<code>环境变量</code></p>
+<img src="../../../quark01/assets/1556823-20181220220359609-736422950.png" alt="img" style="zoom:90%;" />
+<p>在<code>系统变量</code>中新建MYSQL_HOME</p>
+<img src="../../../quark01/assets/image-20201109140222488.png" alt="image-20201109140222488" style="zoom:80%;" />
+<p>在<code>系统变量</code>中找到并<strong>双击</strong><code>Path</code></p>
+<img src="../../../quark01/assets/1556823-20181220220551145-1198958872.png" alt="img" style="zoom:80%;" />
+<p>点击<code>新建</code></p>
+<img src="../../../quark01/assets/image-20201109135248104.png" alt="image-20201109135248104" style="zoom:80%;" />
+<p>最后点击确定。</p>
+<p><strong>如何验证是否添加成功？</strong></p>
+<p>右键开始菜单(就是屏幕左下角)，选择<code>命令提示符(管理员)</code>，打开黑框，敲入<code>mysql</code>，回车。
+如果提示<code>Can't connect to MySQL server on 'localhost'</code>则证明添加成功；
+如果提示<code>mysql不是内部或外部命令，也不是可运行的程序或批处理文件</code>则表示添加添加失败，请重新检查步骤并重试。</p>
+<h4 id="232--新建配置文件" class="headerLink">
+    <a href="#232--%e6%96%b0%e5%bb%ba%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6" class="header-mark"></a>2.3.2  新建配置文件</h4><p>新建一个文本文件，内容如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-properties" data-lang="properties"><span class="line"><span class="cl"><span class="err">[mysql]</span>
+</span></span><span class="line"><span class="cl"><span class="na">default-character-set</span><span class="o">=</span><span class="s">utf8</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">[mysqld]</span>
+</span></span><span class="line"><span class="cl"><span class="na">character-set-server</span><span class="o">=</span><span class="s">utf8</span>
+</span></span><span class="line"><span class="cl"><span class="na">default-storage-engine</span><span class="o">=</span><span class="s">INNODB</span>
+</span></span><span class="line"><span class="cl"><span class="na">sql_mode</span><span class="o">=</span><span class="s">STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>把上面的文本文件另存为，在保存类型里选<code>所有文件 (*.*)</code>，文件名叫<code>my.ini</code>，存放的路径为MySQL的<code>根目录</code>(例如我的是<code>D:\software\mysql-5.7.24-winx64</code>,根据自己的MySQL目录位置修改)。</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109142704951.png"
+        srcset="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109142704951.png, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109142704951.png 1.5x, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109142704951.png 2x"
+        sizes="auto"
+        alt="image-20201109142704951"
+        title="image-20201109142704951" ></figure></p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109142737584.png"
+        srcset="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109142737584.png, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109142737584.png 1.5x, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109142737584.png 2x"
+        sizes="auto"
+        alt="image-20201109142737584"
+        title="image-20201109142737584" ></figure></p>
+<p>上面代码意思就是配置数据库的默认编码集为utf-8和默认存储引擎为INNODB。</p>
+<h4 id="233--初始化mysql" class="headerLink">
+    <a href="#233--%e5%88%9d%e5%a7%8b%e5%8c%96mysql" class="header-mark"></a>2.3.3  初始化MySQL</h4><p>在刚才的黑框中敲入<code>mysqld --initialize-insecure</code>，回车，稍微等待一会，如果出现没有出现报错信息(如下图)则证明data目录初始化没有问题，此时再查看MySQL目录下已经有data目录生成。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">mysqld --initialize-insecure
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><img
+        
+        loading="lazy"
+        src="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109140955772.png"
+        srcset="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109140955772.png, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109140955772.png 1.5x, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109140955772.png 2x"
+        sizes="auto"
+        alt="image-20201109140955772"
+        title="image-20201109140955772" ></figure></p>
+<p>tips：如果出现如下错误</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109135848054.png"
+        srcset="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109135848054.png, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109135848054.png 1.5x, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109135848054.png 2x"
+        sizes="auto"
+        alt="image-20201109135848054"
+        title="image-20201109135848054" ></figure></p>
+<p>是由于权限不足导致的，去<code>C:\Windows\System32</code> 下以管理员方式运行 cmd.exe</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109140423691.png"
+        srcset="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109140423691.png, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109140423691.png 1.5x, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109140423691.png 2x"
+        sizes="auto"
+        alt="image-20201109140423691"
+        title="image-20201109140423691" ></figure></p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109140001186.png"
+        srcset="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109140001186.png, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109140001186.png 1.5x, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109140001186.png 2x"
+        sizes="auto"
+        alt="image-20201109140001186"
+        title="image-20201109140001186" ></figure></p>
+<h4 id="234--注册mysql服务" class="headerLink">
+    <a href="#234--%e6%b3%a8%e5%86%8cmysql%e6%9c%8d%e5%8a%a1" class="header-mark"></a>2.3.4  注册MySQL服务</h4><p>在黑框里敲入<code>mysqld -install</code>，回车。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">mysqld -install
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><img
+        
+        loading="lazy"
+        src="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109141325810.png"
+        srcset="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109141325810.png, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109141325810.png 1.5x, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20201109141325810.png 2x"
+        sizes="auto"
+        alt="image-20201109141325810"
+        title="image-20201109141325810" ></figure></p>
+<p>现在你的计算机上已经安装好了MySQL服务了。</p>
+<p>MySQL服务器</p>
+<h4 id="235--启动mysql服务" class="headerLink">
+    <a href="#235--%e5%90%af%e5%8a%a8mysql%e6%9c%8d%e5%8a%a1" class="header-mark"></a>2.3.5  启动MySQL服务</h4><p>在黑框里敲入<code>net start mysql</code>，回车。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">net</span><span class="w"> </span><span class="n">start</span><span class="w"> </span><span class="n">mysql</span><span class="w">  </span><span class="c1">// 启动mysql服务</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">net</span><span class="w"> </span><span class="n">stop</span><span class="w"> </span><span class="n">mysql</span><span class="w">  </span><span class="c1">// 停止mysql服务</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><img
+        
+        loading="lazy"
+        src="D:%5cAlphaGuoBlog%5cquark01%5cassets%5c1556823-20181221093036851-1317238155.png"
+        srcset="D:%5cAlphaGuoBlog%5cquark01%5cassets%5c1556823-20181221093036851-1317238155.png, D:%5cAlphaGuoBlog%5cquark01%5cassets%5c1556823-20181221093036851-1317238155.png 1.5x, D:%5cAlphaGuoBlog%5cquark01%5cassets%5c1556823-20181221093036851-1317238155.png 2x"
+        sizes="auto"
+        alt="img"
+        title="img" ></figure></p>
+<h4 id="236--修改默认账户密码" class="headerLink">
+    <a href="#236--%e4%bf%ae%e6%94%b9%e9%bb%98%e8%ae%a4%e8%b4%a6%e6%88%b7%e5%af%86%e7%a0%81" class="header-mark"></a>2.3.6  修改默认账户密码</h4><p>在黑框里敲入<code>mysqladmin -u root password 1234</code>，这里的<code>1234</code>就是指默认管理员(即root账户)的密码，可以自行修改成你喜欢的。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">mysqladmin -u root password 1234
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><img
+        
+        loading="lazy"
+        src="D:%5cAlphaGuoBlog%5cquark01%5cassets%5c1556823-20181221093251250-819416425.png"
+        srcset="D:%5cAlphaGuoBlog%5cquark01%5cassets%5c1556823-20181221093251250-819416425.png, D:%5cAlphaGuoBlog%5cquark01%5cassets%5c1556823-20181221093251250-819416425.png 1.5x, D:%5cAlphaGuoBlog%5cquark01%5cassets%5c1556823-20181221093251250-819416425.png 2x"
+        sizes="auto"
+        alt="img"
+        title="img" ></figure></p>
+<p><strong>至此，MySQL 5.7 解压版安装完毕！</strong></p>
+<h3 id="24--mysql登陆和退出" class="headerLink">
+    <a href="#24--mysql%e7%99%bb%e9%99%86%e5%92%8c%e9%80%80%e5%87%ba" class="header-mark"></a>2.4  MySQL登陆和退出</h3><h4 id="241--登陆" class="headerLink">
+    <a href="#241--%e7%99%bb%e9%99%86" class="header-mark"></a>2.4.1  登陆</h4><p>右键开始菜单，选择<code>命令提示符</code>，打开黑框。
+在黑框中输入，<code>mysql -uroot -p1234</code>，回车，出现下图且左下角为<code>mysql&gt;</code>，则登录成功。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">mysql -uroot -p1234
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><img
+        
+        loading="lazy"
+        src="D:%5cAlphaGuoBlog%5cquark01%5cassets%5c1556823-20181220222422178-61579658.png"
+        srcset="D:%5cAlphaGuoBlog%5cquark01%5cassets%5c1556823-20181220222422178-61579658.png, D:%5cAlphaGuoBlog%5cquark01%5cassets%5c1556823-20181220222422178-61579658.png 1.5x, D:%5cAlphaGuoBlog%5cquark01%5cassets%5c1556823-20181220222422178-61579658.png 2x"
+        sizes="auto"
+        alt="img"
+        title="img" ></figure></p>
+<p><strong>到这里你就可以开始你的MySQL之旅了！</strong></p>
+<p>登陆参数：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">mysql -u用户名 -p密码 -h要连接的mysql服务器的ip地址(默认127.0.0.1) -P端口号(默认3306)
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="242--退出" class="headerLink">
+    <a href="#242--%e9%80%80%e5%87%ba" class="header-mark"></a>2.4.2  退出</h4><p>退出mysql：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">exit
+</span></span><span class="line"><span class="cl">quit
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="25--mysql数据模型" class="headerLink">
+    <a href="#25--mysql%e6%95%b0%e6%8d%ae%e6%a8%a1%e5%9e%8b" class="header-mark"></a>2.5  MySQL数据模型</h3><p><strong>关系型数据库：</strong></p>
+<blockquote>
+<p>关系型数据库是建立在关系模型基础上的数据库，简单说，关系型数据库是由多张能互相连接的 二维表 组成的数据库</p>
+</blockquote>
+<p>如下图，<code>订单信息表</code> 和 <code>客户信息表</code> 都是有行有列二维表我们将这样的称为关系型数据库。</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210721205130231.png"
+        srcset="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210721205130231.png, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210721205130231.png 1.5x, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210721205130231.png 2x"
+        sizes="auto"
+        alt="image-20210721205130231"
+        title="image-20210721205130231" ></figure></p>
+<p>接下来看关系型数据库的优点：</p>
+<ul>
+<li>都是使用表结构，格式一致，易于维护。</li>
+<li>使用通用的 SQL 语言操作，使用方便，可用于复杂查询。
+<ul>
+<li>关系型数据库都可以通过SQL进行操作，所以使用方便。</li>
+<li>复杂查询。现在需要查询001号订单数据，我们可以看到该订单是1号客户的订单，而1号订单是李聪这个客户。以后也可以在一张表中进行统计分析等操作。</li>
+</ul>
+</li>
+<li>数据存储在磁盘中，安全。</li>
+</ul>
+<p><strong>数据模型：</strong></p>
+<img src="../../../quark01/assets/image-20210721212754568.png" alt="image-20210721212754568" style="zoom:70%;" />
+<p>如上图，我们通过客户端可以通过数据库管理系统创建数据库，在数据库中创建表，在表中添加数据。创建的每一个数据库对应到磁盘上都是一个文件夹。比如可以通过SQL语句创建一个数据库（数据库名称为db1），语句如下。该语句咱们后面会学习。</p>
+<img src="../../../quark01/assets/image-20210721213349761.png" alt="image-20210721213349761" style="zoom:80%;" />
+<p>我们可以在数据库安装目录下的data目录下看到多了一个 <code>db1</code> 的文件夹。所以，<strong>在MySQL中一个数据库对应到磁盘上的一个文件夹。</strong></p>
+<p>而一个数据库下可以创建多张表，我们到MySQL中自带的mysql数据库的文件夹目录下：</p>
+<img src="../../../quark01/assets/image-20210721214029913.png" alt="image-20210721214029913" style="zoom:80%;" />
+<p>而上图中右边的 <code>db.frm</code> 是表文件，<code>db.MYD</code> 是数据文件，通过这两个文件就可以查询到数据展示成二维表的效果。</p>
+<p><strong>小结：</strong></p>
+<ul>
+<li>MySQL中可以创建多个数据库，每个数据库对应到磁盘上的一个文件夹</li>
+<li>在每个数据库中可以创建多个表，每张都对应到磁盘上一个 frm 文件</li>
+<li>每张表可以存储多条数据，数据会被存储到磁盘中  MYD 文件中</li>
+</ul>
+<h2 id="3sql概述" class="headerLink">
+    <a href="#3sql%e6%a6%82%e8%bf%b0" class="header-mark"></a>3，SQL概述</h2><p>了解了数据模型后，接下来我们就学习SQL语句，通过SQL语句对数据库、表、数据进行增删改查操作。</p>
+<h3 id="31--sql简介" class="headerLink">
+    <a href="#31--sql%e7%ae%80%e4%bb%8b" class="header-mark"></a>3.1  SQL简介</h3><ul>
+<li>英文：Structured Query Language，简称 SQL</li>
+<li>结构化查询语言，一门操作关系型数据库的编程语言</li>
+<li>定义操作所有关系型数据库的统一标准</li>
+<li>对于同一个需求，每一种数据库操作的方式可能会存在一些不一样的地方，我们称为“方言”</li>
+</ul>
+<h3 id="32--通用语法" class="headerLink">
+    <a href="#32--%e9%80%9a%e7%94%a8%e8%af%ad%e6%b3%95" class="header-mark"></a>3.2  通用语法</h3><ul>
+<li>
+<p>SQL 语句可以单行或多行书写，以分号结尾。</p>
+<img src="../../../quark01/assets/image-20210721215223872.png" alt="image-20210721215223872" style="zoom:80%;" /> 
+<p>如上，以分号结尾才是一个完整的sql语句。</p>
+</li>
+<li>
+<p>MySQL 数据库的 SQL 语句不区分大小写，关键字建议使用大写。</p>
+<p>同样的一条sql语句写成下图的样子，一样可以运行处结果。</p>
+<img src="../../../quark01/assets/image-20210721215328410.png" alt="image-20210721215328410" style="zoom:80%;" /> 
+</li>
+<li>
+<p>注释</p>
+<ul>
+<li>
+<p>单行注释: &ndash; 注释内容 或 #注释内容(MySQL 特有)</p>
+<img src="../../../quark01/assets/image-20210721215517293.png" alt="image-20210721215517293" style="zoom:80%;" /> 
+<img src="../../../quark01/assets/image-20210721215556885.png" alt="image-20210721215556885" style="zoom:80%;" /> 
+<blockquote>
+<p>注意：使用&ndash; 添加单行注释时，&ndash;后面一定要加空格，而#没有要求。</p>
+</blockquote>
+</li>
+<li>
+<p>多行注释: /* 注释 */</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="33--sql分类" class="headerLink">
+    <a href="#33--sql%e5%88%86%e7%b1%bb" class="header-mark"></a>3.3  SQL分类</h3><ul>
+<li>
+<p>DDL(Data Definition Language) ： 数据定义语言，用来定义数据库对象：数据库，表，列等</p>
+<p>DDL简单理解就是用来操作数据库，表等</p>
+<img src="../../../quark01/assets/image-20210721220032047.png" alt="image-20210721220032047" style="zoom:60%;" />
+</li>
+<li>
+<p>DML(Data Manipulation Language) 数据操作语言，用来对数据库中表的数据进行增删改</p>
+<p>DML简单理解就对表中数据进行增删改</p>
+<img src="../../../quark01/assets/image-20210721220132919.png" alt="image-20210721220132919" style="zoom:60%;" />
+</li>
+<li>
+<p>DQL(Data Query Language) 数据查询语言，用来查询数据库中表的记录(数据)</p>
+<p>DQL简单理解就是对数据进行查询操作。从数据库表中查询到我们想要的数据。</p>
+</li>
+<li>
+<p>DCL(Data Control Language) 数据控制语言，用来定义数据库的访问权限和安全级别，及创建用户</p>
+<p>DML简单理解就是对数据库进行权限控制。比如我让某一个数据库表只能让某一个用户进行操作等。</p>
+</li>
+</ul>
+<blockquote>
+<p>注意： 以后我们最常操作的是 <code>DML</code> 和 <code>DQL</code>  ，因为我们开发中最常操作的就是数据。</p>
+</blockquote>
+<h2 id="4ddl操作数据库" class="headerLink">
+    <a href="#4ddl%e6%93%8d%e4%bd%9c%e6%95%b0%e6%8d%ae%e5%ba%93" class="header-mark"></a>4，DDL:操作数据库</h2><p>我们先来学习DDL来操作数据库。而操作数据库主要就是对数据库的增删查操作。</p>
+<h3 id="41--查询" class="headerLink">
+    <a href="#41--%e6%9f%a5%e8%af%a2" class="header-mark"></a>4.1  查询</h3><p>查询所有的数据库</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SHOW</span><span class="w"> </span><span class="n">DATABASES</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>运行上面语句效果如下：</p>
+<img src="../../../quark01/assets/image-20210721221107014.png" alt="image-20210721221107014" style="zoom:80%;" />
+<p>上述查询到的是的这些数据库是mysql安装好自带的数据库，我们以后不要操作这些数据库。</p>
+<h3 id="42--创建数据库" class="headerLink">
+    <a href="#42--%e5%88%9b%e5%bb%ba%e6%95%b0%e6%8d%ae%e5%ba%93" class="header-mark"></a>4.2  创建数据库</h3><ul>
+<li><strong>创建数据库</strong>：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="err">数据库名称</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>运行语句效果如下：</p>
+<img src="../../../quark01/assets/image-20210721223450755.png" alt="image-20210721223450755" style="zoom:80%;" />
+<p>而在创建数据库的时候，我并不知道db1数据库有没有创建，直接再次创建名为db1的数据库就会出现错误。</p>
+<img src="../../../quark01/assets/image-20210721223745490.png" alt="image-20210721223745490" style="zoom:80%;" />
+<p>为了避免上面的错误，在创建数据库的时候先做判断，如果不存在再创建。</p>
+<ul>
+<li><strong>创建数据库(判断，如果不存在则创建)</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="err">数据库名称</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>运行语句效果如下：</p>
+<img src="../../../quark01/assets/image-20210721224056476.png" alt="image-20210721224056476" style="zoom:80%;" />
+<p>从上面的效果可以看到虽然db1数据库已经存在，再创建db1也没有报错，而创建db2数据库则创建成功。</p>
+<h3 id="43--删除数据库" class="headerLink">
+    <a href="#43--%e5%88%a0%e9%99%a4%e6%95%b0%e6%8d%ae%e5%ba%93" class="header-mark"></a>4.3  删除数据库</h3><ul>
+<li><strong>删除数据库</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">DROP</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="err">数据库名称</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>删除数据库(判断，如果存在则删除)</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">DROP</span><span class="w"> </span><span class="k">DATABASE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="err">数据库名称</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>运行语句效果如下：</p>
+<img src="../../../quark01/assets/image-20210721224435251.png" alt="image-20210721224435251" style="zoom:80%;" />
+<h3 id="44--使用数据库" class="headerLink">
+    <a href="#44--%e4%bd%bf%e7%94%a8%e6%95%b0%e6%8d%ae%e5%ba%93" class="header-mark"></a>4.4  使用数据库</h3><p>数据库创建好了，要在数据库中创建表，得先明确在哪儿个数据库中操作，此时就需要使用数据库。</p>
+<ul>
+<li><strong>使用数据库</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">USE</span><span class="w"> </span><span class="err">数据库名称</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>查看当前使用的数据库</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="k">DATABASE</span><span class="p">();</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>运行语句效果如下：</p>
+<img src="../../../quark01/assets/image-20210721224720841.png" alt="image-20210721224720841" style="zoom:80%;" />
+<h2 id="5ddl操作表" class="headerLink">
+    <a href="#5ddl%e6%93%8d%e4%bd%9c%e8%a1%a8" class="header-mark"></a>5，DDL:操作表</h2><p>操作表也就是对表进行增（Create）删（Retrieve）改（Update）查（Delete）。</p>
+<h3 id="51--查询表" class="headerLink">
+    <a href="#51--%e6%9f%a5%e8%af%a2%e8%a1%a8" class="header-mark"></a>5.1  查询表</h3><ul>
+<li><strong>查询当前数据库下所有表名称</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SHOW</span><span class="w"> </span><span class="n">TABLES</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>我们创建的数据库中没有任何表，因此我们进入mysql自带的mysql数据库，执行上述语句查看</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210721230202814.png"
+        srcset="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210721230202814.png, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210721230202814.png 1.5x, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210721230202814.png 2x"
+        sizes="auto"
+        alt="image-20210721230202814"
+        title="image-20210721230202814" ></figure></p>
+<ul>
+<li><strong>查询表结构</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">DESC</span><span class="w"> </span><span class="err">表名称</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>查看mysql数据库中func表的结构，运行语句如下：</p>
+<img src="../../../quark01/assets/image-20210721230332428.png" alt="image-20210721230332428" style="zoom:80%;" />
+<h3 id="52--创建表" class="headerLink">
+    <a href="#52--%e5%88%9b%e5%bb%ba%e8%a1%a8" class="header-mark"></a>5.2  创建表</h3><ul>
+<li><strong>创建表</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="err">表名</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="err">字段名</span><span class="mi">1</span><span class="w">  </span><span class="err">数据类型</span><span class="mi">1</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="err">字段名</span><span class="mi">2</span><span class="w">  </span><span class="err">数据类型</span><span class="mi">2</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="err">…</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="err">字段名</span><span class="n">n</span><span class="w">  </span><span class="err">数据类型</span><span class="n">n</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>注意：最后一行末尾，不能加逗号</p>
+</blockquote>
+<p>知道了创建表的语句，那么我们创建创建如下结构的表</p>
+<img src="../../../quark01/assets/image-20210721230824097.png" alt="image-20210721230824097" style="zoom:80%;" />
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">tb_user</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">id</span><span class="w"> </span><span class="nb">int</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">username</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">password</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>运行语句如下：</p>
+<img src="../../../quark01/assets/image-20210721231142326.png" alt="image-20210721231142326" style="zoom:80%;" />
+<h3 id="53--数据类型" class="headerLink">
+    <a href="#53--%e6%95%b0%e6%8d%ae%e7%b1%bb%e5%9e%8b" class="header-mark"></a>5.3  数据类型</h3><p>MySQL 支持多种类型，可以分为三类：</p>
+<ul>
+<li>
+<p>数值</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="n">tinyint</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="err">小整数型，占一个字节</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nb">int</span><span class="w">	</span><span class="err">：</span><span class="w"> </span><span class="err">大整数类型，占四个字节</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">eg</span><span class="w"> </span><span class="err">：</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="nb">int</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">double</span><span class="w"> </span><span class="err">：</span><span class="w"> </span><span class="err">浮点类型</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="err">使用格式：</span><span class="w"> </span><span class="err">字段名</span><span class="w"> </span><span class="n">double</span><span class="p">(</span><span class="err">总长度</span><span class="p">,</span><span class="err">小数点后保留的位数</span><span class="p">)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">eg</span><span class="w"> </span><span class="err">：</span><span class="w"> </span><span class="n">score</span><span class="w"> </span><span class="n">double</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="w">   
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>日期</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="nb">date</span><span class="w"> </span><span class="err">：</span><span class="w"> </span><span class="err">日期值。只包含年月日</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">eg</span><span class="w"> </span><span class="err">：</span><span class="n">birthday</span><span class="w"> </span><span class="nb">date</span><span class="w"> </span><span class="err">：</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">datetime</span><span class="w"> </span><span class="err">：</span><span class="w"> </span><span class="err">混合日期和时间值。包含年月日时分秒</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>字符串</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="nb">char</span><span class="w"> </span><span class="err">：</span><span class="w"> </span><span class="err">定长字符串。</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="err">优点：存储性能高</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="err">缺点：浪费空间</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">eg</span><span class="w"> </span><span class="err">：</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w">  </span><span class="err">如果存储的数据字符个数不足</span><span class="mi">10</span><span class="err">个，也会占</span><span class="mi">10</span><span class="err">个的空间</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nb">varchar</span><span class="w"> </span><span class="err">：</span><span class="w"> </span><span class="err">变长字符串。</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="err">优点：节约空间</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="err">缺点：存储性能底</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">eg</span><span class="w"> </span><span class="err">：</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="err">如果存储的数据字符个数不足</span><span class="mi">10</span><span class="err">个，那就数据字符个数是几就占几个的空间</span><span class="w">	
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<blockquote>
+<p>注意：其他类型参考资料中的《MySQL数据类型].xlsx》</p>
+</blockquote>
+<p><strong>案例：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">需求：设计一张学生表，请注重数据类型、长度的合理性
+</span></span><span class="line"><span class="cl">	1. 编号
+</span></span><span class="line"><span class="cl">	2. 姓名，姓名最长不超过10个汉字
+</span></span><span class="line"><span class="cl">	3. 性别，因为取值只有两种可能，因此最多一个汉字
+</span></span><span class="line"><span class="cl">	4. 生日，取值为年月日
+</span></span><span class="line"><span class="cl">	5. 入学成绩，小数点后保留两位
+</span></span><span class="line"><span class="cl">	6. 邮件地址，最大长度不超过 64
+</span></span><span class="line"><span class="cl">	7. 家庭联系电话，不一定是手机号码，可能会出现 - 等字符
+</span></span><span class="line"><span class="cl">	8. 学生状态（用数字表示，正常、休学、毕业...）
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>语句设计如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">student</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="n">id</span><span class="w"> </span><span class="nb">int</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">name</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">gender</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">birthday</span><span class="w"> </span><span class="nb">date</span><span class="p">,</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">score</span><span class="w"> </span><span class="n">double</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">email</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">15</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">tel</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">15</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">status</span><span class="w"> </span><span class="n">tinyint</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="54--删除表" class="headerLink">
+    <a href="#54--%e5%88%a0%e9%99%a4%e8%a1%a8" class="header-mark"></a>5.4  删除表</h3><ul>
+<li><strong>删除表</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">DROP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="err">表名</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>删除表时判断表是否存在</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">DROP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">IF</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="err">表名</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>运行语句效果如下：</p>
+<img src="../../../quark01/assets/image-20210721235108267.png" alt="image-20210721235108267" style="zoom:80%;" />
+<h3 id="55--修改表" class="headerLink">
+    <a href="#55--%e4%bf%ae%e6%94%b9%e8%a1%a8" class="header-mark"></a>5.5  修改表</h3><ul>
+<li><strong>修改表名</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="err">表名</span><span class="w"> </span><span class="k">RENAME</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="err">新的表名</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">-- 将表名student修改为stu
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">alter</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">student</span><span class="w"> </span><span class="k">rename</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">stu</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>添加一列</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="err">表名</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="err">列名</span><span class="w"> </span><span class="err">数据类型</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">-- 给stu表添加一列address，该字段类型是varchar(50)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">alter</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">add</span><span class="w"> </span><span class="n">address</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>修改数据类型</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="err">表名</span><span class="w"> </span><span class="k">MODIFY</span><span class="w"> </span><span class="err">列名</span><span class="w"> </span><span class="err">新数据类型</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">-- 将stu表中的address字段的类型改为 char(50)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">alter</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">modify</span><span class="w"> </span><span class="n">address</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>修改列名和数据类型</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="err">表名</span><span class="w"> </span><span class="n">CHANGE</span><span class="w"> </span><span class="err">列名</span><span class="w"> </span><span class="err">新列名</span><span class="w"> </span><span class="err">新数据类型</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">-- 将stu表中的address字段名改为 addr，类型改为varchar(50)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">alter</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="n">change</span><span class="w"> </span><span class="n">address</span><span class="w"> </span><span class="n">addr</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>删除列</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="err">表名</span><span class="w"> </span><span class="k">DROP</span><span class="w"> </span><span class="err">列名</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">-- 将stu表中的addr字段 删除
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">alter</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">drop</span><span class="w"> </span><span class="n">addr</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="6navicat使用" class="headerLink">
+    <a href="#6navicat%e4%bd%bf%e7%94%a8" class="header-mark"></a>6，navicat使用</h2><p>通过上面的学习，我们发现在命令行中写sql语句特别不方便，尤其是编写创建表的语句，我们只能在记事本上写好后直接复制到命令行进行执行。那么有没有刚好的工具提供给我们进行使用呢？ 有。</p>
+<h3 id="61--navicat概述" class="headerLink">
+    <a href="#61--navicat%e6%a6%82%e8%bf%b0" class="header-mark"></a>6.1  navicat概述</h3><ul>
+<li>Navicat for MySQL 是管理和开发 MySQL 或 MariaDB 的理想解决方案。</li>
+<li>这套全面的前端工具为数据库管理、开发和维护提供了一款直观而强大的图形界面。</li>
+<li>官网： <a href="http://www.navicat.com.cn/" target="_blank" rel="noopener noreferrer">http://www.navicat.com.cn</a></li>
+</ul>
+<h3 id="62--navicat安装" class="headerLink">
+    <a href="#62--navicat%e5%ae%89%e8%a3%85" class="header-mark"></a>6.2  navicat安装</h3><p>参考 : 资料\navicat安装包\navicat_mysql_x86\navicat安装步骤.md</p>
+<h3 id="63--navicat使用" class="headerLink">
+    <a href="#63--navicat%e4%bd%bf%e7%94%a8" class="header-mark"></a>6.3  navicat使用</h3><h4 id="631--建立和mysql服务的连接" class="headerLink">
+    <a href="#631--%e5%bb%ba%e7%ab%8b%e5%92%8cmysql%e6%9c%8d%e5%8a%a1%e7%9a%84%e8%bf%9e%e6%8e%a5" class="header-mark"></a>6.3.1  建立和mysql服务的连接</h4><p>第一步： 点击连接，选择MySQL</p>
+<img src="../../../quark01/assets/image-20210721235928346.png" alt="image-20210721235928346" style="zoom:70%;" />
+<p>第二步：填写连接数据库必要的信息</p>
+<img src="../../../quark01/assets/image-20210722000116080.png" alt="image-20210722000116080" style="zoom:80%;" />
+<p>以上操作没有问题就会出现如下图所示界面：</p>
+<img src="../../../quark01/assets/image-20210722000345349.png" alt="image-20210722000345349" style="zoom:80%;" />
+<h4 id="632--操作" class="headerLink">
+    <a href="#632--%e6%93%8d%e4%bd%9c" class="header-mark"></a>6.3.2  操作</h4><p>连接成功后就能看到如下图界面：</p>
+<img src="../../../quark01/assets/image-20210722000521997.png" alt="image-20210722000521997" style="zoom:80%;" />
+<ul>
+<li><strong>修改表结构</strong></li>
+</ul>
+<p>通过下图操作修改表结构：</p>
+<img src="../../../quark01/assets/image-20210722000740661.png" alt="image-20210722000740661" style="zoom:80%;" />
+<p>点击了设计表后即出现如下图所示界面，在图中红框中直接修改字段名，类型等信息：</p>
+<img src="../../../quark01/assets/image-20210722000929075.png" alt="image-20210722000929075" style="zoom:80%;" />
+<ul>
+<li><strong>编写SQL语句并执行</strong></li>
+</ul>
+<p>按照如下图所示进行操作即可书写SQL语句并执行sql语句。</p>
+<img src="../../../quark01/assets/image-20210722001333817.png" alt="image-20210722001333817" style="zoom:80%;" />
+<h2 id="7dml" class="headerLink">
+    <a href="#7dml" class="header-mark"></a>7，DML</h2><p>DML主要是对数据进行增（insert）删（delete）改（update）操作。</p>
+<h3 id="71--添加数据" class="headerLink">
+    <a href="#71--%e6%b7%bb%e5%8a%a0%e6%95%b0%e6%8d%ae" class="header-mark"></a>7.1  添加数据</h3><ul>
+<li><strong>给指定列添加数据</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="err">表名</span><span class="p">(</span><span class="err">列名</span><span class="mi">1</span><span class="p">,</span><span class="err">列名</span><span class="mi">2</span><span class="p">,</span><span class="err">…</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="p">(</span><span class="err">值</span><span class="mi">1</span><span class="p">,</span><span class="err">值</span><span class="mi">2</span><span class="p">,</span><span class="err">…</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>给全部列添加数据</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="err">表名</span><span class="w"> </span><span class="k">VALUES</span><span class="p">(</span><span class="err">值</span><span class="mi">1</span><span class="p">,</span><span class="err">值</span><span class="mi">2</span><span class="p">,</span><span class="err">…</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>批量添加数据</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="err">表名</span><span class="p">(</span><span class="err">列名</span><span class="mi">1</span><span class="p">,</span><span class="err">列名</span><span class="mi">2</span><span class="p">,</span><span class="err">…</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="p">(</span><span class="err">值</span><span class="mi">1</span><span class="p">,</span><span class="err">值</span><span class="mi">2</span><span class="p">,</span><span class="err">…</span><span class="p">),(</span><span class="err">值</span><span class="mi">1</span><span class="p">,</span><span class="err">值</span><span class="mi">2</span><span class="p">,</span><span class="err">…</span><span class="p">),(</span><span class="err">值</span><span class="mi">1</span><span class="p">,</span><span class="err">值</span><span class="mi">2</span><span class="p">,</span><span class="err">…</span><span class="p">)</span><span class="err">…</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="err">表名</span><span class="w"> </span><span class="k">VALUES</span><span class="p">(</span><span class="err">值</span><span class="mi">1</span><span class="p">,</span><span class="err">值</span><span class="mi">2</span><span class="p">,</span><span class="err">…</span><span class="p">),(</span><span class="err">值</span><span class="mi">1</span><span class="p">,</span><span class="err">值</span><span class="mi">2</span><span class="p">,</span><span class="err">…</span><span class="p">),(</span><span class="err">值</span><span class="mi">1</span><span class="p">,</span><span class="err">值</span><span class="mi">2</span><span class="p">,</span><span class="err">…</span><span class="p">)</span><span class="err">…</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>练习</strong></li>
+</ul>
+<p>为了演示以下的增删改操作是否操作成功，故先将查询所有数据的语句介绍给大家：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- 给指定列添加数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">NAME</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;张三&#39;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">-- 给所有列添加数据，列名的列表可以省略的
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="n">NAME</span><span class="p">,</span><span class="n">sex</span><span class="p">,</span><span class="n">birthday</span><span class="p">,</span><span class="n">score</span><span class="p">,</span><span class="n">email</span><span class="p">,</span><span class="n">tel</span><span class="p">,</span><span class="n">STATUS</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;李四&#39;</span><span class="p">,</span><span class="s1">&#39;男&#39;</span><span class="p">,</span><span class="s1">&#39;1999-11-11&#39;</span><span class="p">,</span><span class="mi">88</span><span class="p">.</span><span class="mi">88</span><span class="p">,</span><span class="s1">&#39;lisi@itcast.cn&#39;</span><span class="p">,</span><span class="s1">&#39;13888888888&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;李四&#39;</span><span class="p">,</span><span class="s1">&#39;男&#39;</span><span class="p">,</span><span class="s1">&#39;1999-11-11&#39;</span><span class="p">,</span><span class="mi">88</span><span class="p">.</span><span class="mi">88</span><span class="p">,</span><span class="s1">&#39;lisi@itcast.cn&#39;</span><span class="p">,</span><span class="s1">&#39;13888888888&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">-- 批量添加数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;李四&#39;</span><span class="p">,</span><span class="s1">&#39;男&#39;</span><span class="p">,</span><span class="s1">&#39;1999-11-11&#39;</span><span class="p">,</span><span class="mi">88</span><span class="p">.</span><span class="mi">88</span><span class="p">,</span><span class="s1">&#39;lisi@itcast.cn&#39;</span><span class="p">,</span><span class="s1">&#39;13888888888&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;李四&#39;</span><span class="p">,</span><span class="s1">&#39;男&#39;</span><span class="p">,</span><span class="s1">&#39;1999-11-11&#39;</span><span class="p">,</span><span class="mi">88</span><span class="p">.</span><span class="mi">88</span><span class="p">,</span><span class="s1">&#39;lisi@itcast.cn&#39;</span><span class="p">,</span><span class="s1">&#39;13888888888&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">	</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;李四&#39;</span><span class="p">,</span><span class="s1">&#39;男&#39;</span><span class="p">,</span><span class="s1">&#39;1999-11-11&#39;</span><span class="p">,</span><span class="mi">88</span><span class="p">.</span><span class="mi">88</span><span class="p">,</span><span class="s1">&#39;lisi@itcast.cn&#39;</span><span class="p">,</span><span class="s1">&#39;13888888888&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="72--修改数据" class="headerLink">
+    <a href="#72--%e4%bf%ae%e6%94%b9%e6%95%b0%e6%8d%ae" class="header-mark"></a>7.2  修改数据</h3><ul>
+<li><strong>修改表数据</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">UPDATE</span><span class="w"> </span><span class="err">表名</span><span class="w"> </span><span class="k">SET</span><span class="w"> </span><span class="err">列名</span><span class="mi">1</span><span class="o">=</span><span class="err">值</span><span class="mi">1</span><span class="p">,</span><span class="err">列名</span><span class="mi">2</span><span class="o">=</span><span class="err">值</span><span class="mi">2</span><span class="p">,</span><span class="err">…</span><span class="w"> </span><span class="p">[</span><span class="k">WHERE</span><span class="w"> </span><span class="err">条件</span><span class="p">]</span><span class="w"> </span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>注意：</p>
+<ol>
+<li>修改语句中如果不加条件，则将所有数据都修改！</li>
+<li>像上面的语句中的中括号，表示在写sql语句中可以省略这部分</li>
+</ol>
+</blockquote>
+<ul>
+<li>
+<p><strong>练习</strong></p>
+<ul>
+<li>
+<p>将张三的性别改为女</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">update</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">sex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;女&#39;</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;张三&#39;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>将张三的生日改为 1999-12-12 分数改为99.99</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">update</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">birthday</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;1999-12-12&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">score</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">99</span><span class="p">.</span><span class="mi">99</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;张三&#39;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>注意：如果update语句没有加where条件，则会将表中所有数据全部修改！</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">update</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="n">sex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;女&#39;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>上面语句的执行完后查询到的结果是：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210722204233305.png"
+        srcset="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210722204233305.png, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210722204233305.png 1.5x, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210722204233305.png 2x"
+        sizes="auto"
+        alt="image-20210722204233305"
+        title="image-20210722204233305" ></figure></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="73--删除数据" class="headerLink">
+    <a href="#73--%e5%88%a0%e9%99%a4%e6%95%b0%e6%8d%ae" class="header-mark"></a>7.3  删除数据</h3><ul>
+<li><strong>删除数据</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">DELETE</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">表名</span><span class="w"> </span><span class="p">[</span><span class="k">WHERE</span><span class="w"> </span><span class="err">条件</span><span class="p">]</span><span class="w"> </span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>练习</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- 删除张三记录
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">delete</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;张三&#39;</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">-- 删除stu表中所有的数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">delete</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="8dql" class="headerLink">
+    <a href="#8dql" class="header-mark"></a>8，DQL</h2><p>下面是黑马程序员展示试题库数据的页面</p>
+<img src="../../../quark01/assets/image-20210722215838144.png" alt="image-20210722215838144" style="zoom:80%;" />
+<p>页面上展示的数据肯定是在数据库中的试题库表中进行存储，而我们需要将数据库中的数据查询出来并展示在页面给用户看。上图中的是最基本的查询效果，那么数据库其实是很多的，不可能在将所有的数据在一页进行全部展示，而页面上会有分页展示的效果，如下：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210722220139174.png"
+        srcset="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210722220139174.png, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210722220139174.png 1.5x, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210722220139174.png 2x"
+        sizes="auto"
+        alt="image-20210722220139174"
+        title="image-20210722220139174" ></figure></p>
+<p>当然上图中的难度字段当我们点击也可以实现排序查询操作。从这个例子我们就可以看出，对于数据库的查询时灵活多变的，需要根据具体的需求来实现，而数据库查询操作也是最重要的操作，所以此部分需要大家重点掌握。</p>
+<p>接下来我们先介绍查询的完整语法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="err">字段列表</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">FROM</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="err">表名列表</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">WHERE</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="err">条件列表</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="err">分组字段</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">HAVING</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="err">分组后条件</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="err">排序字段</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">LIMIT</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="err">分页限定</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>为了给大家演示查询的语句，我们需要先准备表及一些数据：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="c1">-- 删除stu表
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">drop</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="k">exists</span><span class="w"> </span><span class="n">stu</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">-- 创建stu表
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="p">(</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="nb">int</span><span class="p">,</span><span class="w"> </span><span class="c1">-- 编号
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span><span class="w"> </span><span class="c1">-- 姓名
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="nb">int</span><span class="p">,</span><span class="w"> </span><span class="c1">-- 年龄
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w"> </span><span class="n">sex</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span><span class="w"> </span><span class="c1">-- 性别
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w"> </span><span class="n">address</span><span class="w"> </span><span class="nb">varchar</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span><span class="w"> </span><span class="c1">-- 地址
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w"> </span><span class="n">math</span><span class="w"> </span><span class="n">double</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="c1">-- 数学成绩
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w"> </span><span class="n">english</span><span class="w"> </span><span class="n">double</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="c1">-- 英语成绩
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="w"> </span><span class="n">hire_date</span><span class="w"> </span><span class="nb">date</span><span class="w"> </span><span class="c1">-- 入学时间
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">-- 添加数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">stu</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="n">NAME</span><span class="p">,</span><span class="n">age</span><span class="p">,</span><span class="n">sex</span><span class="p">,</span><span class="n">address</span><span class="p">,</span><span class="n">math</span><span class="p">,</span><span class="n">english</span><span class="p">,</span><span class="n">hire_date</span><span class="p">)</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">VALUES</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;马运&#39;</span><span class="p">,</span><span class="mi">55</span><span class="p">,</span><span class="s1">&#39;男&#39;</span><span class="p">,</span><span class="s1">&#39;杭州&#39;</span><span class="p">,</span><span class="mi">66</span><span class="p">,</span><span class="mi">78</span><span class="p">,</span><span class="s1">&#39;1995-09-01&#39;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;马花疼&#39;</span><span class="p">,</span><span class="mi">45</span><span class="p">,</span><span class="s1">&#39;女&#39;</span><span class="p">,</span><span class="s1">&#39;深圳&#39;</span><span class="p">,</span><span class="mi">98</span><span class="p">,</span><span class="mi">87</span><span class="p">,</span><span class="s1">&#39;1998-09-01&#39;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="s1">&#39;马斯克&#39;</span><span class="p">,</span><span class="mi">55</span><span class="p">,</span><span class="s1">&#39;男&#39;</span><span class="p">,</span><span class="s1">&#39;香港&#39;</span><span class="p">,</span><span class="mi">56</span><span class="p">,</span><span class="mi">77</span><span class="p">,</span><span class="s1">&#39;1999-09-02&#39;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="s1">&#39;柳白&#39;</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="s1">&#39;女&#39;</span><span class="p">,</span><span class="s1">&#39;湖南&#39;</span><span class="p">,</span><span class="mi">76</span><span class="p">,</span><span class="mi">65</span><span class="p">,</span><span class="s1">&#39;1997-09-05&#39;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="s1">&#39;柳青&#39;</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="s1">&#39;男&#39;</span><span class="p">,</span><span class="s1">&#39;湖南&#39;</span><span class="p">,</span><span class="mi">86</span><span class="p">,</span><span class="k">NULL</span><span class="p">,</span><span class="s1">&#39;1998-09-01&#39;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="s1">&#39;刘德花&#39;</span><span class="p">,</span><span class="mi">57</span><span class="p">,</span><span class="s1">&#39;男&#39;</span><span class="p">,</span><span class="s1">&#39;香港&#39;</span><span class="p">,</span><span class="mi">99</span><span class="p">,</span><span class="mi">99</span><span class="p">,</span><span class="s1">&#39;1998-09-01&#39;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="s1">&#39;张学右&#39;</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="s1">&#39;女&#39;</span><span class="p">,</span><span class="s1">&#39;香港&#39;</span><span class="p">,</span><span class="mi">99</span><span class="p">,</span><span class="mi">99</span><span class="p">,</span><span class="s1">&#39;1998-09-01&#39;</span><span class="p">),</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="s1">&#39;德玛西亚&#39;</span><span class="p">,</span><span class="mi">18</span><span class="p">,</span><span class="s1">&#39;男&#39;</span><span class="p">,</span><span class="s1">&#39;南京&#39;</span><span class="p">,</span><span class="mi">56</span><span class="p">,</span><span class="mi">65</span><span class="p">,</span><span class="s1">&#39;1994-09-02&#39;</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>接下来咱们从最基本的查询语句开始学起。</p>
+<h3 id="81--基础查询" class="headerLink">
+    <a href="#81--%e5%9f%ba%e7%a1%80%e6%9f%a5%e8%af%a2" class="header-mark"></a>8.1  基础查询</h3><h4 id="811--语法" class="headerLink">
+    <a href="#811--%e8%af%ad%e6%b3%95" class="header-mark"></a>8.1.1  语法</h4><ul>
+<li><strong>查询多个字段</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="err">字段列表</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">表名</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">表名</span><span class="p">;</span><span class="w"> </span><span class="c1">-- 查询所有数据
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>去除重复记录</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="k">DISTINCT</span><span class="w"> </span><span class="err">字段列表</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">表名</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>起别名</strong></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">AS</span><span class="p">:</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="err">也可以省略</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="812--练习" class="headerLink">
+    <a href="#812--%e7%bb%83%e4%b9%a0" class="header-mark"></a>8.1.2  练习</h4><ul>
+<li>
+<p>查询name、age两列</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="n">age</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>查询所有列的数据，列名的列表可以使用*替代</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>上面语句中的*不建议大家使用，因为在这写*不方便我们阅读sql语句。我们写字段列表的话，可以添加注释对每一个字段进行说明</p>
+<img src="../../../quark01/assets/image-20210722221534870.png" alt="image-20210722221534870" style="zoom:80%;" />
+<p>而在上课期间为了简约课程的时间，老师很多地方都会写*。</p>
+</li>
+<li>
+<p>查询地址信息</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="n">address</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>执行上面语句结果如下：</p>
+<p><figure><img
+        
+        loading="lazy"
+        src="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210722221756380.png"
+        srcset="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210722221756380.png, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210722221756380.png 1.5x, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210722221756380.png 2x"
+        sizes="auto"
+        alt="image-20210722221756380"
+        title="image-20210722221756380" ></figure></p>
+<p>从上面的结果我们可以看到有重复的数据，我们也可以使用 <code>distinct</code> 关键字去重重复数据。</p>
+</li>
+<li>
+<p>去除重复记录</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="k">distinct</span><span class="w"> </span><span class="n">address</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>查询姓名、数学成绩、英语成绩。并通过as给math和english起别名（as关键字可以省略）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="n">math</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="err">数学成绩</span><span class="p">,</span><span class="n">english</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="err">英文成绩</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="n">math</span><span class="w"> </span><span class="err">数学成绩</span><span class="p">,</span><span class="n">english</span><span class="w"> </span><span class="err">英文成绩</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="82--条件查询" class="headerLink">
+    <a href="#82--%e6%9d%a1%e4%bb%b6%e6%9f%a5%e8%af%a2" class="header-mark"></a>8.2  条件查询</h3><h4 id="821--语法" class="headerLink">
+    <a href="#821--%e8%af%ad%e6%b3%95" class="header-mark"></a>8.2.1  语法</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="err">字段列表</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">表名</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="err">条件列表</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>条件</strong></li>
+</ul>
+<p>条件列表可以使用以下运算符</p>
+<img src="../../../quark01/assets/image-20210722190508272.png" alt="image-20210722190508272" style="zoom:60%;" />
+<h4 id="822--条件查询练习" class="headerLink">
+    <a href="#822--%e6%9d%a1%e4%bb%b6%e6%9f%a5%e8%af%a2%e7%bb%83%e4%b9%a0" class="header-mark"></a>8.2.2  条件查询练习</h4><ul>
+<li>
+<p>查询年龄大于20岁的学员信息</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>查询年龄大于等于20岁的学员信息</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>查询年龄大于等于20岁 并且 年龄 小于等于 30岁 的学员信息</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w">  </span><span class="n">age</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="k">and</span><span class="w">  </span><span class="n">age</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>上面语句中 &amp;&amp;  和  and  都表示并且的意思。建议使用 and 。</p>
+<p>也可以使用  between &hellip; and 来实现上面需求</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="k">BETWEEN</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="mi">30</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>查询入学日期在'1998-09-01&rsquo; 到 &lsquo;1999-09-01&rsquo;  之间的学员信息</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">hire_date</span><span class="w"> </span><span class="k">BETWEEN</span><span class="w"> </span><span class="s1">&#39;1998-09-01&#39;</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="s1">&#39;1999-09-01&#39;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>查询年龄等于18岁的学员信息</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">18</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>查询年龄不等于18岁的学员信息</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">18</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="mi">18</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>查询年龄等于18岁 或者 年龄等于20岁 或者 年龄等于22岁的学员信息</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">18</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">22</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">20</span><span class="w"> </span><span class="p">,</span><span class="mi">22</span><span class="p">);</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>查询英语成绩为 null的学员信息</p>
+<p>null值的比较不能使用 =  或者 != 。需要使用 is  或者 is not</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">english</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">null</span><span class="p">;</span><span class="w"> </span><span class="c1">-- 这个语句是不行的
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">english</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">null</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">english</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h4 id="823--模糊查询练习" class="headerLink">
+    <a href="#823--%e6%a8%a1%e7%b3%8a%e6%9f%a5%e8%af%a2%e7%bb%83%e4%b9%a0" class="header-mark"></a>8.2.3  模糊查询练习</h4><blockquote>
+<p>模糊查询使用like关键字，可以使用通配符进行占位:</p>
+<p>（1）_ : 代表单个任意字符</p>
+<p>（2）% : 代表任意个数字符</p>
+</blockquote>
+<ul>
+<li>
+<p>查询姓&rsquo;马&rsquo;的学员信息</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">&#39;马%&#39;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>查询第二个字是&rsquo;花&rsquo;的学员信息</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">&#39;_花%&#39;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>查询名字中包含 &lsquo;德&rsquo; 的学员信息</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">&#39;%德%&#39;</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="83--排序查询" class="headerLink">
+    <a href="#83--%e6%8e%92%e5%ba%8f%e6%9f%a5%e8%af%a2" class="header-mark"></a>8.3  排序查询</h3><h4 id="831--语法" class="headerLink">
+    <a href="#831--%e8%af%ad%e6%b3%95" class="header-mark"></a>8.3.1  语法</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="err">字段列表</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">表名</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="err">排序字段名</span><span class="mi">1</span><span class="w"> </span><span class="p">[</span><span class="err">排序方式</span><span class="mi">1</span><span class="p">],</span><span class="err">排序字段名</span><span class="mi">2</span><span class="w"> </span><span class="p">[</span><span class="err">排序方式</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="err">…</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>上述语句中的排序方式有两种，分别是：</p>
+<ul>
+<li>ASC ： 升序排列 <strong>（默认值）</strong></li>
+<li>DESC ： 降序排列</li>
+</ul>
+<blockquote>
+<p>注意：如果有多个排序条件，当前边的条件值一样时，才会根据第二条件进行排序</p>
+</blockquote>
+<h4 id="832--练习" class="headerLink">
+    <a href="#832--%e7%bb%83%e4%b9%a0" class="header-mark"></a>8.3.2  练习</h4><ul>
+<li>
+<p>查询学生信息，按照年龄升序排列</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>查询学生信息，按照数学成绩降序排列</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">math</span><span class="w"> </span><span class="k">desc</span><span class="w"> </span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>查询学生信息，按照数学成绩降序排列，如果数学成绩一样，再按照英语成绩升序排列</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">math</span><span class="w"> </span><span class="k">desc</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="n">english</span><span class="w"> </span><span class="k">asc</span><span class="w"> </span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="84--聚合函数" class="headerLink">
+    <a href="#84--%e8%81%9a%e5%90%88%e5%87%bd%e6%95%b0" class="header-mark"></a>8.4  聚合函数</h3><h4 id="841--概念" class="headerLink">
+    <a href="#841--%e6%a6%82%e5%bf%b5" class="header-mark"></a>8.4.1  概念</h4><p>==将一列数据作为一个整体，进行纵向计算。==</p>
+<p>如何理解呢？假设有如下表</p>
+<img src="../../../quark01/assets/image-20210722194410628.png" alt="image-20210722194410628" style="zoom:80%;" />
+<p>现有一需求让我们求表中所有数据的数学成绩的总和。这就是对math字段进行纵向求和。</p>
+<h4 id="842--聚合函数分类" class="headerLink">
+    <a href="#842--%e8%81%9a%e5%90%88%e5%87%bd%e6%95%b0%e5%88%86%e7%b1%bb" class="header-mark"></a>8.4.2  聚合函数分类</h4><table>
+<thead>
+<tr>
+<th>函数名</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>count(列名)</td>
+<td>统计数量（一般选用不为null的列）</td>
+</tr>
+<tr>
+<td>max(列名)</td>
+<td>最大值</td>
+</tr>
+<tr>
+<td>min(列名)</td>
+<td>最小值</td>
+</tr>
+<tr>
+<td>sum(列名)</td>
+<td>求和</td>
+</tr>
+<tr>
+<td>avg(列名)</td>
+<td>平均值</td>
+</tr>
+</tbody>
+</table>
+<h4 id="843--聚合函数语法" class="headerLink">
+    <a href="#843--%e8%81%9a%e5%90%88%e5%87%bd%e6%95%b0%e8%af%ad%e6%b3%95" class="header-mark"></a>8.4.3  聚合函数语法</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="err">聚合函数名</span><span class="p">(</span><span class="err">列名</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">表</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>注意：null 值不参与所有聚合函数运算</p>
+</blockquote>
+<h4 id="844--练习" class="headerLink">
+    <a href="#844--%e7%bb%83%e4%b9%a0" class="header-mark"></a>8.4.4  练习</h4><ul>
+<li>
+<p>统计班级一共有多少个学生</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="n">english</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>上面语句根据某个字段进行统计，如果该字段某一行的值为null的话，将不会被统计。所以可以在count(*) 来实现。* 表示所有字段数据，一行中也不可能所有的数据都为null，所以建议使用 count(*)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>查询数学成绩的最高分</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="k">max</span><span class="p">(</span><span class="n">math</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>查询数学成绩的最低分</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="k">min</span><span class="p">(</span><span class="n">math</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>查询数学成绩的总分</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="k">sum</span><span class="p">(</span><span class="n">math</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>查询数学成绩的平均分</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="k">avg</span><span class="p">(</span><span class="n">math</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>查询英语成绩的最低分</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="k">min</span><span class="p">(</span><span class="n">english</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<h3 id="85--分组查询" class="headerLink">
+    <a href="#85--%e5%88%86%e7%bb%84%e6%9f%a5%e8%af%a2" class="header-mark"></a>8.5  分组查询</h3><h4 id="851--语法" class="headerLink">
+    <a href="#851--%e8%af%ad%e6%b3%95" class="header-mark"></a>8.5.1  语法</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="err">字段列表</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">表名</span><span class="w"> </span><span class="p">[</span><span class="k">WHERE</span><span class="w"> </span><span class="err">分组前条件限定</span><span class="p">]</span><span class="w"> </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="err">分组字段名</span><span class="w"> </span><span class="p">[</span><span class="k">HAVING</span><span class="w"> </span><span class="err">分组后条件过滤</span><span class="p">];</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>注意：分组之后，查询的字段为聚合函数和分组字段，查询其他字段无任何意义</p>
+</blockquote>
+<h4 id="852--练习" class="headerLink">
+    <a href="#852--%e7%bb%83%e4%b9%a0" class="header-mark"></a>8.5.2  练习</h4><ul>
+<li>
+<p>查询男同学和女同学各自的数学平均分</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="n">sex</span><span class="p">,</span><span class="w"> </span><span class="k">avg</span><span class="p">(</span><span class="n">math</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">sex</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>注意：分组之后，查询的字段为聚合函数和分组字段，查询其他字段无任何意义</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">sex</span><span class="p">,</span><span class="w"> </span><span class="k">avg</span><span class="p">(</span><span class="n">math</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">sex</span><span class="p">;</span><span class="w">  </span><span class="c1">-- 这里查询name字段就没有任何意义
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>查询男同学和女同学各自的数学平均分，以及各自人数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="n">sex</span><span class="p">,</span><span class="w"> </span><span class="k">avg</span><span class="p">(</span><span class="n">math</span><span class="p">),</span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">sex</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>查询男同学和女同学各自的数学平均分，以及各自人数，要求：分数低于70分的不参与分组</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="n">sex</span><span class="p">,</span><span class="w"> </span><span class="k">avg</span><span class="p">(</span><span class="n">math</span><span class="p">),</span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">math</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">70</span><span class="w"> </span><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">sex</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>查询男同学和女同学各自的数学平均分，以及各自人数，要求：分数低于70分的不参与分组，分组之后人数大于2个的</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="n">sex</span><span class="p">,</span><span class="w"> </span><span class="k">avg</span><span class="p">(</span><span class="n">math</span><span class="p">),</span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">math</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">70</span><span class="w"> </span><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">sex</span><span class="w"> </span><span class="k">having</span><span class="w"> </span><span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w">  </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p><strong>where 和 having 区别：</strong></p>
+<ul>
+<li>
+<p>执行时机不一样：where 是分组之前进行限定，不满足where条件，则不参与分组，而having是分组之后对结果进行过滤。</p>
+</li>
+<li>
+<p>可判断的条件不一样：where 不能对聚合函数进行判断，having 可以。</p>
+</li>
+</ul>
+<h3 id="86--分页查询" class="headerLink">
+    <a href="#86--%e5%88%86%e9%a1%b5%e6%9f%a5%e8%af%a2" class="header-mark"></a>8.6  分页查询</h3><p>如下图所示，大家在很多网站都见过类似的效果，如京东、百度、淘宝等。分页查询是将数据一页一页的展示给用户看，用户也可以通过点击查看下一页的数据。</p>
+<img src="../../../quark01/assets/image-20210722230330366.png" alt="image-20210722230330366" style="zoom:80%;" />
+<p>接下来我们先说分页查询的语法。</p>
+<h4 id="861--语法" class="headerLink">
+    <a href="#861--%e8%af%ad%e6%b3%95" class="header-mark"></a>8.6.1  语法</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="err">字段列表</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">表名</span><span class="w"> </span><span class="k">LIMIT</span><span class="w">  </span><span class="err">起始索引</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="err">查询条目数</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>注意： 上述语句中的起始索引是从0开始</p>
+</blockquote>
+<h4 id="862--练习" class="headerLink">
+    <a href="#862--%e7%bb%83%e4%b9%a0" class="header-mark"></a>8.6.2  练习</h4><ul>
+<li>
+<p>从0开始查询，查询3条数据</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">limit</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>每页显示3条数据，查询第1页数据</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">limit</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>每页显示3条数据，查询第2页数据</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">limit</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>每页显示3条数据，查询第3页数据</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">stu</span><span class="w"> </span><span class="k">limit</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p>从上面的练习推导出起始索引计算公式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="err">起始索引</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="err">当前页码</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="err">每页显示的条数</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></div>
+
+        
+
+<div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-12-31</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span><a class="link-to-mardown" href=/mysql/index.md target="_blank" rel="noopener noreferrer">阅读原始文档</a>
+                    </span></div>
+            <div class="post-info-share"><button title="分享到 Twitter" data-sharer="twitter" data-url="https://alphaguo.vip/mysql/" data-title="MySql" data-via="@guo_alpha36266" data-hashtags="SQL"><span class="fab fa-twitter fa-fw"></span></button><button title="分享到 Facebook" data-sharer="facebook" data-url="https://alphaguo.vip/mysql/" data-hashtag="SQL"><span class="fab fa-facebook-square fa-fw"></span></button><button title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://alphaguo.vip/mysql/" data-title="MySql" data-web><span class="fab fa-whatsapp fa-fw"></span></button><button title="分享到 Line" data-sharer="line" data-url="https://alphaguo.vip/mysql/" data-title="MySql"><span data-svg-src="/lib/simple-icons/icons/line.min.svg"></span></button><button title="分享到 微博" data-sharer="weibo" data-url="https://alphaguo.vip/mysql/" data-title="MySql"><span class="fab fa-weibo fa-fw"></span></button><button title="分享到 Myspace" data-sharer="myspace" data-url="https://alphaguo.vip/mysql/" data-title="MySql" data-description=""><span data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></span></button><button title="分享到 Blogger" data-sharer="blogger" data-url="https://alphaguo.vip/mysql/" data-title="MySql" data-description=""><span class="fab fa-blogger fa-fw"></span></button><button title="分享到 Evernote" data-sharer="evernote" data-url="https://alphaguo.vip/mysql/" data-title="MySql"><span class="fab fa-evernote fa-fw"></span></button></div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/sql/">SQL</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav">
+            <a href="/request-response/" class="next" rel="next" title="Request Response">Request Response<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">AlphaGuo</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+            <div class="footer-line"></div>
+            <div class="footer-line">
+            </div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="回到顶部">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div id="cookieconsent-container"></div><div class="assets"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/katex/copy-tex.min.css">
+        <noscript><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"desktop-header-typeit":"AlphaGuo Blog","mobile-header-typeit":"AlphaGuo Blog"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":50,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"sharerjs":true,"table":{"sort":true},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/lib/tablesort/tablesort.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js" defer></script><script type="text/javascript" src="/lib/katex/mhchem.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script type="text/javascript" src="/js/cookieconsent.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script></div>
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>C - 分类 - AlphaGuo Blog</title>
+        <link>https://alphaguo.vip/categories/c/</link>
+        <description>C - 分类 - AlphaGuo Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 31 Dec 2023 22:41:39 &#43;0800</lastBuildDate><atom:link href="https://alphaguo.vip/categories/c/" rel="self" type="application/rss+xml" /><item>
+    <title>文件操作pro</title>
+    <link>https://alphaguo.vip/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9Cpro/</link>
+    <pubDate>Sun, 31 Dec 2023 22:41:39 &#43;0800</pubDate><author>
+                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9Cpro/</guid>
+    <description><![CDATA[1、相关概念 1.1 文件的概念​ 一个文件通常就是磁盘上一段命名的存储区。但是对于操作系统来说，文件就会更复杂一些。例如，一个大文件可以存储在一些分]]></description>
+</item><item>
+    <title>结构体强化</title>
+    <link>https://alphaguo.vip/%E7%BB%93%E6%9E%84%E4%BD%93%E5%BC%BA%E5%8C%96/</link>
+    <pubDate>Sun, 31 Dec 2023 22:41:20 &#43;0800</pubDate><author>
+                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/%E7%BB%93%E6%9E%84%E4%BD%93%E5%BC%BA%E5%8C%96/</guid>
+    <description><![CDATA[1、结构体基础知识 1.1 结构体类型的定义 1 2 3 4 5 6 7 8 9 struct Person{ char name[64]; int age; }; typedef struct _PERSON{ char name[64]; int age; }Person; 注意：定义结构体类型时不要直接给成员赋值，结构体只是一个]]></description>
+</item><item>
+    <title>多维数组</title>
+    <link>https://alphaguo.vip/%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84/</link>
+    <pubDate>Sun, 31 Dec 2023 22:40:56 &#43;0800</pubDate><author>
+                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84/</guid>
+    <description><![CDATA[1、一维数组 元素类型角度：数组是相同类型的变量的有序集合 内存角度：连续的一大片内存空间 1.1 数组名考虑下面这些声明： 1 2 int a; int b[10]; 我们把a称作标量]]></description>
+</item><item>
+    <title>内存分区</title>
+    <link>https://alphaguo.vip/%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA/</link>
+    <pubDate>Sun, 31 Dec 2023 22:40:41 &#43;0800</pubDate><author>
+                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA/</guid>
+    <description><![CDATA[1、内存分区 1.1 运行之前1）预处理：宏定义展开、头文件展开、条件编译，这里并不会检查语法 2）编译：检查语法，将预处理后文件编译生成汇编文件 3）]]></description>
+</item><item>
+    <title>指针强化</title>
+    <link>https://alphaguo.vip/%E6%8C%87%E9%92%88%E5%BC%BA%E5%8C%96/</link>
+    <pubDate>Sun, 31 Dec 2023 20:41:43 &#43;0800</pubDate><author>
+                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/%E6%8C%87%E9%92%88%E5%BC%BA%E5%8C%96/</guid>
+    <description><![CDATA[1、指针是一种数据类型 1.1 指针变量指针是一种数据类型，占用内存空间，用来保存内存地址。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 void test01(){ int* p1 = 0x1234; int*** p2 = 0x1111;]]></description>
+</item><item>
+    <title>数据类型</title>
+    <link>https://alphaguo.vip/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</link>
+    <pubDate>Sun, 31 Dec 2023 20:36:38 &#43;0800</pubDate><author>
+                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</guid>
+    <description><![CDATA[数据类型 1.1、数据类型的基本概念 类型是对数据的抽象; 类型相同的数据具有相同的表示形式、存储格式以及相关操作; 程序中所有的数据都必定属于某种]]></description>
+</item><item>
+    <title>低级函数</title>
+    <link>https://alphaguo.vip/%E4%BD%8E%E7%BA%A7%E5%87%BD%E6%95%B0/</link>
+    <pubDate>Sun, 31 Dec 2023 20:36:00 &#43;0800</pubDate><author>
+                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/%E4%BD%8E%E7%BA%A7%E5%87%BD%E6%95%B0/</guid>
+    <description><![CDATA[函数函数是编程中的一个基本概念，它是一段被命名的代码块，可以在程序中多次调用。函数允许将代码逻辑分成可重复使用的模块，从而提高代码的可读性、]]></description>
+</item><item>
+    <title>文件操作</title>
+    <link>https://alphaguo.vip/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</link>
+    <pubDate>Sun, 31 Dec 2023 20:35:34 &#43;0800</pubDate><author>
+                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/</guid>
+    <description><![CDATA[1 、概述 1.1磁盘文件和设备文件 磁盘文件 指一组相关数据的有序集合,通常存储在外部介质(如磁盘)上，使用时才调入内存。 设备文件 在操作系统中把每]]></description>
+</item><item>
+    <title>结构体</title>
+    <link>https://alphaguo.vip/%E7%BB%93%E6%9E%84%E4%BD%93/</link>
+    <pubDate>Sun, 31 Dec 2023 20:35:12 &#43;0800</pubDate><author>
+                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/%E7%BB%93%E6%9E%84%E4%BD%93/</guid>
+    <description><![CDATA[复合类型（自定义类型） 1、结构体 1.1概述数组：描述一组具有相同类型数据的有序集合，用于处理大量相同类型的数据运算。 有时我们需要将不同类型的]]></description>
+</item><item>
+    <title>内存</title>
+    <link>https://alphaguo.vip/%E5%86%85%E5%AD%98/</link>
+    <pubDate>Sun, 31 Dec 2023 20:34:57 &#43;0800</pubDate><author>
+                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/%E5%86%85%E5%AD%98/</guid>
+    <description><![CDATA[extern，静态函数，，内存操作函数（memset,memcpy） 1、概念 1.1局部变量 定义： 局部变量是在函数内部声明的变量，只在声明它的]]></description>
+</item></channel>
+</rss>

@@ -1,0 +1,41 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Web - 分类 - AlphaGuo Blog</title>
+        <link>https://alphaguo.vip/categories/web/</link>
+        <description>Web - 分类 - AlphaGuo Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 31 Dec 2023 20:33:00 &#43;0800</lastBuildDate><atom:link href="https://alphaguo.vip/categories/web/" rel="self" type="application/rss+xml" /><item>
+    <title>Maven</title>
+    <link>https://alphaguo.vip/maven/</link>
+    <pubDate>Sun, 31 Dec 2023 20:33:00 &#43;0800</pubDate><author>
+                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/maven/</guid>
+    <description><![CDATA[Apache Maven 是一个项目管理和构建工具，它基于项目对象模型(POM)的概念 通过一小段描述信息来管理项目的构建、报告和文档 官网：http://maven]]></description>
+</item><item>
+    <title>Cookie JSON</title>
+    <link>https://alphaguo.vip/cookie-json/</link>
+    <pubDate>Sun, 31 Dec 2023 20:32:40 &#43;0800</pubDate><author>
+        <name>AlphaGuo</name>
+    </author><guid>https://alphaguo.vip/cookie-json/</guid>
+    <description><![CDATA[1，会话跟踪技术的概述对于会话跟踪这四个词，我们需要拆开来进行解释，首先要理解什么是会话，然后再去理解什么是会话跟踪: 会话:用户打开浏览器，]]></description>
+</item><item>
+    <title>Filter Listener Ajax</title>
+    <link>https://alphaguo.vip/filter-listener-ajax/</link>
+    <pubDate>Sun, 31 Dec 2023 20:32:08 &#43;0800</pubDate><author>
+        <name>AlphaGuo</name>
+    </author><guid>https://alphaguo.vip/filter-listener-ajax/</guid>
+    <description><![CDATA[Filter&amp;Listener&amp;Ajax 1，Filter 1.1 Filter概述Filter 表示过滤器，是 JavaWeb 三大组件(Servlet、Filter、Listener)之一。Servle]]></description>
+</item><item>
+    <title>Servlet Tomcat</title>
+    <link>https://alphaguo.vip/servlet-tomcat/</link>
+    <pubDate>Sun, 31 Dec 2023 20:31:40 &#43;0800</pubDate><author>
+        <name>AlphaGuo</name>
+    </author><guid>https://alphaguo.vip/servlet-tomcat/</guid>
+    <description><![CDATA[1，Web概述 1.1 Web和JavaWeb的概念==Web是全球广域网，也称为万维网(www)，能够通过浏览器访问的网站。== 在我们日常的生活中]]></description>
+</item><item>
+    <title>Request Response</title>
+    <link>https://alphaguo.vip/request-response/</link>
+    <pubDate>Sun, 31 Dec 2023 20:30:57 &#43;0800</pubDate><author>
+        <name>AlphaGuo</name>
+    </author><guid>https://alphaguo.vip/request-response/</guid>
+    <description><![CDATA[1，Request和Response的概述==Request是请求对象，Response是响应对象。==这两个对象在我们使用Servlet的]]></description>
+</item></channel>
+</rss>

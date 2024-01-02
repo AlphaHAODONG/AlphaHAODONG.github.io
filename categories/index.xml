@@ -1,0 +1,77 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Categories - 分类 - AlphaGuo Blog</title>
+        <link>https://alphaguo.vip/categories/</link>
+        <description>Categories - 分类 - AlphaGuo Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 31 Dec 2023 22:42:17 &#43;0800</lastBuildDate><atom:link href="https://alphaguo.vip/categories/" rel="self" type="application/rss+xml" /><item>
+    <title>Linux</title>
+    <link>https://alphaguo.vip/categories/linux/</link>
+    <pubDate>Sun, 31 Dec 2023 22:42:17 &#43;0800</pubDate><author>
+        <name>AlphaGuo</name>
+    </author><guid>https://alphaguo.vip/categories/linux/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>JS</title>
+    <link>https://alphaguo.vip/categories/js/</link>
+    <pubDate>Sun, 31 Dec 2023 22:41:56 &#43;0800</pubDate><author>
+        <name>AlphaGuo</name>
+    </author><guid>https://alphaguo.vip/categories/js/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>C</title>
+    <link>https://alphaguo.vip/categories/c/</link>
+    <pubDate>Sun, 31 Dec 2023 22:41:39 &#43;0800</pubDate><author>
+        <name>AlphaGuo</name>
+    </author><guid>https://alphaguo.vip/categories/c/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>疑难杂症</title>
+    <link>https://alphaguo.vip/categories/%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/</link>
+    <pubDate>Sun, 31 Dec 2023 22:38:18 &#43;0800</pubDate><author>
+        <name>AlphaGuo</name>
+    </author><guid>https://alphaguo.vip/categories/%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>算法</title>
+    <link>https://alphaguo.vip/categories/%E7%AE%97%E6%B3%95/</link>
+    <pubDate>Sun, 31 Dec 2023 22:37:37 &#43;0800</pubDate><author>
+        <name>AlphaGuo</name>
+    </author><guid>https://alphaguo.vip/categories/%E7%AE%97%E6%B3%95/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>JVAV</title>
+    <link>https://alphaguo.vip/categories/jvav/</link>
+    <pubDate>Sun, 31 Dec 2023 20:41:01 &#43;0800</pubDate><author>
+        <name>AlphaGuo</name>
+    </author><guid>https://alphaguo.vip/categories/jvav/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>JVAVA</title>
+    <link>https://alphaguo.vip/categories/jvava/</link>
+    <pubDate>Sun, 31 Dec 2023 20:40:40 &#43;0800</pubDate><author>
+        <name>AlphaGuo</name>
+    </author><guid>https://alphaguo.vip/categories/jvava/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>tool</title>
+    <link>https://alphaguo.vip/categories/tool/</link>
+    <pubDate>Sun, 31 Dec 2023 20:40:22 &#43;0800</pubDate><author>
+        <name>AlphaGuo</name>
+    </author><guid>https://alphaguo.vip/categories/tool/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>Spring</title>
+    <link>https://alphaguo.vip/categories/spring/</link>
+    <pubDate>Sun, 31 Dec 2023 20:33:49 &#43;0800</pubDate><author>
+        <name>AlphaGuo</name>
+    </author><guid>https://alphaguo.vip/categories/spring/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>Mybatis</title>
+    <link>https://alphaguo.vip/categories/mybatis/</link>
+    <pubDate>Sun, 31 Dec 2023 20:33:33 &#43;0800</pubDate><author>
+        <name>AlphaGuo</name>
+    </author><guid>https://alphaguo.vip/categories/mybatis/</guid>
+    <description><![CDATA[]]></description>
+</item></channel>
+</rss>

@@ -1,0 +1,389 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>Linux命令大全 - AlphaGuo Blog</title><meta name="Description" content="关山难越"><meta property="og:title" content="Linux命令大全" />
+<meta property="og:description" content="Vim命令合集 *命令历史* 以:和/开头的命令都有历史纪录，可以首先键入:或/然后按上下箭头来选择某个历史命令。 *启动vim* 在命令行窗口中输" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://alphaguo.vip/linux%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8/" /><meta property="og:image" content="https://alphaguo.vip/images/favicon-16x16.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-12-31T22:40:01+08:00" />
+<meta property="article:modified_time" content="2023-12-31T22:40:01+08:00" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://alphaguo.vip/images/favicon-16x16.png" /><meta name="twitter:title" content="Linux命令大全"/>
+<meta name="twitter:description" content="Vim命令合集 *命令历史* 以:和/开头的命令都有历史纪录，可以首先键入:或/然后按上下箭头来选择某个历史命令。 *启动vim* 在命令行窗口中输"/>
+<meta name="twitter:site" content="@guo_alpha36266"/>
+<meta name="application-name" content="AlphaGuo">
+<meta name="apple-mobile-web-app-title" content="AlphaGuo">
+
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><meta name="twitter:creator" content="@@guo_alpha36266" /><link rel="icon" href="/images/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://alphaguo.vip/linux%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8/" /><link rel="prev" href="https://alphaguo.vip/vi%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/" /><link rel="next" href="https://alphaguo.vip/linux%E5%90%84%E7%BA%A7%E7%9B%AE%E5%BD%95%E7%AE%80%E4%BB%8B/" />
+<link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Linux命令大全",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://alphaguo.vip/linux%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8/"
+        },"genre": "posts","keywords": "Linux","wordcount":  3039 ,
+        "url": "https://alphaguo.vip/linux%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8/","datePublished": "2023-12-31T22:40:01+08:00","dateModified": "2023-12-31T22:40:01+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"authors": [{
+                        "@type": "Person",
+                        "name": "AlphaGuo"                    
+                    }],"description": ""
+    }
+    </script></head>
+
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme); document.documentElement.style.setProperty('color-scheme', theme === 'light' ? 'light' : 'dark'); window.theme = theme;   window.isDark = window.theme !== 'light' }
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('auto' === 'light' || 'auto' === 'dark' || 'auto' === 'black') setTheme('auto'), saveTheme('auto'); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+        window.switchThemeEventSet = new Set()
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="AlphaGuo Blog"><span id="desktop-header-typeit" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-select" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                    <select class="color-theme-select" id="theme-select-desktop" title="切换主题">
+                        <option value="light">浅色</option>
+                        <option value="dark">深色</option>
+                        <option value="black">黑色</option>
+                        <option value="auto">跟随系统</option>
+                    </select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="AlphaGuo Blog"><span id="mobile-header-typeit" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-select" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+                <select class="color-theme-select" id="theme-select-mobile" title="切换主题">
+                    <option value="light">浅色</option>
+                    <option value="dark">深色</option>
+                    <option value="black">黑色</option>
+                    <option value="auto">跟随系统</option>
+                </select>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">目录</h2>
+        <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents"></nav></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Linux命令大全</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><span class='author'><span class="author fas fa-user-circle fa-fw"></span><span class='screen-reader-text'>  </span><a href='https://alphaguo.vip/authors/alphaguo'>AlphaGuo</a></span>
+                </span>&nbsp;<span class="post-category">收录于 </span>&nbsp;<span class="post-category">类别 <a href="/categories/linux/"><i class="far fa-folder fa-fw"></i>Linux</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2023-12-31">2023-12-31</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2023-12-31">2023-12-31</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3039 字&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 7 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><p><a href="http://www.cnblogs.com/softwaretesting/archive/2011/07/12/2104435.html" target="_blank" rel="noopener noreferrer">Vim命令合集</a></p>
+<p><em><strong>*命令历史*</strong></em></p>
+<p>以:和/开头的命令都有历史纪录，可以首先键入:或/然后按上下箭头来选择某个历史命令。</p>
+<p><em><strong>*启动vim*</strong></em></p>
+<p>在命令行窗口中输入以下命令即可</p>
+<p>vim 直接启动vim</p>
+<p>vim filename 打开vim并创建名为filename的文件</p>
+<p><em><strong>*文件命令*</strong></em></p>
+<p>打开单个文件</p>
+<p>vim file</p>
+<p>同时打开多个文件</p>
+<p>vim file1 file2 file3 &hellip;</p>
+<p>在vim窗口中打开一个新文件</p>
+<p>:open file</p>
+<p>在新窗口中打开文件</p>
+<p>:split file</p>
+<p>切换到下一个文件</p>
+<p>:bn</p>
+<p>切换到上一个文件</p>
+<p>:bp</p>
+<p>查看当前打开的文件列表，当前正在编辑的文件会用[]括起来。</p>
+<p>:args</p>
+<p>打开远程文件，比如ftp或者share folder</p>
+<p>:e ftp://192.168.10.76/abc.txt</p>
+<p>:e \qadrive\test\1.txt</p>
+<p><em><strong>*vim的模式*</strong></em></p>
+<p>正常模式（按Esc或Ctrl+[进入） 左下角显示文件名或为空</p>
+<p>插入模式（按i键进入） 左下角显示&ndash;INSERT&ndash;</p>
+<p>可视模式（不知道如何进入） 左下角显示&ndash;VISUAL&ndash;</p>
+<p><em><strong>*导航命令*</strong></em></p>
+<p>% 括号匹配</p>
+<p><em><strong>*插入命令*</strong></em></p>
+<p>i 在当前位置生前插入</p>
+<p>I 在当前行首插入</p>
+<p>a 在当前位置后插入</p>
+<p>A 在当前行尾插入</p>
+<p>o 在当前行之后插入一行</p>
+<p>O 在当前行之前插入一行</p>
+<p><em><strong>*查找命令*</strong></em></p>
+<p>/text　　查找text，按n健查找下一个，按N健查找前一个。</p>
+<p>?text　　查找text，反向查找，按n健查找下一个，按N健查找前一个。</p>
+<p>vim中有一些特殊字符在查找时需要转义　　.*[]^%/?~$</p>
+<p>:set ignorecase　　忽略大小写的查找</p>
+<p>:set noignorecase　　不忽略大小写的查找</p>
+<p>查找很长的词，如果一个词很长，键入麻烦，可以将光标移动到该词上，按*或#键即可以该单词进行搜索，相当于/搜索。而#命令相当于?搜索。</p>
+<p>:set hlsearch　　高亮搜索结果，所有结果都高亮显示，而不是只显示一个匹配。</p>
+<p>:set nohlsearch　　关闭高亮搜索显示</p>
+<p>:nohlsearch　　关闭当前的高亮显示，如果再次搜索或者按下n或N键，则会再次高亮。</p>
+<p>:set incsearch　　逐步搜索模式，对当前键入的字符进行搜索而不必等待键入完成。</p>
+<p>:set wrapscan　　重新搜索，在搜索到文件头或尾时，返回继续搜索，默认开启。</p>
+<p><em><strong>*替换命令*</strong></em></p>
+<p>ra 将当前字符替换为a，当期字符即光标所在字符。</p>
+<p>s/old/new/ 用old替换new，替换当前行的第一个匹配</p>
+<p>s/old/new/g 用old替换new，替换当前行的所有匹配</p>
+<p>%s/old/new/ 用old替换new，替换所有行的第一个匹配</p>
+<p>%s/old/new/g 用old替换new，替换整个文件的所有匹配</p>
+<p>:10,20 s/^/  /g 在第10行知第20行每行前面加四个空格，用于缩进。</p>
+<p>ddp 交换光标所在行和其下紧邻的一行。</p>
+<p><em><strong>*移动命令*</strong></em></p>
+<p>h 左移一个字符</p>
+<p>l 右移一个字符，这个命令很少用，一般用w代替。</p>
+<p>k 上移一个字符</p>
+<p>j 下移一个字符</p>
+<p>以上四个命令可以配合数字使用，比如20j就是向下移动20行，5h就是向左移动5个字符，在Vim中，很多命令都可以配合数字使用，比如删除10个字符10x，在当前位置后插入3个！，3a！<Esc>，这里的Esc是必须的，否则命令不生效。</p>
+<p>w 向前移动一个单词（光标停在单词首部），如果已到行尾，则转至下一行行首。此命令快，可以代替l命令。</p>
+<p>b 向后移动一个单词 2b 向后移动2个单词</p>
+<p>e，同w，只不过是光标停在单词尾部</p>
+<p>ge，同b，光标停在单词尾部。</p>
+<p>^ 移动到本行第一个非空白字符上。</p>
+<p>0（数字0）移动到本行第一个字符上，</p>
+<p><HOME> 移动到本行第一个字符。同0健。</p>
+<p>$ 移动到行尾 3$ 移动到下面3行的行尾</p>
+<p>gg 移动到文件头。 = [[</p>
+<p>G（shift + g） 移动到文件尾。 = ]]</p>
+<p>f（find）命令也可以用于移动，fx将找到光标后第一个为x的字符，3fd将找到第三个为d的字符。</p>
+<p>F 同f，反向查找。</p>
+<p>跳到指定行，冒号+行号，回车，比如跳到240行就是 :240回车。另一个方法是行号+G，比如230G跳到230行。</p>
+<p>Ctrl + e 向下滚动一行</p>
+<p>Ctrl + y 向上滚动一行</p>
+<p>Ctrl + d 向下滚动半屏</p>
+<p>Ctrl + u 向上滚动半屏</p>
+<p>Ctrl + f 向下滚动一屏</p>
+<p>Ctrl + b 向上滚动一屏</p>
+<p><em><strong>*撤销和重做*</strong></em></p>
+<p>u 撤销（Undo）</p>
+<p>U 撤销对整行的操作</p>
+<p>Ctrl + r 重做（Redo），即撤销的撤销。</p>
+<p><em><strong>*删除命令*</strong></em></p>
+<p>x 删除当前字符</p>
+<p>3x 删除当前光标开始向后三个字符</p>
+<p>X 删除当前字符的前一个字符。X=dh</p>
+<p>dl 删除当前字符， dl=x</p>
+<p>dh 删除前一个字符</p>
+<p>dd 删除当前行</p>
+<p>dj 删除上一行</p>
+<p>dk 删除下一行</p>
+<p>10d 删除当前行开始的10行。</p>
+<p>D 删除当前字符至行尾。D=d$</p>
+<p>d$ 删除当前字符之后的所有字符（本行）</p>
+<p>kdgg 删除当前行之前所有行（不包括当前行）</p>
+<p>jdG（jd shift + g）  删除当前行之后所有行（不包括当前行）</p>
+<p>:1,10d 删除1-10行</p>
+<p>:11,$d 删除11行及以后所有的行</p>
+<p>:1,$d 删除所有行</p>
+<p>J(shift + j)　　删除两行之间的空行，实际上是合并两行。</p>
+<p><em><strong>*拷贝和粘贴*</strong></em></p>
+<p>yy 拷贝当前行</p>
+<p>nyy 拷贝当前后开始的n行，比如2yy拷贝当前行及其下一行。</p>
+<p>p 在当前光标后粘贴,如果之前使用了yy命令来复制一行，那么就在当前行的下一行粘贴。</p>
+<p>shift+p 在当前行前粘贴</p>
+<p>:1,10 co 20 将1-10行插入到第20行之后。</p>
+<p>:1,$ co $ 将整个文件复制一份并添加到文件尾部。</p>
+<p>正常模式下按v（逐字）或V（逐行）进入可视模式，然后用jklh命令移动即可选择某些行或字符，再按y即可复制</p>
+<p>ddp交换当前行和其下一行</p>
+<p>xp交换当前字符和其后一个字符</p>
+<p><em><strong>*剪切命令*</strong></em></p>
+<p>正常模式下按v（逐字）或V（逐行）进入可视模式，然后用jklh命令移动即可选择某些行或字符，再按d即可剪切</p>
+<p>ndd 剪切当前行之后的n行。利用p命令可以对剪切的内容进行粘贴</p>
+<p>:1,10d 将1-10行剪切。利用p命令可将剪切后的内容进行粘贴。</p>
+<p>:1, 10 m 20 将第1-10行移动到第20行之后。</p>
+<p><em><strong>*退出命令*</strong></em></p>
+<p>:wq 保存并退出</p>
+<p>ZZ 保存并退出</p>
+<p>:q! 强制退出并忽略所有更改</p>
+<p>:e! 放弃所有修改，并打开原来文件。</p>
+<p><em><strong>*窗口命令*</strong></em></p>
+<p>:split或new 打开一个新窗口，光标停在顶层的窗口上</p>
+<p>:split file或:new file 用新窗口打开文件</p>
+<p>split打开的窗口都是横向的，使用vsplit可以纵向打开窗口。</p>
+<p>Ctrl+ww 移动到下一个窗口</p>
+<p>Ctrl+wj 移动到下方的窗口</p>
+<p>Ctrl+wk 移动到上方的窗口</p>
+<p>关闭窗口</p>
+<p>:close 最后一个窗口不能使用此命令，可以防止意外退出vim。</p>
+<p>:q 如果是最后一个被关闭的窗口，那么将退出vim。</p>
+<p>ZZ 保存并退出。</p>
+<p>关闭所有窗口，只保留当前窗口</p>
+<p>:only</p>
+<p>录制宏</p>
+<p>按q键加任意字母开始录制，再按q键结束录制（这意味着vim中的宏不可嵌套），使用的时候@加宏名，比如qa。。。q录制名为a的宏，@a使用这个宏。</p>
+<p><em><strong>*执行shell命令*</strong></em></p>
+<p>:!command</p>
+<p>:!ls 列出当前目录下文件</p>
+<p>:!perl -c script.pl 检查perl脚本语法，可以不用退出vim，非常方便。</p>
+<p>:!perl script.pl 执行perl脚本，可以不用退出vim，非常方便。</p>
+<p>:suspend或Ctrl - Z 挂起vim，回到shell，按fg可以返回vim。</p>
+<p><em><strong>*注释命令*</strong></em></p>
+<p>perl程序中#开始的行为注释，所以要注释某些行，只需在行首加入#</p>
+<p>3,5 s/^/#/g 注释第3-5行</p>
+<p>3,5 s/^#//g 解除3-5行的注释</p>
+<p>1,$ s/^/#/g 注释整个文档。</p>
+<p>:%s/^/#/g 注释整个文档，此法更快。</p>
+<p><em><strong>*帮助命令*</strong></em></p>
+<p>:help or F1 显示整个帮助</p>
+<p>:help xxx 显示xxx的帮助，比如 :help i, :help CTRL-[（即Ctrl+[的帮助）。</p>
+<p>:help &rsquo;number&rsquo; Vim选项的帮助用单引号括起</p>
+<p>:help <Esc> 特殊键的帮助用&lt;&gt;扩起</p>
+<p>:help -t Vim启动参数的帮助用-</p>
+<p>：help i_<Esc> 插入模式下Esc的帮助，某个模式下的帮助用模式_主题的模式</p>
+<p>帮助文件中位于||之间的内容是超链接，可以用Ctrl+]进入链接，Ctrl+o（Ctrl + t）返回</p>
+<p><em><strong>*其他非编辑命令*</strong></em></p>
+<p>. 重复前一次命令</p>
+<p>:set ruler?　　查看是否设置了ruler，在.vimrc中，使用set命令设制的选项都可以通过这个命令查看</p>
+<p>:scriptnames　　查看vim脚本文件的位置，比如.vimrc文件，语法文件及plugin等。</p>
+<p>:set list 显示非打印字符，如tab，空格，行尾等。如果tab无法显示，请确定用set lcs=tab:&gt;-命令设置了.vimrc文件，并确保你的文件中的确有tab，如果开启了expendtab，那么tab将被扩展为空格。</p>
+<p>Vim教程</p>
+<p>在Unix系统上</p>
+<p>$ vimtutor</p>
+<p>在Windows系统上</p>
+<p>:help tutor</p>
+<p>:syntax 列出已经定义的语法项</p>
+<p>:syntax clear 清除已定义的语法规则</p>
+<p>:syntax case match 大小写敏感，int和Int将视为不同的语法元素</p>
+<p>:syntax case ignore 大小写无关，int和Int将视为相同的语法元素，并使用同样的配色方案</p>
+</div>
+
+        
+
+
+<h2>相关内容</h2>
+<div class="related-container">
+    <div class="related-item-container">
+            <h2 class="related-title">
+                <a href="/linux%E5%9F%BA%E7%A1%80/">Linux基础</a>
+            </h2>
+        </div>
+    <div class="related-item-container">
+            <h2 class="related-title">
+                <a href="/linux%E5%90%84%E7%BA%A7%E7%9B%AE%E5%BD%95%E7%AE%80%E4%BB%8B/">Linux各级目录简介</a>
+            </h2>
+        </div>
+    <div class="related-item-container">
+            <h2 class="related-title">
+                <a href="/vi%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/">Vi使用方法</a>
+            </h2>
+        </div>
+    <div class="related-item-container">
+            <h2 class="related-title">
+                <a href="/linux%E7%9A%84top%E5%91%BD%E4%BB%A4%E8%A7%A3%E6%9E%90/">Linux的top命令解析</a>
+            </h2>
+        </div>
+    
+
+</div>
+
+<div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2023-12-31</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span><a class="link-to-mardown" href=/linux%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8/index.md target="_blank" rel="noopener noreferrer">阅读原始文档</a>
+                    </span></div>
+            <div class="post-info-share"><button title="分享到 Twitter" data-sharer="twitter" data-url="https://alphaguo.vip/linux%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8/" data-title="Linux命令大全" data-via="@guo_alpha36266" data-hashtags="Linux"><span class="fab fa-twitter fa-fw"></span></button><button title="分享到 Facebook" data-sharer="facebook" data-url="https://alphaguo.vip/linux%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8/" data-hashtag="Linux"><span class="fab fa-facebook-square fa-fw"></span></button><button title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://alphaguo.vip/linux%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8/" data-title="Linux命令大全" data-web><span class="fab fa-whatsapp fa-fw"></span></button><button title="分享到 Line" data-sharer="line" data-url="https://alphaguo.vip/linux%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8/" data-title="Linux命令大全"><span data-svg-src="/lib/simple-icons/icons/line.min.svg"></span></button><button title="分享到 微博" data-sharer="weibo" data-url="https://alphaguo.vip/linux%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8/" data-title="Linux命令大全"><span class="fab fa-weibo fa-fw"></span></button><button title="分享到 Myspace" data-sharer="myspace" data-url="https://alphaguo.vip/linux%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8/" data-title="Linux命令大全" data-description=""><span data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></span></button><button title="分享到 Blogger" data-sharer="blogger" data-url="https://alphaguo.vip/linux%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8/" data-title="Linux命令大全" data-description=""><span class="fab fa-blogger fa-fw"></span></button><button title="分享到 Evernote" data-sharer="evernote" data-url="https://alphaguo.vip/linux%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8/" data-title="Linux命令大全"><span class="fab fa-evernote fa-fw"></span></button></div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/linux/">Linux</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/vi%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/" class="prev" rel="prev" title="Vi使用方法"><i class="fas fa-angle-left fa-fw"></i>Vi使用方法</a>
+            <a href="/linux%E5%90%84%E7%BA%A7%E7%9B%AE%E5%BD%95%E7%AE%80%E4%BB%8B/" class="next" rel="next" title="Linux各级目录简介">Linux各级目录简介<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div id="comments"></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">AlphaGuo</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+            <div class="footer-line"></div>
+            <div class="footer-line">
+            </div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="回到顶部">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div id="cookieconsent-container"></div><div class="assets"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/katex/copy-tex.min.css">
+        <noscript><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"desktop-header-typeit":"AlphaGuo Blog","mobile-header-typeit":"AlphaGuo Blog"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":50,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"sharerjs":true,"table":{"sort":true},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},"duration":-1,"speed":100}};</script><script type="text/javascript" src="/lib/tablesort/tablesort.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js" defer></script><script type="text/javascript" src="/lib/katex/mhchem.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script type="text/javascript" src="/js/cookieconsent.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script></div>
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>AlphaGuo - 作者 - AlphaGuo Blog</title>
+        <link>https://alphaguo.vip/authors/alphaguo/</link>
+        <description>AlphaGuo - 作者 - AlphaGuo Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 31 Dec 2023 22:42:17 &#43;0800</lastBuildDate><atom:link href="https://alphaguo.vip/authors/alphaguo/" rel="self" type="application/rss+xml" /><item>
+    <title>Linux基础</title>
+    <link>https://alphaguo.vip/linux%E5%9F%BA%E7%A1%80/</link>
+    <pubDate>Sun, 31 Dec 2023 22:42:17 &#43;0800</pubDate><author>
+                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/linux%E5%9F%BA%E7%A1%80/</guid>
+    <description><![CDATA[Linux的安装以及一些基础命令]]></description>
+</item><item>
+    <title>Js</title>
+    <link>https://alphaguo.vip/js/</link>
+    <pubDate>Sun, 31 Dec 2023 22:41:56 &#43;0800</pubDate><author>
+                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/js/</guid>
+    <description><![CDATA[JS基础]]></description>
+</item><item>
+    <title>文件操作pro</title>
+    <link>https://alphaguo.vip/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9Cpro/</link>
+    <pubDate>Sun, 31 Dec 2023 22:41:39 &#43;0800</pubDate><author>
+                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9Cpro/</guid>
+    <description><![CDATA[1、相关概念 1.1 文件的概念​ 一个文件通常就是磁盘上一段命名的存储区。但是对于操作系统来说，文件就会更复杂一些。例如，一个大文件可以存储在一些分]]></description>
+</item><item>
+    <title>结构体强化</title>
+    <link>https://alphaguo.vip/%E7%BB%93%E6%9E%84%E4%BD%93%E5%BC%BA%E5%8C%96/</link>
+    <pubDate>Sun, 31 Dec 2023 22:41:20 &#43;0800</pubDate><author>
+                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/%E7%BB%93%E6%9E%84%E4%BD%93%E5%BC%BA%E5%8C%96/</guid>
+    <description><![CDATA[1、结构体基础知识 1.1 结构体类型的定义 1 2 3 4 5 6 7 8 9 struct Person{ char name[64]; int age; }; typedef struct _PERSON{ char name[64]; int age; }Person; 注意：定义结构体类型时不要直接给成员赋值，结构体只是一个]]></description>
+</item><item>
+    <title>多维数组</title>
+    <link>https://alphaguo.vip/%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84/</link>
+    <pubDate>Sun, 31 Dec 2023 22:40:56 &#43;0800</pubDate><author>
+                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84/</guid>
+    <description><![CDATA[1、一维数组 元素类型角度：数组是相同类型的变量的有序集合 内存角度：连续的一大片内存空间 1.1 数组名考虑下面这些声明： 1 2 int a; int b[10]; 我们把a称作标量]]></description>
+</item><item>
+    <title>内存分区</title>
+    <link>https://alphaguo.vip/%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA/</link>
+    <pubDate>Sun, 31 Dec 2023 22:40:41 &#43;0800</pubDate><author>
+                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA/</guid>
+    <description><![CDATA[1、内存分区 1.1 运行之前1）预处理：宏定义展开、头文件展开、条件编译，这里并不会检查语法 2）编译：检查语法，将预处理后文件编译生成汇编文件 3）]]></description>
+</item><item>
+    <title>Linux各级目录简介</title>
+    <link>https://alphaguo.vip/linux%E5%90%84%E7%BA%A7%E7%9B%AE%E5%BD%95%E7%AE%80%E4%BB%8B/</link>
+    <pubDate>Sun, 31 Dec 2023 22:40:21 &#43;0800</pubDate><author>
+                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/linux%E5%90%84%E7%BA%A7%E7%9B%AE%E5%BD%95%E7%AE%80%E4%BB%8B/</guid>
+    <description><![CDATA[Linux各目录及每个目录的详细介绍 【常见目录说明】 目录 /bin 存放二进制可执行文件(ls,cat,mkdir等)，常用命令一般都在这里。 /etc 存放系]]></description>
+</item><item>
+    <title>Linux命令大全</title>
+    <link>https://alphaguo.vip/linux%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8/</link>
+    <pubDate>Sun, 31 Dec 2023 22:40:01 &#43;0800</pubDate><author>
+                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/linux%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8/</guid>
+    <description><![CDATA[Vim命令合集 *命令历史* 以:和/开头的命令都有历史纪录，可以首先键入:或/然后按上下箭头来选择某个历史命令。 *启动vim* 在命令行窗口中输]]></description>
+</item><item>
+    <title>Vi使用方法</title>
+    <link>https://alphaguo.vip/vi%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</link>
+    <pubDate>Sun, 31 Dec 2023 22:39:36 &#43;0800</pubDate><author>
+                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/vi%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</guid>
+    <description><![CDATA[vi使用方法详细介绍 vi编辑器是所有Unix及Linux系统下标准的编辑器，它的强大不逊色于任何最新的文本编辑器，这里只是简单地介绍一下它的]]></description>
+</item><item>
+    <title>各种疑难杂症</title>
+    <link>https://alphaguo.vip/%E5%90%84%E7%A7%8D%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/</link>
+    <pubDate>Sun, 31 Dec 2023 22:38:18 &#43;0800</pubDate><author>
+                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/%E5%90%84%E7%A7%8D%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/</guid>
+    <description><![CDATA[一、如何彻底删除VM ware虚拟机 ​ 很显然，对于这类瘤氓软件来说，在控制面板里常规删除已经不能满足它的癖好了，在这里我要对csdn上的一些牛]]></description>
+</item></channel>
+</rss>

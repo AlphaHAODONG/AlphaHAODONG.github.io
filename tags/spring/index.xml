@@ -1,0 +1,13 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Spring - 标签 - AlphaGuo Blog</title>
+        <link>https://alphaguo.vip/tags/spring/</link>
+        <description>Spring - 标签 - AlphaGuo Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 31 Dec 2023 20:33:49 &#43;0800</lastBuildDate><atom:link href="https://alphaguo.vip/tags/spring/" rel="self" type="application/rss+xml" /><item>
+    <title>Spring01</title>
+    <link>https://alphaguo.vip/spring01/</link>
+    <pubDate>Sun, 31 Dec 2023 20:33:49 &#43;0800</pubDate><author>
+                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/spring01/</guid>
+    <description><![CDATA[一、Spring简介 1.1 目前我们代码存在的问题 代码书写现状 耦合度偏高 解决方案 使用对象时，在程序中不要主动使用new产生对象，转换为由外部提供对]]></description>
+</item></channel>
+</rss>
