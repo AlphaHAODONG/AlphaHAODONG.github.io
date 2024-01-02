@@ -3,7 +3,14 @@
         <title>Tags - 标签 - AlphaGuo Blog</title>
         <link>https://alphaguo.vip/tags/</link>
         <description>Tags - 标签 - AlphaGuo Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 31 Dec 2023 22:42:17 &#43;0800</lastBuildDate><atom:link href="https://alphaguo.vip/tags/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 02 Jan 2024 17:19:08 &#43;0800</lastBuildDate><atom:link href="https://alphaguo.vip/tags/" rel="self" type="application/rss+xml" /><item>
+    <title>数据结构</title>
+    <link>https://alphaguo.vip/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</link>
+    <pubDate>Tue, 02 Jan 2024 17:19:08 &#43;0800</pubDate><author>
+        <name>AlphaGuo</name>
+    </author><guid>https://alphaguo.vip/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
     <title>Linux</title>
     <link>https://alphaguo.vip/tags/linux/</link>
     <pubDate>Sun, 31 Dec 2023 22:42:17 &#43;0800</pubDate><author>
@@ -65,13 +72,6 @@
     <pubDate>Sun, 31 Dec 2023 20:33:33 &#43;0800</pubDate><author>
         <name>AlphaGuo</name>
     </author><guid>https://alphaguo.vip/tags/mybatis/</guid>
-    <description><![CDATA[]]></description>
-</item><item>
-    <title>Web</title>
-    <link>https://alphaguo.vip/tags/web/</link>
-    <pubDate>Sun, 31 Dec 2023 20:33:00 &#43;0800</pubDate><author>
-        <name>AlphaGuo</name>
-    </author><guid>https://alphaguo.vip/tags/web/</guid>
     <description><![CDATA[]]></description>
 </item></channel>
 </rss>

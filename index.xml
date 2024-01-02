@@ -3,9 +3,15 @@
         <title>AlphaGuo Blog</title>
         <link>https://alphaguo.vip/</link>
         <description>关山难越</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 31 Dec 2023 22:42:17 &#43;0800</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 02 Jan 2024 17:19:08 &#43;0800</lastBuildDate>
             <atom:link href="https://alphaguo.vip/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>线性表</title>
+    <link>https://alphaguo.vip/%E7%BA%BF%E6%80%A7%E8%A1%A8/</link>
+    <pubDate>Tue, 02 Jan 2024 17:19:08 &#43;0800</pubDate><author>
+                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/%E7%BA%BF%E6%80%A7%E8%A1%A8/</guid>
+    <description><![CDATA[更新中]]></description>
+</item><item>
     <title>Linux基础</title>
     <link>https://alphaguo.vip/linux%E5%9F%BA%E7%A1%80/</link>
     <pubDate>Sun, 31 Dec 2023 22:42:17 &#43;0800</pubDate><author>
@@ -53,11 +59,5 @@
     <pubDate>Sun, 31 Dec 2023 22:40:01 &#43;0800</pubDate><author>
                         <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/linux%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8/</guid>
     <description><![CDATA[Vim命令合集 *命令历史* 以:和/开头的命令都有历史纪录，可以首先键入:或/然后按上下箭头来选择某个历史命令。 *启动vim* 在命令行窗口中输]]></description>
-</item><item>
-    <title>Vi使用方法</title>
-    <link>https://alphaguo.vip/vi%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</link>
-    <pubDate>Sun, 31 Dec 2023 22:39:36 &#43;0800</pubDate><author>
-                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/vi%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</guid>
-    <description><![CDATA[vi使用方法详细介绍 vi编辑器是所有Unix及Linux系统下标准的编辑器，它的强大不逊色于任何最新的文本编辑器，这里只是简单地介绍一下它的]]></description>
 </item></channel>
 </rss>

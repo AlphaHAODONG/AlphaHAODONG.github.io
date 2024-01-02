@@ -3,7 +3,13 @@
         <title>AlphaGuo - 作者 - AlphaGuo Blog</title>
         <link>https://alphaguo.vip/authors/alphaguo/</link>
         <description>AlphaGuo - 作者 - AlphaGuo Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 31 Dec 2023 22:42:17 &#43;0800</lastBuildDate><atom:link href="https://alphaguo.vip/authors/alphaguo/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Tue, 02 Jan 2024 17:19:08 &#43;0800</lastBuildDate><atom:link href="https://alphaguo.vip/authors/alphaguo/" rel="self" type="application/rss+xml" /><item>
+    <title>线性表</title>
+    <link>https://alphaguo.vip/%E7%BA%BF%E6%80%A7%E8%A1%A8/</link>
+    <pubDate>Tue, 02 Jan 2024 17:19:08 &#43;0800</pubDate><author>
+                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/%E7%BA%BF%E6%80%A7%E8%A1%A8/</guid>
+    <description><![CDATA[更新中]]></description>
+</item><item>
     <title>Linux基础</title>
     <link>https://alphaguo.vip/linux%E5%9F%BA%E7%A1%80/</link>
     <pubDate>Sun, 31 Dec 2023 22:42:17 &#43;0800</pubDate><author>
@@ -57,11 +63,5 @@
     <pubDate>Sun, 31 Dec 2023 22:39:36 &#43;0800</pubDate><author>
                         <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/vi%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/</guid>
     <description><![CDATA[vi使用方法详细介绍 vi编辑器是所有Unix及Linux系统下标准的编辑器，它的强大不逊色于任何最新的文本编辑器，这里只是简单地介绍一下它的]]></description>
-</item><item>
-    <title>各种疑难杂症</title>
-    <link>https://alphaguo.vip/%E5%90%84%E7%A7%8D%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/</link>
-    <pubDate>Sun, 31 Dec 2023 22:38:18 &#43;0800</pubDate><author>
-                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/%E5%90%84%E7%A7%8D%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/</guid>
-    <description><![CDATA[一、如何彻底删除VM ware虚拟机 ​ 很显然，对于这类瘤氓软件来说，在控制面板里常规删除已经不能满足它的癖好了，在这里我要对csdn上的一些牛]]></description>
 </item></channel>
 </rss>
