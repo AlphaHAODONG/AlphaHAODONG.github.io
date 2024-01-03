@@ -3,7 +3,7 @@
 
 # 1、[USACO09OCT] The Robot Plow G
 
-## 题目描述
+## 题目描述 
 
 Farmer John has purchased a new robotic plow in order to relieve him from the drudgery of plowing field after field after field. It achieves this goal but at a slight disadvantage: the robotic plow can only plow in a perfect rectangle with sides of integer length.
 
