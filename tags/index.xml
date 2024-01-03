@@ -4,18 +4,18 @@
         <link>https://alphaguo.vip/tags/</link>
         <description>Tags - 标签 - AlphaGuo Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 03 Jan 2024 21:08:36 &#43;0800</lastBuildDate><atom:link href="https://alphaguo.vip/tags/" rel="self" type="application/rss+xml" /><item>
-    <title>算法</title>
-    <link>https://alphaguo.vip/tags/%E7%AE%97%E6%B3%95/</link>
+    <title>算法基础</title>
+    <link>https://alphaguo.vip/tags/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/</link>
     <pubDate>Wed, 03 Jan 2024 21:08:36 &#43;0800</pubDate><author>
         <name>AlphaGuo</name>
-    </author><guid>https://alphaguo.vip/tags/%E7%AE%97%E6%B3%95/</guid>
+    </author><guid>https://alphaguo.vip/tags/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/</guid>
     <description><![CDATA[]]></description>
 </item><item>
-    <title>数据结构</title>
-    <link>https://alphaguo.vip/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</link>
+    <title>线性表</title>
+    <link>https://alphaguo.vip/tags/%E7%BA%BF%E6%80%A7%E8%A1%A8/</link>
     <pubDate>Tue, 02 Jan 2024 17:19:08 &#43;0800</pubDate><author>
         <name>AlphaGuo</name>
-    </author><guid>https://alphaguo.vip/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</guid>
+    </author><guid>https://alphaguo.vip/tags/%E7%BA%BF%E6%80%A7%E8%A1%A8/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>Linux</title>
@@ -46,6 +46,13 @@
     </author><guid>https://alphaguo.vip/tags/%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/</guid>
     <description><![CDATA[]]></description>
 </item><item>
+    <title>算法</title>
+    <link>https://alphaguo.vip/tags/%E7%AE%97%E6%B3%95/</link>
+    <pubDate>Sun, 31 Dec 2023 22:37:37 &#43;0800</pubDate><author>
+        <name>AlphaGuo</name>
+    </author><guid>https://alphaguo.vip/tags/%E7%AE%97%E6%B3%95/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
     <title>JVAV</title>
     <link>https://alphaguo.vip/tags/jvav/</link>
     <pubDate>Sun, 31 Dec 2023 20:41:01 &#43;0800</pubDate><author>
@@ -65,13 +72,6 @@
     <pubDate>Sun, 31 Dec 2023 20:33:49 &#43;0800</pubDate><author>
         <name>AlphaGuo</name>
     </author><guid>https://alphaguo.vip/tags/spring/</guid>
-    <description><![CDATA[]]></description>
-</item><item>
-    <title>Mybatis</title>
-    <link>https://alphaguo.vip/tags/mybatis/</link>
-    <pubDate>Sun, 31 Dec 2023 20:33:33 &#43;0800</pubDate><author>
-        <name>AlphaGuo</name>
-    </author><guid>https://alphaguo.vip/tags/mybatis/</guid>
     <description><![CDATA[]]></description>
 </item></channel>
 </rss>
