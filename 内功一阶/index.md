@@ -69,7 +69,7 @@ As in the task's example.
 
 ​		第一次做题的时候可能会想去求出重复格子的个数，这种做法是可行的，但是不可取，所以换个思路，定义一个bool类型的数组，当某个格子被访问时，把它的值变为1，最后统计值为1的格子个数就可以了。。。
 
-```c++
+```cpp
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 using namespace std;
@@ -222,7 +222,7 @@ In the third example, the numbers modulo 42 are 39, 40, 41, 0, 1, 2, 40, 41, 0 a
 2. 每一次求出的余数可以看做数组下标，把它的值变为1。`a[余数]=1`
 3. 最后求出`a[i]=1`的个数
 
-```c++
+```cpp
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 using namespace std;
