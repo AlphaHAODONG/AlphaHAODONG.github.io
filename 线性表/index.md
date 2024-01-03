@@ -120,7 +120,7 @@ struct Person
 
 
 
- //插入数组
+ //插入数据
  void insert_dynamiArray(struct dynamiArray* arr, void* data, int pos)
  {
      if (arr == NULL)
@@ -166,6 +166,55 @@ struct Person
 
  }
 
+ //按照位置删除数据
+ void removeByPos_dynamiArray(struct dynamiArray* arr, int pos)
+ {
+    if(arr==NULL)
+    {
+        return;
+    }
+    //无效的删除位置
+    if(pos<0||pos>arr->m_Size-1)
+    {
+        return;
+    }
+    for (int i = pos; i < arr->m_Size; i++)
+    {
+        arr->p1[i] = arr->p1[i + 1];
+    }
+    arr->m_Size--;
+
+ }
+
+ int comparePerson(void *data1,void*data2)
+ {
+     struct Person* p1 = data1;
+     struct Person* p2 = data2;
+     return strcmp(p1->name, p2->name) == 0 && p1->age == p2->age;
+ }
+ //按照值删除
+ void removeByValue_dynamiArray(struct dynamiArray* arr, void* data, int(*myCompare)(void*, void*))
+ {
+     if(arr==NULL)
+     {
+         return;
+     }
+     if(data==NULL)
+     {
+         return;
+     }
+     for (int i = 0; i < arr->m_Size; i++)
+     {
+         if (myCompare(arr->p1[i], data))
+         {
+             removeByPos_dynamiArray(arr, i);
+             break;
+         }
+     }
+ }
+
+
+
  //遍历
  void foreach_dynamiArray(struct dynamiArray* arr,void(*myPrint)(void*))
  {
@@ -184,6 +233,23 @@ struct Person
      struct Person* person = data;
      printf("姓名: %s 年龄: %d \n", person->name, person->age);
 }
+
+ void destory_dynamiArray(struct dynamiArray* arr)
+ {
+     if (arr == NULL)
+     {
+         return;
+     }
+     if (arr->p1 != NULL)
+     {
+         free(arr->p1);
+         arr->p1 = NULL;
+     }
+     free(arr);
+     arr = NULL;
+
+     return;
+ }
  void test01()
  {
      struct dynamiArray* arr = init_dynamicArray(3);
@@ -203,8 +269,22 @@ struct Person
 
   
      foreach_dynamiArray(arr, printPerson);
+    /* 姓名: 张飞 年龄 : 20
+     姓名 : 赵云 年龄 : 18
+     姓名 : 关羽 年龄 : 19
+     姓名 : 刘备 年龄 : 2*/
+
      printf("插入数据后，数组的容量为  %d\n", arr->m_Capacity);
      printf("插入数据后，数组的大小为  %d\n", arr->m_Size);
+
+     printf("删除关羽\n");
+     removeByPos_dynamiArray(arr, 2);
+     foreach_dynamiArray(arr, printPerson);
+
+     printf("删除刘备\n");
+     struct Person p = { "刘备",21 };
+     removeByValue_dynamiArray(arr, &p, comparePerson);
+     foreach_dynamiArray(arr, printPerson);
  
  }
 int main()
@@ -226,3 +306,199 @@ int main()
 缺点：
 
 - 插入和删除操作需要移动大量元素。
+
+### 3、线性表的链式存储(单向链表)
+
+​		前面我们写的线性表的顺序存储(动态数组)的案例，最大的缺点是插入和删除时需要移动大量元素，这显然需要耗费时间，能不能想办法解决呢？链表。
+​		链表为了表示每个数据元素与其直接后继元素之间的逻辑关系，每个元素除了存储本身的信息外，还需要存储指示其直接后继的信息。
+
+![img](https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202401031746442.jpg)
+
+**单链表**
+
+- 线性表的链式存储结构中，每个节点中只包含一个指针域，这样的链表叫单链表。
+- 通过每个节点的指针域将线性表的数据元素按其逻辑次序链接在一起（如图）。
+
+![img](https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202401031747875.jpg)
+
+**概念解释：**
+
+- 表头结点
+
+  链表中的第一个结点，包含指向第一个数据元素的指针以及链表自身的一些信息
+
+- 数据节点
+
+  链表中代表数据元素的结点，包含指向下一个数据元素的指针和数据元素的信息
+
+- 尾节点
+
+  链表中的最后一个数据结点，其下一元素指针为空，表示无后继。
+
+![img](https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202401031749936.jpg)
+
+#### 3.1 线性表的链式存储(单项链表)的设计与实现
+
+1. 插入操作![img](https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202401031750094.jpg)
+
+   ```c
+   node->next = current->next;
+   current->next = node;
+   ```
+
+   
+
+2. 删除操作
+
+![img](https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202401031751651.jpg)
+
+```c
+current->next = ret->next;
+```
+
+```c
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+//节点
+struct LinkNode
+{
+    //数据域
+    void* data;
+    //指针域
+    struct LinkNode* next;
+};
+struct Node
+{
+    char name[64];
+    int age;
+};
+//链表
+struct LList
+{
+    //头结点
+    struct LinkNode pHeader;
+    //链表长度
+    int m_Size;
+};
+typedef void* LinkList;
+
+//初始化链表
+LinkList init_LinkList()
+{
+    struct LList* myList = malloc(sizeof(struct LList));
+    if(myList==NULL)
+    {
+        return NULL;
+    }
+    myList->pHeader.data = NULL;
+    myList->pHeader.next = NULL;
+    myList->m_Size = 0;
+    return myList;
+}
+
+void insert_LinkList(LinkList list, int pos, void* data)
+{
+    struct LList* myList = list;
+    if (list == NULL || data == NULL)
+    {
+        return;
+    }
+    if (pos<0 || pos>myList->m_Size)
+    {
+        pos = myList->m_Size;
+    }
+    //创建一个临时节点,用来寻找新节点的前驱结点
+    struct LinkNode* pCurrent = &myList->pHeader;
+    for (int i = 0; i < pos; i++)
+    {
+        pCurrent = pCurrent->next;
+    }//此时pCurrent节点就是新节点的前驱节点
+    struct LinkNode* newNode = malloc(sizeof(struct LinkNode));
+    newNode->data = data;
+    newNode->next = NULL;
+
+    newNode->next = pCurrent->next;
+    pCurrent->next = newNode;
+
+    //更新链表长度
+    myList->m_Size++;
+
+
+
+    return;
+}
+
+void printNode(void* data)
+{
+    struct Node* node = data;
+    printf("姓名：%s  年龄：%d\n", node->name, node->age);
+}
+void foreach_LinkList(LinkList list, void(*myPrint)(void*))
+{
+    if (list == NULL)
+    {
+        return;
+    }
+    struct LList* myList = list;
+    struct LinkNode* pCurrent = myList->pHeader.next;
+    while (pCurrent != NULL) {
+        myPrint(pCurrent->data);
+        pCurrent = pCurrent->next;
+    }
+
+}
+
+void test02()
+{
+    LinkList myList = init_LinkList();
+    struct Node p1 = { "赵云",18 };
+    struct Node p2 = { "关羽",19 };
+    struct Node p3 = { "张飞",20 };
+    struct Node p4 = { "刘备",21 };
+    struct Node p5 = { "黄忠",22 };
+    struct Node p6 = { "曹操",23 };
+
+    insert_LinkList(myList, 0, &p1);
+    insert_LinkList(myList, -1, &p2);
+    insert_LinkList(myList, 0, &p3);
+    insert_LinkList(myList, -1, &p4);
+    insert_LinkList(myList, 0, &p5);
+    insert_LinkList(myList, -1, &p6);
+
+    foreach_LinkList(myList, printNode);
+        /*姓名：黄忠  年龄：22
+        姓名：张飞  年龄：20
+        姓名：赵云  年龄：18
+        姓名：关羽  年龄：19
+        姓名：刘备  年龄：21
+        姓名：曹操  年龄：23*/
+    return;
+}
+int main()
+{
+    test02();
+        
+    system("pause");
+    return 0;
+}
+
+```
+
+#### 3.2 优点和缺点
+
+1. 优点：
+
+   无需一次性定制链表的容量 
+
+   插入和删除操作无需移动数据元素
+
+2. 缺点：
+
+   数据元素必须保存后继元素的位置信息
+
+   获取指定数据的元素操作需要顺序访问之前的元素
+
+
