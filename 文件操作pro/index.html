@@ -279,14 +279,15 @@
 <h4 id="22-文件指针" class="headerLink">
     <a href="#22-%e6%96%87%e4%bb%b6%e6%8c%87%e9%92%88" class="header-mark"></a>2.2 文件指针</h4><p>​		我们知道，文件是由操作系统管理的单元。当我们想操作一个文件的时候，让操作系统帮我们打开文件，操作系统把我们指定要打开文件的信息保存起来，并且返回给我们一个指针指向文件的信息。文件指针也可以理解为代指打开的文件。这个指针的类型为FILE类型。该类型定义在stdio.h头文件中。通过文件指针，我们就可以对文件进行各种操作。</p>
 <p>​		对于每一个ANSI C程序，运行时系统必须提供至少三个流-标准输入(stdin)、标准输出(stdout)、标准错误(stderr)，它们都是一个指向FILE结构的指针。标准输入是缺省情况下的输入来源，标准输出时缺省情况下的输出设置。具体缺省值因编译器而异，通常标准输入为键盘设备、标准输出为终端或者屏幕。</p>
-<p><figure><img
-        
-        loading="lazy"
-        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338995.jpeg"
-        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338995.jpeg, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338995.jpeg 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338995.jpeg 2x"
-        sizes="auto"
-        alt="img"
-        title="img" ></figure></p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338995.jpeg" title="img" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338995.jpeg">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338995.jpeg"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338995.jpeg, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338995.jpeg 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338995.jpeg 2x"
+            sizes="auto"
+            alt="img">
+    </a></figure></p>
 <p>ANSI C并未规定FILE的成员，不同编译器可能有不同的定义。VS下FILE信息如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -321,14 +322,15 @@
 <p>​		ANSI C标准采用“缓冲文件系统”处理数据文件 所谓缓冲文件系统是指系统自动地在内存区为程序中每一个正在使用的文件开辟一个文件缓冲区从内存向磁盘输出数据必须先送到内存中的缓冲区，装满缓冲区后才一起送到磁盘去 如果从磁盘向计算机读入数据，则一次从磁盘文件将一批数据输入到内存缓冲区(充满缓冲 区)，然后再从缓冲区逐个地将数据送到程序数据区(给程序变量) 。</p>
 <p><em><strong>那么文件缓冲区有什么作用呢？</strong></em></p>
 <p>​		如我们从磁盘里取信息，我们先把读出的数据放在缓冲区，计算机再直接从缓冲区中取数据，等缓冲区的数据取完后再去磁盘中读取，这样就可以减少磁盘的读写次数，再加上计算机对缓冲区的操作大大快于对磁盘的操作，故应用缓冲区可大大提高计算机的运行速度。</p>
-<p><figure><img
-        
-        loading="lazy"
-        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338021.jpeg"
-        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338021.jpeg, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338021.jpeg 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338021.jpeg 2x"
-        sizes="auto"
-        alt="img"
-        title="img" ></figure></p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338021.jpeg" title="img" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338021.jpeg">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338021.jpeg"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338021.jpeg, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338021.jpeg 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338021.jpeg 2x"
+            sizes="auto"
+            alt="img">
+    </a></figure></p>
 <h4 id="24-文件打开关闭" class="headerLink">
     <a href="#24-%e6%96%87%e4%bb%b6%e6%89%93%e5%bc%80%e5%85%b3%e9%97%ad" class="header-mark"></a>2.4 文件打开关闭</h4><h5 id="241-文件打开-fopen" class="headerLink">
     <a href="#241-%e6%96%87%e4%bb%b6%e6%89%93%e5%bc%80-fopen" class="header-mark"></a>2.4.1 文件打开 <code>fopen</code></h5><p>​		文件的打开操作表示将给用户指定的文件在内存分配一个FILE结构区，并将该结构的指针返回给用户程序，以后用户程序就可用此FILE指针来实现对指定文件的存取操作了。当使用打开函数时，必须给出文件名、文件操作方式(读、写或读写)。</p>
@@ -558,8 +560,8 @@
         </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
             <i class="fas fa-comment fa-fw"></i>
         </a>
-    </div><div id="cookieconsent-container"></div><div class="assets"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/katex/copy-tex.min.css">
-        <noscript><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"desktop-header-typeit":"AlphaGuo Blog","mobile-header-typeit":"AlphaGuo Blog"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":50,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"sharerjs":true,"table":{"sort":true},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},"duration":-1,"speed":250}};</script><script type="text/javascript" src="/lib/tablesort/tablesort.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js" defer></script><script type="text/javascript" src="/lib/katex/mhchem.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script type="text/javascript" src="/js/cookieconsent.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script></div>
+    </div><div id="cookieconsent-container"></div><div class="assets"><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/katex/copy-tex.min.css">
+        <noscript><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"desktop-header-typeit":"AlphaGuo Blog","mobile-header-typeit":"AlphaGuo Blog"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":50,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"sharerjs":true,"table":{"sort":true},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},"duration":-1,"speed":250}};</script><script type="text/javascript" src="/lib/tablesort/tablesort.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js" defer></script><script type="text/javascript" src="/lib/katex/mhchem.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script type="text/javascript" src="/js/cookieconsent.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script></div>
 </body>
 
 </html>

@@ -2320,23 +2320,25 @@
     <a href="#61--%e9%9c%80%e6%b1%82" class="header-mark"></a>6.1  需求</h3><p>使用Axios + JSON 完成品牌列表数据查询和添加。页面效果还是下图所示：</p>
 <img src="../../../quark01/assets/image-20210830234803335.png" alt="image-20210830234803335" style="zoom:60%;" />
 <h3 id="62--查询所有功能" class="headerLink">
-    <a href="#62--%e6%9f%a5%e8%af%a2%e6%89%80%e6%9c%89%e5%8a%9f%e8%83%bd" class="header-mark"></a>6.2  查询所有功能</h3><p><figure><img
-        
-        loading="lazy"
-        src="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831085332612.png"
-        srcset="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831085332612.png, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831085332612.png 1.5x, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831085332612.png 2x"
-        sizes="auto"
-        alt="image-20210831085332612"
-        title="image-20210831085332612" ></figure></p>
+    <a href="#62--%e6%9f%a5%e8%af%a2%e6%89%80%e6%9c%89%e5%8a%9f%e8%83%bd" class="header-mark"></a>6.2  查询所有功能</h3><p><figure><a class="lightgallery" href="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831085332612.png" title="image-20210831085332612" data-thumbnail="D:\AlphaGuoBlog\quark01\assets\image-20210831085332612.png">
+        <img
+            
+            loading="lazy"
+            src="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831085332612.png"
+            srcset="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831085332612.png, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831085332612.png 1.5x, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831085332612.png 2x"
+            sizes="auto"
+            alt="image-20210831085332612">
+    </a></figure></p>
 <p>如上图所示就该功能的整体流程。前后端需以 JSON 格式进行数据的传递；由于此功能是查询所有的功能，前端发送 ajax 请求不需要携带参数，而后端响应数据需以如下格式的 json 数据</p>
-<p><figure><img
-        
-        loading="lazy"
-        src="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831090839336.png"
-        srcset="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831090839336.png, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831090839336.png 1.5x, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831090839336.png 2x"
-        sizes="auto"
-        alt="image-20210831090839336"
-        title="image-20210831090839336" ></figure></p>
+<p><figure><a class="lightgallery" href="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831090839336.png" title="image-20210831090839336" data-thumbnail="D:\AlphaGuoBlog\quark01\assets\image-20210831090839336.png">
+        <img
+            
+            loading="lazy"
+            src="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831090839336.png"
+            srcset="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831090839336.png, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831090839336.png 1.5x, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831090839336.png 2x"
+            sizes="auto"
+            alt="image-20210831090839336">
+    </a></figure></p>
 <h4 id="621--环境准备" class="headerLink">
     <a href="#621--%e7%8e%af%e5%a2%83%e5%87%86%e5%a4%87" class="header-mark"></a>6.2.1  环境准备</h4><p>将 <code>02-AJAX\04-资料\3. 品牌列表案例\初始工程</code> 下的 <code>brand-demo</code> 工程拷贝到我们自己 <code>工作空间</code> ，然后再将项目导入到我们自己的 Idea 中。工程目录结构如下：</p>
 <img src="../../../quark01/assets/image-20210831091604457.png" alt="image-20210831091604457" style="zoom:80%;" />
@@ -2669,34 +2671,37 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="63--添加品牌功能" class="headerLink">
-    <a href="#63--%e6%b7%bb%e5%8a%a0%e5%93%81%e7%89%8c%e5%8a%9f%e8%83%bd" class="header-mark"></a>6.3  添加品牌功能</h3><p><figure><img
-        
-        loading="lazy"
-        src="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831100117014.png"
-        srcset="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831100117014.png, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831100117014.png 1.5x, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831100117014.png 2x"
-        sizes="auto"
-        alt="image-20210831100117014"
-        title="image-20210831100117014" ></figure></p>
+    <a href="#63--%e6%b7%bb%e5%8a%a0%e5%93%81%e7%89%8c%e5%8a%9f%e8%83%bd" class="header-mark"></a>6.3  添加品牌功能</h3><p><figure><a class="lightgallery" href="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831100117014.png" title="image-20210831100117014" data-thumbnail="D:\AlphaGuoBlog\quark01\assets\image-20210831100117014.png">
+        <img
+            
+            loading="lazy"
+            src="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831100117014.png"
+            srcset="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831100117014.png, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831100117014.png 1.5x, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831100117014.png 2x"
+            sizes="auto"
+            alt="image-20210831100117014">
+    </a></figure></p>
 <p>如上所示，当我们点击 <code>新增</code> 按钮，会跳转到 <code>addBrand.html</code> 页面。在 <code>addBrand.html</code> 页面输入数据后点击 <code>提交</code> 按钮，就会将数据提交到后端，而后端将数据保存到数据库中。</p>
 <p>具体的前后端交互的流程如下：</p>
-<p><figure><img
-        
-        loading="lazy"
-        src="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831100329698.png"
-        srcset="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831100329698.png, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831100329698.png 1.5x, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831100329698.png 2x"
-        sizes="auto"
-        alt="image-20210831100329698"
-        title="image-20210831100329698" ></figure></p>
+<p><figure><a class="lightgallery" href="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831100329698.png" title="image-20210831100329698" data-thumbnail="D:\AlphaGuoBlog\quark01\assets\image-20210831100329698.png">
+        <img
+            
+            loading="lazy"
+            src="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831100329698.png"
+            srcset="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831100329698.png, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831100329698.png 1.5x, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831100329698.png 2x"
+            sizes="auto"
+            alt="image-20210831100329698">
+    </a></figure></p>
 <p>==说明：==</p>
 <p>前端需要将用户输入的数据提交到后端，这部分数据需要以 json 格式进行提交，数据格式如下：</p>
-<p><figure><img
-        
-        loading="lazy"
-        src="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831101234467.png"
-        srcset="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831101234467.png, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831101234467.png 1.5x, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831101234467.png 2x"
-        sizes="auto"
-        alt="image-20210831101234467"
-        title="image-20210831101234467" ></figure></p>
+<p><figure><a class="lightgallery" href="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831101234467.png" title="image-20210831101234467" data-thumbnail="D:\AlphaGuoBlog\quark01\assets\image-20210831101234467.png">
+        <img
+            
+            loading="lazy"
+            src="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831101234467.png"
+            srcset="D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831101234467.png, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831101234467.png 1.5x, D:%5cAlphaGuoBlog%5cquark01%5cassets%5cimage-20210831101234467.png 2x"
+            sizes="auto"
+            alt="image-20210831101234467">
+    </a></figure></p>
 <h4 id="631--后端实现" class="headerLink">
     <a href="#631--%e5%90%8e%e7%ab%af%e5%ae%9e%e7%8e%b0" class="header-mark"></a>6.3.1  后端实现</h4><p>在 <code>com.itheima.web</code> 包下创建名为 <code>AddServlet</code> 的 <code>servlet</code>，具体的逻辑如下：</p>
 <ul>
@@ -3109,8 +3114,8 @@
         </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
             <i class="fas fa-comment fa-fw"></i>
         </a>
-    </div><div id="cookieconsent-container"></div><div class="assets"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/katex/copy-tex.min.css">
-        <noscript><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"desktop-header-typeit":"AlphaGuo Blog","mobile-header-typeit":"AlphaGuo Blog"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":50,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"sharerjs":true,"table":{"sort":true},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},"duration":-1,"speed":250}};</script><script type="text/javascript" src="/lib/tablesort/tablesort.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js" defer></script><script type="text/javascript" src="/lib/katex/mhchem.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script type="text/javascript" src="/js/cookieconsent.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script></div>
+    </div><div id="cookieconsent-container"></div><div class="assets"><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/katex/copy-tex.min.css">
+        <noscript><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"desktop-header-typeit":"AlphaGuo Blog","mobile-header-typeit":"AlphaGuo Blog"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":50,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"sharerjs":true,"table":{"sort":true},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},"duration":-1,"speed":250}};</script><script type="text/javascript" src="/lib/tablesort/tablesort.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js" defer></script><script type="text/javascript" src="/lib/katex/mhchem.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script type="text/javascript" src="/js/cookieconsent.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script></div>
 </body>
 
 </html>

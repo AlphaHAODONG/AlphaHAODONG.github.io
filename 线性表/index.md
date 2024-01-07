@@ -399,6 +399,7 @@ LinkList init_LinkList()
     return myList;
 }
 
+//插入数据
 void insert_LinkList(LinkList list, int pos, void* data)
 {
     struct LList* myList = list;
@@ -436,6 +437,7 @@ void printNode(void* data)
     struct Node* node = data;
     printf("姓名：%s  年龄：%d\n", node->name, node->age);
 }
+//遍历
 void foreach_LinkList(LinkList list, void(*myPrint)(void*))
 {
     if (list == NULL)
@@ -449,6 +451,116 @@ void foreach_LinkList(LinkList list, void(*myPrint)(void*))
         pCurrent = pCurrent->next;
     }
 
+}
+
+//删除链表节点
+void removeBuPos_LinkList(LinkList list, int pos)
+{
+    if (list == NULL)
+    {
+        return;
+    }
+    struct LList* mylist = list;
+    if (pos<0 || pos>mylist->m_Size - 1)
+    {
+        return;
+    }
+    //找到待删除位置的前驱节点位置
+    struct LinkNode* pCurrent = &mylist->pHeader;
+    for (int i = 0; i < pos; i++)
+    {
+        pCurrent = pCurrent->next;
+    }
+    //此时pcurrent就是待删除节点的前驱节点位置
+    struct LinkNode* pDel = pCurrent->next;//pdel就是要删除的节点
+    pCurrent->next = pDel->next;
+
+    free(pDel);
+    pDel = NULL;
+
+    //更新链表长度
+    mylist->m_Size--;
+
+}
+
+//回调函数，删除对比
+int CompareNode(void* data1, void* data2)
+{
+    struct Node* n1 = data1;
+    struct Node* n2 = data2;
+    return strcmp(n1->name, n2->name) == 0 && n1->age == n2->age;
+
+}
+
+//按值删除链表节点
+void removeByValue_LinkList(LinkList list, void* data, int (*myCompare)(void*, void*))
+{
+    if (list == NULL)
+    {
+        return;
+    }
+    if (data == NULL)
+    {
+        return;
+    }
+
+    //将list还原成真实的链表结构体
+    struct LList* mylist = list;
+
+    //创建两个辅助指针变量
+    struct LinkNode* pPrey = &mylist->pHeader;
+    struct LinkNode* pCurrent = mylist->pHeader.next;
+
+    //遍历链表，找用户要删除的数据
+    for (int i = 0; i < mylist->m_Size; i++)
+    {
+        if (myCompare(data, pCurrent->data))
+        {
+            //找到要修改的数据了，更改指针指向
+            pPrey->next = pCurrent->next;
+
+            free(pCurrent);
+            pCurrent = NULL;
+
+            mylist->m_Size++;
+            break;
+        }
+        pPrey = pCurrent;
+        pCurrent = pCurrent->next;
+    }
+
+}
+
+//清除链表
+void clear_LinkList(LinkList list) {
+    if (list == NULL) {
+        return;
+    }
+    struct LList* myList = list;
+    struct LinkNode* pCurrent = myList->pHeader.next;
+    struct LinkNode* pNext = NULL;
+
+    while (pCurrent != NULL) {
+        pNext = pCurrent->next;
+        free(pCurrent);
+        pCurrent = pNext;
+    }
+
+    myList->pHeader.next = NULL;
+    myList->m_Size = 0;
+}
+
+
+//销毁链表
+void destory_LinkList(LinkList list)
+{
+    if (list == NULL)
+    {
+        return;
+    }
+    clear_LinkList(list);
+    free(list);
+    list = NULL;
 }
 
 void test02()
@@ -475,6 +587,22 @@ void test02()
         姓名：关羽  年龄：19
         姓名：刘备  年龄：21
         姓名：曹操  年龄：23*/
+    printf("--------------------------------------------------\n");
+
+    printf("按位置要删除刘备------------------------\n");
+    removeBuPos_LinkList(myList, 4);
+    foreach_LinkList(myList, printNode);
+
+    printf("按值要删除黄忠------------------------\n");
+    removeByValue_LinkList(myList, &p5, CompareNode);
+    foreach_LinkList(myList, printNode);
+
+    printf("清空链表-------------------------------\n");
+    clear_LinkList(myList);
+    foreach_LinkList(myList, printNode);
+
+    printf("销毁链表------------------------------\n");
+    destory_LinkList(myList);
     return;
 }
 int main()

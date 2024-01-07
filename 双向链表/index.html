@@ -165,28 +165,30 @@
     </li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><p><figure><img
-        
-        loading="lazy"
-        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336751.png"
-        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336751.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336751.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336751.png 2x"
-        sizes="auto"
-        alt="image-20231220211716208"
-        title="image-20231220211716208" ></figure></p>
+            </div><div class="content" id="content"><p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336751.png" title="image-20231220211716208" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336751.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336751.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336751.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336751.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336751.png 2x"
+            sizes="auto"
+            alt="image-20231220211716208">
+    </a></figure></p>
 <h3 id="1双向链表的增删改查" class="headerLink">
     <a href="#1%e5%8f%8c%e5%90%91%e9%93%be%e8%a1%a8%e7%9a%84%e5%a2%9e%e5%88%a0%e6%94%b9%e6%9f%a5" class="header-mark"></a>1、双向链表的增删改查</h3><h4 id="11java的实现思路" class="headerLink">
     <a href="#11java%e7%9a%84%e5%ae%9e%e7%8e%b0%e6%80%9d%e8%b7%af" class="header-mark"></a>1.1Java的实现思路</h4><p>分析 双向链表的遍历，添加，修改，删除的操作思路===》代码实现</p>
 <ol>
 <li>
 <p><strong>遍历</strong> 方和 单链表一样，只是可以向前，也可以向后查找</p>
-<p><figure><img
-        
-        loading="lazy"
-        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336686.png"
-        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336686.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336686.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336686.png 2x"
-        sizes="auto"
-        alt="image-20231220212515214"
-        title="image-20231220212515214" ></figure></p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336686.png" title="image-20231220212515214" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336686.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336686.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336686.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336686.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336686.png 2x"
+            sizes="auto"
+            alt="image-20231220212515214">
+    </a></figure></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -239,14 +241,15 @@
 <p>(1) 先找到双向链表的最后这个节点</p>
 <p>(2) temp.next = newHeroNode</p>
 <p>(3) newHeroNode.pre = temp;</p>
-<p><figure><img
-        
-        loading="lazy"
-        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336694.png"
-        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336694.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336694.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336694.png 2x"
-        sizes="auto"
-        alt="image-20231220212623249"
-        title="image-20231220212623249" ></figure></p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336694.png" title="image-20231220212623249" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336694.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336694.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336694.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336694.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336694.png 2x"
+            sizes="auto"
+            alt="image-20231220212623249">
+    </a></figure></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -290,14 +293,15 @@
 <p><strong>修改</strong></p>
 <p>(1)先找到要修改的节点</p>
 <p>(2)替换</p>
-<p><figure><img
-        
-        loading="lazy"
-        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336744.png"
-        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336744.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336744.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336744.png 2x"
-        sizes="auto"
-        alt="image-20231220212721826"
-        title="image-20231220212721826" ></figure></p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336744.png" title="image-20231220212721826" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336744.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336744.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336744.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336744.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336744.png 2x"
+            sizes="auto"
+            alt="image-20231220212721826">
+    </a></figure></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -367,14 +371,15 @@
 <p>(2) 直接找到要删除的这个节点，比如temp</p>
 <p>(3) 	temp.pre.next = temp.next</p>
 <p>(4) temp.next.pre = temp.pre;</p>
-<p><figure><img
-        
-        loading="lazy"
-        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336703.png"
-        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336703.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336703.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336703.png 2x"
-        sizes="auto"
-        alt="image-20231220212814930"
-        title="image-20231220212814930" ></figure></p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336703.png" title="image-20231220212814930" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336703.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336703.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336703.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336703.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336703.png 2x"
+            sizes="auto"
+            alt="image-20231220212814930">
+    </a></figure></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -779,33 +784,36 @@
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="2约瑟夫问题" class="headerLink">
-    <a href="#2%e7%ba%a6%e7%91%9f%e5%a4%ab%e9%97%ae%e9%a2%98" class="header-mark"></a>2、约瑟夫问题</h3><p><figure><img
-        
-        loading="lazy"
-        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336732.png"
-        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336732.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336732.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336732.png 2x"
-        sizes="auto"
-        alt="image-20231222214237595"
-        title="image-20231222214237595" ></figure></p>
+    <a href="#2%e7%ba%a6%e7%91%9f%e5%a4%ab%e9%97%ae%e9%a2%98" class="header-mark"></a>2、约瑟夫问题</h3><p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336732.png" title="image-20231222214237595" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336732.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336732.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336732.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336732.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336732.png 2x"
+            sizes="auto"
+            alt="image-20231222214237595">
+    </a></figure></p>
 <p>问题为：设编号为1，2，… n的n个人围坐一圈，约定编号为k（1&lt;=k&lt;=n）的人从1开始报数，数到m 的那个人出列，它的下一位又从1开始报数，数到m的那个人又出列，依次类推，直到所有人出列为止，由此产生一个出队编号的序列。</p>
 <p><strong>提示</strong></p>
 <p>用一个不带头结点的循环链表来处理Josephu 问题：先构成一个有n个结点的单循环链表，然后由k结点起从1开始计数，计到m时，对应结点从链表中删除，然后再从被删除结点的下一个结点又从1开始计数，直到最后一个结点从链表中删除算法结束。</p>
-<p><figure><img
-        
-        loading="lazy"
-        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336174.png"
-        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336174.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336174.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336174.png 2x"
-        sizes="auto"
-        alt="img"
-        title="img" ></figure></p>
-<p><figure><img
-        
-        loading="lazy"
-        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336192.png"
-        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336192.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336192.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336192.png 2x"
-        sizes="auto"
-        alt="img"
-        title="img" ></figure></p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336174.png" title="img" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336174.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336174.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336174.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336174.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336174.png 2x"
+            sizes="auto"
+            alt="img">
+    </a></figure></p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336192.png" title="img" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336192.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336192.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336192.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336192.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312336192.png 2x"
+            sizes="auto"
+            alt="img">
+    </a></figure></p>
 <p>具体代码实现</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1155,8 +1163,8 @@
         </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
             <i class="fas fa-comment fa-fw"></i>
         </a>
-    </div><div id="cookieconsent-container"></div><div class="assets"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/katex/copy-tex.min.css">
-        <noscript><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"desktop-header-typeit":"AlphaGuo Blog","mobile-header-typeit":"AlphaGuo Blog"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":50,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"sharerjs":true,"table":{"sort":true},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},"duration":-1,"speed":250}};</script><script type="text/javascript" src="/lib/tablesort/tablesort.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js" defer></script><script type="text/javascript" src="/lib/katex/mhchem.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script type="text/javascript" src="/js/cookieconsent.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script></div>
+    </div><div id="cookieconsent-container"></div><div class="assets"><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/katex/copy-tex.min.css">
+        <noscript><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"desktop-header-typeit":"AlphaGuo Blog","mobile-header-typeit":"AlphaGuo Blog"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":50,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"sharerjs":true,"table":{"sort":true},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},"duration":-1,"speed":250}};</script><script type="text/javascript" src="/lib/tablesort/tablesort.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js" defer></script><script type="text/javascript" src="/lib/katex/mhchem.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script type="text/javascript" src="/js/cookieconsent.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script></div>
 </body>
 
 </html>

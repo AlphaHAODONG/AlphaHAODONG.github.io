@@ -202,14 +202,15 @@
 <p>3）汇编：将汇编文件生成目标文件(二进制文件)</p>
 <p>4）链接：将目标文件链接为可执行程序</p>
 <p>当我们编译完成生成可执行文件之后，我们通过在linux下<code>size</code>命令可以查看一个可执行二进制文件基本情况：</p>
-<p><figure><img
-        
-        loading="lazy"
-        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338781.jpeg"
-        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338781.jpeg, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338781.jpeg 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338781.jpeg 2x"
-        sizes="auto"
-        alt="img"
-        title="img" ></figure></p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338781.jpeg" title="img" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338781.jpeg">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338781.jpeg"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338781.jpeg, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338781.jpeg 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338781.jpeg 2x"
+            sizes="auto"
+            alt="img">
+    </a></figure></p>
 <p>通过上图可以得知，在没有运行程序前，也就是说程序没有加载到内存前，可执行程序内部已经分好3段信息，分别为代码区（<code>text</code>）、数据区（<code>data</code>）和未初始化数据区（<code>bss</code>）3 个部分（有些人直接把<code>data</code>和<code>bss</code>合起来叫做静态区或全局区）。</p>
 <p>l 代码区存放 CPU 执行的机器指令。通常代码区是可<strong>共享</strong>的（即另外的执行程序可以调用它），使其可共享的目的是对于频繁被执行的程序，只需要在内存中有一份代码即可。代码区通常是<strong>只读</strong>的，使其只读的原因是防止程序意外地修改了它的指t令。另外，代码区还规划了局部变量的相关信息。</p>
 <p>l 全局初始化数据区/静态数据区（data段）该区包含了在程序中明确被初始化的全局变量、已经初始化的静态变量（包括全局静态变量和t）和常量数据（如字符串常量）。</p>
@@ -379,14 +380,15 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p><figure><img
-        
-        loading="lazy"
-        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338731.jpeg"
-        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338731.jpeg, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338731.jpeg 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338731.jpeg 2x"
-        sizes="auto"
-        alt="img"
-        title="img" ></figure></p>
+</div><p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338731.jpeg" title="img" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338731.jpeg">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338731.jpeg"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338731.jpeg, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338731.jpeg 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338731.jpeg 2x"
+            sizes="auto"
+            alt="img">
+    </a></figure></p>
 <p>堆分配内存API：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -718,55 +720,61 @@
 </tbody>
 </table>
 <h4 id="43函数变量传递分析" class="headerLink">
-    <a href="#43%e5%87%bd%e6%95%b0%e5%8f%98%e9%87%8f%e4%bc%a0%e9%80%92%e5%88%86%e6%9e%90" class="header-mark"></a>4.3函数变量传递分析</h4><p><figure><img
-        
-        loading="lazy"
-        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338873.png"
-        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338873.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338873.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338873.png 2x"
-        sizes="auto"
-        alt="img"
-        title="img" ></figure></p>
-<p><figure><img
-        
-        loading="lazy"
-        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338097.png"
-        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338097.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338097.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338097.png 2x"
-        sizes="auto"
-        alt="img"
-        title="img" ></figure></p>
-<p><figure><img
-        
-        loading="lazy"
-        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338960.png"
-        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338960.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338960.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338960.png 2x"
-        sizes="auto"
-        alt="img"
-        title="img" ></figure></p>
-<p><figure><img
-        
-        loading="lazy"
-        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338789.png"
-        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338789.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338789.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338789.png 2x"
-        sizes="auto"
-        alt="img"
-        title="img" ></figure></p>
-<p><figure><img
-        
-        loading="lazy"
-        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338412.png"
-        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338412.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338412.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338412.png 2x"
-        sizes="auto"
-        alt="img"
-        title="img" ></figure></p>
+    <a href="#43%e5%87%bd%e6%95%b0%e5%8f%98%e9%87%8f%e4%bc%a0%e9%80%92%e5%88%86%e6%9e%90" class="header-mark"></a>4.3函数变量传递分析</h4><p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338873.png" title="img" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338873.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338873.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338873.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338873.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338873.png 2x"
+            sizes="auto"
+            alt="img">
+    </a></figure></p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338097.png" title="img" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338097.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338097.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338097.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338097.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338097.png 2x"
+            sizes="auto"
+            alt="img">
+    </a></figure></p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338960.png" title="img" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338960.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338960.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338960.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338960.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338960.png 2x"
+            sizes="auto"
+            alt="img">
+    </a></figure></p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338789.png" title="img" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338789.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338789.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338789.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338789.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338789.png 2x"
+            sizes="auto"
+            alt="img">
+    </a></figure></p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338412.png" title="img" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338412.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338412.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338412.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338412.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338412.png 2x"
+            sizes="auto"
+            alt="img">
+    </a></figure></p>
 <h4 id="44栈的生长方向和内存存放方向" class="headerLink">
-    <a href="#44%e6%a0%88%e7%9a%84%e7%94%9f%e9%95%bf%e6%96%b9%e5%90%91%e5%92%8c%e5%86%85%e5%ad%98%e5%ad%98%e6%94%be%e6%96%b9%e5%90%91" class="header-mark"></a>4.4栈的生长方向和内存存放方向</h4><p><figure><img
-        
-        loading="lazy"
-        src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338760.png"
-        srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338760.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338760.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338760.png 2x"
-        sizes="auto"
-        alt="img"
-        title="img" ></figure></p>
+    <a href="#44%e6%a0%88%e7%9a%84%e7%94%9f%e9%95%bf%e6%96%b9%e5%90%91%e5%92%8c%e5%86%85%e5%ad%98%e5%ad%98%e6%94%be%e6%96%b9%e5%90%91" class="header-mark"></a>4.4栈的生长方向和内存存放方向</h4><p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338760.png" title="img" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338760.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338760.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338760.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338760.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202312312338760.png 2x"
+            sizes="auto"
+            alt="img">
+    </a></figure></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -905,8 +913,8 @@
         </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
             <i class="fas fa-comment fa-fw"></i>
         </a>
-    </div><div id="cookieconsent-container"></div><div class="assets"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/katex/copy-tex.min.css">
-        <noscript><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"desktop-header-typeit":"AlphaGuo Blog","mobile-header-typeit":"AlphaGuo Blog"},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":50,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"sharerjs":true,"table":{"sort":true},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},"duration":-1,"speed":250}};</script><script type="text/javascript" src="/lib/tablesort/tablesort.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js" defer></script><script type="text/javascript" src="/lib/katex/mhchem.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script type="text/javascript" src="/js/cookieconsent.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script></div>
+    </div><div id="cookieconsent-container"></div><div class="assets"><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/katex/copy-tex.min.css">
+        <noscript><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"desktop-header-typeit":"AlphaGuo Blog","mobile-header-typeit":"AlphaGuo Blog"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":50,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"sharerjs":true,"table":{"sort":true},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},"duration":-1,"speed":250}};</script><script type="text/javascript" src="/lib/tablesort/tablesort.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js" defer></script><script type="text/javascript" src="/lib/katex/mhchem.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script type="text/javascript" src="/js/cookieconsent.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script></div>
 </body>
 
 </html>
