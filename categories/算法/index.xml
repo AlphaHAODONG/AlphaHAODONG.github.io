@@ -9,11 +9,5 @@
     <pubDate>Wed, 03 Jan 2024 21:08:36 &#43;0800</pubDate><author>
                         <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/%E5%86%85%E5%8A%9F%E4%B8%80%E9%98%B6/</guid>
     <description><![CDATA[一些很简单的算法基础，大佬就不要看了。。。更新中]]></description>
-</item><item>
-    <title>双向链表</title>
-    <link>https://alphaguo.vip/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8/</link>
-    <pubDate>Sun, 31 Dec 2023 22:37:37 &#43;0800</pubDate><author>
-                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8/</guid>
-    <description><![CDATA[1、双向链表的增删改查 1.1Java的实现思路分析 双向链表的遍历，添加，修改，删除的操作思路===》代码实现 遍历 方和 单链表一样，只是可以向前]]></description>
 </item></channel>
 </rss>
