@@ -251,4 +251,154 @@ int main()
 }
 ```
 
+# 3、子数整数
 
+## 题目描述
+
+对于一个五位数 $\overline{a_1a_2a_3a_4a_5}$，可将其拆分为三个子数：
+
+$sub_1=\overline{a_1a_2a_3}$
+
+$sub_2=\overline{a_2a_3a_4}$
+
+$sub_3=\overline{a_3a_4a_5}$
+
+例如，五位数 $20207$ 可以拆分成
+
+$sub_1=202$
+
+$sub_2=020\ (=20)$
+
+$sub_3=207$
+
+现在给定一个正整数 $K$，要求你编程求出 $10000$ 到 $30000$ 之间所有满足下述条件的五位数，条件是这些五位数的三个子数 $sub_1,sub_2,sub_3$ 都可被 $K$ 整除。
+
+## 输入格式
+
+一个正整数 $K$。
+
+## 输出格式
+
+每一行为一个满足条件的五位数，要求从小到大输出。不得重复输出或遗漏。如果无解，则输出 `No`。
+
+## 样例 #1
+
+### 样例输入 #1
+
+```
+15
+```
+
+### 样例输出 #1
+
+```
+22555
+25555
+28555
+30000
+```
+
+## 提示
+
+$0<K<1000$
+
+​		**先来分析：**
+
+​		这道题的重点在于如何取出三个子数，比较人性化的一点是题目限定了标准为五位数，所以只需要通过/和%的运用就可以取出三个子数。
+
+```cpp
+#define _CRT_SECURE_NO_WARNINGS
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    int k, sub1, sub2, sub3;
+    bool flag = 0;
+    cin >> k;
+    for (int i = 10000; i <= 30000; i++) 
+    {
+        sub1 = i / 100;
+        sub2 = (i / 10) % 1000;
+        sub3 = i % 1000;
+        if (sub1 % k == 0 && sub2 % k == 0 && sub3 % k == 0)
+        {
+            flag = 1;
+            cout << i << endl;
+        }
+    }
+    if (!flag)
+    {
+        cout << "No" << endl;
+    }
+    system("pause");
+    return 0;
+}
+```
+
+# The Blocks Problem
+
+## 题面翻译
+
+初始时从左到右有 $n$ 个木块，编号为 $0 \ldots n-1$,要求实现下列四种操作：
+
+- `move a onto b` : 把 $a$ 和 $b$ 上方的木块归位，然后把 $a$ 放到 $b$ 上面。
+- `move a over b` : 把 $a$ 上方的木块归位，然后把 $a$ 放在 $b$ 所在木块堆的最上方。
+- `pile a onto b` : 把 $b$ 上方的木块归位，然后把 $a$ 及以上的木块坨到 $b$ 上面。
+- `pile a over b` : 把 $a$ 及以上的木块坨到 $b$ 的上面。
+- 一组数据的结束标志为 `quit`，如果有非法指令（如 $a$ 与 $b$ 在同一堆），无需处理。
+
+输出:所有操作输入完毕后，从左到右，从下到上输出每个位置的木块编号。
+
+感谢 [jxdql2001](https://www.luogu.com.cn/user/27114) 提供的翻译。
+
+## 题目描述
+
+[problemUrl]: https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=3&page=show_problem&problem=37
+
+[PDF](https://uva.onlinejudge.org/external/1/p101.pdf)
+
+![](https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202401161902572.png)
+
+## 输入格式
+
+![](https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202401161902484.png)
+
+## 输出格式
+
+![](https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202401161902463.png)
+
+## 样例 #1
+
+### 样例输入 #1
+
+```
+10
+move 9 onto 1
+move 8 over 1
+move 7 over 1
+move 6 over 1
+pile 8 over 6
+pile 8 over 5
+move 2 over 1
+move 4 over 9
+quit
+```
+
+### 样例输出 #1
+
+```
+0: 0
+1: 1 9 2 4
+2:
+3: 3
+4:
+5: 5 8 7 6
+6:
+7:
+8:
+9:
+```
+
+​		**先来分析：**
+
+​		这个题意不是一针见血的，应该把`样例输出`横着看，`:`左边的`1234567890`表示的是9个位置，`:`右边的是每个位置上的木块。
