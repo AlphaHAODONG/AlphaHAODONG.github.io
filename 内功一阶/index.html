@@ -33,7 +33,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https://alphaguo.vip/%E5%86%85%E5%8A%9F%E4%B8%80%E9%98%B6/"
-        },"genre": "posts","keywords": "算法基础","wordcount":  3036 ,
+        },"genre": "posts","keywords": "算法基础","wordcount":  4076 ,
         "url": "https://alphaguo.vip/%E5%86%85%E5%8A%9F%E4%B8%80%E9%98%B6/","datePublished": "2024-01-03T21:08:36+08:00","dateModified": "2024-01-16T21:08:36+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"authors": [{
@@ -197,7 +197,7 @@
             <div class="post-meta-line">
                 <span class="post-author"><span class='author'><span class="author fas fa-user-circle fa-fw"></span><span class='screen-reader-text'>  </span><a href='https://alphaguo.vip/authors/alphaguo'>AlphaGuo</a></span>
                 </span>&nbsp;<span class="post-category">收录于 </span>&nbsp;<span class="post-category">类别 <a href="/categories/%E7%AE%97%E6%B3%95/"><i class="far fa-folder fa-fw"></i>算法</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-01-03">2024-01-03</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2024-01-16">2024-01-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 3036 字&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 7 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-01-03">2024-01-03</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2024-01-16">2024-01-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4076 字&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 9 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -718,8 +718,8 @@ In the third example, the numbers modulo 42 are 39, 40, 41, 0, 1, 2, 40, 41, 0 a
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h1 id="the-blocks-problem" class="headerLink">
-    <a href="#the-blocks-problem" class="header-mark"></a>The Blocks Problem</h1><h2 id="题面翻译-1" class="headerLink">
+</div><h1 id="4the-blocks-problem" class="headerLink">
+    <a href="#4the-blocks-problem" class="header-mark"></a>4、The Blocks Problem</h1><h2 id="题面翻译-1" class="headerLink">
     <a href="#%e9%a2%98%e9%9d%a2%e7%bf%bb%e8%af%91-1" class="header-mark"></a>题面翻译</h2><p>初始时从左到右有 $n$ 个木块，编号为 $0 \ldots n-1$,要求实现下列四种操作：</p>
 <ul>
 <li><code>move a onto b</code> : 把 $a$ 和 $b$ 上方的木块归位，然后把 $a$ 放到 $b$ 上面。</li>
@@ -818,7 +818,305 @@ In the third example, the numbers modulo 42 are 39, 40, 41, 0, 1, 2, 40, 41, 0 a
 </div>
 </div><p>​		<strong>先来分析：</strong></p>
 <p>​		这个题意不是一针见血的，应该把<code>样例输出</code>横着看，<code>:</code>左边的<code>1234567890</code>表示的是9个位置，<code>:</code>右边的是每个位置上的木块。</p>
+<h1 id="5移除元素" class="headerLink">
+    <a href="#5%e7%a7%bb%e9%99%a4%e5%85%83%e7%b4%a0" class="header-mark"></a>5、移除元素</h1><p>给你一个数组 <code>nums</code> 和一个值 <code>val</code>，你需要 <strong><a href="https://baike.baidu.com/item/%e5%8e%9f%e5%9c%b0%e7%ae%97%e6%b3%95" target="_blank" rel="noopener noreferrer">原地</a></strong> 移除所有数值等于 <code>val</code> 的元素，并返回移除后数组的新长度。</p>
+<p>不要使用额外的数组空间，你必须仅使用 <code>O(1)</code> 额外空间并 <strong><a href="https://baike.baidu.com/item/%e5%8e%9f%e5%9c%b0%e7%ae%97%e6%b3%95" target="_blank" rel="noopener noreferrer">原地 </a>修改输入数组</strong>。</p>
+<p>元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。</p>
+<p><strong>说明:</strong></p>
+<p>为什么返回数值是整数，但输出的答案是数组呢?</p>
+<p>请注意，输入数组是以**「引用」**方式传递的，这意味着在函数里修改输入数组对于调用者是可见的。</p>
+<p>你可以想象内部操作如下:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="c1">// nums 是以“引用”方式传递的。也就是说，不对实参作任何拷贝
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">removeElement</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">val</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 在函数里修改输入数组对于调用者是可见的。
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 根据你的函数返回的长度, 它会打印出数组中 该长度范围内 的所有元素。
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">print</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
+</div><p><strong>示例 1：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">输入：nums = [3,2,2,3], val = 3
+</span></span><span class="line"><span class="cl">输出：2, nums = [2,2]
+</span></span><span class="line"><span class="cl">解释：函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2。你不需要考虑数组中超出新长度后面的元素。例如，函数返回的新长度为 2 ，而 nums = [2,2,3,3] 或 nums = [2,2,0,0]，也会被视作正确答案。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>示例 2：</strong></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">输入：nums = [0,1,2,2,3,0,4,2], val = 2
+</span></span><span class="line"><span class="cl">输出：5, nums = [0,1,3,0,4]
+</span></span><span class="line"><span class="cl">解释：函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4。注意这五个元素可为任意顺序。你不需要考虑数组中超出新长度后面的元素。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>提示：</strong></p>
+<ul>
+<li><code>0 &lt;= nums.length &lt;= 100</code></li>
+<li><code>0 &lt;= nums[i] &lt;= 50</code></li>
+<li><code>0 &lt;= val &lt;= 100</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">removeElement</span><span class="p">(</span><span class="kt">int</span><span class="o">*</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">numsSize</span><span class="p">,</span> <span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="o">*</span><span class="n">p</span><span class="o">=</span><span class="n">nums</span><span class="p">;</span><span class="c1">//p找等于val的元素
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="o">*</span><span class="n">q</span><span class="o">=</span><span class="n">nums</span><span class="o">+</span><span class="n">numsSize</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="c1">//q找不等于val的元素
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="n">p</span><span class="o">&lt;=</span><span class="n">q</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="o">*</span><span class="n">q</span><span class="o">==</span><span class="n">val</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="n">q</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">continue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="o">==</span><span class="n">val</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="o">*</span><span class="n">p</span><span class="o">=*</span><span class="n">q</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">q</span><span class="o">--</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">p</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">p</span><span class="o">-</span><span class="n">nums</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">		<span class="kt">int</span> <span class="n">removeElement</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">nums</span><span class="p">.</span><span class="n">size</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">j</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="k">if</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">					<span class="n">swap</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="o">--</span><span class="p">],</span><span class="n">nums</span><span class="p">[</span><span class="n">j</span><span class="o">--</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">				<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="6旋转链表" class="headerLink">
+    <a href="#6%e6%97%8b%e8%bd%ac%e9%93%be%e8%a1%a8" class="header-mark"></a>6、旋转链表</h1><p>给你一个链表的头节点 <code>head</code> ，旋转链表，将链表每个节点向右移动 <code>k</code> 个位置。</p>
+<p><strong>示例 1：</strong></p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202401311347494.jpeg" title="img" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202401311347494.jpeg">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202401311347494.jpeg"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202401311347494.jpeg, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202401311347494.jpeg 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202401311347494.jpeg 2x"
+            sizes="auto"
+            alt="img">
+    </a></figure></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">输入：head = [1,2,3,4,5], k = 2
+</span></span><span class="line"><span class="cl">输出：[4,5,1,2,3]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>示例 2：</strong></p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202401311347478.jpeg" title="img" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202401311347478.jpeg">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202401311347478.jpeg"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202401311347478.jpeg, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202401311347478.jpeg 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202401311347478.jpeg 2x"
+            sizes="auto"
+            alt="img">
+    </a></figure></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">输入：head = [0,1,2], k = 4
+</span></span><span class="line"><span class="cl">输出：[2,0,1]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>提示：</strong></p>
+<ul>
+<li>链表中节点的数目在范围 <code>[0, 500]</code> 内</li>
+<li><code>-100 &lt;= Node.val &lt;= 100</code></li>
+<li><code>0 &lt;= k &lt;= 2 * 109</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#define _CRT_SECURE_NO_WARNINGS
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">struct</span> <span class="nc">ListNode</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ListNode</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ListNode</span><span class="p">()</span> <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span> <span class="n">next</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ListNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">next</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">	<span class="n">ListNode</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="n">ListNode</span> <span class="o">*</span><span class="n">next</span><span class="p">)</span> <span class="o">:</span> <span class="n">val</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">next</span><span class="p">(</span><span class="n">next</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">		<span class="n">ListNode</span><span class="o">*</span> <span class="n">rotateRight</span><span class="p">(</span><span class="n">ListNode</span><span class="o">*</span> <span class="n">head</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">			<span class="n">ListNode</span> <span class="o">*</span><span class="n">p</span><span class="o">=</span><span class="n">head</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="n">ListNode</span> <span class="o">*</span><span class="n">q</span><span class="o">=</span><span class="n">head</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			
+</span></span><span class="line"><span class="cl">			<span class="k">if</span><span class="p">(</span><span class="n">head</span><span class="o">==</span><span class="k">nullptr</span> <span class="o">||</span> <span class="n">k</span><span class="o">==</span><span class="mi">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">				<span class="k">return</span> <span class="n">head</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			<span class="kt">int</span> <span class="n">length</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">for</span><span class="p">(</span><span class="n">ListNode</span> <span class="o">*</span><span class="n">i</span><span class="o">=</span><span class="n">head</span><span class="p">;</span> <span class="n">i</span><span class="o">!=</span><span class="k">nullptr</span><span class="p">;</span> <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="n">length</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="o">%</span><span class="n">length</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="c1">//把p移动k个节点 
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">k</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">			<span class="k">while</span><span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">!=</span><span class="k">nullptr</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">				<span class="c1">//把p移动到原链表的尾节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>				<span class="c1">//此时q指向的是新链表的尾节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>				<span class="n">q</span><span class="o">=</span><span class="n">q</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">				<span class="n">p</span><span class="o">=</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="p">}</span>
+</span></span><span class="line"><span class="cl">			<span class="c1">//把原链表的尾节点的next指向原链表的头节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="n">p</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">=</span><span class="n">head</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="c1">//设置新链表的头节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="n">head</span><span class="o">=</span><span class="n">q</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="c1">//q指向的是新链表的尾节点，next置空
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>			<span class="n">q</span><span class="o">-&gt;</span><span class="n">next</span><span class="o">=</span><span class="k">nullptr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">			<span class="k">return</span> <span class="n">head</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div>
 
         
 
