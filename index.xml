@@ -3,9 +3,15 @@
         <title>AlphaGuo Blog</title>
         <link>https://alphaguo.vip/</link>
         <description>关山难越</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 31 Jan 2024 21:08:36 &#43;0800</lastBuildDate>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 31 Mar 2024 00:00:17 &#43;0800</lastBuildDate>
             <atom:link href="https://alphaguo.vip/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Nacos</title>
+    <link>https://alphaguo.vip/nacos/</link>
+    <pubDate>Sun, 31 Mar 2024 00:00:17 &#43;0800</pubDate><author>
+                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/nacos/</guid>
+    <description><![CDATA[Nacos注册中心国内公司一般都推崇阿里巴巴的技术，比如注册中心，SpringCloudAlibaba也推出了一个名为Nacos的注册中心。]]></description>
+</item><item>
     <title>内功一阶</title>
     <link>https://alphaguo.vip/%E5%86%85%E5%8A%9F%E4%B8%80%E9%98%B6/</link>
     <pubDate>Wed, 31 Jan 2024 21:08:36 &#43;0800</pubDate><author>
@@ -53,11 +59,5 @@
     <pubDate>Sun, 31 Dec 2023 22:40:41 &#43;0800</pubDate><author>
                         <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA/</guid>
     <description><![CDATA[内存四区]]></description>
-</item><item>
-    <title>Linux各级目录简介</title>
-    <link>https://alphaguo.vip/linux%E5%90%84%E7%BA%A7%E7%9B%AE%E5%BD%95%E7%AE%80%E4%BB%8B/</link>
-    <pubDate>Sun, 31 Dec 2023 22:40:21 &#43;0800</pubDate><author>
-                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/linux%E5%90%84%E7%BA%A7%E7%9B%AE%E5%BD%95%E7%AE%80%E4%BB%8B/</guid>
-    <description><![CDATA[Linux各目录及每个目录的详细介绍 【常见目录说明】 目录 /bin 存放二进制可执行文件(ls,cat,mkdir等)，常用命令一般都在这里。 /etc 存放系]]></description>
 </item></channel>
 </rss>
