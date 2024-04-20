@@ -1,13 +1,13 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>JS - 标签 - AlphaGuo Blog</title>
-        <link>https://alphaguo.vip/tags/js/</link>
+        <link>https://ghd.icu/tags/js/</link>
         <description>JS - 标签 - AlphaGuo Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 31 Dec 2023 22:41:56 &#43;0800</lastBuildDate><atom:link href="https://alphaguo.vip/tags/js/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 31 Dec 2023 22:41:56 &#43;0800</lastBuildDate><atom:link href="https://ghd.icu/tags/js/" rel="self" type="application/rss+xml" /><item>
     <title>Js</title>
-    <link>https://alphaguo.vip/js/</link>
+    <link>https://ghd.icu/js/</link>
     <pubDate>Sun, 31 Dec 2023 22:41:56 &#43;0800</pubDate><author>
-                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/js/</guid>
+                        <name>AlphaGuo</name><uri>https://ghd.icu/</uri><email>alphaguo141@gmail.com</email></author><guid>https://ghd.icu/js/</guid>
     <description><![CDATA[JS基础]]></description>
 </item></channel>
 </rss>

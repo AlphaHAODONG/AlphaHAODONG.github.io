@@ -1,77 +1,77 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Tags - 标签 - AlphaGuo Blog</title>
-        <link>https://alphaguo.vip/tags/</link>
+        <link>https://ghd.icu/tags/</link>
         <description>Tags - 标签 - AlphaGuo Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 31 Jan 2024 21:08:36 &#43;0800</lastBuildDate><atom:link href="https://alphaguo.vip/tags/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 31 Jan 2024 21:08:36 &#43;0800</lastBuildDate><atom:link href="https://ghd.icu/tags/" rel="self" type="application/rss+xml" /><item>
     <title>算法基础</title>
-    <link>https://alphaguo.vip/tags/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/</link>
+    <link>https://ghd.icu/tags/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/</link>
     <pubDate>Wed, 31 Jan 2024 21:08:36 &#43;0800</pubDate><author>
         <name>AlphaGuo</name>
-    </author><guid>https://alphaguo.vip/tags/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/</guid>
+    </author><guid>https://ghd.icu/tags/%E7%AE%97%E6%B3%95%E5%9F%BA%E7%A1%80/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>线性表</title>
-    <link>https://alphaguo.vip/tags/%E7%BA%BF%E6%80%A7%E8%A1%A8/</link>
+    <link>https://ghd.icu/tags/%E7%BA%BF%E6%80%A7%E8%A1%A8/</link>
     <pubDate>Tue, 02 Jan 2024 17:19:08 &#43;0800</pubDate><author>
         <name>AlphaGuo</name>
-    </author><guid>https://alphaguo.vip/tags/%E7%BA%BF%E6%80%A7%E8%A1%A8/</guid>
+    </author><guid>https://ghd.icu/tags/%E7%BA%BF%E6%80%A7%E8%A1%A8/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>Linux</title>
-    <link>https://alphaguo.vip/tags/linux/</link>
+    <link>https://ghd.icu/tags/linux/</link>
     <pubDate>Sun, 31 Dec 2023 22:42:17 &#43;0800</pubDate><author>
         <name>AlphaGuo</name>
-    </author><guid>https://alphaguo.vip/tags/linux/</guid>
+    </author><guid>https://ghd.icu/tags/linux/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>JS</title>
-    <link>https://alphaguo.vip/tags/js/</link>
+    <link>https://ghd.icu/tags/js/</link>
     <pubDate>Sun, 31 Dec 2023 22:41:56 &#43;0800</pubDate><author>
         <name>AlphaGuo</name>
-    </author><guid>https://alphaguo.vip/tags/js/</guid>
+    </author><guid>https://ghd.icu/tags/js/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>C</title>
-    <link>https://alphaguo.vip/tags/c/</link>
+    <link>https://ghd.icu/tags/c/</link>
     <pubDate>Sun, 31 Dec 2023 22:41:39 &#43;0800</pubDate><author>
         <name>AlphaGuo</name>
-    </author><guid>https://alphaguo.vip/tags/c/</guid>
+    </author><guid>https://ghd.icu/tags/c/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>疑难杂症</title>
-    <link>https://alphaguo.vip/tags/%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/</link>
+    <link>https://ghd.icu/tags/%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/</link>
     <pubDate>Sun, 31 Dec 2023 22:38:18 &#43;0800</pubDate><author>
         <name>AlphaGuo</name>
-    </author><guid>https://alphaguo.vip/tags/%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/</guid>
+    </author><guid>https://ghd.icu/tags/%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>JVAV</title>
-    <link>https://alphaguo.vip/tags/jvav/</link>
+    <link>https://ghd.icu/tags/jvav/</link>
     <pubDate>Sun, 31 Dec 2023 20:41:01 &#43;0800</pubDate><author>
         <name>AlphaGuo</name>
-    </author><guid>https://alphaguo.vip/tags/jvav/</guid>
+    </author><guid>https://ghd.icu/tags/jvav/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>tool</title>
-    <link>https://alphaguo.vip/tags/tool/</link>
+    <link>https://ghd.icu/tags/tool/</link>
     <pubDate>Sun, 31 Dec 2023 20:40:22 &#43;0800</pubDate><author>
         <name>AlphaGuo</name>
-    </author><guid>https://alphaguo.vip/tags/tool/</guid>
+    </author><guid>https://ghd.icu/tags/tool/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>Spring</title>
-    <link>https://alphaguo.vip/tags/spring/</link>
+    <link>https://ghd.icu/tags/spring/</link>
     <pubDate>Sun, 31 Dec 2023 20:33:49 &#43;0800</pubDate><author>
         <name>AlphaGuo</name>
-    </author><guid>https://alphaguo.vip/tags/spring/</guid>
+    </author><guid>https://ghd.icu/tags/spring/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>Mybatis</title>
-    <link>https://alphaguo.vip/tags/mybatis/</link>
+    <link>https://ghd.icu/tags/mybatis/</link>
     <pubDate>Sun, 31 Dec 2023 20:33:33 &#43;0800</pubDate><author>
         <name>AlphaGuo</name>
-    </author><guid>https://alphaguo.vip/tags/mybatis/</guid>
+    </author><guid>https://ghd.icu/tags/mybatis/</guid>
     <description><![CDATA[]]></description>
 </item></channel>
 </rss>

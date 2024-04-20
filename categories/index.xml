@@ -1,77 +1,77 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Categories - 分类 - AlphaGuo Blog</title>
-        <link>https://alphaguo.vip/categories/</link>
+        <link>https://ghd.icu/categories/</link>
         <description>Categories - 分类 - AlphaGuo Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 31 Jan 2024 21:08:36 &#43;0800</lastBuildDate><atom:link href="https://alphaguo.vip/categories/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 31 Jan 2024 21:08:36 &#43;0800</lastBuildDate><atom:link href="https://ghd.icu/categories/" rel="self" type="application/rss+xml" /><item>
     <title>算法</title>
-    <link>https://alphaguo.vip/categories/%E7%AE%97%E6%B3%95/</link>
+    <link>https://ghd.icu/categories/%E7%AE%97%E6%B3%95/</link>
     <pubDate>Wed, 31 Jan 2024 21:08:36 &#43;0800</pubDate><author>
         <name>AlphaGuo</name>
-    </author><guid>https://alphaguo.vip/categories/%E7%AE%97%E6%B3%95/</guid>
+    </author><guid>https://ghd.icu/categories/%E7%AE%97%E6%B3%95/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>数据结构</title>
-    <link>https://alphaguo.vip/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</link>
+    <link>https://ghd.icu/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</link>
     <pubDate>Tue, 02 Jan 2024 17:19:08 &#43;0800</pubDate><author>
         <name>AlphaGuo</name>
-    </author><guid>https://alphaguo.vip/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</guid>
+    </author><guid>https://ghd.icu/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>Linux</title>
-    <link>https://alphaguo.vip/categories/linux/</link>
+    <link>https://ghd.icu/categories/linux/</link>
     <pubDate>Sun, 31 Dec 2023 22:42:17 &#43;0800</pubDate><author>
         <name>AlphaGuo</name>
-    </author><guid>https://alphaguo.vip/categories/linux/</guid>
+    </author><guid>https://ghd.icu/categories/linux/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>JS</title>
-    <link>https://alphaguo.vip/categories/js/</link>
+    <link>https://ghd.icu/categories/js/</link>
     <pubDate>Sun, 31 Dec 2023 22:41:56 &#43;0800</pubDate><author>
         <name>AlphaGuo</name>
-    </author><guid>https://alphaguo.vip/categories/js/</guid>
+    </author><guid>https://ghd.icu/categories/js/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>C</title>
-    <link>https://alphaguo.vip/categories/c/</link>
+    <link>https://ghd.icu/categories/c/</link>
     <pubDate>Sun, 31 Dec 2023 22:41:39 &#43;0800</pubDate><author>
         <name>AlphaGuo</name>
-    </author><guid>https://alphaguo.vip/categories/c/</guid>
+    </author><guid>https://ghd.icu/categories/c/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>疑难杂症</title>
-    <link>https://alphaguo.vip/categories/%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/</link>
+    <link>https://ghd.icu/categories/%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/</link>
     <pubDate>Sun, 31 Dec 2023 22:38:18 &#43;0800</pubDate><author>
         <name>AlphaGuo</name>
-    </author><guid>https://alphaguo.vip/categories/%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/</guid>
+    </author><guid>https://ghd.icu/categories/%E7%96%91%E9%9A%BE%E6%9D%82%E7%97%87/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>JVAV</title>
-    <link>https://alphaguo.vip/categories/jvav/</link>
+    <link>https://ghd.icu/categories/jvav/</link>
     <pubDate>Sun, 31 Dec 2023 20:41:01 &#43;0800</pubDate><author>
         <name>AlphaGuo</name>
-    </author><guid>https://alphaguo.vip/categories/jvav/</guid>
+    </author><guid>https://ghd.icu/categories/jvav/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>JVAVA</title>
-    <link>https://alphaguo.vip/categories/jvava/</link>
+    <link>https://ghd.icu/categories/jvava/</link>
     <pubDate>Sun, 31 Dec 2023 20:40:40 &#43;0800</pubDate><author>
         <name>AlphaGuo</name>
-    </author><guid>https://alphaguo.vip/categories/jvava/</guid>
+    </author><guid>https://ghd.icu/categories/jvava/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>tool</title>
-    <link>https://alphaguo.vip/categories/tool/</link>
+    <link>https://ghd.icu/categories/tool/</link>
     <pubDate>Sun, 31 Dec 2023 20:40:22 &#43;0800</pubDate><author>
         <name>AlphaGuo</name>
-    </author><guid>https://alphaguo.vip/categories/tool/</guid>
+    </author><guid>https://ghd.icu/categories/tool/</guid>
     <description><![CDATA[]]></description>
 </item><item>
     <title>Spring</title>
-    <link>https://alphaguo.vip/categories/spring/</link>
+    <link>https://ghd.icu/categories/spring/</link>
     <pubDate>Sun, 31 Dec 2023 20:33:49 &#43;0800</pubDate><author>
         <name>AlphaGuo</name>
-    </author><guid>https://alphaguo.vip/categories/spring/</guid>
+    </author><guid>https://ghd.icu/categories/spring/</guid>
     <description><![CDATA[]]></description>
 </item></channel>
 </rss>

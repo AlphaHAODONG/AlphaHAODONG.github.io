@@ -1,67 +1,67 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>AlphaGuo - 作者 - AlphaGuo Blog</title>
-        <link>https://alphaguo.vip/authors/alphaguo/</link>
+        <link>https://ghd.icu/authors/alphaguo/</link>
         <description>AlphaGuo - 作者 - AlphaGuo Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 31 Mar 2024 00:00:17 &#43;0800</lastBuildDate><atom:link href="https://alphaguo.vip/authors/alphaguo/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 31 Mar 2024 00:00:17 &#43;0800</lastBuildDate><atom:link href="https://ghd.icu/authors/alphaguo/" rel="self" type="application/rss+xml" /><item>
     <title>Nacos</title>
-    <link>https://alphaguo.vip/nacos/</link>
+    <link>https://ghd.icu/nacos/</link>
     <pubDate>Sun, 31 Mar 2024 00:00:17 &#43;0800</pubDate><author>
-                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/nacos/</guid>
+                        <name>AlphaGuo</name><uri>https://ghd.icu/</uri><email>alphaguo141@gmail.com</email></author><guid>https://ghd.icu/nacos/</guid>
     <description><![CDATA[Nacos注册中心国内公司一般都推崇阿里巴巴的技术，比如注册中心，SpringCloudAlibaba也推出了一个名为Nacos的注册中心。]]></description>
 </item><item>
     <title>内功一阶</title>
-    <link>https://alphaguo.vip/%E5%86%85%E5%8A%9F%E4%B8%80%E9%98%B6/</link>
+    <link>https://ghd.icu/%E5%86%85%E5%8A%9F%E4%B8%80%E9%98%B6/</link>
     <pubDate>Wed, 31 Jan 2024 21:08:36 &#43;0800</pubDate><author>
-                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/%E5%86%85%E5%8A%9F%E4%B8%80%E9%98%B6/</guid>
+                        <name>AlphaGuo</name><uri>https://ghd.icu/</uri><email>alphaguo141@gmail.com</email></author><guid>https://ghd.icu/%E5%86%85%E5%8A%9F%E4%B8%80%E9%98%B6/</guid>
     <description><![CDATA[一些很简单的算法基础，大佬就不要看了。。。更新中]]></description>
 </item><item>
     <title>线性表</title>
-    <link>https://alphaguo.vip/%E7%BA%BF%E6%80%A7%E8%A1%A8/</link>
+    <link>https://ghd.icu/%E7%BA%BF%E6%80%A7%E8%A1%A8/</link>
     <pubDate>Tue, 02 Jan 2024 17:19:08 &#43;0800</pubDate><author>
-                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/%E7%BA%BF%E6%80%A7%E8%A1%A8/</guid>
+                        <name>AlphaGuo</name><uri>https://ghd.icu/</uri><email>alphaguo141@gmail.com</email></author><guid>https://ghd.icu/%E7%BA%BF%E6%80%A7%E8%A1%A8/</guid>
     <description><![CDATA[更新中]]></description>
 </item><item>
     <title>Linux基础</title>
-    <link>https://alphaguo.vip/linux%E5%9F%BA%E7%A1%80/</link>
+    <link>https://ghd.icu/linux%E5%9F%BA%E7%A1%80/</link>
     <pubDate>Sun, 31 Dec 2023 22:42:17 &#43;0800</pubDate><author>
-                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/linux%E5%9F%BA%E7%A1%80/</guid>
+                        <name>AlphaGuo</name><uri>https://ghd.icu/</uri><email>alphaguo141@gmail.com</email></author><guid>https://ghd.icu/linux%E5%9F%BA%E7%A1%80/</guid>
     <description><![CDATA[Linux的安装以及一些基础命令]]></description>
 </item><item>
     <title>Js</title>
-    <link>https://alphaguo.vip/js/</link>
+    <link>https://ghd.icu/js/</link>
     <pubDate>Sun, 31 Dec 2023 22:41:56 &#43;0800</pubDate><author>
-                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/js/</guid>
+                        <name>AlphaGuo</name><uri>https://ghd.icu/</uri><email>alphaguo141@gmail.com</email></author><guid>https://ghd.icu/js/</guid>
     <description><![CDATA[JS基础]]></description>
 </item><item>
     <title>文件操作pro</title>
-    <link>https://alphaguo.vip/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9Cpro/</link>
+    <link>https://ghd.icu/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9Cpro/</link>
     <pubDate>Sun, 31 Dec 2023 22:41:39 &#43;0800</pubDate><author>
-                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9Cpro/</guid>
+                        <name>AlphaGuo</name><uri>https://ghd.icu/</uri><email>alphaguo141@gmail.com</email></author><guid>https://ghd.icu/%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9Cpro/</guid>
     <description><![CDATA[文件操作]]></description>
 </item><item>
     <title>结构体强化</title>
-    <link>https://alphaguo.vip/%E7%BB%93%E6%9E%84%E4%BD%93%E5%BC%BA%E5%8C%96/</link>
+    <link>https://ghd.icu/%E7%BB%93%E6%9E%84%E4%BD%93%E5%BC%BA%E5%8C%96/</link>
     <pubDate>Sun, 31 Dec 2023 22:41:20 &#43;0800</pubDate><author>
-                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/%E7%BB%93%E6%9E%84%E4%BD%93%E5%BC%BA%E5%8C%96/</guid>
+                        <name>AlphaGuo</name><uri>https://ghd.icu/</uri><email>alphaguo141@gmail.com</email></author><guid>https://ghd.icu/%E7%BB%93%E6%9E%84%E4%BD%93%E5%BC%BA%E5%8C%96/</guid>
     <description><![CDATA[1、结构体基础知识 1.1 结构体类型的定义 1 2 3 4 5 6 7 8 9 struct Person{ char name[64]; int age; }; typedef struct _PERSON{ char name[64]; int age; }Person; 注意：定义结构体类型时不要直接给成员赋值，结构体只是一个]]></description>
 </item><item>
     <title>多维数组</title>
-    <link>https://alphaguo.vip/%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84/</link>
+    <link>https://ghd.icu/%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84/</link>
     <pubDate>Sun, 31 Dec 2023 22:40:56 &#43;0800</pubDate><author>
-                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84/</guid>
+                        <name>AlphaGuo</name><uri>https://ghd.icu/</uri><email>alphaguo141@gmail.com</email></author><guid>https://ghd.icu/%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84/</guid>
     <description><![CDATA[1、一维数组 元素类型角度：数组是相同类型的变量的有序集合 内存角度：连续的一大片内存空间 1.1 数组名考虑下面这些声明： 1 2 int a; int b[10]; 我们把a称作标量]]></description>
 </item><item>
     <title>内存分区</title>
-    <link>https://alphaguo.vip/%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA/</link>
+    <link>https://ghd.icu/%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA/</link>
     <pubDate>Sun, 31 Dec 2023 22:40:41 &#43;0800</pubDate><author>
-                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA/</guid>
+                        <name>AlphaGuo</name><uri>https://ghd.icu/</uri><email>alphaguo141@gmail.com</email></author><guid>https://ghd.icu/%E5%86%85%E5%AD%98%E5%88%86%E5%8C%BA/</guid>
     <description><![CDATA[内存四区]]></description>
 </item><item>
     <title>Linux各级目录简介</title>
-    <link>https://alphaguo.vip/linux%E5%90%84%E7%BA%A7%E7%9B%AE%E5%BD%95%E7%AE%80%E4%BB%8B/</link>
+    <link>https://ghd.icu/linux%E5%90%84%E7%BA%A7%E7%9B%AE%E5%BD%95%E7%AE%80%E4%BB%8B/</link>
     <pubDate>Sun, 31 Dec 2023 22:40:21 &#43;0800</pubDate><author>
-                        <name>AlphaGuo</name><uri>https://alphaguo.vip/</uri><email>alphaguo141@gmail.com</email></author><guid>https://alphaguo.vip/linux%E5%90%84%E7%BA%A7%E7%9B%AE%E5%BD%95%E7%AE%80%E4%BB%8B/</guid>
+                        <name>AlphaGuo</name><uri>https://ghd.icu/</uri><email>alphaguo141@gmail.com</email></author><guid>https://ghd.icu/linux%E5%90%84%E7%BA%A7%E7%9B%AE%E5%BD%95%E7%AE%80%E4%BB%8B/</guid>
     <description><![CDATA[Linux各目录及每个目录的详细介绍 【常见目录说明】 目录 /bin 存放二进制可执行文件(ls,cat,mkdir等)，常用命令一般都在这里。 /etc 存放系]]></description>
 </item></channel>
 </rss>

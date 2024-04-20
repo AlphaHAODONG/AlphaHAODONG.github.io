@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
         <title>Authors - 作者 - AlphaGuo Blog</title>
-        <link>https://alphaguo.vip/authors/</link>
+        <link>https://ghd.icu/authors/</link>
         <description>Authors - 作者 - AlphaGuo Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 31 Mar 2024 00:00:17 &#43;0800</lastBuildDate><atom:link href="https://alphaguo.vip/authors/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 31 Mar 2024 00:00:17 &#43;0800</lastBuildDate><atom:link href="https://ghd.icu/authors/" rel="self" type="application/rss+xml" /><item>
     <title>AlphaGuo</title>
-    <link>https://alphaguo.vip/authors/alphaguo/</link>
+    <link>https://ghd.icu/authors/alphaguo/</link>
     <pubDate>Sun, 31 Mar 2024 00:00:17 &#43;0800</pubDate><author>
         <name>AlphaGuo</name>
-    </author><guid>https://alphaguo.vip/authors/alphaguo/</guid>
+    </author><guid>https://ghd.icu/authors/alphaguo/</guid>
     <description><![CDATA[]]></description>
 </item></channel>
 </rss>
