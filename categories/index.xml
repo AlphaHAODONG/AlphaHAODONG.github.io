@@ -3,7 +3,14 @@
         <title>Categories - 分类 - AlphaGuo Blog</title>
         <link>https://ghd.icu/categories/</link>
         <description>Categories - 分类 - AlphaGuo Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 31 Jan 2024 21:08:36 &#43;0800</lastBuildDate><atom:link href="https://ghd.icu/categories/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 31 Mar 2024 00:00:17 &#43;0800</lastBuildDate><atom:link href="https://ghd.icu/categories/" rel="self" type="application/rss+xml" /><item>
+    <title>中间件</title>
+    <link>https://ghd.icu/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/</link>
+    <pubDate>Sun, 31 Mar 2024 00:00:17 &#43;0800</pubDate><author>
+        <name>AlphaGuo</name>
+    </author><guid>https://ghd.icu/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
     <title>算法</title>
     <link>https://ghd.icu/categories/%E7%AE%97%E6%B3%95/</link>
     <pubDate>Wed, 31 Jan 2024 21:08:36 &#43;0800</pubDate><author>
@@ -65,13 +72,6 @@
     <pubDate>Sun, 31 Dec 2023 20:40:22 &#43;0800</pubDate><author>
         <name>AlphaGuo</name>
     </author><guid>https://ghd.icu/categories/tool/</guid>
-    <description><![CDATA[]]></description>
-</item><item>
-    <title>Spring</title>
-    <link>https://ghd.icu/categories/spring/</link>
-    <pubDate>Sun, 31 Dec 2023 20:33:49 &#43;0800</pubDate><author>
-        <name>AlphaGuo</name>
-    </author><guid>https://ghd.icu/categories/spring/</guid>
     <description><![CDATA[]]></description>
 </item></channel>
 </rss>
