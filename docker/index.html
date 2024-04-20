@@ -1,0 +1,2392 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="noodp" />
+    <title>Docker - AlphaGuo Blog</title><meta name="Description" content="关山难越"><meta property="og:title" content="Docker" />
+<meta property="og:description" content="来自于itheima" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://ghd.icu/docker/" /><meta property="og:image" content="https://ghd.icu/images/favicon-16x16.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2024-04-20T15:37:22+08:00" />
+<meta property="article:modified_time" content="2024-04-20T15:37:22+08:00" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://ghd.icu/images/favicon-16x16.png" /><meta name="twitter:title" content="Docker"/>
+<meta name="twitter:description" content="来自于itheima"/>
+<meta name="twitter:site" content="@guo_alpha36266"/>
+<meta name="application-name" content="AlphaGuo">
+<meta name="apple-mobile-web-app-title" content="AlphaGuo">
+
+<meta name="theme-color" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><meta name="twitter:creator" content="@@guo_alpha36266" /><link rel="icon" href="/images/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" href="https://ghd.icu/docker/" /><link rel="prev" href="https://ghd.icu/nacos/" />
+<link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/color.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/fontawesome-free/all.min.css">
+        <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/animate/animate.min.css">
+        <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Docker",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://ghd.icu/docker/"
+        },"genre": "posts","keywords": "Docker","wordcount":  11669 ,
+        "url": "https://ghd.icu/docker/","datePublished": "2024-04-20T15:37:22+08:00","dateModified": "2024-04-20T15:37:22+08:00","publisher": {
+            "@type": "Organization",
+            "name": ""},"authors": [{
+                        "@type": "Person",
+                        "name": "AlphaGuo"                    
+                    }],"description": ""
+    }
+    </script></head>
+
+<body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">
+        function setTheme(theme) {document.body.setAttribute('theme', theme); document.documentElement.style.setProperty('color-scheme', theme === 'light' ? 'light' : 'dark'); window.theme = theme;   window.isDark = window.theme !== 'light' }
+        function saveTheme(theme) {window.localStorage && localStorage.setItem('theme', theme);}
+        function getMeta(metaName) {const metas = document.getElementsByTagName('meta'); for (let i = 0; i < metas.length; i++) if (metas[i].getAttribute('name') === metaName) return metas[i]; return '';}
+        if (window.localStorage && localStorage.getItem('theme')) {let theme = localStorage.getItem('theme');theme === 'light' || theme === 'dark' || theme === 'black' ? setTheme(theme) : (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light')); } else { if ('auto' === 'light' || 'auto' === 'dark' || 'auto' === 'black') setTheme('auto'), saveTheme('auto'); else saveTheme('auto'), window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? setTheme('dark') : setTheme('light');}
+        let metaColors = {'light': '#f8f8f8','dark': '#252627','black': '#000000'}
+        getMeta('theme-color').content = metaColors[document.body.getAttribute('theme')];
+        window.switchThemeEventSet = new Set()
+    </script>
+    <div id="back-to-top"></div>
+    <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="AlphaGuo Blog"><span id="desktop-header-typeit" class="typeit"></span></a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-select" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                    <select class="color-theme-select" id="theme-select-desktop" title="切换主题">
+                        <option value="light">浅色</option>
+                        <option value="dark">深色</option>
+                        <option value="black">黑色</option>
+                        <option value="auto">跟随系统</option>
+                    </select>
+                </a></div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="AlphaGuo Blog"><span id="mobile-header-typeit" class="typeit"></span></a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a href="javascript:void(0);" class="menu-item theme-select" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+                <select class="color-theme-select" id="theme-select-mobile" title="切换主题">
+                    <option value="light">浅色</option>
+                    <option value="dark">深色</option>
+                    <option value="black">黑色</option>
+                    <option value="auto">跟随系统</option>
+                </select>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+            <div class="container"><div class="toc" id="toc-auto">
+        <h2 class="toc-title">目录</h2>
+        <div class="toc-content" id="toc-content-auto"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#11什么是docker">1.1.什么是Docker</a>
+      <ul>
+        <li><a href="#111应用部署的环境问题">1.1.1.应用部署的环境问题</a></li>
+        <li><a href="#112docker解决依赖兼容问题">1.1.2.Docker解决依赖兼容问题</a></li>
+        <li><a href="#113docker解决操作系统环境差异">1.1.3.Docker解决操作系统环境差异</a></li>
+        <li><a href="#114小结">1.1.4.小结</a></li>
+      </ul>
+    </li>
+    <li><a href="#12docker和虚拟机的区别">1.2.Docker和虚拟机的区别</a></li>
+    <li><a href="#13docker架构">1.3.Docker架构</a>
+      <ul>
+        <li><a href="#131镜像和容器">1.3.1.镜像和容器</a></li>
+        <li><a href="#132dockerhub">1.3.2.DockerHub</a></li>
+        <li><a href="#133docker架构">1.3.3.Docker架构</a></li>
+        <li><a href="#134小结">1.3.4.小结</a></li>
+      </ul>
+    </li>
+    <li><a href="#14安装docker">1.4.安装Docker</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#21镜像操作">2.1.镜像操作</a>
+      <ul>
+        <li><a href="#211镜像名称">2.1.1.镜像名称</a></li>
+        <li><a href="#212镜像命令">2.1.2.镜像命令</a></li>
+        <li><a href="#213案例1-拉取查看镜像">2.1.3.案例1-拉取、查看镜像</a></li>
+        <li><a href="#214案例2-保存导入镜像">2.1.4.案例2-保存、导入镜像</a></li>
+        <li><a href="#215练习">2.1.5.练习</a></li>
+      </ul>
+    </li>
+    <li><a href="#22容器操作">2.2.容器操作</a>
+      <ul>
+        <li><a href="#221容器相关命令">2.2.1.容器相关命令</a></li>
+        <li><a href="#222案例-创建并运行一个容器">2.2.2.案例-创建并运行一个容器</a></li>
+        <li><a href="#223案例-进入容器修改文件">2.2.3.案例-进入容器，修改文件</a></li>
+        <li><a href="#224小结">2.2.4.小结</a></li>
+        <li><a href="#225-案例创建并运行一个redis容器并且支持数据持久化">2.2.5 案例：创建并运行一个redis容器，并且支持数据持久化</a>
+          <ul>
+            <li><a href="#1实现步骤">1.实现步骤</a></li>
+            <li><a href="#2具体实现">2.具体实现</a>
+              <ul>
+                <li><a href="#步骤一到dockerhub搜索redis镜像">步骤一：到DockerHub搜索Redis镜像</a></li>
+                <li><a href="#步骤二查看redis镜像文档中的帮助信息">步骤二：查看Redis镜像文档中的帮助信息</a></li>
+                <li><a href="#步骤三利用docker-run-命令运行一个redis容器">步骤三：利用docker run 命令运行一个Redis容器</a></li>
+                <li><a href="#步骤四进入redis容器">步骤四：进入redis容器</a></li>
+                <li><a href="#步骤五执行redis-cli客户端命令">步骤五：执行redis-cli客户端命令</a></li>
+                <li><a href="#步骤六设置数据num666">步骤六：设置数据num=666</a></li>
+                <li><a href="#步骤七在window系统中使用redis客户端连接">步骤七:在window系统中使用redis客户端连接</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#23数据卷容器数据管理">2.3.数据卷（容器数据管理）</a>
+      <ul>
+        <li><a href="#231什么是数据卷">2.3.1.什么是数据卷</a></li>
+        <li><a href="#232数据集操作命令">2.3.2.数据集操作命令</a></li>
+        <li><a href="#233创建和查看数据卷">2.3.3.创建和查看数据卷</a></li>
+        <li><a href="#234挂载数据卷">2.3.4.挂载数据卷</a></li>
+        <li><a href="#235案例-给nginx挂载数据卷">2.3.5.案例-给nginx挂载数据卷</a></li>
+        <li><a href="#236案例-给mysql挂载本地目录">2.3.6.案例-给MySQL挂载本地目录</a></li>
+        <li><a href="#237小结">2.3.7.小结</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#31镜像结构">3.1.镜像结构</a></li>
+    <li><a href="#32dockerfile语法">3.2.Dockerfile语法</a></li>
+    <li><a href="#33构建java项目">3.3.构建Java项目</a>
+      <ul>
+        <li><a href="#331基于ubuntu构建java项目">3.3.1.基于Ubuntu构建Java项目</a></li>
+        <li><a href="#332基于java8构建java项目">3.3.2.基于java8构建Java项目</a></li>
+      </ul>
+    </li>
+    <li><a href="#34小结">3.4.小结</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#41初识dockercompose">4.1.初识DockerCompose</a></li>
+    <li><a href="#42安装dockercompose">4.2.安装DockerCompose</a></li>
+    <li><a href="#43部署应用这里简单实现就好后期学习微服务会多个微服务部署-课下完成">4.3.部署应用(这里简单实现就好，后期学习微服务会多个微服务部署) 课下完成</a>
+      <ul>
+        <li><a href="#431实现思路">4.3.1.实现思路</a></li>
+        <li><a href="#432具体实现">4.3.2.具体实现</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#51docker镜像仓库介绍">5.1Docker镜像仓库介绍</a></li>
+    <li><a href="#51搭建私有镜像仓库">5.1.搭建私有镜像仓库</a></li>
+    <li><a href="#52推送拉取镜像">5.2.推送、拉取镜像</a></li>
+  </ul>
+</nav></div>
+    </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Docker</h1><div class="post-meta">
+            <div class="post-meta-line">
+                <span class="post-author"><span class='author'><span class="author fas fa-user-circle fa-fw"></span><span class='screen-reader-text'>  </span><a href='https://ghd.icu/authors/alphaguo'>AlphaGuo</a></span>
+                </span>&nbsp;<span class="post-category">收录于 </span>&nbsp;<span class="post-category">类别 <a href="/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/"><i class="far fa-folder fa-fw"></i>中间件</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-04-20">2024-04-20</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2024-04-20">2024-04-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 11669 字&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 24 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#11什么是docker">1.1.什么是Docker</a>
+      <ul>
+        <li><a href="#111应用部署的环境问题">1.1.1.应用部署的环境问题</a></li>
+        <li><a href="#112docker解决依赖兼容问题">1.1.2.Docker解决依赖兼容问题</a></li>
+        <li><a href="#113docker解决操作系统环境差异">1.1.3.Docker解决操作系统环境差异</a></li>
+        <li><a href="#114小结">1.1.4.小结</a></li>
+      </ul>
+    </li>
+    <li><a href="#12docker和虚拟机的区别">1.2.Docker和虚拟机的区别</a></li>
+    <li><a href="#13docker架构">1.3.Docker架构</a>
+      <ul>
+        <li><a href="#131镜像和容器">1.3.1.镜像和容器</a></li>
+        <li><a href="#132dockerhub">1.3.2.DockerHub</a></li>
+        <li><a href="#133docker架构">1.3.3.Docker架构</a></li>
+        <li><a href="#134小结">1.3.4.小结</a></li>
+      </ul>
+    </li>
+    <li><a href="#14安装docker">1.4.安装Docker</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#21镜像操作">2.1.镜像操作</a>
+      <ul>
+        <li><a href="#211镜像名称">2.1.1.镜像名称</a></li>
+        <li><a href="#212镜像命令">2.1.2.镜像命令</a></li>
+        <li><a href="#213案例1-拉取查看镜像">2.1.3.案例1-拉取、查看镜像</a></li>
+        <li><a href="#214案例2-保存导入镜像">2.1.4.案例2-保存、导入镜像</a></li>
+        <li><a href="#215练习">2.1.5.练习</a></li>
+      </ul>
+    </li>
+    <li><a href="#22容器操作">2.2.容器操作</a>
+      <ul>
+        <li><a href="#221容器相关命令">2.2.1.容器相关命令</a></li>
+        <li><a href="#222案例-创建并运行一个容器">2.2.2.案例-创建并运行一个容器</a></li>
+        <li><a href="#223案例-进入容器修改文件">2.2.3.案例-进入容器，修改文件</a></li>
+        <li><a href="#224小结">2.2.4.小结</a></li>
+        <li><a href="#225-案例创建并运行一个redis容器并且支持数据持久化">2.2.5 案例：创建并运行一个redis容器，并且支持数据持久化</a>
+          <ul>
+            <li><a href="#1实现步骤">1.实现步骤</a></li>
+            <li><a href="#2具体实现">2.具体实现</a>
+              <ul>
+                <li><a href="#步骤一到dockerhub搜索redis镜像">步骤一：到DockerHub搜索Redis镜像</a></li>
+                <li><a href="#步骤二查看redis镜像文档中的帮助信息">步骤二：查看Redis镜像文档中的帮助信息</a></li>
+                <li><a href="#步骤三利用docker-run-命令运行一个redis容器">步骤三：利用docker run 命令运行一个Redis容器</a></li>
+                <li><a href="#步骤四进入redis容器">步骤四：进入redis容器</a></li>
+                <li><a href="#步骤五执行redis-cli客户端命令">步骤五：执行redis-cli客户端命令</a></li>
+                <li><a href="#步骤六设置数据num666">步骤六：设置数据num=666</a></li>
+                <li><a href="#步骤七在window系统中使用redis客户端连接">步骤七:在window系统中使用redis客户端连接</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#23数据卷容器数据管理">2.3.数据卷（容器数据管理）</a>
+      <ul>
+        <li><a href="#231什么是数据卷">2.3.1.什么是数据卷</a></li>
+        <li><a href="#232数据集操作命令">2.3.2.数据集操作命令</a></li>
+        <li><a href="#233创建和查看数据卷">2.3.3.创建和查看数据卷</a></li>
+        <li><a href="#234挂载数据卷">2.3.4.挂载数据卷</a></li>
+        <li><a href="#235案例-给nginx挂载数据卷">2.3.5.案例-给nginx挂载数据卷</a></li>
+        <li><a href="#236案例-给mysql挂载本地目录">2.3.6.案例-给MySQL挂载本地目录</a></li>
+        <li><a href="#237小结">2.3.7.小结</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#31镜像结构">3.1.镜像结构</a></li>
+    <li><a href="#32dockerfile语法">3.2.Dockerfile语法</a></li>
+    <li><a href="#33构建java项目">3.3.构建Java项目</a>
+      <ul>
+        <li><a href="#331基于ubuntu构建java项目">3.3.1.基于Ubuntu构建Java项目</a></li>
+        <li><a href="#332基于java8构建java项目">3.3.2.基于java8构建Java项目</a></li>
+      </ul>
+    </li>
+    <li><a href="#34小结">3.4.小结</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#41初识dockercompose">4.1.初识DockerCompose</a></li>
+    <li><a href="#42安装dockercompose">4.2.安装DockerCompose</a></li>
+    <li><a href="#43部署应用这里简单实现就好后期学习微服务会多个微服务部署-课下完成">4.3.部署应用(这里简单实现就好，后期学习微服务会多个微服务部署) 课下完成</a>
+      <ul>
+        <li><a href="#431实现思路">4.3.1.实现思路</a></li>
+        <li><a href="#432具体实现">4.3.2.具体实现</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#51docker镜像仓库介绍">5.1Docker镜像仓库介绍</a></li>
+    <li><a href="#51搭建私有镜像仓库">5.1.搭建私有镜像仓库</a></li>
+    <li><a href="#52推送拉取镜像">5.2.推送、拉取镜像</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h1 id="docker实用篇" class="headerLink">
+    <a href="#docker%e5%ae%9e%e7%94%a8%e7%af%87" class="header-mark"></a>Docker实用篇</h1><h1 id="1初识docker" class="headerLink">
+    <a href="#1%e5%88%9d%e8%af%86docker" class="header-mark"></a>1.初识Docker</h1><h2 id="11什么是docker" class="headerLink">
+    <a href="#11%e4%bb%80%e4%b9%88%e6%98%afdocker" class="header-mark"></a>1.1.什么是Docker</h2><p>前面学习的linux系统虽然可以部署应用，但是操作给部署带来了很大的麻烦。</p>
+<ul>
+<li>分布式系统中，依赖的组件非常多，不同组件之间部署时往往会产生一些冲突。</li>
+<li>在数百上千台服务中重复部署，环境不一定一致，会遇到各种问题</li>
+</ul>
+<h3 id="111应用部署的环境问题" class="headerLink">
+    <a href="#111%e5%ba%94%e7%94%a8%e9%83%a8%e7%bd%b2%e7%9a%84%e7%8e%af%e5%a2%83%e9%97%ae%e9%a2%98" class="header-mark"></a>1.1.1.应用部署的环境问题</h3><p>大型项目组件较多，运行环境也较为复杂，部署时会碰到一些问题：</p>
+<ul>
+<li>
+<p>依赖关系复杂，容易出现兼容性问题</p>
+</li>
+<li>
+<p>开发、测试、生产环境有差异</p>
+</li>
+</ul>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538113.png" title="image-20210731141907366" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538113.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538113.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538113.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538113.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538113.png 2x"
+            sizes="auto"
+            alt="image-20210731141907366">
+    </a></figure></p>
+<p>例如一个项目中，部署时需要依赖于node.js、Redis、RabbitMQ、MySQL等，这些服务部署时所需要的函数库、依赖项各不相同，甚至会有冲突。给部署带来了极大的困难。</p>
+<h3 id="112docker解决依赖兼容问题" class="headerLink">
+    <a href="#112docker%e8%a7%a3%e5%86%b3%e4%be%9d%e8%b5%96%e5%85%bc%e5%ae%b9%e9%97%ae%e9%a2%98" class="header-mark"></a>1.1.2.Docker解决依赖兼容问题</h3><p>而Docker确巧妙的解决了这些问题，Docker是如何实现的呢？</p>
+<p>Docker为了解决依赖的兼容问题的，采用了两个手段：</p>
+<ul>
+<li>
+<p>将应用的Libs（函数库）、Deps（依赖）、配置与应用一起打包</p>
+</li>
+<li>
+<p>将每个应用放到一个隔离<strong>容器</strong>去运行，避免互相干扰</p>
+</li>
+</ul>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538095.png" title="image-20210731142219735" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538095.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538095.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538095.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538095.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538095.png 2x"
+            sizes="auto"
+            alt="image-20210731142219735">
+    </a></figure></p>
+<p>这样打包好的应用包中，既包含应用本身，也保护应用所需要的Libs、Deps，无需再操作系统上安装这些，自然就不存在不同应用之间的兼容问题了。</p>
+<p>虽然解决了不同应用的兼容问题，但是开发、测试等环境会存在差异，操作系统版本也会有差异，怎么解决这些问题呢？</p>
+<h3 id="113docker解决操作系统环境差异" class="headerLink">
+    <a href="#113docker%e8%a7%a3%e5%86%b3%e6%93%8d%e4%bd%9c%e7%b3%bb%e7%bb%9f%e7%8e%af%e5%a2%83%e5%b7%ae%e5%bc%82" class="header-mark"></a>1.1.3.Docker解决操作系统环境差异</h3><p>要解决不同操作系统环境差异问题，必须先了解操作系统结构。以一个Ubuntu操作系统为例，结构如下：</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538206.png" title="image-20210731143401460" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538206.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538206.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538206.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538206.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538206.png 2x"
+            sizes="auto"
+            alt="image-20210731143401460">
+    </a></figure></p>
+<p>结构包括：</p>
+<ul>
+<li>计算机硬件：例如CPU、内存、磁盘等</li>
+<li>系统内核：所有Linux发行版的内核都是Linux，例如CentOS、Ubuntu、Fedora等。内核可以与计算机硬件交互，对外提供<strong>内核指令</strong>，用于操作计算机硬件。</li>
+<li>系统应用：操作系统本身提供的应用、函数库。这些函数库是对内核指令的封装，使用更加方便。</li>
+</ul>
+<p>应用于计算机交互的流程如下：</p>
+<p>1）应用调用操作系统应用（函数库），实现各种功能</p>
+<p>2）系统函数库是对内核指令集的封装，会调用内核指令</p>
+<p>3）内核指令操作计算机硬件</p>
+<p>Ubuntu和CentOS都是基于Linux内核，无非是系统应用不同，提供的函数库有差异：</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538138.png" title="image-20210731144304990" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538138.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538138.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538138.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538138.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538138.png 2x"
+            sizes="auto"
+            alt="image-20210731144304990">
+    </a></figure></p>
+<p>此时，如果将一个Ubuntu版本的MySQL应用安装到CentOS系统，MySQL在调用Ubuntu函数库时，会发现找不到或者不匹配，就会报错了：</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538313.png" title="image-20210731144458680" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538313.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538313.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538313.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538313.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538313.png 2x"
+            sizes="auto"
+            alt="image-20210731144458680">
+    </a></figure></p>
+<p>Docker如何解决不同系统环境的问题？</p>
+<ul>
+<li>Docker将用户程序与所需要调用的系统(比如Ubuntu)函数库一起打包</li>
+<li>Docker运行到不同操作系统时，直接基于打包的函数库，借助于操作系统的Linux内核来运行</li>
+</ul>
+<p>如图：</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538261.png" title="image-20210731144820638" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538261.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538261.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538261.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538261.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538261.png 2x"
+            sizes="auto"
+            alt="image-20210731144820638">
+    </a></figure></p>
+<h3 id="114小结" class="headerLink">
+    <a href="#114%e5%b0%8f%e7%bb%93" class="header-mark"></a>1.1.4.小结</h3><p>Docker如何解决大型项目依赖关系复杂，不同组件依赖的兼容性问题？</p>
+<ul>
+<li>Docker允许开发中将应用、依赖、函数库、配置一起<strong>打包</strong>，形成可移植镜像</li>
+<li>Docker应用运行在容器中，使用沙箱机制，相互<strong>隔离</strong></li>
+</ul>
+<p>Docker如何解决开发、测试、生产环境有差异的问题？</p>
+<ul>
+<li>Docker镜像中包含完整运行环境，包括系统函数库，仅依赖系统的Linux内核，因此可以在任意Linux操作系统上运行</li>
+</ul>
+<p>Docker是一个快速交付应用、运行应用的技术，具备下列优势：</p>
+<ul>
+<li>可以将程序及其依赖、运行环境一起打包为一个镜像，可以迁移到任意Linux操作系统</li>
+<li>运行时利用沙箱机制形成隔离容器，各个应用互不干扰</li>
+<li>启动、移除都可以通过一行命令完成，方便快捷</li>
+</ul>
+<h2 id="12docker和虚拟机的区别" class="headerLink">
+    <a href="#12docker%e5%92%8c%e8%99%9a%e6%8b%9f%e6%9c%ba%e7%9a%84%e5%8c%ba%e5%88%ab" class="header-mark"></a>1.2.Docker和虚拟机的区别</h2><p>Docker可以让一个应用在任何操作系统中非常方便的运行。而以前我们接触的虚拟机，也能在一个操作系统中，运行另外一个操作系统，保护系统中的任何应用。</p>
+<p>两者有什么差异呢？</p>
+<p><strong>虚拟机</strong>（virtual machine）是在操作系统中<strong>模拟</strong>硬件设备，然后运行另一个操作系统，比如在 Windows 系统里面运行 Ubuntu 系统，这样就可以运行任意的Ubuntu应用了。</p>
+<blockquote>
+<p>传统的虚拟机需要模拟整台机器包括硬件，每台虚拟机都需要有⾃⼰的操作系统，虚拟机⼀旦被开启，预分配给他的资源将全部被占⽤。每⼀个虚拟机包括应⽤，必要的⼆进制和库，以及⼀个完整的⽤户操作系统。像平常用的VMware就属于虚拟机操作软件。</p>
+</blockquote>
+<p><strong>Docker</strong>仅仅是封装函数库，并没有模拟完整的操作系统，如图：</p>
+<blockquote>
+<p>Docker是一种<strong>容器</strong>技术。</p>
+<p>容器技术是和我们的宿主机共享硬件资源及操作系统可以实现资源的动态分配。容器包含应⽤和其所有的依赖包，但是与其他容器共享内核。容器在宿主机操作系统中，在⽤户空间以<strong>分离的进程</strong>运⾏。</p>
+<p>所有主流的Linux发行版都可以运行Docker</p>
+</blockquote>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538691.png" title="image-20210731145914960" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538691.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538691.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538691.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538691.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538691.png 2x"
+            sizes="auto"
+            alt="image-20210731145914960">
+    </a></figure></p>
+<p>ps:</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538722.png" title="image-20230101231230415" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538722.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538722.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538722.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538722.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538722.png 2x"
+            sizes="auto"
+            alt="image-20230101231230415">
+    </a></figure></p>
+<p>对比来看：</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538738.png" title="image-20210731152243765" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538738.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538738.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538738.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538738.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538738.png 2x"
+            sizes="auto"
+            alt="image-20210731152243765">
+    </a></figure></p>
+<p>小结：</p>
+<p>Docker和虚拟机的差异：</p>
+<ul>
+<li>
+<p>docker是一个系统进程；虚拟机是在操作系统中的操作系统</p>
+</li>
+<li>
+<p>docker体积小、启动速度快、性能好；虚拟机体积大、启动速度慢、性能一般</p>
+</li>
+</ul>
+<h2 id="13docker架构" class="headerLink">
+    <a href="#13docker%e6%9e%b6%e6%9e%84" class="header-mark"></a>1.3.Docker架构</h2><h3 id="131镜像和容器" class="headerLink">
+    <a href="#131%e9%95%9c%e5%83%8f%e5%92%8c%e5%ae%b9%e5%99%a8" class="header-mark"></a>1.3.1.镜像和容器</h3><p>Docker中有几个重要的概念：</p>
+<p><strong>镜像（Image）</strong>：Docker将应用程序及其所需的依赖、函数库、环境、配置等文件打包在一起，称为镜像。</p>
+<p><strong>容器（Container）</strong>：镜像中的应用程序运行后形成的进程就是<strong>容器</strong>，只是Docker会给容器进程做隔离，对外不可见。</p>
+<p>一切应用最终都是代码组成，都是硬盘中的一个个的字节形成的<strong>文件</strong>。只有运行时，才会加载到内存，形成进程。</p>
+<p>而<strong>镜像</strong>，就是把一个应用在硬盘上的文件、及其运行环境、部分系统函数库文件一起打包形成的文件包。这个文件包是只读的。</p>
+<p><strong>容器</strong>呢，就是将这些文件中编写的程序、函数加载到内存中允许，形成进程，只不过要隔离起来。因此一个镜像可以启动多次，形成多个容器进程。</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538754.png" title="image-20210731153059464" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538754.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538754.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538754.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538754.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538754.png 2x"
+            sizes="auto"
+            alt="image-20210731153059464">
+    </a></figure></p>
+<p>例如你下载了一个QQ，如果我们将QQ在磁盘上的运行<strong>文件</strong>及其运行的操作系统依赖打包，形成QQ镜像。然后你可以启动多次，双开、甚至三开QQ，跟多个妹子聊天。</p>
+<h3 id="132dockerhub" class="headerLink">
+    <a href="#132dockerhub" class="header-mark"></a>1.3.2.DockerHub</h3><p>开源应用程序非常多，打包这些应用往往是重复的劳动。为了避免这些重复劳动，人们就会将自己打包的应用镜像，例如Redis、MySQL镜像放到网络上，共享使用，就像GitHub的代码共享一样。</p>
+<ul>
+<li>
+<p>DockerHub：DockerHub是一个官方的Docker镜像的托管平台。这样的平台称为Docker Registry。</p>
+</li>
+<li>
+<p>国内也有类似于DockerHub 的公开服务，比如 <a href="https://c.163yun.com/hub" target="_blank" rel="noopener noreferrer">网易云镜像服务</a>、<a href="https://cr.console.aliyun.com/" target="_blank" rel="noopener noreferrer">阿里云镜像库</a>等。</p>
+</li>
+</ul>
+<p>我们一方面可以将自己的镜像共享到DockerHub，另一方面也可以从DockerHub拉取镜像：</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538777.png" title="image-20210731153743354" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538777.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538777.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538777.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538777.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538777.png 2x"
+            sizes="auto"
+            alt="image-20210731153743354">
+    </a></figure></p>
+<h3 id="133docker架构" class="headerLink">
+    <a href="#133docker%e6%9e%b6%e6%9e%84" class="header-mark"></a>1.3.3.Docker架构</h3><p>我们要使用Docker来操作镜像、容器，就必须要安装Docker。</p>
+<p>Docker是一个CS架构的程序，由两部分组成：</p>
+<ul>
+<li>
+<p>服务端(server)：Docker守护进程，负责处理Docker指令，管理镜像、容器等</p>
+</li>
+<li>
+<p>客户端(client)：通过命令或RestAPI向Docker服务端发送指令。可以在本地或远程向服务端发送指令。</p>
+</li>
+</ul>
+<p>如图：</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538802.png" title="image-20210731154257653" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538802.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538802.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538802.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538802.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538802.png 2x"
+            sizes="auto"
+            alt="image-20210731154257653">
+    </a></figure></p>
+<h3 id="134小结" class="headerLink">
+    <a href="#134%e5%b0%8f%e7%bb%93" class="header-mark"></a>1.3.4.小结</h3><p>镜像：</p>
+<ul>
+<li>将应用程序及其依赖、环境、配置打包在一起</li>
+</ul>
+<p>容器：</p>
+<ul>
+<li>镜像运行起来就是容器，一个镜像可以运行多个容器</li>
+</ul>
+<p>Docker结构：</p>
+<ul>
+<li>
+<p>服务端：接收命令或远程请求，操作镜像或容器</p>
+</li>
+<li>
+<p>客户端：发送命令或者请求到Docker服务端</p>
+</li>
+</ul>
+<p>DockerHub：</p>
+<ul>
+<li>一个镜像托管的服务器，类似的还有阿里云镜像服务，统称为DockerRegistry</li>
+</ul>
+<h2 id="14安装docker" class="headerLink">
+    <a href="#14%e5%ae%89%e8%a3%85docker" class="header-mark"></a>1.4.安装Docker</h2><p>企业部署一般都是采用Linux操作系统，而其中又数CentOS发行版占比最多，因此我们在CentOS下安装Docker。参考课前资料中的文档：</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538539.png" title="image-20210731155002425" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538539.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538539.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538539.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538539.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538539.png 2x"
+            sizes="auto"
+            alt="image-20210731155002425">
+    </a></figure></p>
+<h1 id="2docker的基本操作" class="headerLink">
+    <a href="#2docker%e7%9a%84%e5%9f%ba%e6%9c%ac%e6%93%8d%e4%bd%9c" class="header-mark"></a>2.Docker的基本操作</h1><h2 id="21镜像操作" class="headerLink">
+    <a href="#21%e9%95%9c%e5%83%8f%e6%93%8d%e4%bd%9c" class="header-mark"></a>2.1.镜像操作</h2><h3 id="211镜像名称" class="headerLink">
+    <a href="#211%e9%95%9c%e5%83%8f%e5%90%8d%e7%a7%b0" class="header-mark"></a>2.1.1.镜像名称</h3><p>首先来看下镜像的名称组成：</p>
+<ul>
+<li>镜名称一般分两部分组成：[repository]:[tag]。</li>
+<li>在没有指定tag时，默认是latest，代表最新版本的镜像</li>
+</ul>
+<p>如图：</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538554.png" title="image-20210731155141362" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538554.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538554.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538554.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538554.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538554.png 2x"
+            sizes="auto"
+            alt="image-20210731155141362">
+    </a></figure></p>
+<p>这里的mysql就是repository，5.7就是tag，合一起就是镜像名称，代表5.7版本的MySQL镜像。</p>
+<h3 id="212镜像命令" class="headerLink">
+    <a href="#212%e9%95%9c%e5%83%8f%e5%91%bd%e4%bb%a4" class="header-mark"></a>2.1.2.镜像命令</h3><p>常见的镜像操作命令如图：</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538569.png" title="image-20210731155649535" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538569.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538569.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538569.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538569.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538569.png 2x"
+            sizes="auto"
+            alt="image-20210731155649535">
+    </a></figure></p>
+<h3 id="213案例1-拉取查看镜像" class="headerLink">
+    <a href="#213%e6%a1%88%e4%be%8b1-%e6%8b%89%e5%8f%96%e6%9f%a5%e7%9c%8b%e9%95%9c%e5%83%8f" class="header-mark"></a>2.1.3.案例1-拉取、查看镜像</h3><p>需求：从DockerHub中拉取一个nginx镜像并查看</p>
+<p>1）首先去镜像仓库搜索nginx镜像，比如<a href="https://hub.docker.com/" target="_blank" rel="noopener noreferrer">DockerHub</a>:</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538598.png" title="image-20210731155844368" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538598.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538598.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538598.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538598.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538598.png 2x"
+            sizes="auto"
+            alt="image-20210731155844368">
+    </a></figure></p>
+<p>2）根据查看到的镜像名称，拉取自己需要的镜像，通过命令：docker pull nginx</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538614.png" title="image-20210731155856199" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538614.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538614.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538614.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538614.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538614.png 2x"
+            sizes="auto"
+            alt="image-20210731155856199">
+    </a></figure></p>
+<p>3）通过命令：docker images 查看拉取到的镜像</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538763.png" title="image-20210731155903037" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538763.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538763.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538763.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538763.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538763.png 2x"
+            sizes="auto"
+            alt="image-20210731155903037">
+    </a></figure></p>
+<h3 id="214案例2-保存导入镜像" class="headerLink">
+    <a href="#214%e6%a1%88%e4%be%8b2-%e4%bf%9d%e5%ad%98%e5%af%bc%e5%85%a5%e9%95%9c%e5%83%8f" class="header-mark"></a>2.1.4.案例2-保存、导入镜像</h3><p>需求：利用docker save将nginx镜像导出磁盘，然后再通过load加载回来</p>
+<p>1）利用docker xx &ndash;help命令查看docker save和docker load的语法</p>
+<p>例如，查看save命令用法，可以输入命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker save --help
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>结果：</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538009.png" title="image-20210731161104732" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538009.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538009.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538009.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538009.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538009.png 2x"
+            sizes="auto"
+            alt="image-20210731161104732">
+    </a></figure></p>
+<p>命令格式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker save -o <span class="o">[</span>保存的目标文件名称<span class="o">]</span> <span class="o">[</span>镜像名称<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>2）使用docker save导出镜像到磁盘</p>
+<p>运行命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker save -o nginx.tar nginx:latest
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>结果如图：</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538056.png" title="image-20210731161354344" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538056.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538056.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538056.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538056.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538056.png 2x"
+            sizes="auto"
+            alt="image-20210731161354344">
+    </a></figure></p>
+<p>3）使用docker load加载镜像</p>
+<p>先删除本地的nginx镜像：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker rmi nginx:latest
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后运行命令，加载本地文件：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker load -i nginx.tar
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>结果：</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538075.png" title="image-20210731161746245" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538075.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538075.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538075.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538075.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538075.png 2x"
+            sizes="auto"
+            alt="image-20210731161746245">
+    </a></figure></p>
+<h3 id="215练习" class="headerLink">
+    <a href="#215%e7%bb%83%e4%b9%a0" class="header-mark"></a>2.1.5.练习</h3><p>需求：去DockerHub搜索并拉取一个Redis镜像</p>
+<p><strong>目标：</strong></p>
+<p>1）去DockerHub搜索Redis镜像</p>
+<p>2）查看Redis镜像的名称和版本</p>
+<p>3）利用docker pull命令拉取镜像</p>
+<blockquote>
+<p>说明：拉取指定版本的redis镜像 <strong>docker pull redis:latest</strong></p>
+</blockquote>
+<p>4）利用docker save命令将 redis:latest打包为一个redis.tar包</p>
+<blockquote>
+<p>docker save -o redis.tar redis:latest</p>
+</blockquote>
+<p>5）利用docker rmi 删除本地的redis:latest</p>
+<blockquote>
+<p>docker rmi redis:latest</p>
+</blockquote>
+<p>6）利用docker load 重新加载 redis.tar文件</p>
+<blockquote>
+<p>docker load -i redis.tar</p>
+</blockquote>
+<h2 id="22容器操作" class="headerLink">
+    <a href="#22%e5%ae%b9%e5%99%a8%e6%93%8d%e4%bd%9c" class="header-mark"></a>2.2.容器操作</h2><h3 id="221容器相关命令" class="headerLink">
+    <a href="#221%e5%ae%b9%e5%99%a8%e7%9b%b8%e5%85%b3%e5%91%bd%e4%bb%a4" class="header-mark"></a>2.2.1.容器相关命令</h3><p>容器操作的命令如图：</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538143.png" title="image-20210731161950495" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538143.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538143.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538143.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538143.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538143.png 2x"
+            sizes="auto"
+            alt="image-20210731161950495">
+    </a></figure></p>
+<p>容器保护三个状态：</p>
+<ul>
+<li>运行：进程正常运行</li>
+<li>暂停：进程暂停，CPU不再运行，并不释放内存</li>
+<li>停止：进程终止，回收进程占用的内存、CPU等资源</li>
+</ul>
+<p>其中：</p>
+<ul>
+<li>
+<p>docker run：创建并运行一个容器，处于运行状态</p>
+</li>
+<li>
+<p>docker pause：让一个运行的容器暂停</p>
+</li>
+<li>
+<p>docker unpause：让一个容器从暂停状态恢复运行</p>
+</li>
+<li>
+<p>docker stop：停止一个运行的容器</p>
+</li>
+<li>
+<p>docker start：让一个停止的容器再次运行</p>
+</li>
+<li>
+<p>docker rm：删除一个容器</p>
+</li>
+<li>
+<p>docker ps -a 查看所有容器</p>
+</li>
+</ul>
+<h3 id="222案例-创建并运行一个容器" class="headerLink">
+    <a href="#222%e6%a1%88%e4%be%8b-%e5%88%9b%e5%bb%ba%e5%b9%b6%e8%bf%90%e8%a1%8c%e4%b8%80%e4%b8%aa%e5%ae%b9%e5%99%a8" class="header-mark"></a>2.2.2.案例-创建并运行一个容器</h3><p>创建并运行nginx容器的命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker run --name containerName -p 80:80 -d nginx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>命令解读：</p>
+<ul>
+<li>docker run ：创建并运行一个容器</li>
+<li>&ndash;name : 给容器起一个名字，比如叫做mn</li>
+<li>-p ：将宿主机端口与容器端口映射，冒号左侧是宿主机端口，右侧是容器端口</li>
+<li>-d：后台运行容器</li>
+<li>nginx：镜像名称，例如nginx</li>
+</ul>
+<p>这里的<code>-p</code>参数，是将容器端口映射到宿主机端口。</p>
+<p>默认情况下，容器是隔离环境，我们直接访问宿主机的80端口，肯定访问不到容器中的nginx。</p>
+<p>现在，将容器的80与宿主机的80关联起来，当我们访问宿主机的80端口时，就会被映射到容器的80，这样就能访问到nginx了：</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538277.png" title="image-20210731163255863" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538277.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538277.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538277.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538277.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538277.png 2x"
+            sizes="auto"
+            alt="image-20210731163255863">
+    </a></figure></p>
+<p>浏览器直接访问：</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538299.png" title="image-20221216185307814" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538299.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538299.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538299.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538299.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538299.png 2x"
+            sizes="auto"
+            alt="image-20221216185307814">
+    </a></figure></p>
+<h3 id="223案例-进入容器修改文件" class="headerLink">
+    <a href="#223%e6%a1%88%e4%be%8b-%e8%bf%9b%e5%85%a5%e5%ae%b9%e5%99%a8%e4%bf%ae%e6%94%b9%e6%96%87%e4%bb%b6" class="header-mark"></a>2.2.3.案例-进入容器，修改文件</h3><p><strong>需求</strong>：进入Nginx容器，修改HTML文件内容，添加“传智教育欢迎您”</p>
+<p><strong>提示</strong>：进入容器要用到docker exec命令。</p>
+<p><strong>步骤</strong>：</p>
+<p>1）进入容器。进入我们刚刚创建的nginx容器的命令为：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker <span class="nb">exec</span> -it mn bash
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>命令解读：</p>
+<ul>
+<li>
+<p>docker exec ：进入容器内部，执行一个命令</p>
+</li>
+<li>
+<p>-it : 给当前进入的容器创建一个标准输入、输出终端，允许我们与容器交互</p>
+</li>
+<li>
+<p>mn ：要进入的容器的名称</p>
+</li>
+<li>
+<p>bash：进入容器后执行的命令，bash是一个linux终端交互命令</p>
+<blockquote>
+<p>bash命令是shell脚本命令的超集，大多数shell脚本都可以在bash下运行，bash主要有如下这些功能：</p>
+<p>cd rm mkdir&hellip;.</p>
+</blockquote>
+</li>
+</ul>
+<p>2）进入nginx的HTML所在目录 /usr/share/nginx/html</p>
+<p>容器内部会模拟一个独立的Linux文件系统，看起来如同一个linux服务器一样：</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538766.png" title="image-20210731164159811" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538766.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538766.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538766.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538766.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538766.png 2x"
+            sizes="auto"
+            alt="image-20210731164159811">
+    </a></figure></p>
+<p>nginx的环境、配置、运行文件全部都在这个文件系统中，包括我们要修改的html文件。</p>
+<p>查看DockerHub网站中的nginx页面，可以知道nginx的html目录位置在<code>/usr/share/nginx/html</code></p>
+<p>我们执行命令，进入该目录：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="nb">cd</span> /usr/share/nginx/html
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>查看目录下文件：</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538829.png" title="image-20210731164455818" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538829.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538829.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538829.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538829.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538829.png 2x"
+            sizes="auto"
+            alt="image-20210731164455818">
+    </a></figure></p>
+<p>3）修改index.html的内容</p>
+<p>容器内没有vim命令，无法直接修改，我们用下面的命令来修改：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">sed -i -e <span class="s1">&#39;s#Welcome to nginx#传智教育欢迎您#g&#39;</span> -e <span class="s1">&#39;s#&lt;head&gt;#&lt;head&gt;&lt;meta charset=&#34;utf-8&#34;&gt;#g&#39;</span> index.html
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>说明：</p>
+<blockquote>
+<p>1)-e : 可以在同一行里执行多条命令</p>
+<p>2)<strong>-i</strong> 就是直接对文本文件进行操作的</p>
+</blockquote>
+<p>在浏览器访问自己的虚拟机地址，例如我的是：http://192.168.150.101，即可看到结果：</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538842.png" title="image-20210731164717604" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538842.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538842.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538842.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538842.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538842.png 2x"
+            sizes="auto"
+            alt="image-20210731164717604">
+    </a></figure></p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538862.png" title="image-20221216201604719" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538862.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538862.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538862.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538862.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538862.png 2x"
+            sizes="auto"
+            alt="image-20221216201604719">
+    </a></figure></p>
+<h3 id="224小结" class="headerLink">
+    <a href="#224%e5%b0%8f%e7%bb%93" class="header-mark"></a>2.2.4.小结</h3><p>【1】暂停容器?</p>
+<blockquote>
+<p>docker pause 容器名</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538877.png" title="image-20221216202155617" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538877.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538877.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538877.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538877.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538877.png 2x"
+            sizes="auto"
+            alt="image-20221216202155617">
+    </a></figure></p>
+<p>浏览器访问：</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538891.png" title="image-20221216202316951" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538891.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538891.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538891.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538891.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538891.png 2x"
+            sizes="auto"
+            alt="image-20221216202316951">
+    </a></figure></p>
+</blockquote>
+<p>【2】从暂停回到运行容器?</p>
+<blockquote>
+<p>docker unpause 容器名</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538132.png" title="image-20221216202442369" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538132.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538132.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538132.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538132.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538132.png 2x"
+            sizes="auto"
+            alt="image-20221216202442369">
+    </a></figure></p>
+<p>浏览器可以访问了：</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538145.png" title="image-20221216202540677" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538145.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538145.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538145.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538145.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538145.png 2x"
+            sizes="auto"
+            alt="image-20221216202540677">
+    </a></figure></p>
+</blockquote>
+<p>【3】停止容器?</p>
+<blockquote>
+<p>docker stop 容器名</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538159.png" title="image-20221216202709220" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538159.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538159.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538159.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538159.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538159.png 2x"
+            sizes="auto"
+            alt="image-20221216202709220">
+    </a></figure></p>
+<p>浏览器访问效果:</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538176.png" title="image-20221216202811356" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538176.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538176.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538176.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538176.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538176.png 2x"
+            sizes="auto"
+            alt="image-20221216202811356">
+    </a></figure></p>
+</blockquote>
+<p>【4】从停止到启动容器?</p>
+<blockquote>
+<p>docker start 容器名</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538439.png" title="image-20221216202916903" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538439.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538439.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538439.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538439.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538439.png 2x"
+            sizes="auto"
+            alt="image-20221216202916903">
+    </a></figure></p>
+<p>浏览器访问效果:</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538452.png" title="image-20221216202952827" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538452.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538452.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538452.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538452.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538452.png 2x"
+            sizes="auto"
+            alt="image-20221216202952827">
+    </a></figure></p>
+</blockquote>
+<p>【5】查看所有运行的容器状态?</p>
+<blockquote>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538468.png" title="image-20221216203103327" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538468.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538468.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538468.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538468.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538468.png 2x"
+            sizes="auto"
+            alt="image-20221216203103327">
+    </a></figure></p>
+<p>如果将容器关闭：</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538485.png" title="image-20221216203155824" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538485.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538485.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538485.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538485.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538485.png 2x"
+            sizes="auto"
+            alt="image-20221216203155824">
+    </a></figure></p>
+<p>再次查看所有运行的容器状态?</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538498.png" title="image-20221216203231163" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538498.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538498.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538498.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538498.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538498.png 2x"
+            sizes="auto"
+            alt="image-20221216203231163">
+    </a></figure></p>
+<p>可以通过-a参数查看所有状态的容器，包括已经停止的</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538511.png" title="image-20221216203349273" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538511.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538511.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538511.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538511.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538511.png 2x"
+            sizes="auto"
+            alt="image-20221216203349273">
+    </a></figure></p>
+</blockquote>
+<p>【6】查看容器日志?</p>
+<blockquote>
+<p>docker logs 容器名</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538841.png" title="image-20221216203717121" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538841.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538841.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538841.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538841.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538841.png 2x"
+            sizes="auto"
+            alt="image-20221216203717121">
+    </a></figure></p>
+<p>添加 -f 参数可以持续查看日志。浏览器访问，不用执行命令，直接在终端输出日志信息。</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538860.png" title="image-20221216204302675" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538860.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538860.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538860.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538860.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538860.png 2x"
+            sizes="auto"
+            alt="image-20221216204302675">
+    </a></figure></p>
+</blockquote>
+<p>【7】删除容器</p>
+<blockquote>
+<p>docker rm 容器名</p>
+<p>不能删除运行中的容器，除非添加 -f 参数</p>
+<p>docker rm -f 容器名</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538882.png" title="image-20221216205200772" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538882.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538882.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538882.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538882.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538882.png 2x"
+            sizes="auto"
+            alt="image-20221216205200772">
+    </a></figure></p>
+</blockquote>
+<blockquote>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538901.png" title="image-20221216205329111" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538901.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538901.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538901.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538901.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538901.png 2x"
+            sizes="auto"
+            alt="image-20221216205329111">
+    </a></figure></p>
+</blockquote>
+<p>【8】docker run命令的常见参数有哪些？</p>
+<ul>
+<li>&ndash;name：指定容器名称</li>
+<li>-p：指定端口映射</li>
+<li>-d：让容器后台运行</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">docker</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="o">--</span><span class="n">name</span><span class="w"> </span><span class="n">containerName</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="n">80</span><span class="p">:</span><span class="n">80</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="n">nginx</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="225-案例创建并运行一个redis容器并且支持数据持久化" class="headerLink">
+    <a href="#225-%e6%a1%88%e4%be%8b%e5%88%9b%e5%bb%ba%e5%b9%b6%e8%bf%90%e8%a1%8c%e4%b8%80%e4%b8%aaredis%e5%ae%b9%e5%99%a8%e5%b9%b6%e4%b8%94%e6%94%af%e6%8c%81%e6%95%b0%e6%8d%ae%e6%8c%81%e4%b9%85%e5%8c%96" class="header-mark"></a>2.2.5 案例：创建并运行一个redis容器，并且支持数据持久化</h3><h4 id="1实现步骤" class="headerLink">
+    <a href="#1%e5%ae%9e%e7%8e%b0%e6%ad%a5%e9%aa%a4" class="header-mark"></a>1.实现步骤</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">步骤一：到DockerHub搜索Redis镜像
+</span></span><span class="line"><span class="cl">步骤二：查看Redis镜像文档中的帮助信息
+</span></span><span class="line"><span class="cl">步骤三：利用docker run 命令运行一个Redis容器
+</span></span><span class="line"><span class="cl">	docker run --name redis -p 6379:6379 -d redis redis-server --appendonly yes
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="2具体实现" class="headerLink">
+    <a href="#2%e5%85%b7%e4%bd%93%e5%ae%9e%e7%8e%b0" class="header-mark"></a>2.具体实现</h4><h5 id="步骤一到dockerhub搜索redis镜像" class="headerLink">
+    <a href="#%e6%ad%a5%e9%aa%a4%e4%b8%80%e5%88%b0dockerhub%e6%90%9c%e7%b4%a2redis%e9%95%9c%e5%83%8f" class="header-mark"></a>步骤一：到DockerHub搜索Redis镜像</h5><p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538914.png" title="image-20221217171652632" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538914.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538914.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538914.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538914.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538914.png 2x"
+            sizes="auto"
+            alt="image-20221217171652632">
+    </a></figure></p>
+<h5 id="步骤二查看redis镜像文档中的帮助信息" class="headerLink">
+    <a href="#%e6%ad%a5%e9%aa%a4%e4%ba%8c%e6%9f%a5%e7%9c%8bredis%e9%95%9c%e5%83%8f%e6%96%87%e6%a1%a3%e4%b8%ad%e7%9a%84%e5%b8%ae%e5%8a%a9%e4%bf%a1%e6%81%af" class="header-mark"></a>步骤二：查看Redis镜像文档中的帮助信息</h5><p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538939.png" title="image-20221217171918964" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538939.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538939.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538939.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538939.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538939.png 2x"
+            sizes="auto"
+            alt="image-20221217171918964">
+    </a></figure></p>
+<h5 id="步骤三利用docker-run-命令运行一个redis容器" class="headerLink">
+    <a href="#%e6%ad%a5%e9%aa%a4%e4%b8%89%e5%88%a9%e7%94%a8docker-run-%e5%91%bd%e4%bb%a4%e8%bf%90%e8%a1%8c%e4%b8%80%e4%b8%aaredis%e5%ae%b9%e5%99%a8" class="header-mark"></a>步骤三：利用docker run 命令运行一个Redis容器</h5><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">docker run --name redis -p 6379:6379 -d redis redis-server --appendonly yes
+</span></span><span class="line"><span class="cl">    --name：指定容器名称,redis表示容器名
+</span></span><span class="line"><span class="cl">	-p：指定端口映射。6379:6379 冒号左侧是宿主机端口，右侧是容器端口
+</span></span><span class="line"><span class="cl">	-d：让容器后台运行
+</span></span><span class="line"><span class="cl">	redis：表示镜像名
+</span></span><span class="line"><span class="cl">    redis-server：表示redis服务
+</span></span><span class="line"><span class="cl">    --appendonly yes ：开启aof持久化
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h5 id="步骤四进入redis容器" class="headerLink">
+    <a href="#%e6%ad%a5%e9%aa%a4%e5%9b%9b%e8%bf%9b%e5%85%a5redis%e5%ae%b9%e5%99%a8" class="header-mark"></a>步骤四：进入redis容器</h5><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">docker exec -it redis bash
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538311.png" title="image-20221217181359269" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538311.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538311.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538311.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538311.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538311.png 2x"
+            sizes="auto"
+            alt="image-20221217181359269">
+    </a></figure></p>
+<h5 id="步骤五执行redis-cli客户端命令" class="headerLink">
+    <a href="#%e6%ad%a5%e9%aa%a4%e4%ba%94%e6%89%a7%e8%a1%8credis-cli%e5%ae%a2%e6%88%b7%e7%ab%af%e5%91%bd%e4%bb%a4" class="header-mark"></a>步骤五：执行redis-cli客户端命令</h5><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">redis</span><span class="o">-</span><span class="n">cli</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538325.png" title="image-20221217181532009" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538325.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538325.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538325.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538325.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538325.png 2x"
+            sizes="auto"
+            alt="image-20221217181532009">
+    </a></figure></p>
+<h5 id="步骤六设置数据num666" class="headerLink">
+    <a href="#%e6%ad%a5%e9%aa%a4%e5%85%ad%e8%ae%be%e7%bd%ae%e6%95%b0%e6%8d%aenum666" class="header-mark"></a>步骤六：设置数据num=666</h5><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="n">set</span><span class="w"> </span><span class="n">num</span><span class="w"> </span><span class="n">666</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538339.png" title="image-20221217181716495" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538339.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538339.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538339.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538339.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538339.png 2x"
+            sizes="auto"
+            alt="image-20221217181716495">
+    </a></figure></p>
+<h5 id="步骤七在window系统中使用redis客户端连接" class="headerLink">
+    <a href="#%e6%ad%a5%e9%aa%a4%e4%b8%83%e5%9c%a8window%e7%b3%bb%e7%bb%9f%e4%b8%ad%e4%bd%bf%e7%94%a8redis%e5%ae%a2%e6%88%b7%e7%ab%af%e8%bf%9e%e6%8e%a5" class="header-mark"></a>步骤七:在window系统中使用redis客户端连接</h5><p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538354.png" title="image-20221217181919050" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538354.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538354.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538354.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538354.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538354.png 2x"
+            sizes="auto"
+            alt="image-20221217181919050">
+    </a></figure></p>
+<p>ps:大家可以回想我们前面讲解linux安装redis有多么麻烦。而使用docker是不是更加方便。</p>
+<h2 id="23数据卷容器数据管理" class="headerLink">
+    <a href="#23%e6%95%b0%e6%8d%ae%e5%8d%b7%e5%ae%b9%e5%99%a8%e6%95%b0%e6%8d%ae%e7%ae%a1%e7%90%86" class="header-mark"></a>2.3.数据卷（容器数据管理）</h2><p>在之前的nginx案例中，修改nginx的html页面时，需要进入nginx内部。并且因为没有编辑器，修改文件也很麻烦。</p>
+<p>这就是因为容器与数据（容器内文件）耦合带来的后果。</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538370.png" title="image-20210731172440275" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538370.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538370.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538370.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538370.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538370.png 2x"
+            sizes="auto"
+            alt="image-20210731172440275">
+    </a></figure></p>
+<p>要解决这个问题，必须将数据与容器解耦，这就要用到数据卷了。</p>
+<h3 id="231什么是数据卷" class="headerLink">
+    <a href="#231%e4%bb%80%e4%b9%88%e6%98%af%e6%95%b0%e6%8d%ae%e5%8d%b7" class="header-mark"></a>2.3.1.什么是数据卷</h3><p>**数据卷（volume）**是一个虚拟目录，指向宿主机文件系统中的某个目录。</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538682.png" title="image-20210731173541846" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538682.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538682.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538682.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538682.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538682.png 2x"
+            sizes="auto"
+            alt="image-20210731173541846">
+    </a></figure></p>
+<p>一旦完成数据卷挂载，对容器的一切操作都会作用在数据卷对应的宿主机目录了。</p>
+<p>这样，我们操作宿主机的/var/lib/docker/volumes/html目录，就等于操作容器内的/usr/share/nginx/html目录了</p>
+<h3 id="232数据集操作命令" class="headerLink">
+    <a href="#232%e6%95%b0%e6%8d%ae%e9%9b%86%e6%93%8d%e4%bd%9c%e5%91%bd%e4%bb%a4" class="header-mark"></a>2.3.2.数据集操作命令</h3><p>数据卷操作的基本语法如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker volume <span class="o">[</span>COMMAND<span class="o">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>docker volume命令是数据卷操作，根据命令后跟随的command来确定下一步的操作：</p>
+<ul>
+<li>create 创建一个volume</li>
+<li>inspect 显示一个或多个volume的信息</li>
+<li>ls 列出所有的volume</li>
+<li>prune 删除未使用的volume</li>
+<li>rm 删除一个或多个指定的volume</li>
+</ul>
+<h3 id="233创建和查看数据卷" class="headerLink">
+    <a href="#233%e5%88%9b%e5%bb%ba%e5%92%8c%e6%9f%a5%e7%9c%8b%e6%95%b0%e6%8d%ae%e5%8d%b7" class="header-mark"></a>2.3.3.创建和查看数据卷</h3><p><strong>需求</strong>：创建一个数据卷，并查看数据卷在宿主机的目录位置</p>
+<p>① 创建数据卷</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker volume create html
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>② 查看所有数据</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker volume ls
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>结果：</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538703.png" title="image-20210731173746910" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538703.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538703.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538703.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538703.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538703.png 2x"
+            sizes="auto"
+            alt="image-20210731173746910">
+    </a></figure></p>
+<p>说明:</p>
+<blockquote>
+<p>第一个数据卷是docker自己生成的。我们不需要关心。</p>
+</blockquote>
+<p>③ 查看数据卷详细信息卷</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker volume inspect html
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>结果：</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538720.png" title="image-20210731173809877" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538720.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538720.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538720.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538720.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538720.png 2x"
+            sizes="auto"
+            alt="image-20210731173809877">
+    </a></figure></p>
+<p>可以看到，我们创建的html这个数据卷关联的宿主机目录为<code>/var/lib/docker/volumes/html/_data</code>目录。</p>
+<p><strong>小结</strong>：</p>
+<p>数据卷的作用：</p>
+<ul>
+<li>将容器与数据分离，解耦合，方便操作容器内数据，保证数据安全</li>
+</ul>
+<p>数据卷操作：</p>
+<ul>
+<li>docker volume create：创建数据卷</li>
+<li>docker volume ls：查看所有数据卷</li>
+<li>docker volume inspect：查看数据卷详细信息，包括关联的宿主机目录位置</li>
+<li>docker volume rm：删除指定数据卷</li>
+<li>docker volume prune：删除所有未使用的数据卷</li>
+</ul>
+<h3 id="234挂载数据卷" class="headerLink">
+    <a href="#234%e6%8c%82%e8%bd%bd%e6%95%b0%e6%8d%ae%e5%8d%b7" class="header-mark"></a>2.3.4.挂载数据卷</h3><p>我们在创建容器时，可以通过 -v 参数来挂载一个数据卷到某个容器内目录，命令格式如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker run --name mn -v html:/root/html -p 8080:80 -d nginx:latest 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里的-v就是挂载数据卷的命令：</p>
+<ul>
+<li><code>-v html:/root/html</code> ：把html数据卷挂载到容器内的/root/html这个目录中</li>
+</ul>
+<h3 id="235案例-给nginx挂载数据卷" class="headerLink">
+    <a href="#235%e6%a1%88%e4%be%8b-%e7%bb%99nginx%e6%8c%82%e8%bd%bd%e6%95%b0%e6%8d%ae%e5%8d%b7" class="header-mark"></a>2.3.5.案例-给nginx挂载数据卷</h3><p><strong>需求</strong>：创建一个nginx容器，修改容器内的html目录内的index.html内容</p>
+<p><strong>分析</strong>：上个案例中，我们进入nginx容器内部，已经知道nginx的html目录所在位置/usr/share/nginx/html ，我们需要把这个目录挂载到html这个数据卷上，方便操作其中的内容。</p>
+<p><strong>提示</strong>：运行容器时使用 -v 参数挂载数据卷</p>
+<p>步骤：</p>
+<p>① 创建容器并挂载数据卷到容器内的HTML目录</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker run --name mn -v html:/usr/share/nginx/html -p 80:80 -d nginx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>-d：后台运行容器</p>
+</blockquote>
+<p>② 进入html数据卷所在位置，并修改HTML内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl"><span class="c1"># 查看html数据卷的位置</span>
+</span></span><span class="line"><span class="cl">docker volume inspect html
+</span></span><span class="line"><span class="cl"><span class="c1"># 进入该目录</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /var/lib/docker/volumes/html/_data
+</span></span><span class="line"><span class="cl"><span class="c1"># 修改文件</span>
+</span></span><span class="line"><span class="cl">vim index.html
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>③浏览器访问</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538739.png" title="image-20221217200121911" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538739.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538739.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538739.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538739.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538739.png 2x"
+            sizes="auto"
+            alt="image-20221217200121911">
+    </a></figure></p>
+<h3 id="236案例-给mysql挂载本地目录" class="headerLink">
+    <a href="#236%e6%a1%88%e4%be%8b-%e7%bb%99mysql%e6%8c%82%e8%bd%bd%e6%9c%ac%e5%9c%b0%e7%9b%ae%e5%bd%95" class="header-mark"></a>2.3.6.案例-给MySQL挂载本地目录</h3><p>容器不仅仅可以挂载数据卷，也可以直接挂载到宿主机目录上。关联关系如下：</p>
+<ul>
+<li>带数据卷模式：宿主机目录 &ndash;&gt; 数据卷 &mdash;&gt; 容器内目录</li>
+<li>直接挂载模式：宿主机目录 &mdash;&gt; 容器内目录</li>
+</ul>
+<p>如图：</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538754.png" title="image-20210731175155453" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538754.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538754.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538754.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538754.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538754.png 2x"
+            sizes="auto"
+            alt="image-20210731175155453">
+    </a></figure></p>
+<p><strong>语法</strong>：</p>
+<p>目录挂载与数据卷挂载的语法是类似的：</p>
+<ul>
+<li>-v [宿主机目录]:[容器内目录]</li>
+<li>-v [宿主机文件]:[容器内文件]</li>
+</ul>
+<p><strong>需求</strong>：创建并运行一个MySQL容器，将宿主机目录直接挂载到容器</p>
+<p>实现思路如下：</p>
+<p>1）在将课前资料中的mysql.tar文件上传到虚拟机，通过load命令加载为镜像</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538178.png" title="image-20221217213413438" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538178.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538178.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538178.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538178.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538178.png 2x"
+            sizes="auto"
+            alt="image-20221217213413438">
+    </a></figure></p>
+<blockquote>
+<p>docker load -i mysql.tar</p>
+</blockquote>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538199.png" title="image-20221217213735268" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538199.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538199.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538199.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538199.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538199.png 2x"
+            sizes="auto"
+            alt="image-20221217213735268">
+    </a></figure></p>
+<blockquote>
+<p>查看镜像： docker images</p>
+</blockquote>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538224.png" title="image-20221217213852875" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538224.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538224.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538224.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538224.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538224.png 2x"
+            sizes="auto"
+            alt="image-20221217213852875">
+    </a></figure></p>
+<p>2）创建目录/tmp/mysql/data</p>
+<blockquote>
+<p>mkdir -p /tmp/mysql/data</p>
+<p>说明：-p表示创建多级目录</p>
+</blockquote>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538240.png" title="image-20221217214247095" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538240.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538240.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538240.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538240.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538240.png 2x"
+            sizes="auto"
+            alt="image-20221217214247095">
+    </a></figure></p>
+<p>3）去</p>
+<p>查阅资料，创建并运行MySQL容器，要求：</p>
+<p>① 挂载/tmp/mysql/data到mysql容器内数据存储目录</p>
+<blockquote>
+<p>说明：mysql的data目录是我们平常经常容易修改的目录，因此我们将容器中的data目录挂载到宿主机的本地目录</p>
+</blockquote>
+<p>② 设置MySQL密码</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker run --restart<span class="o">=</span>always -p 3306:3306 --name mysql -v /tmp/mysql/data:/var/lib/mysql  -e <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span><span class="m">1234</span> -d mysql:5.7.25
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">说明：
+</span></span><span class="line"><span class="cl">	1.--restart<span class="o">=</span>always 表示当Docker重启时，当前mysql容器总是重启容器.如果不加，docker重启，mysql不会重启
+</span></span><span class="line"><span class="cl">	2.-p 3306:3306 ：port ，冒号前面的表示宿主机的端口号，冒号右边的表示mysql容器端口号
+</span></span><span class="line"><span class="cl">	3.--name mysql 表示当前的容器名
+</span></span><span class="line"><span class="cl">	4.-v /tmp/mysql/data:/var/lib/mysql
+</span></span><span class="line"><span class="cl">		1<span class="o">)</span>-v <span class="o">[</span>宿主机目录<span class="o">]</span>:<span class="o">[</span>容器内目录<span class="o">]</span> 
+</span></span><span class="line"><span class="cl">		2<span class="o">)</span>/tmp/mysql/data 表示宿主机目录
+</span></span><span class="line"><span class="cl">		3<span class="o">)</span>/var/lib/mysql 表示data在容器中的位置，这个目录是通过dockerhub官方查看的
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538250.png" title="image-20221217235331285" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538250.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538250.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538250.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538250.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538250.png 2x"
+            sizes="auto"
+            alt="image-20221217235331285">
+    </a></figure></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">	5.-e：表示environment环境变量的意思
+</span></span><span class="line"><span class="cl">	6.-d：表示后台运行
+</span></span><span class="line"><span class="cl">	7.mysql:5.7.25  表示mysql镜像名
+</span></span><span class="line"><span class="cl">	
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538269.png" title="image-20221218001851838" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538269.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538269.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538269.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538269.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538269.png 2x"
+            sizes="auto"
+            alt="image-20221218001851838">
+    </a></figure></p>
+<blockquote>
+<p>注意：</p>
+<p>​	1.如果启动报错，有可能是端口号冲突，此时可以执行命令 systemctl stop mysqld。停止之前开启的mysql服务。</p>
+<p>​	2.删除之前创建的mysql容器：docker rm mysql</p>
+</blockquote>
+<p>查看mysql容器是否启动：</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538711.png" title="image-20221218001813256" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538711.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538711.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538711.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538711.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538711.png 2x"
+            sizes="auto"
+            alt="image-20221218001813256">
+    </a></figure></p>
+<p>使用mysql客户端datagrip访问下：</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538731.png" title="image-20221218002150648" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538731.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538731.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538731.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538731.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538731.png 2x"
+            sizes="auto"
+            alt="image-20221218002150648">
+    </a></figure></p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538745.png" title="image-20221217215023891" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538745.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538745.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538745.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538745.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538745.png 2x"
+            sizes="auto"
+            alt="image-20221217215023891">
+    </a></figure></p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538759.png" title="image-20221217223254622" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538759.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538759.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538759.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538759.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538759.png 2x"
+            sizes="auto"
+            alt="image-20221217223254622">
+    </a></figure></p>
+<p>补充：</p>
+<blockquote>
+<p>1.netstat -tnlp | grep :3306 属于linux系统命令查看3306端口号是否被占用</p>
+<p>2.service mysqld stop 停止mysql服务</p>
+</blockquote>
+<h3 id="237小结" class="headerLink">
+    <a href="#237%e5%b0%8f%e7%bb%93" class="header-mark"></a>2.3.7.小结</h3><p>docker run的命令中通过 -v 参数挂载文件或目录到容器中：</p>
+<ul>
+<li>-v volume名称:容器内目录</li>
+<li>-v 宿主机文件:容器内文</li>
+<li>-v 宿主机目录:容器内目录</li>
+</ul>
+<p>数据卷挂载与目录直接挂载的</p>
+<ul>
+<li>数据卷挂载耦合度低，由docker来管理目录，但是目录较深，不好找</li>
+<li>目录挂载耦合度高，需要我们自己管理目录，不过目录容易寻找查看</li>
+</ul>
+<h1 id="3dockerfile自定义镜像理解" class="headerLink">
+    <a href="#3dockerfile%e8%87%aa%e5%ae%9a%e4%b9%89%e9%95%9c%e5%83%8f%e7%90%86%e8%a7%a3" class="header-mark"></a>3.Dockerfile自定义镜像(理解)</h1><p>之前学习的镜像都是DockerHub官方制作的镜像，我们在实际开发中自己写的代码是否可以让DockerHub官方帮助我们制作镜像呢?</p>
+<p>显然是不能的，我们不能把公司代码交给DockerHub官方来制作镜像，主要是不安全。所以在实际开发中，我们自己写的代码一定要自己制作镜像。</p>
+<p>而要自定义镜像，就必须先了解镜像的结构才行。</p>
+<h2 id="31镜像结构" class="headerLink">
+    <a href="#31%e9%95%9c%e5%83%8f%e7%bb%93%e6%9e%84" class="header-mark"></a>3.1.镜像结构</h2><p>镜像是将应用程序及其需要的系统函数库、环境、配置、依赖打包而成。</p>
+<p>我们以MySQL为例，来看看镜像的组成结构：</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538775.png" title="image-20210731175806273" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538775.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538775.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538775.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538775.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538775.png 2x"
+            sizes="auto"
+            alt="image-20210731175806273">
+    </a></figure></p>
+<p>简单来说，镜像就是在系统函数库、运行环境基础上，添加应用程序文件、配置文件、依赖文件等组合，然后编写好启动脚本打包在一起形成的文件。</p>
+<p>我们要构建镜像，其实就是实现上述打包的过程。</p>
+<h2 id="32dockerfile语法" class="headerLink">
+    <a href="#32dockerfile%e8%af%ad%e6%b3%95" class="header-mark"></a>3.2.Dockerfile语法</h2><p>构建自定义的镜像时，并不需要一个个文件去拷贝，打包。</p>
+<p>我们只需要告诉Docker，我们的镜像的组成，需要哪些BaseImage、需要拷贝什么文件、需要安装什么依赖、启动脚本是什么，将来Docker会帮助我们构建镜像。</p>
+<p>而描述上述信息的文件就是Dockerfile文件。</p>
+<p><strong>Dockerfile</strong>就是一个文本文件，其中包含一个个的<strong>指令(Instruction)</strong>，用指令来说明要执行什么操作来构建镜像。每一个指令都会形成一层Layer。</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538276.png" title="image-20210731180321133" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538276.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538276.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538276.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538276.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538276.png 2x"
+            sizes="auto"
+            alt="image-20210731180321133">
+    </a></figure></p>
+<p>更新详细语法说明，请参考官网文档： <a href="https://docs.docker.com/engine/reference/builder" target="_blank" rel="noopener noreferrer">https://docs.docker.com/engine/reference/builder</a></p>
+<h2 id="33构建java项目" class="headerLink">
+    <a href="#33%e6%9e%84%e5%bb%bajava%e9%a1%b9%e7%9b%ae" class="header-mark"></a>3.3.构建Java项目</h2><h3 id="331基于ubuntu构建java项目" class="headerLink">
+    <a href="#331%e5%9f%ba%e4%ba%8eubuntu%e6%9e%84%e5%bb%bajava%e9%a1%b9%e7%9b%ae" class="header-mark"></a>3.3.1.基于Ubuntu构建Java项目</h3><p>需求：基于Ubuntu镜像构建一个新镜像，运行一个java项目</p>
+<ul>
+<li>
+<p>步骤1：新建一个空文件夹docker-demo</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538299.png" title="image-20221218124259243" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538299.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538299.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538299.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538299.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538299.png 2x"
+            sizes="auto"
+            alt="image-20221218124259243">
+    </a></figure></p>
+</li>
+<li>
+<p>步骤2：拷贝课前资料中的docker-demo.jar文件到docker-demo这个目录</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538314.png" title="image-20221218154214447" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538314.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538314.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538314.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538314.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538314.png 2x"
+            sizes="auto"
+            alt="image-20221218154214447">
+    </a></figure></p>
+</li>
+<li>
+<p>步骤3：拷贝课前资料中的jdk8.tar.gz文件到docker-demo这个目录</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538335.png" title="image-20221218154541701" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538335.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538335.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538335.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538335.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538335.png 2x"
+            sizes="auto"
+            alt="image-20221218154541701">
+    </a></figure></p>
+</li>
+<li>
+<p>步骤4：拷贝课前资料提供的Dockerfile到docker-demo这个目录</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538355.png" title="image-20221218154651142" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538355.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538355.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538355.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538355.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538355.png 2x"
+            sizes="auto"
+            alt="image-20221218154651142">
+    </a></figure></p>
+<p>其中的内容如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="c"># 指定基础镜像</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">FROM</span><span class="s"> ubuntu:16.04</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 配置环境变量，JDK的安装目录</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> <span class="nv">JAVA_DIR</span><span class="o">=</span>/usr/local<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 拷贝jdk和java项目的包</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> ./jdk8.tar.gz <span class="nv">$JAVA_DIR</span>/<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> ./docker-demo.jar /tmp/app.jar<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 安装JDK</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">RUN</span> <span class="nb">cd</span> <span class="nv">$JAVA_DIR</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span> <span class="o">&amp;&amp;</span> tar -xf ./jdk8.tar.gz <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span> <span class="o">&amp;&amp;</span> mv ./jdk1.8.0_144 ./java8<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 配置环境变量</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> <span class="nv">JAVA_HOME</span><span class="o">=</span><span class="nv">$JAVA_DIR</span>/java8<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENV</span> <span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:<span class="nv">$JAVA_HOME</span>/bin<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 暴露端口</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">EXPOSE</span><span class="s"> 8090</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 入口，java项目的启动命令</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENTRYPOINT</span> java -jar /tmp/app.jar<span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>步骤5：切换到docker-demo</p>
+<p>将准备好的docker-demo上传到虚拟机任意目录，然后进入docker-demo目录下</p>
+</li>
+</ul>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538375.png" title="image-20221218155128773" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538375.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538375.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538375.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538375.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538375.png 2x"
+            sizes="auto"
+            alt="image-20221218155128773">
+    </a></figure></p>
+<ul>
+<li>
+<p>步骤6：运行命令：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">docker build -t javaweb:1.0 .
+</span></span><span class="line"><span class="cl">	说明:
+</span></span><span class="line"><span class="cl">		1.docker build 表示构建
+</span></span><span class="line"><span class="cl">		2.-t:t的全称是tag表示版本
+</span></span><span class="line"><span class="cl">		3.javaweb:1.0 ：镜像组成格式  repository:版本  javaweb表示repository，属于标识符，随便定义
+</span></span><span class="line"><span class="cl">		<span class="k">4.</span> 在版本即1.0后面一定加空格然后书写点，点表示在当前目录执行Dockerfile文件
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538805.png" title="image-20221218161533433" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538805.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538805.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538805.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538805.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538805.png 2x"
+            sizes="auto"
+            alt="image-20221218161533433">
+    </a></figure></p>
+<ul>
+<li>
+<p>查看镜像</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538829.png" title="image-20221218161641643" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538829.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538829.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538829.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538829.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538829.png 2x"
+            sizes="auto"
+            alt="image-20221218161641643">
+    </a></figure></p>
+</li>
+<li>
+<p>构建容器：</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker run --name myWeb1.0 -p 8090:8090 -d javaweb:1.0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538847.png" title="image-20221218162046305" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538847.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538847.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538847.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538847.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538847.png 2x"
+            sizes="auto"
+            alt="image-20221218162046305">
+    </a></figure></p>
+<ul>
+<li>查看启动的容器</li>
+</ul>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538862.png" title="image-20221218162142441" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538862.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538862.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538862.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538862.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538862.png 2x"
+            sizes="auto"
+            alt="image-20221218162142441">
+    </a></figure></p>
+<ul>
+<li>最后访问 http://192.168.200.128:8090/hello/count，其中的ip改成你的虚拟机ip</li>
+</ul>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538889.png" title="image-20221218162518673" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538889.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538889.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538889.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538889.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538889.png 2x"
+            sizes="auto"
+            alt="image-20221218162518673">
+    </a></figure></p>
+<h3 id="332基于java8构建java项目" class="headerLink">
+    <a href="#332%e5%9f%ba%e4%ba%8ejava8%e6%9e%84%e5%bb%bajava%e9%a1%b9%e7%9b%ae" class="header-mark"></a>3.3.2.基于java8构建Java项目</h3><p>虽然我们可以基于Ubuntu基础镜像，添加任意自己需要的安装包，构建镜像，但是却比较麻烦。所以大多数情况下，我们都可以在一些安装了部分软件的基础镜像上做改造。</p>
+<p>例如，构建java项目的镜像，可以在已经准备了JDK的基础镜像基础上构建。</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538902.png" title="image-20221218163608835" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538902.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538902.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538902.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538902.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538902.png 2x"
+            sizes="auto"
+            alt="image-20221218163608835">
+    </a></figure></p>
+<p>**需求：**基于java:8-alpine镜像，将一个Java项目构建为镜像</p>
+<p>实现思路如下：</p>
+<ul>
+<li>① 在tmp目录下在新建一个空的目录docker-demo02</li>
+</ul>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538327.png" title="image-20221218165226785" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538327.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538327.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538327.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538327.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538327.png 2x"
+            sizes="auto"
+            alt="image-20221218165226785">
+    </a></figure></p>
+<ul>
+<li>
+<p>② 拷贝课前资料提供的docker-demo.jar到这个目录中</p>
+</li>
+<li>
+<p>③ 然后在目录中新建一个文件，命名为Dockerfile，编写Dockerfile文件：</p>
+<ul>
+<li>
+<p>a ）基于java:8-alpine作为基础镜像</p>
+</li>
+<li>
+<p>b ）将docker-demo.jar拷贝到镜像中</p>
+</li>
+<li>
+<p>c ）暴露端口</p>
+</li>
+<li>
+<p>d ）编写入口ENTRYPOINT</p>
+<p>内容如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-dockerfile" data-lang="dockerfile"><span class="line"><span class="cl"><span class="k">FROM</span><span class="s"> java:8-alpine</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">COPY</span> ./docker-demo.jar /tmp/app.jar<span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 暴露端口</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">EXPOSE</span><span class="s"> 8090</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="c"># 入口，java项目的启动命令</span><span class="err">
+</span></span></span><span class="line"><span class="cl"><span class="err"></span><span class="k">ENTRYPOINT</span> java -jar /tmp/app.jar<span class="err">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+</ul>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538337.png" title="image-20221218165600492" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538337.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538337.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538337.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538337.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538337.png 2x"
+            sizes="auto"
+            alt="image-20221218165600492">
+    </a></figure></p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538353.png" title="image-20221218165946099" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538353.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538353.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538353.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538353.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538353.png 2x"
+            sizes="auto"
+            alt="image-20221218165946099">
+    </a></figure></p>
+</li>
+<li>
+<p>④ 使用docker build命令构建镜像</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">docker build -t javaweb:2.0 .
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>⑤停止之前启动的容器myWeb1.0，否则端口号冲突</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">docker stop myWeb1.0
+</span></span></code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>⑥ 使用docker run创建容器并运行</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">docker run --name myWeb2.0 -p 8090:8090 -d javaweb:2.0
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>⑦浏览器访问</li>
+</ul>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538368.png" title="image-20221218172740225" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538368.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538368.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538368.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538368.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538368.png 2x"
+            sizes="auto"
+            alt="image-20221218172740225">
+    </a></figure></p>
+<h2 id="34小结" class="headerLink">
+    <a href="#34%e5%b0%8f%e7%bb%93" class="header-mark"></a>3.4.小结</h2><p>小结：</p>
+<ol>
+<li>
+<p>Dockerfile的本质是一个文件，通过指令描述镜像的构建过程</p>
+</li>
+<li>
+<p>Dockerfile的第一行必须是FROM，从一个基础镜像来构建</p>
+</li>
+<li>
+<p>基础镜像可以是基本操作系统，如Ubuntu。也可以是其他人制作好的镜像，例如：java:8-alpine</p>
+</li>
+</ol>
+<h1 id="4docker-compose" class="headerLink">
+    <a href="#4docker-compose" class="header-mark"></a>4.Docker-Compose</h1><p>通过我们上述学习，对于每个应用都是手动创建和运行容器，那么实际开发中小一点的公司几十个应用，大一点公司几百个应用，而如果一个一个手动部署，效率会比较低也比较麻烦。因此我们可以学习下面的技术Docker-Compose来解决。</p>
+<p>Docker Compose可以基于Compose文件帮我们快速的部署分布式应用，而无需手动一个个创建和运行容器！</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538381.png" title="image-20210731180921742" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538381.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538381.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538381.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538381.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538381.png 2x"
+            sizes="auto"
+            alt="image-20210731180921742">
+    </a></figure></p>
+<h2 id="41初识dockercompose" class="headerLink">
+    <a href="#41%e5%88%9d%e8%af%86dockercompose" class="header-mark"></a>4.1.初识DockerCompose</h2><p>Compose文件是一个文本文件，通过指令定义集群中的每个容器如何运行。格式如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="err">version:</span> <span class="s2">&#34;3.8&#34;</span>
+</span></span><span class="line"><span class="cl"> <span class="err">services:</span>
+</span></span><span class="line"><span class="cl">  <span class="err">mysql:</span>
+</span></span><span class="line"><span class="cl">    <span class="err">image:</span> <span class="err">mysql:</span><span class="mf">5.7</span><span class="err">.</span><span class="mi">25</span>
+</span></span><span class="line"><span class="cl">    <span class="err">environment:</span>
+</span></span><span class="line"><span class="cl">     <span class="err">MYSQL_ROOT_PASSWORD:</span> <span class="mi">123</span> 
+</span></span><span class="line"><span class="cl">    <span class="err">volumes:</span>
+</span></span><span class="line"><span class="cl">     <span class="err">-</span> <span class="s2">&#34;/tmp/mysql/data:/var/lib/mysql&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="err">web:</span>
+</span></span><span class="line"><span class="cl">    <span class="err">build:</span> <span class="err">.</span>
+</span></span><span class="line"><span class="cl">    <span class="err">ports:</span>
+</span></span><span class="line"><span class="cl">     <span class="err">-</span> <span class="s2">&#34;8090:8090&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>上面的Compose文件就描述一个项目，其中包含两个容器：</p>
+<ul>
+<li>mysql：一个基于<code>mysql:5.7.25</code>镜像构建的容器，并且挂载了1个目录</li>
+<li>web：一个基于<code>docker build</code>临时构建的镜像容器，映射端口时8090</li>
+</ul>
+<p>DockerCompose的详细语法参考官网：https://docs.docker.com/compose/compose-file/</p>
+<p>其实DockerCompose文件可以看做是将多个docker run命令写到一个文件，只是语法稍有差异。</p>
+<p>补充:以前执行命令创建镜像和容器方式：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">docker run --restart=always -p 3306:3306 --name mysql -v /tmp/mysql/data:/var/lib/mysql  -e MYSQL_ROOT_PASSWORD=1234 -d mysql:5.7.25
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">docker build -t javaweb:1.0 .
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="42安装dockercompose" class="headerLink">
+    <a href="#42%e5%ae%89%e8%a3%85dockercompose" class="header-mark"></a>4.2.安装DockerCompose</h2><p>参考课前资料</p>
+<h2 id="43部署应用这里简单实现就好后期学习微服务会多个微服务部署-课下完成" class="headerLink">
+    <a href="#43%e9%83%a8%e7%bd%b2%e5%ba%94%e7%94%a8%e8%bf%99%e9%87%8c%e7%ae%80%e5%8d%95%e5%ae%9e%e7%8e%b0%e5%b0%b1%e5%a5%bd%e5%90%8e%e6%9c%9f%e5%ad%a6%e4%b9%a0%e5%be%ae%e6%9c%8d%e5%8a%a1%e4%bc%9a%e5%a4%9a%e4%b8%aa%e5%be%ae%e6%9c%8d%e5%8a%a1%e9%83%a8%e7%bd%b2-%e8%af%be%e4%b8%8b%e5%ae%8c%e6%88%90" class="header-mark"></a>4.3.部署应用(这里简单实现就好，后期学习微服务会多个微服务部署) 课下完成</h2><h3 id="431实现思路" class="headerLink">
+    <a href="#431%e5%ae%9e%e7%8e%b0%e6%80%9d%e8%b7%af" class="header-mark"></a>4.3.1.实现思路</h3><p>【1】 查看  <strong>资料\原始代码\docker-compose</strong>文件夹，里面是已经编写好了docker-compose文件和项目</p>
+<p>【2】修改docker-compose的配置文件docker-compose.yml变为自己当前的环境配置参数</p>
+<p>【3】将docker-compose目录上传到虚拟机中的/tmp目录下面</p>
+<p>【4】切换到docker-compose目录下即docker-compose.yml文件所在位置</p>
+<p>【5】查看之前启动的容器并全部删除</p>
+<p>【6】停止mysql服务</p>
+<p>【7】执行命令 docker-compose up -d 批量构建容器，并启动</p>
+<p>【8】使用浏览器访问项目</p>
+<p>【9】使用mysql客户端datagrip访问mysql服务</p>
+<h3 id="432具体实现" class="headerLink">
+    <a href="#432%e5%85%b7%e4%bd%93%e5%ae%9e%e7%8e%b0" class="header-mark"></a>4.3.2.具体实现</h3><p>【1】 查看  <strong>资料\原始代码\docker-compose</strong>文件夹，里面是已经编写好了docker-compose文件和项目</p>
+<p>【2】修改docker-compose的配置文件docker-compose.yml变为自己当前的环境配置参数</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="c"># DockerCompose的版本是3.2</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;3.2&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># DockerCompose启动时启动的服务(应用)，一共启动2个服务</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">services</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># 基于已有的镜像image: mysql:5.7.25去创建mysql容器</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">mysql</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># 你的虚拟机镜像应该是mysql:5.7.25。这里基于你的mysql镜像创建容器</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">mysql:5.7.25</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">mysql_container</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">environment</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="nt">MYSQL_ROOT_PASSWORD</span><span class="p">:</span><span class="w"> </span><span class="m">1234</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;/tmp/mysql/data:/var/lib/mysql&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;/tmp/mysql/conf/my.cnf:/etc/mysql/conf.d/my.cnf&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;3306:3306&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="c"># 自己构建镜像然后创建容器</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">  </span><span class="nt">myweb</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># 找到当前目录下myweb-service下面的Dockerfile然后构建镜像</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">build</span><span class="p">:</span><span class="w"> </span><span class="l">./myweb-service</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c"># 镜像名是 myweb:3.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">myweb:3.0</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">myweb_container</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span><span class="c"># 在浏览器访问项目的端口号是8082</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">      </span>- <span class="s2">&#34;8082:8090&#34;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>【3】将docker-compose目录上传到虚拟机中的/tmp目录下面</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538409.png" title="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538409.png" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538409.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538409.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538409.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538409.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538409.png 2x"
+            sizes="auto"
+            alt="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538409.png">
+    </a></figure></p>
+<p>【4】切换到docker-compose目录下即docker-compose.yml文件所在位置</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538752.png" title="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538752.png" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538752.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538752.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538752.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538752.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538752.png 2x"
+            sizes="auto"
+            alt="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538752.png">
+    </a></figure></p>
+<p>【5】查看之前启动的容器并全部删除</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538764.png" title="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538764.png" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538764.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538764.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538764.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538764.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538764.png 2x"
+            sizes="auto"
+            alt="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538764.png">
+    </a></figure></p>
+<p>【6】停止mysql服务</p>
+<blockquote>
+<p>service mysqld stop</p>
+</blockquote>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538779.png" title="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538779.png" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538779.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538779.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538779.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538779.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538779.png 2x"
+            sizes="auto"
+            alt="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538779.png">
+    </a></figure></p>
+<p>【7】执行命令 docker-compose up -d 批量构建容器，并启动</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538796.png" title="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538796.png" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538796.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538796.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538796.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538796.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538796.png 2x"
+            sizes="auto"
+            alt="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538796.png">
+    </a></figure></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl"><span class="gh"># 利用DockerCompose部署,批量构建容器，并启动
+</span></span></span><span class="line"><span class="cl"><span class="gh"># 说明:docker-compose up -d 以后台的方式运行容器.
+</span></span></span><span class="line"><span class="cl"><span class="gh"># up表示创建和启动容器
+</span></span></span><span class="line"><span class="cl"><span class="gh"># -d 表示后台
+</span></span></span><span class="line"><span class="cl"><span class="gh"></span>docker-compose up -d
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>【8】使用浏览器访问项目</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538807.png" title="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538807.png" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538807.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538807.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538807.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538807.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538807.png 2x"
+            sizes="auto"
+            alt="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538807.png">
+    </a></figure></p>
+<p>【9】使用mysql客户端datagrip访问mysql服务</p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538820.png" title="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538820.png" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538820.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538820.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538820.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538820.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538820.png 2x"
+            sizes="auto"
+            alt="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538820.png">
+    </a></figure></p>
+<h1 id="5docker镜像仓库-理解" class="headerLink">
+    <a href="#5docker%e9%95%9c%e5%83%8f%e4%bb%93%e5%ba%93-%e7%90%86%e8%a7%a3" class="header-mark"></a>5.Docker镜像仓库 理解</h1><h2 id="51docker镜像仓库介绍" class="headerLink">
+    <a href="#51docker%e9%95%9c%e5%83%8f%e4%bb%93%e5%ba%93%e4%bb%8b%e7%bb%8d" class="header-mark"></a>5.1Docker镜像仓库介绍</h2><p>我们之前学习了一些镜像，例如第三方的镜像mysql reids等，也有我们自己创建的镜像。那么这些镜像都需要管理和保存，管理和保存镜像的地方就叫镜像仓库（ Docker Registry ）。有公共的和私有的两种形式：</p>
+<ul>
+<li>
+<p>公共仓库：例如Docker官方的 <a href="https://hub.docker.com/" target="_blank" rel="noopener noreferrer">Docker Hub</a>，国内也有一些云服务商提供类似于 Docker Hub 的公开服务，比如 <a href="https://c.163.com/hub" target="_blank" rel="noopener noreferrer">网易云镜像服务</a>、<a href="https://hub.daocloud.io/" target="_blank" rel="noopener noreferrer">DaoCloud</a><a href="https://hub.daocloud.io/" target="_blank" rel="noopener noreferrer"> </a><a href="https://hub.daocloud.io/" target="_blank" rel="noopener noreferrer">镜像服务</a>、<a href="https://cr.console.aliyun.com/" target="_blank" rel="noopener noreferrer">阿里云镜像服务</a>等。</p>
+</li>
+<li>
+<p>私有仓库：除了使用公开仓库外，用户还可以在本地搭建私有 Docker Registry。企业自己的镜像最好是采用私有Docker Registry来实现。实际开发中我们一般都是自己搭建镜像仓库，因为将企业的项目的镜像上传到公共仓库不安全。</p>
+</li>
+</ul>
+<h2 id="51搭建私有镜像仓库" class="headerLink">
+    <a href="#51%e6%90%ad%e5%bb%ba%e7%a7%81%e6%9c%89%e9%95%9c%e5%83%8f%e4%bb%93%e5%ba%93" class="header-mark"></a>5.1.搭建私有镜像仓库</h2><p>参考课前资料《CentOS7安装Docker.md》</p>
+<h2 id="52推送拉取镜像" class="headerLink">
+    <a href="#52%e6%8e%a8%e9%80%81%e6%8b%89%e5%8f%96%e9%95%9c%e5%83%8f" class="header-mark"></a>5.2.推送、拉取镜像</h2><p>推送镜像到私有镜像服务必须先tag(版本)，步骤如下：</p>
+<p>① 重新tag本地镜像，名称前缀为私有仓库的地址：192.168.200.128:5000/</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker tag nginx:latest 192.168.200.128:5000/nginx:1.0 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>说明：</p>
+<blockquote>
+<p>1.nginx:latest 表示原来的镜像名和版本</p>
+<p>2.192.168.200.128:5000 私有仓库的地址</p>
+<p>3.nginx:1.0 ：新的镜像和版本</p>
+</blockquote>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538065.png" title="image-20221219161838251" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538065.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538065.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538065.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538065.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538065.png 2x"
+            sizes="auto"
+            alt="image-20221219161838251">
+    </a></figure></p>
+<p>② 推送镜像</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">docker push 192.168.200.128:5000/nginx:1.0 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538097.png" title="image-20221219161919001" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538097.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538097.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538097.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538097.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538097.png 2x"
+            sizes="auto"
+            alt="image-20221219161919001">
+    </a></figure></p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538119.png" title="image-20221219161946423" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538119.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538119.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538119.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538119.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201538119.png 2x"
+            sizes="auto"
+            alt="image-20221219161946423">
+    </a></figure></p>
+<p>③ 拉取镜像</p>
+<p>【1】先删除之前的镜像</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-markdown" data-lang="markdown"><span class="line"><span class="cl">docker rmi 192.168.200.128:5000/nginx:1.0 nginx:latest
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>【2】在拉取新的镜像</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="line"><span class="cl">docker pull 192.168.200.128:5000/nginx:1.0 
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201541586.png" title="image-20221219162028629" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201541586.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201541586.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201541586.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201541586.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201541586.png 2x"
+            sizes="auto"
+            alt="image-20221219162028629">
+    </a></figure></p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201544965.png" title="image-20221219162116901" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201544965.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201544965.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201544965.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201544965.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404201544965.png 2x"
+            sizes="auto"
+            alt="image-20221219162116901">
+    </a></figure></p>
+</div>
+
+        
+
+<div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2024-04-20</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"><span><a class="link-to-mardown" href=/docker/index.md target="_blank" rel="noopener noreferrer">阅读原始文档</a>
+                    </span></div>
+            <div class="post-info-share"><button title="分享到 Twitter" data-sharer="twitter" data-url="https://ghd.icu/docker/" data-title="Docker" data-via="@guo_alpha36266" data-hashtags="Docker"><span class="fab fa-twitter fa-fw"></span></button><button title="分享到 Facebook" data-sharer="facebook" data-url="https://ghd.icu/docker/" data-hashtag="Docker"><span class="fab fa-facebook-square fa-fw"></span></button><button title="分享到 WhatsApp" data-sharer="whatsapp" data-url="https://ghd.icu/docker/" data-title="Docker" data-web><span class="fab fa-whatsapp fa-fw"></span></button><button title="分享到 Line" data-sharer="line" data-url="https://ghd.icu/docker/" data-title="Docker"><span data-svg-src="/lib/simple-icons/icons/line.min.svg"></span></button><button title="分享到 微博" data-sharer="weibo" data-url="https://ghd.icu/docker/" data-title="Docker"><span class="fab fa-weibo fa-fw"></span></button><button title="分享到 Myspace" data-sharer="myspace" data-url="https://ghd.icu/docker/" data-title="Docker" data-description=""><span data-svg-src="/lib/simple-icons/icons/myspace.min.svg"></span></button><button title="分享到 Blogger" data-sharer="blogger" data-url="https://ghd.icu/docker/" data-title="Docker" data-description=""><span class="fab fa-blogger fa-fw"></span></button><button title="分享到 Evernote" data-sharer="evernote" data-url="https://ghd.icu/docker/" data-title="Docker"><span class="fab fa-evernote fa-fw"></span></button></div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/docker/">Docker</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/nacos/" class="prev" rel="prev" title="Nacos"><i class="fas fa-angle-left fa-fw"></i>Nacos</a></div>
+</div>
+<div id="comments"></div></article></div>
+        </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2022 - 2024</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank" rel="noopener noreferrer">AlphaGuo</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+            <div class="footer-line"></div>
+            <div class="footer-line">
+            </div>
+        </div></footer></div>
+
+    <div id="fixed-buttons"><a href="#back-to-top" id="back-to-top-button" class="fixed-button" title="回到顶部">
+            <i class="fas fa-arrow-up fa-fw"></i>
+        </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+            <i class="fas fa-comment fa-fw"></i>
+        </a>
+    </div><div id="cookieconsent-container"></div><div class="assets"><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><link rel="stylesheet" href="/lib/katex/katex.min.css"><link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/lib/katex/copy-tex.min.css">
+        <noscript><link rel="stylesheet" href="/lib/katex/copy-tex.min.css"></noscript><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"cookieconsent":{"content":{"dismiss":"同意","link":"了解更多","message":"本网站使用 Cookies 来改善您的浏览体验."},"enable":true,"palette":{"button":{"background":"#f0f0f0"},"popup":{"background":"#1aa3ff"}},"theme":"edgeless"},"data":{"desktop-header-typeit":"AlphaGuo Blog","mobile-header-typeit":"AlphaGuo Blog"},"lightGallery":{"actualSize":false,"exThumbImage":"data-thumbnail","hideBarsDelay":2000,"selector":".lightgallery","speed":400,"thumbContHeight":80,"thumbWidth":80,"thumbnail":true},"math":{"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":true,"left":"\\[","right":"\\]"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"}],"strict":false},"search":{"distance":100,"findAllMatches":false,"fuseIndexURL":"/index.json","highlightTag":"em","ignoreFieldNorm":false,"ignoreLocation":false,"isCaseSensitive":false,"location":0,"maxResultLength":10,"minMatchCharLength":2,"noResultsFound":"没有找到结果","snippetLength":50,"threshold":0.3,"type":"fuse","useExtendedSearch":false},"sharerjs":true,"table":{"sort":true},"typeit":{"cursorChar":"|","cursorSpeed":1000,"data":{"desktop-header-typeit":["desktop-header-typeit"],"mobile-header-typeit":["mobile-header-typeit"]},"duration":-1,"speed":250}};</script><script type="text/javascript" src="/lib/tablesort/tablesort.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lightgallery.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-thumbnail.min.js"></script><script type="text/javascript" src="/lib/lightgallery/lg-zoom.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/sharer/sharer.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript" src="/lib/katex/katex.min.js" defer></script><script type="text/javascript" src="/lib/katex/auto-render.min.js" defer></script><script type="text/javascript" src="/lib/katex/copy-tex.min.js" defer></script><script type="text/javascript" src="/lib/katex/mhchem.min.js" defer></script><script type="text/javascript" src="/js/katex.min.js" defer></script><script type="text/javascript" src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script type="text/javascript" src="/js/cookieconsent.min.js" defer></script><script type="text/javascript" src="/js/theme.min.js" defer></script></div>
+</body>
+
+</html>

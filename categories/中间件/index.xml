@@ -3,7 +3,13 @@
         <title>中间件 - 分类 - AlphaGuo Blog</title>
         <link>https://ghd.icu/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/</link>
         <description>中间件 - 分类 - AlphaGuo Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 31 Mar 2024 00:00:17 &#43;0800</lastBuildDate><atom:link href="https://ghd.icu/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 20 Apr 2024 15:37:22 &#43;0800</lastBuildDate><atom:link href="https://ghd.icu/categories/%E4%B8%AD%E9%97%B4%E4%BB%B6/" rel="self" type="application/rss+xml" /><item>
+    <title>Docker</title>
+    <link>https://ghd.icu/docker/</link>
+    <pubDate>Sat, 20 Apr 2024 15:37:22 &#43;0800</pubDate><author>
+                        <name>AlphaGuo</name><uri>https://ghd.icu/</uri><email>alphaguo141@gmail.com</email></author><guid>https://ghd.icu/docker/</guid>
+    <description><![CDATA[来自于itheima]]></description>
+</item><item>
     <title>Nacos</title>
     <link>https://ghd.icu/nacos/</link>
     <pubDate>Sun, 31 Mar 2024 00:00:17 &#43;0800</pubDate><author>
