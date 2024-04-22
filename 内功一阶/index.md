@@ -868,64 +868,83 @@ Translated by @HuangBo
 ```
 
 ```cpp
-#define _CRT_SECURE_NO_WARNINGS // 禁用安全警告
 
-#include <bits/stdc++.h> // 包含通用的标准库头文件
+#define _CRT_SECURE_NO_WARNINGS
+#include <bits/stdc++.h>
 using namespace std;
-
-const int maxSize = 26 + 5; // 定义最大尺寸为31
-struct Matrix { // 定义矩阵结构体
-    int a, b; // 矩阵的行和列
-    Matrix(int a = 0, int b = 0) // 构造函数，初始化矩阵的行和列
-        : a(a), b(b)
-    {}
-} m[maxSize]; // 创建Matrix类型的数组m
-
-stack<Matrix> s; // 声明一个存放Matrix类型的栈s
-
-int main01()
+int main()
 {
-    int n; // 声明整数变量n
-    char c; // 声明字符变量c
-    string str; // 声明字符串变量str
-    cin >> n; // 从标准输入流读取一个整数n
-    for (int i = 0; i < n; i++) { // 循环读取n次
-        cin >> c; // 从标准输入流读取一个字符c
-        int k = c - 'A'; // 如果输入的是字母，则转换为整数
-        cin >> m[k].a >> m[k].b; // 从标准输入流读取两个整数，分别赋值给m[k].a和m[k].b
-    }
-    while (cin >> str) { // 循环读取字符串str，直到读取失败
-        int len = str.length(); // 获取字符串str的长度
-        bool error = false; // 声明布尔变量error，并初始化为false
-        int ans = 0; // 声明整数变量ans，并初始化为0
-        for (int i = 0; i < len; i++) { // 循环遍历字符串str
-            if (isalpha(str[i])) { // 如果str[i]是字母
-                s.push(m[str[i] - 'A']); // 将m[str[i]-'A']入栈
+    int T, n, m;//T:几组优先级，n:本组优先级个数，m:你的优先级下标
+    cin >> T;
+    for (int i = 0; i < T; i++) {
+        queue<int> q;//记录每个优先级的下标
+        vector<int> a, b;//a:原优先级排序,b:降序后的优先级排序
+        int k = 0, x;//x:输入所有的优先级
+        cin >> n >> m;
+        for (int j = 0; j < n; j++) {
+            cin >> x;
+            a.push_back(x);
+            b.push_back(x);
+            q.push(j);
+        }
+        sort(b. begin(), b.end(), greater<int>());//降序
+        int w = 0;
+        int max = 0;
+        while (!q.empty()) {
+            max = b[w];
+            int t = q.front();
+            if (a[t] < max) {
+                q.pop();
+                q.push(t);
             }
-            else if (str[i] == ')') { // 如果str[i]是右括号
-                Matrix m2 = s.top(); // 栈顶元素出栈，并赋值给m2
-                s.pop(); // 弹出栈顶元素
-                Matrix m1 = s.top(); // 再次将栈顶元素出栈，并赋值给m1
-                s.pop(); // 弹出栈顶元素
-                if (m1.b != m2.a) { // 如果m1的列数不等于m2的行数
-                    error = true; // 将error标记为true
-                    break; // 退出循环
+            else {
+                if (t == m) {
+                    cout << ++k << endl;
+                    break;
                 }
-                ans += m1.a * m1.b * m2.b; // 计算矩阵相乘的结果，并累加到ans上
-                s.push(Matrix(m1.a, m2.b)); // 将新的矩阵入栈，行数为m1的行数，列数为m2的列数
+                else {
+                    q.pop();
+                    k++;
+                    w++;
+                }
             }
         }
-        if (error) { // 如果error为true
-            cout << "error" << endl; // 输出错误信息
-        }
-        else { // 否则
-            cout << ans << endl; // 输出计算结果
-        }
     }
-    system("pause"); // 暂停系统，等待用户按任意键继续
-    return 0; // 返回0，表示程序正常结束
+    system("pause");
+    return 0;
 }
 
 ```
 
+# 10、第 k 小整数
 
+## 题目描述
+
+现有 $n$ 个正整数，要求出这 $n$ 个正整数中的第 $k$ 个最小整数（相同大小的整数只计算一次）。
+
+## 输入格式
+
+第一行为 $n$ 和 $k$; 第二行开始为 $n$ 个正整数的值，整数间用空格隔开。
+
+## 输出格式
+
+第$k$个最小整数的值；若无解，则输出 `NO RESULT`。
+
+## 样例 #1
+
+### 样例输入 #1
+
+```
+10 3
+1 3 3 7 2 5 1 2 4 6
+```
+
+### 样例输出 #1
+
+```
+3
+```
+
+## 提示
+
+$n \leq 10000$，$k \leq 1000$，正整数均小于 $30000$。
