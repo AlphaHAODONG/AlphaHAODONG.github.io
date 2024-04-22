@@ -33,7 +33,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https://ghd.icu/%E5%86%85%E5%8A%9F%E4%B8%80%E9%98%B6/"
-        },"genre": "posts","keywords": "算法基础","wordcount":  4748 ,
+        },"genre": "posts","keywords": "算法基础","wordcount":  7227 ,
         "url": "https://ghd.icu/%E5%86%85%E5%8A%9F%E4%B8%80%E9%98%B6/","datePublished": "2024-01-31T21:08:36+08:00","dateModified": "2024-01-16T21:08:36+08:00","publisher": {
             "@type": "Organization",
             "name": ""},"authors": [{
@@ -192,12 +192,44 @@
       </ul>
     </li>
   </ul>
+
+  <ul>
+    <li><a href="#题面翻译-2">题面翻译</a></li>
+    <li><a href="#矩阵链乘">矩阵链乘</a>
+      <ul>
+        <li><a href="#题目描述-4">题目描述</a></li>
+        <li><a href="#输入格式-4">输入格式</a></li>
+      </ul>
+    </li>
+    <li><a href="#题目描述-5">题目描述</a></li>
+    <li><a href="#输入格式-5">输入格式</a></li>
+    <li><a href="#输出格式-4">输出格式</a></li>
+    <li><a href="#样例-1-4">样例 #1</a>
+      <ul>
+        <li><a href="#样例输入-1-4">样例输入 #1</a></li>
+        <li><a href="#样例输出-1-4">样例输出 #1</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#题面翻译-3">题面翻译</a></li>
+    <li><a href="#题目描述-6">题目描述</a></li>
+    <li><a href="#输入格式-6">输入格式</a></li>
+    <li><a href="#输出格式-5">输出格式</a></li>
+    <li><a href="#样例-1-5">样例 #1</a>
+      <ul>
+        <li><a href="#样例输入-1-5">样例输入 #1</a></li>
+        <li><a href="#样例输出-1-5">样例输出 #1</a></li>
+      </ul>
+    </li>
+  </ul>
 </nav></div>
     </div><script>document.getElementsByTagName("main")[0].setAttribute("autoTOC", "true")</script><article class="page single"><h1 class="single-title animate__animated animate__flipInX">内功一阶</h1><div class="post-meta">
             <div class="post-meta-line">
                 <span class="post-author"><span class='author'><span class="author fas fa-user-circle fa-fw"></span><span class='screen-reader-text'>  </span><a href='https://ghd.icu/authors/alphaguo'>AlphaGuo</a></span>
                 </span>&nbsp;<span class="post-category">收录于 </span>&nbsp;<span class="post-category">类别 <a href="/categories/%E7%AE%97%E6%B3%95/"><i class="far fa-folder fa-fw"></i>算法</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-01-31">2024-01-31</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2024-01-16">2024-01-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 4748 字&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 10 分钟&nbsp;</div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2024-01-31">2024-01-31</time>&nbsp;<i class="far fa-edit fa-fw"></i>&nbsp;<time datetime="2024-01-16">2024-01-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 7227 字&nbsp;<i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 15 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
@@ -265,6 +297,38 @@
       <ul>
         <li><a href="#样例输入-1-3">样例输入 #1</a></li>
         <li><a href="#样例输出-1-3">样例输出 #1</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#题面翻译-2">题面翻译</a></li>
+    <li><a href="#矩阵链乘">矩阵链乘</a>
+      <ul>
+        <li><a href="#题目描述-4">题目描述</a></li>
+        <li><a href="#输入格式-4">输入格式</a></li>
+      </ul>
+    </li>
+    <li><a href="#题目描述-5">题目描述</a></li>
+    <li><a href="#输入格式-5">输入格式</a></li>
+    <li><a href="#输出格式-4">输出格式</a></li>
+    <li><a href="#样例-1-4">样例 #1</a>
+      <ul>
+        <li><a href="#样例输入-1-4">样例输入 #1</a></li>
+        <li><a href="#样例输出-1-4">样例输出 #1</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#题面翻译-3">题面翻译</a></li>
+    <li><a href="#题目描述-6">题目描述</a></li>
+    <li><a href="#输入格式-6">输入格式</a></li>
+    <li><a href="#输出格式-5">输出格式</a></li>
+    <li><a href="#样例-1-5">样例 #1</a>
+      <ul>
+        <li><a href="#样例输入-1-5">样例输入 #1</a></li>
+        <li><a href="#样例输出-1-5">样例输出 #1</a></li>
       </ul>
     </li>
   </ul>
@@ -1205,7 +1269,451 @@ In the third example, the numbers modulo 42 are 39, 40, 41, 0, 1, 2, 40, 41, 0 a
 <li>去掉括号后表达式无歧义，上式即便写成 <code>1 2 + 3 4 + * </code>也可以依据次序计算出正确结果。</li>
 <li>适合用栈操作运算：遇到数字则入栈；遇到算符则取出栈顶两个数字进行计算，并将结果压入栈中</li>
 </ul>
+<h1 id="8矩阵链乘-matrix-chain-multiplication" class="headerLink">
+    <a href="#8%e7%9f%a9%e9%98%b5%e9%93%be%e4%b9%98-matrix-chain-multiplication" class="header-mark"></a>8、矩阵链乘 Matrix Chain Multiplication</h1><h2 id="题面翻译-2" class="headerLink">
+    <a href="#%e9%a2%98%e9%9d%a2%e7%bf%bb%e8%af%91-2" class="header-mark"></a>题面翻译</h2><h2 id="矩阵链乘" class="headerLink">
+    <a href="#%e7%9f%a9%e9%98%b5%e9%93%be%e4%b9%98" class="header-mark"></a>矩阵链乘</h2><h3 id="题目描述-4" class="headerLink">
+    <a href="#%e9%a2%98%e7%9b%ae%e6%8f%8f%e8%bf%b0-4" class="header-mark"></a>题目描述</h3><p>假设你必须评估一种表达形如 A<em>B</em>C<em>D</em>E，其中 A,B,C,D,E是矩阵。既然矩阵乘法是关联的，那么乘法的顺序是任意的。然而，链乘的元素数量必须由你选择的赋值顺序决定。</p>
+<p>例如，A，B，C分别是 50 * 10 ，10 * 20 和 20 * 5 的矩阵。现在有两种方案计算 A * B * C ,即（A * B) * C 和 A*(B * C)。<br>
+第一个要进行15000次基本乘法，而第二个只进行3500次。</p>
+<p>你的任务就是写出一个程序判定以给定的方式相乘需要多少次基本乘法计算。</p>
+<h3 id="输入格式-4" class="headerLink">
+    <a href="#%e8%be%93%e5%85%a5%e6%a0%bc%e5%bc%8f-4" class="header-mark"></a>输入格式</h3><p>输入包含两个部分：矩阵和表达式。
+输入文件的第一行包含了一个整数 n(1  $\leq$  n  $\leq$  26), 代表矩阵的个数。接下来的n行每一行都包含了一个大写字母，说明矩阵的名称，以及两个整数，说明行与列的个数。<br>
+第二个部分严格遵守以下的语法：</p>
+<p>SecondPart = Line {  Line  } <EOF>
+Line       = Expression <CR>
+Expression = Matrix | &ldquo;(&rdquo; Expression Expression &ldquo;)&rdquo;
+Matrix     = &ldquo;A&rdquo; | &ldquo;B&rdquo; | &ldquo;C&rdquo; | &hellip; | &ldquo;X&rdquo; | &ldquo;Y&rdquo; | &ldquo;Z&rdquo;</p>
+<p>###输出格式</p>
+<p>对于每一个表达式，如果乘法无法进行就输出 &quot; error &ldquo;。否则就输出一行包含计算所需的乘法次数。</p>
+<p>感谢@onceagain 提供翻译</p>
+<h2 id="题目描述-5" class="headerLink">
+    <a href="#%e9%a2%98%e7%9b%ae%e6%8f%8f%e8%bf%b0-5" class="header-mark"></a>题目描述</h2><p><a href="https://uva.onlinejudge.org/external/4/p442.pdf" target="_blank" rel="noopener noreferrer">PDF</a></p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211732436.png" title="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211732436.png" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211732436.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211732436.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211732436.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211732436.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211732436.png 2x"
+            sizes="auto"
+            alt="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211732436.png">
+    </a></figure></p>
+<h2 id="输入格式-5" class="headerLink">
+    <a href="#%e8%be%93%e5%85%a5%e6%a0%bc%e5%bc%8f-5" class="header-mark"></a>输入格式</h2><p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211732454.png" title="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211732454.png" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211732454.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211732454.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211732454.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211732454.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211732454.png 2x"
+            sizes="auto"
+            alt="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211732454.png">
+    </a></figure></p>
+<h2 id="输出格式-4" class="headerLink">
+    <a href="#%e8%be%93%e5%87%ba%e6%a0%bc%e5%bc%8f-4" class="header-mark"></a>输出格式</h2><p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211732451.png" title="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211732451.png" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211732451.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211732451.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211732451.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211732451.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211732451.png 2x"
+            sizes="auto"
+            alt="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211732451.png">
+    </a></figure></p>
+<h2 id="样例-1-4" class="headerLink">
+    <a href="#%e6%a0%b7%e4%be%8b-1-4" class="header-mark"></a>样例 #1</h2><h3 id="样例输入-1-4" class="headerLink">
+    <a href="#%e6%a0%b7%e4%be%8b%e8%be%93%e5%85%a5-1-4" class="header-mark"></a>样例输入 #1</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">9
+</span></span><span class="line"><span class="cl">A 50 10
+</span></span><span class="line"><span class="cl">B 10 20
+</span></span><span class="line"><span class="cl">C 20 5
+</span></span><span class="line"><span class="cl">D 30 35
+</span></span><span class="line"><span class="cl">E 35 15
+</span></span><span class="line"><span class="cl">F 15 5
+</span></span><span class="line"><span class="cl">G 5 10
+</span></span><span class="line"><span class="cl">H 10 20
+</span></span><span class="line"><span class="cl">I 20 25
+</span></span><span class="line"><span class="cl">A
+</span></span><span class="line"><span class="cl">B
+</span></span><span class="line"><span class="cl">C
+</span></span><span class="line"><span class="cl">(AA)
+</span></span><span class="line"><span class="cl">(AB)
+</span></span><span class="line"><span class="cl">(AC)
+</span></span><span class="line"><span class="cl">(A(BC))
+</span></span><span class="line"><span class="cl">((AB)C)
+</span></span><span class="line"><span class="cl">(((((DE)F)G)H)I)
+</span></span><span class="line"><span class="cl">(D(E(F(G(HI)))))
+</span></span><span class="line"><span class="cl">((D(EF))((GH)I))
+</span></span></code></pre></td></tr></table>
 </div>
+</div><h3 id="样例输出-1-4" class="headerLink">
+    <a href="#%e6%a0%b7%e4%be%8b%e8%be%93%e5%87%ba-1-4" class="header-mark"></a>样例输出 #1</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">0
+</span></span><span class="line"><span class="cl">0
+</span></span><span class="line"><span class="cl">0
+</span></span><span class="line"><span class="cl">error
+</span></span><span class="line"><span class="cl">10000
+</span></span><span class="line"><span class="cl">error
+</span></span><span class="line"><span class="cl">3500
+</span></span><span class="line"><span class="cl">15000
+</span></span><span class="line"><span class="cl">40500
+</span></span><span class="line"><span class="cl">47500
+</span></span><span class="line"><span class="cl">15125
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#define _CRT_SECURE_NO_WARNINGS </span><span class="c1">// 禁用安全警告
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;bits/stdc++.h&gt;</span><span class="cp"> </span><span class="c1">// 包含通用的标准库头文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">int</span> <span class="n">maxSize</span> <span class="o">=</span> <span class="mi">26</span> <span class="o">+</span> <span class="mi">5</span><span class="p">;</span> <span class="c1">// 定义最大尺寸为31
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="nc">Matrix</span> <span class="p">{</span> <span class="c1">// 定义矩阵结构体
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span> <span class="c1">// 矩阵的行和列
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Matrix</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">// 构造函数，初始化矩阵的行和列
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="o">:</span> <span class="n">a</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">b</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">m</span><span class="p">[</span><span class="n">maxSize</span><span class="p">];</span> <span class="c1">// 创建Matrix类型的数组m
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="n">stack</span><span class="o">&lt;</span><span class="n">Matrix</span><span class="o">&gt;</span> <span class="n">s</span><span class="p">;</span> <span class="c1">// 声明一个存放Matrix类型的栈s
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main01</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span> <span class="c1">// 声明整数变量n
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">char</span> <span class="n">c</span><span class="p">;</span> <span class="c1">// 声明字符变量c
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">string</span> <span class="n">str</span><span class="p">;</span> <span class="c1">// 声明字符串变量str
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span><span class="p">;</span> <span class="c1">// 从标准输入流读取一个整数n
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 循环读取n次
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">c</span><span class="p">;</span> <span class="c1">// 从标准输入流读取一个字符c
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">c</span> <span class="o">-</span> <span class="sc">&#39;A&#39;</span><span class="p">;</span> <span class="c1">// 如果输入的是字母，则转换为整数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">m</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">a</span> <span class="o">&gt;&gt;</span> <span class="n">m</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">b</span><span class="p">;</span> <span class="c1">// 从标准输入流读取两个整数，分别赋值给m[k].a和m[k].b
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">str</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 循环读取字符串str，直到读取失败
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">str</span><span class="p">.</span><span class="n">length</span><span class="p">();</span> <span class="c1">// 获取字符串str的长度
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">bool</span> <span class="n">error</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span> <span class="c1">// 声明布尔变量error，并初始化为false
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 声明整数变量ans，并初始化为0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 循环遍历字符串str
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span> <span class="p">(</span><span class="n">isalpha</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="p">{</span> <span class="c1">// 如果str[i]是字母
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;A&#39;</span><span class="p">]);</span> <span class="c1">// 将m[str[i]-&#39;A&#39;]入栈
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;)&#39;</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 如果str[i]是右括号
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">Matrix</span> <span class="n">m2</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">top</span><span class="p">();</span> <span class="c1">// 栈顶元素出栈，并赋值给m2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">s</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span> <span class="c1">// 弹出栈顶元素
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">Matrix</span> <span class="n">m1</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">top</span><span class="p">();</span> <span class="c1">// 再次将栈顶元素出栈，并赋值给m1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">s</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span> <span class="c1">// 弹出栈顶元素
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">if</span> <span class="p">(</span><span class="n">m1</span><span class="p">.</span><span class="n">b</span> <span class="o">!=</span> <span class="n">m2</span><span class="p">.</span><span class="n">a</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 如果m1的列数不等于m2的行数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="n">error</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span> <span class="c1">// 将error标记为true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="k">break</span><span class="p">;</span> <span class="c1">// 退出循环
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ans</span> <span class="o">+=</span> <span class="n">m1</span><span class="p">.</span><span class="n">a</span> <span class="o">*</span> <span class="n">m1</span><span class="p">.</span><span class="n">b</span> <span class="o">*</span> <span class="n">m2</span><span class="p">.</span><span class="n">b</span><span class="p">;</span> <span class="c1">// 计算矩阵相乘的结果，并累加到ans上
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">Matrix</span><span class="p">(</span><span class="n">m1</span><span class="p">.</span><span class="n">a</span><span class="p">,</span> <span class="n">m2</span><span class="p">.</span><span class="n">b</span><span class="p">));</span> <span class="c1">// 将新的矩阵入栈，行数为m1的行数，列数为m2的列数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 如果error为true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;error&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// 输出错误信息
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="p">{</span> <span class="c1">// 否则
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ans</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// 输出计算结果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">system</span><span class="p">(</span><span class="s">&#34;pause&#34;</span><span class="p">);</span> <span class="c1">// 暂停系统，等待用户按任意键继续
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 返回0，表示程序正常结束
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="9打印队列-printer-queue" class="headerLink">
+    <a href="#9%e6%89%93%e5%8d%b0%e9%98%9f%e5%88%97-printer-queue" class="header-mark"></a>9、打印队列 Printer Queue</h1><h2 id="题面翻译-3" class="headerLink">
+    <a href="#%e9%a2%98%e9%9d%a2%e7%bf%bb%e8%af%91-3" class="header-mark"></a>题面翻译</h2><p>学生会里只有一台打印机，但是有很多文件需要打印，因此打印任务不可避免地需要等待。有些打印任务比较急，有些不那么急，所以每个任务都有一个1～9间的优先级，优先级越高表示任务越急。</p>
+<p>打印机的运作方式如下：首先从打印队列里取出一个任务J，如果队列里有比J更急的任务，则直接把J放到打印队列尾部，否则打印任务J（此时不会把它放回打印队列）。
+输入打印队列中各个任务的优先级以及所关注的任务在队列中的位置（队首位置为0），输出该任务完成的时刻。所有任务都需要1分钟打印。例如，打印队列为{1,1,9,1,1,1}，目前处于队首的任务最终完成时刻为5。</p>
+<p>输入T
+接下来T组数据
+每组数据输入N，TOP。接下来N个数，TOP代表队列首</p>
+<p>Translated by @HuangBo</p>
+<h2 id="题目描述-6" class="headerLink">
+    <a href="#%e9%a2%98%e7%9b%ae%e6%8f%8f%e8%bf%b0-6" class="header-mark"></a>题目描述</h2><p><a href="https://uva.onlinejudge.org/external/121/p12100.pdf" target="_blank" rel="noopener noreferrer">PDF</a></p>
+<p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211821803.png" title="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211821803.png" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211821803.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211821803.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211821803.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211821803.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211821803.png 2x"
+            sizes="auto"
+            alt="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211821803.png">
+    </a></figure></p>
+<h2 id="输入格式-6" class="headerLink">
+    <a href="#%e8%be%93%e5%85%a5%e6%a0%bc%e5%bc%8f-6" class="header-mark"></a>输入格式</h2><p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211821763.png" title="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211821763.png" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211821763.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211821763.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211821763.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211821763.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211821763.png 2x"
+            sizes="auto"
+            alt="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211821763.png">
+    </a></figure></p>
+<h2 id="输出格式-5" class="headerLink">
+    <a href="#%e8%be%93%e5%87%ba%e6%a0%bc%e5%bc%8f-5" class="header-mark"></a>输出格式</h2><p><figure><a class="lightgallery" href="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211821831.png" title="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211821831.png" data-thumbnail="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211821831.png">
+        <img
+            
+            loading="lazy"
+            src="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211821831.png"
+            srcset="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211821831.png, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211821831.png 1.5x, https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211821831.png 2x"
+            sizes="auto"
+            alt="https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211821831.png">
+    </a></figure></p>
+<h2 id="样例-1-5" class="headerLink">
+    <a href="#%e6%a0%b7%e4%be%8b-1-5" class="header-mark"></a>样例 #1</h2><h3 id="样例输入-1-5" class="headerLink">
+    <a href="#%e6%a0%b7%e4%be%8b%e8%be%93%e5%85%a5-1-5" class="header-mark"></a>样例输入 #1</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">3  //3组数据
+</span></span><span class="line"><span class="cl">1 0  //共1个任务，你的任务下标为0
+</span></span><span class="line"><span class="cl">5    //你的任务是5
+</span></span><span class="line"><span class="cl">4 2  //共4个任务，你的任务下标为2
+</span></span><span class="line"><span class="cl">1 2 3 4  //你的任务是3
+</span></span><span class="line"><span class="cl">6 0    //共6个任务，你的任务下标为0
+</span></span><span class="line"><span class="cl">1 1 9 1 1 1  //你的任务是1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="样例输出-1-5" class="headerLink">
+    <a href="#%e6%a0%b7%e4%be%8b%e8%be%93%e5%87%ba-1-5" class="header-mark"></a>样例输出 #1</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">1
+</span></span><span class="line"><span class="cl">2
+</span></span><span class="line"><span class="cl">5
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="cp">#define _CRT_SECURE_NO_WARNINGS </span><span class="c1">// 禁用安全警告
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;bits/stdc++.h&gt;</span><span class="cp"> </span><span class="c1">// 包含通用的标准库头文件
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">int</span> <span class="n">maxSize</span> <span class="o">=</span> <span class="mi">26</span> <span class="o">+</span> <span class="mi">5</span><span class="p">;</span> <span class="c1">// 定义最大尺寸为31
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">struct</span> <span class="nc">Matrix</span> <span class="p">{</span> <span class="c1">// 定义矩阵结构体
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span> <span class="c1">// 矩阵的行和列
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">Matrix</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">// 构造函数，初始化矩阵的行和列
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="o">:</span> <span class="n">a</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">b</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">m</span><span class="p">[</span><span class="n">maxSize</span><span class="p">];</span> <span class="c1">// 创建Matrix类型的数组m
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="n">stack</span><span class="o">&lt;</span><span class="n">Matrix</span><span class="o">&gt;</span> <span class="n">s</span><span class="p">;</span> <span class="c1">// 声明一个存放Matrix类型的栈s
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main01</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">n</span><span class="p">;</span> <span class="c1">// 声明整数变量n
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kt">char</span> <span class="n">c</span><span class="p">;</span> <span class="c1">// 声明字符变量c
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">string</span> <span class="n">str</span><span class="p">;</span> <span class="c1">// 声明字符串变量str
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">n</span><span class="p">;</span> <span class="c1">// 从标准输入流读取一个整数n
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 循环读取n次
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">c</span><span class="p">;</span> <span class="c1">// 从标准输入流读取一个字符c
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">c</span> <span class="o">-</span> <span class="sc">&#39;A&#39;</span><span class="p">;</span> <span class="c1">// 如果输入的是字母，则转换为整数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">m</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">a</span> <span class="o">&gt;&gt;</span> <span class="n">m</span><span class="p">[</span><span class="n">k</span><span class="p">].</span><span class="n">b</span><span class="p">;</span> <span class="c1">// 从标准输入流读取两个整数，分别赋值给m[k].a和m[k].b
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="n">cin</span> <span class="o">&gt;&gt;</span> <span class="n">str</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 循环读取字符串str，直到读取失败
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">len</span> <span class="o">=</span> <span class="n">str</span><span class="p">.</span><span class="n">length</span><span class="p">();</span> <span class="c1">// 获取字符串str的长度
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">bool</span> <span class="n">error</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span> <span class="c1">// 声明布尔变量error，并初始化为false
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">int</span> <span class="n">ans</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 声明整数变量ans，并初始化为0
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">len</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 循环遍历字符串str
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="k">if</span> <span class="p">(</span><span class="n">isalpha</span><span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span> <span class="p">{</span> <span class="c1">// 如果str[i]是字母
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">m</span><span class="p">[</span><span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="sc">&#39;A&#39;</span><span class="p">]);</span> <span class="c1">// 将m[str[i]-&#39;A&#39;]入栈
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">str</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="sc">&#39;)&#39;</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 如果str[i]是右括号
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">Matrix</span> <span class="n">m2</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">top</span><span class="p">();</span> <span class="c1">// 栈顶元素出栈，并赋值给m2
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">s</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span> <span class="c1">// 弹出栈顶元素
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">Matrix</span> <span class="n">m1</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">top</span><span class="p">();</span> <span class="c1">// 再次将栈顶元素出栈，并赋值给m1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">s</span><span class="p">.</span><span class="n">pop</span><span class="p">();</span> <span class="c1">// 弹出栈顶元素
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="k">if</span> <span class="p">(</span><span class="n">m1</span><span class="p">.</span><span class="n">b</span> <span class="o">!=</span> <span class="n">m2</span><span class="p">.</span><span class="n">a</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 如果m1的列数不等于m2的行数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="n">error</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span> <span class="c1">// 将error标记为true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                    <span class="k">break</span><span class="p">;</span> <span class="c1">// 退出循环
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ans</span> <span class="o">+=</span> <span class="n">m1</span><span class="p">.</span><span class="n">a</span> <span class="o">*</span> <span class="n">m1</span><span class="p">.</span><span class="n">b</span> <span class="o">*</span> <span class="n">m2</span><span class="p">.</span><span class="n">b</span><span class="p">;</span> <span class="c1">// 计算矩阵相乘的结果，并累加到ans上
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>                <span class="n">s</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">Matrix</span><span class="p">(</span><span class="n">m1</span><span class="p">.</span><span class="n">a</span><span class="p">,</span> <span class="n">m2</span><span class="p">.</span><span class="n">b</span><span class="p">));</span> <span class="c1">// 将新的矩阵入栈，行数为m1的行数，列数为m2的列数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 如果error为true
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;error&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// 输出错误信息
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="p">{</span> <span class="c1">// 否则
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ans</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// 输出计算结果
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="n">system</span><span class="p">(</span><span class="s">&#34;pause&#34;</span><span class="p">);</span> <span class="c1">// 暂停系统，等待用户按任意键继续
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 返回0，表示程序正常结束
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></div>
 
         
 

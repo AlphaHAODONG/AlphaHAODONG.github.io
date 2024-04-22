@@ -658,3 +658,274 @@ int main() {
 
 - 去掉括号后表达式无歧义，上式即便写成 `1 2 + 3 4 + * `也可以依据次序计算出正确结果。
 - 适合用栈操作运算：遇到数字则入栈；遇到算符则取出栈顶两个数字进行计算，并将结果压入栈中
+
+
+
+# 8、矩阵链乘 Matrix Chain Multiplication
+
+## 题面翻译
+
+## 矩阵链乘
+
+### 题目描述
+
+  假设你必须评估一种表达形如 A*B*C*D*E，其中 A,B,C,D,E是矩阵。既然矩阵乘法是关联的，那么乘法的顺序是任意的。然而，链乘的元素数量必须由你选择的赋值顺序决定。
+
+  例如，A，B，C分别是 50 * 10 ，10 * 20 和 20 * 5 的矩阵。现在有两种方案计算 A * B * C ,即（A * B) * C 和 A*(B * C)。  
+   第一个要进行15000次基本乘法，而第二个只进行3500次。
+
+  你的任务就是写出一个程序判定以给定的方式相乘需要多少次基本乘法计算。
+
+### 输入格式
+
+  输入包含两个部分：矩阵和表达式。 
+   输入文件的第一行包含了一个整数 n(1  $\leq$  n  $\leq$  26), 代表矩阵的个数。接下来的n行每一行都包含了一个大写字母，说明矩阵的名称，以及两个整数，说明行与列的个数。  
+   第二个部分严格遵守以下的语法：
+
+SecondPart = Line {  Line  } <EOF>
+Line       = Expression <CR>
+Expression = Matrix | "(" Expression Expression ")"
+Matrix     = "A" | "B" | "C" | ... | "X" | "Y" | "Z"
+
+###输出格式
+
+  对于每一个表达式，如果乘法无法进行就输出 " error "。否则就输出一行包含计算所需的乘法次数。 
+
+感谢@onceagain 提供翻译
+
+## 题目描述
+
+[problemUrl]: https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=6&page=show_problem&problem=383
+
+[PDF](https://uva.onlinejudge.org/external/4/p442.pdf)
+
+![](https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211732436.png)
+
+## 输入格式
+
+![](https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211732454.png)
+
+## 输出格式
+
+![](https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211732451.png)
+
+## 样例 #1
+
+### 样例输入 #1
+
+```
+9
+A 50 10
+B 10 20
+C 20 5
+D 30 35
+E 35 15
+F 15 5
+G 5 10
+H 10 20
+I 20 25
+A
+B
+C
+(AA)
+(AB)
+(AC)
+(A(BC))
+((AB)C)
+(((((DE)F)G)H)I)
+(D(E(F(G(HI)))))
+((D(EF))((GH)I))
+```
+
+### 样例输出 #1
+
+```
+0
+0
+0
+error
+10000
+error
+3500
+15000
+40500
+47500
+15125
+```
+
+```cpp
+#define _CRT_SECURE_NO_WARNINGS // 禁用安全警告
+
+#include <bits/stdc++.h> // 包含通用的标准库头文件
+using namespace std;
+
+const int maxSize = 26 + 5; // 定义最大尺寸为31
+struct Matrix { // 定义矩阵结构体
+    int a, b; // 矩阵的行和列
+    Matrix(int a = 0, int b = 0) // 构造函数，初始化矩阵的行和列
+        : a(a), b(b)
+    {}
+} m[maxSize]; // 创建Matrix类型的数组m
+
+stack<Matrix> s; // 声明一个存放Matrix类型的栈s
+
+int main01()
+{
+    int n; // 声明整数变量n
+    char c; // 声明字符变量c
+    string str; // 声明字符串变量str
+    cin >> n; // 从标准输入流读取一个整数n
+    for (int i = 0; i < n; i++) { // 循环读取n次
+        cin >> c; // 从标准输入流读取一个字符c
+        int k = c - 'A'; // 如果输入的是字母，则转换为整数
+        cin >> m[k].a >> m[k].b; // 从标准输入流读取两个整数，分别赋值给m[k].a和m[k].b
+    }
+    while (cin >> str) { // 循环读取字符串str，直到读取失败
+        int len = str.length(); // 获取字符串str的长度
+        bool error = false; // 声明布尔变量error，并初始化为false
+        int ans = 0; // 声明整数变量ans，并初始化为0
+        for (int i = 0; i < len; i++) { // 循环遍历字符串str
+            if (isalpha(str[i])) { // 如果str[i]是字母
+                s.push(m[str[i] - 'A']); // 将m[str[i]-'A']入栈
+            }
+            else if (str[i] == ')') { // 如果str[i]是右括号
+                Matrix m2 = s.top(); // 栈顶元素出栈，并赋值给m2
+                s.pop(); // 弹出栈顶元素
+                Matrix m1 = s.top(); // 再次将栈顶元素出栈，并赋值给m1
+                s.pop(); // 弹出栈顶元素
+                if (m1.b != m2.a) { // 如果m1的列数不等于m2的行数
+                    error = true; // 将error标记为true
+                    break; // 退出循环
+                }
+                ans += m1.a * m1.b * m2.b; // 计算矩阵相乘的结果，并累加到ans上
+                s.push(Matrix(m1.a, m2.b)); // 将新的矩阵入栈，行数为m1的行数，列数为m2的列数
+            }
+        }
+        if (error) { // 如果error为true
+            cout << "error" << endl; // 输出错误信息
+        }
+        else { // 否则
+            cout << ans << endl; // 输出计算结果
+        }
+    }
+    system("pause"); // 暂停系统，等待用户按任意键继续
+    return 0; // 返回0，表示程序正常结束
+}
+
+```
+
+# 9、打印队列 Printer Queue
+
+## 题面翻译
+
+学生会里只有一台打印机，但是有很多文件需要打印，因此打印任务不可避免地需要等待。有些打印任务比较急，有些不那么急，所以每个任务都有一个1～9间的优先级，优先级越高表示任务越急。
+
+打印机的运作方式如下：首先从打印队列里取出一个任务J，如果队列里有比J更急的任务，则直接把J放到打印队列尾部，否则打印任务J（此时不会把它放回打印队列）。
+输入打印队列中各个任务的优先级以及所关注的任务在队列中的位置（队首位置为0），输出该任务完成的时刻。所有任务都需要1分钟打印。例如，打印队列为{1,1,9,1,1,1}，目前处于队首的任务最终完成时刻为5。
+
+输入T
+接下来T组数据
+每组数据输入N，TOP。接下来N个数，TOP代表队列首
+
+Translated by @HuangBo
+
+## 题目描述
+
+[problemUrl]: https://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=243&page=show_problem&problem=3252
+
+[PDF](https://uva.onlinejudge.org/external/121/p12100.pdf)
+
+![](https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211821803.png)
+
+## 输入格式
+
+![](https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211821763.png)
+
+## 输出格式
+
+![](https://alphaguo-1322521250.cos.ap-beijing.myqcloud.com/202404211821831.png)
+
+## 样例 #1
+
+### 样例输入 #1
+
+```
+3  //3组数据
+1 0  //共1个任务，你的任务下标为0
+5    //你的任务是5
+4 2  //共4个任务，你的任务下标为2
+1 2 3 4  //你的任务是3
+6 0    //共6个任务，你的任务下标为0
+1 1 9 1 1 1  //你的任务是1
+```
+
+### 样例输出 #1
+
+```
+1
+2
+5
+```
+
+```cpp
+#define _CRT_SECURE_NO_WARNINGS // 禁用安全警告
+
+#include <bits/stdc++.h> // 包含通用的标准库头文件
+using namespace std;
+
+const int maxSize = 26 + 5; // 定义最大尺寸为31
+struct Matrix { // 定义矩阵结构体
+    int a, b; // 矩阵的行和列
+    Matrix(int a = 0, int b = 0) // 构造函数，初始化矩阵的行和列
+        : a(a), b(b)
+    {}
+} m[maxSize]; // 创建Matrix类型的数组m
+
+stack<Matrix> s; // 声明一个存放Matrix类型的栈s
+
+int main01()
+{
+    int n; // 声明整数变量n
+    char c; // 声明字符变量c
+    string str; // 声明字符串变量str
+    cin >> n; // 从标准输入流读取一个整数n
+    for (int i = 0; i < n; i++) { // 循环读取n次
+        cin >> c; // 从标准输入流读取一个字符c
+        int k = c - 'A'; // 如果输入的是字母，则转换为整数
+        cin >> m[k].a >> m[k].b; // 从标准输入流读取两个整数，分别赋值给m[k].a和m[k].b
+    }
+    while (cin >> str) { // 循环读取字符串str，直到读取失败
+        int len = str.length(); // 获取字符串str的长度
+        bool error = false; // 声明布尔变量error，并初始化为false
+        int ans = 0; // 声明整数变量ans，并初始化为0
+        for (int i = 0; i < len; i++) { // 循环遍历字符串str
+            if (isalpha(str[i])) { // 如果str[i]是字母
+                s.push(m[str[i] - 'A']); // 将m[str[i]-'A']入栈
+            }
+            else if (str[i] == ')') { // 如果str[i]是右括号
+                Matrix m2 = s.top(); // 栈顶元素出栈，并赋值给m2
+                s.pop(); // 弹出栈顶元素
+                Matrix m1 = s.top(); // 再次将栈顶元素出栈，并赋值给m1
+                s.pop(); // 弹出栈顶元素
+                if (m1.b != m2.a) { // 如果m1的列数不等于m2的行数
+                    error = true; // 将error标记为true
+                    break; // 退出循环
+                }
+                ans += m1.a * m1.b * m2.b; // 计算矩阵相乘的结果，并累加到ans上
+                s.push(Matrix(m1.a, m2.b)); // 将新的矩阵入栈，行数为m1的行数，列数为m2的列数
+            }
+        }
+        if (error) { // 如果error为true
+            cout << "error" << endl; // 输出错误信息
+        }
+        else { // 否则
+            cout << ans << endl; // 输出计算结果
+        }
+    }
+    system("pause"); // 暂停系统，等待用户按任意键继续
+    return 0; // 返回0，表示程序正常结束
+}
+
+```
+
+
