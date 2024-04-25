@@ -73,7 +73,7 @@ Java 类加载器采用了双亲委派模型（Parent Delegation Model）来组�
 
   示例：
 
-```
+```java
   Class<?> clazz = MyClass.class;
   String className = clazz.getName(); // 获取类名
 ```
@@ -84,7 +84,7 @@ Java 类加载器采用了双亲委派模型（Parent Delegation Model）来组�
 
   示例：
 
-```
+```java
   Class<?> clazz = MyClass.class;
   String simpleName = clazz.getSimpleName(); // 获取简单类名
 ```
@@ -93,7 +93,7 @@ Java 类加载器采用了双亲委派模型（Parent Delegation Model）来组�
 
   示例：
 
-```
+```java
   Class<?> clazz = MyClass.class;
   Package pkg = clazz.getPackage(); // 获取包信息
 ```
@@ -104,7 +104,7 @@ Java 类加载器采用了双亲委派模型（Parent Delegation Model）来组�
 
   
 
-```
+```java
 Class<?> clazz = MyClass.class;
   Class<?> superclass = clazz.getSuperclass(); // 获取父类信息
 ```
@@ -115,7 +115,7 @@ Class<?> clazz = MyClass.class;
 
  
 
-```
+```java
  Class<?> clazz = MyClass.class;
   Class<?>[] interfaces = clazz.getInterfaces(); // 获取实现的接口信息
 ```
@@ -126,7 +126,7 @@ Class<?> clazz = MyClass.class;
 
   示例：
 
-```
+```java
   Class<?> clazz = MyClass.class;
   int modifiers = clazz.getModifiers(); // 获取修饰符
 ```
@@ -137,7 +137,7 @@ Class<?> clazz = MyClass.class;
 
   示例：
 
-```
+```java
   Class<?> clazz = MyClass.class;
   Field[] fields = clazz.getFields(); // 获取公共字段
 ```
@@ -146,7 +146,7 @@ Class<?> clazz = MyClass.class;
 
   示例：
 
-```
+```java
   Class<?> clazz = MyClass.class;
   Field[] declaredFields = clazz.getDeclaredFields(); // 获取所有字段
 ```
@@ -155,7 +155,7 @@ Class<?> clazz = MyClass.class;
 
   示例：
 
-```
+```java
   Class<?> clazz = MyClass.class;
   Method[] methods = clazz.getMethods(); // 获取公共方法
 ```
@@ -164,7 +164,7 @@ Class<?> clazz = MyClass.class;
 
   示例：
 
-```
+```java
   Class<?> clazz = MyClass.class;
     Method[] declaredMethods = clazz.getDeclaredMethods(); // 获取所有方法
 ```
@@ -175,7 +175,7 @@ Class<?> clazz = MyClass.class;
 
   示例：
 
-```
+```java
   Class<?> clazz = MyClass.class;
   Constructor<?>[] constructors = clazz.getConstructors(); // 获取公共构造函数
 ```
@@ -184,7 +184,7 @@ Class<?> clazz = MyClass.class;
 
   示例：
 
-```
+```java
   Class<?> clazz = MyClass.class;
   Constructor<?>[] declaredConstructors = clazz.getDeclaredConstructors(); // 获取所有构造函数
 ```
