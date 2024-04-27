@@ -3,5 +3,11 @@
         <title>所有文章 - AlphaGuo Blog</title>
         <link>https://ghd.icu/posts/</link>
         <description>所有文章 | AlphaGuo Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 20 Apr 2024 15:37:22 &#43;0800</lastBuildDate><atom:link href="https://ghd.icu/posts/" rel="self" type="application/rss+xml" /></channel>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 20 Apr 2024 15:37:22 &#43;0800</lastBuildDate><atom:link href="https://ghd.icu/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>内功一阶</title>
+    <link>https://ghd.icu/%E5%86%85%E5%8A%9F%E4%B8%80%E9%98%B6/</link>
+    <pubDate>Wed, 31 Jan 2024 21:08:36 &#43;0800</pubDate><author>
+                        <name>AlphaGuo</name><uri>https://ghd.icu/</uri><email>alphaguo141@gmail.com</email></author><guid>https://ghd.icu/%E5%86%85%E5%8A%9F%E4%B8%80%E9%98%B6/</guid>
+    <description><![CDATA[一些很简单的算法基础，大佬就不要看了。。。更新中]]></description>
+</item></channel>
 </rss>
